@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 //app.use(errorHandler);
 
-app.use("/api/food/", require("./src/routes/mobileApi"));
+app.use("/api/food/", require("./src/routes/foodApi"));
 
 app.listen(PORT, () => {
   console.log("App running on port: " + PORT);
