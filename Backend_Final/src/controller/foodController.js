@@ -36,7 +36,4 @@ const createFood = async (req, res) => {
   }
 };
 
-
-
-
 module.exports = { getFoodList, createFood };
