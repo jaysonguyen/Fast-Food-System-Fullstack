@@ -157,6 +157,40 @@ const deleteFoodTypeAndFood = async (id) => {
   }
 };
 
+const getFoodByType = async (typeid) => {
+  try {
+    const poolConnection = await sql.connect(config);
+    const data = await poolConnection.query(`
+      exec getFoodByType ${typeid}
+    `);
+    poolConnection.close();
 
+    if (data) {
+      return {
+        EM: "Get food type success",
+        EC: 1,
+        DT: data.recordset,
+      };
+    } else {
+      return {
+        EM: "Get food type empty",
+        EC: 1,
+        DT: [],
+      };
+    }
+  } catch (error) {
+    console.log(`Get one food error: ${error}`);
+    return {
+      EM: "Error",
+      EC: 0,
+      DT: error.message,
+    };
+  }
+};
 
-module.exports = { getAllFoodTypes, getFoodTypeById, createFoodType };
+module.exports = {
+  getAllFoodTypes,
+  getFoodTypeById,
+  createFoodType,
+  getFoodByType,
+};

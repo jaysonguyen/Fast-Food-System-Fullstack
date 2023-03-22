@@ -2,9 +2,8 @@ const {
   getAllFoodTypes,
   getFoodTypeById,
   createFoodType,
+  getFoodByType,
 } = require("../services/foodTypeServices");
-
-const { getFoodByType } = require("../services/foodServices");
 
 const getFoodTypeList = async (req, res) => {
   try {
@@ -42,7 +41,7 @@ const getFoodByT = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: "Error: " + error.message,
+      message: "Error: " + error.status,
     });
   }
 };

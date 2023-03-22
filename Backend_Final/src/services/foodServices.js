@@ -11,13 +11,13 @@ const getAllFood = async () => {
     poolConnection.close();
     if (data) {
       return {
-        EM: "Get data success",
+        EM: "Get all food success",
         EC: 1,
         DT: data.recordset,
       };
     } else {
       return {
-        EM: "Get data success",
+        EM: "Get all food success but food is empty",
         EC: 0,
         DT: [],
       };
@@ -41,13 +41,13 @@ const createOneFood = async (name, price, type) => {
     poolConnection.close();
     if (data) {
       return {
-        EM: "Success",
+        EM: "Create one food success",
         EC: 1,
         DT: data.recordset,
       };
     } else {
       return {
-        EM: "Empty",
+        EM: "food get empty, create successfully",
         EC: 0,
         DT: [],
       };
@@ -92,6 +92,7 @@ const deleteFood = async (id) => {
   }
 };
 
+//show food with status = 0
 const deleteList = async () => {
   try {
     const poolConnection = await sql.connect(config);
@@ -122,6 +123,7 @@ const deleteList = async () => {
   }
 };
 
+//using typeid to delete all food in that food type
 const deleteFoodByFoodType = async (id) => {
   try {
     let poolConnection = await sql.connect(config);
@@ -132,13 +134,13 @@ const deleteFoodByFoodType = async (id) => {
 
     if (data) {
       return {
-        EM: "Delete food type success",
+        EM: "Delete food by food type success",
         EC: 1,
         DT: data.recordset,
       };
     } else {
       return {
-        EM: "Delete food type success",
+        EM: "Delete food by food type success",
         EC: 1,
         DT: [],
       };
@@ -153,6 +155,7 @@ const deleteFoodByFoodType = async (id) => {
   }
 };
 
+//delete from database
 const deleteFoodPermanently = async (id) => {
   try {
     const poolConnection = await sql.connect(config);
@@ -214,6 +217,7 @@ const updateFood = async (id, name, price, type, status) => {
   }
 };
 
+//get food by id
 const getOneFood = async (id) => {
   try {
     const poolConnection = await sql.connect(config);
@@ -252,8 +256,7 @@ const getFoodByName = async (name) => {
       exec getFoodByName N'${name}'
     `);
     poolConnection.close();
-
-    if (data.recordset != []) {
+    if (Object.keys(data.recordset).length > 0) {
       return {
         EM: "Get food by name success",
         EC: 1,
@@ -261,7 +264,7 @@ const getFoodByName = async (name) => {
       };
     } else {
       return {
-        EM: "Get data success",
+        EM: "Not found food",
         EC: 1,
         DT: [],
       };
@@ -276,37 +279,6 @@ const getFoodByName = async (name) => {
   }
 };
 
-const getFoodByType = async (typeid) => {
-  try {
-    const poolConnection = await sql.connect(config);
-    const data = await poolConnection.query(`
-      exec getFoodByType ${typeid}
-    `);
-    poolConnection.close();
-
-    if (data) {
-      return {
-        EM: "Get food type success",
-        EC: 1,
-        DT: data.recordset,
-      };
-    } else {
-      return {
-        EM: "Get food type empty",
-        EC: 1,
-        DT: [],
-      };
-    }
-  } catch (error) {
-    console.log(`Get one food error: ${error}`);
-    return {
-      EM: "Error",
-      EC: 0,
-      DT: error.message,
-    };
-  }
-};
-
 module.exports = {
   getAllFood,
   createOneFood,
@@ -314,5 +286,5 @@ module.exports = {
   getOneFood,
   updateFood,
   deleteList,
-  getFoodByType,
+  getFoodByName,
 };

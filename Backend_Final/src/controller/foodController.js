@@ -5,14 +5,15 @@ const {
   getOneFood,
   deleteFood,
   deleteList,
+  getFoodByName,
 } = require("../services/foodServices");
 
-const { getAllFoodTypes } = require("../services/foodTypeServices");
 const tools = require("../tool");
 
 const getFoodList = async (req, res) => {
   try {
-    const data = await getAllFood();
+    console.log("get food list");
+    let data = await getAllFood();
     return res.status(200).json({
       EM: data.EM,
       EC: data.EC,
@@ -86,6 +87,7 @@ const updateF = async (req, res) => {
 
 const deteleF = async (req, res) => {
   try {
+    // set status of food = 0 (hidden)
     let data = await deleteFood(req.params.id);
     if (data.EM.includes("Success")) {
       return res.status(201).json({
@@ -114,16 +116,23 @@ const getLevel0 = async (req, res) => {
   try {
     // const data = await getOneFood(req.params.id);
     console.log("food running");
+    let { id } = req.params.id;
     let check = tools.isNumberic(req.params.id);
-    console.log(check);
+    console.log(req.query);
+    // console.log(check);
     let data = "";
     if (check) {
-      data = await getOneFood(req.params.id);
-    } else if (req.params.id == "delete") {
+      // get Food by ID
+      data = await getOneFood(id);
+    } else if (id == "delete") {
+      //get deleted food (status = 0)
       data = await deleteList();
-    } 
+    } else if (req.query.name) {
+      //get food by name
+      data = await getFoodByName(req.query.name);
+    }
     return res.status(200).json({
-      EM: "Success",
+      EM: data.EM,
       EC: data.EC,
       DT: data.DT,
     });
