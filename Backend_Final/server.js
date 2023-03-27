@@ -8,22 +8,9 @@ require("dotenv");
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-//app.use(errorHandler);
-
-app.use("/api/food/", require("./src/routes/foodApi"));
-app.use("/api/foodtype/", require("./src/routes/foodTypeApi"));
-
-app.listen(PORT, () => {
-  console.log("App running on port: " + PORT);
-});
-
-//
-
 app.use(function (req, res, next) {
   // Website you wish to allow to connect
-  res.setHeader("Access-Control-Allow-Origin", process.env.REACT_URL);
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
 
   // Request methods you wish to allow
   res.setHeader(
@@ -44,3 +31,16 @@ app.use(function (req, res, next) {
   // Pass to next layer of middleware
   next();
 });
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(errorHandler);
+
+app.use("/api/food/", require("./src/routes/foodApi"));
+app.use("/api/foodtype/", require("./src/routes/foodTypeApi"));
+
+app.listen(PORT, () => {
+  console.log("App running on port: " + PORT);
+});
+
+//
