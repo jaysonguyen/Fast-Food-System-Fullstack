@@ -2,26 +2,26 @@ import React, { useState, useEffect } from "react";
 import { TabPane } from "reactstrap";
 import { ActiveContext } from "../../Context/ActiveContext";
 import { useContext } from "react";
-import { FoodData } from "../../../api/tempAPI";
+// import { FoodData } from "../../../api/tempAPI";
 import CallApi from "../../../utils/callApi";
 
 export default function FoodCart({ foodtype }) {
   const [food, setFood] = useState([]);
 
-  useEffect(() => {
-    const fetchApi = async () => {
-      try {
-        const response = await CallApi.get("/Food");
-        const data = (await response).DT;
-        console.log(data);
-        setFood(data.DT);
-      } catch (error) {
-        setFood(FoodData);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchApi = async () => {
+  //     try {
+  //       const response = await CallApi.get("/Food");
+  //       const data = (await response).DT;
+  //       console.log(data);
+  //       setFood(data.DT);
+  //     } catch (error) {
+  //       setFood(FoodData);
+  //     }
+  //   };
 
-    fetchApi();
-  }, []);
+  //   fetchApi();
+  // }, []);
 
   const context = useContext(ActiveContext);
 

@@ -7,11 +7,9 @@ import { ActiveProvider } from "./components/Context/ActiveContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <ActiveProvider>
-      <App />
-    </ActiveProvider>
-  </React.StrictMode>
+  <ActiveProvider>
+    <App />
+  </ActiveProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
