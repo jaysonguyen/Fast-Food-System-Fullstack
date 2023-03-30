@@ -1,24 +1,28 @@
-import FoodCart from "../../UIElement/FoodCard/FoodCart";
+import FoodCart from "../Card/FoodCard/FoodCart";
 import { TabContent } from "reactstrap";
 import { ActiveContext } from "../../Context/ActiveContext";
-import { useContext, useState } from "react";
-import { FoodData } from "../../../api/tempAPI";
+import { useContext, useState, useEffect } from "react";
+import { FoodTypeData } from "../../../api/tempAPI";
 
 export default function Food() {
   const context = useContext(ActiveContext);
   const classes = `mt-4`;
-  const [food, setFood] = useState([]);
+  const [FoodType, setFoodType] = useState([]);
 
-  const getFoodList = async () => {
-    console.log(FoodData());
+  const getFoodDataTest = async () => {
+    let data = await FoodTypeData();
+    setFoodType(data.DT);
   };
 
+  useEffect(() => {
+    getFoodDataTest();
+  }, []);
+
   return (
-    // <TabContent className={classes} activeTab={context.activeTab}>
-    //   {foodtype.map((foodtype, idx) => {
-    //   return <FoodCart key={idx} foodtype={foodtype}/>;
-    //   })}
-    // </TabContent>
-    <></>
+    <TabContent className={classes} activeTab={context.activeTab}>
+      {FoodType.map((foodtype, idx) => {
+        return <FoodCart key={idx} foodtype={foodtype} />;
+      })}
+    </TabContent>
   );
 }

@@ -1,40 +1,25 @@
-import FoodTypeCart from "../../UIElement/FoodTypeCart/FoodTypeCart";
+import { useState, useEffect } from "react";
+import FoodTypeCart from "../Card/FoodTypeCart/FoodTypeCart";
 import { Nav } from "reactstrap";
+import { FoodTypeData } from "../../../api/tempAPI";
 
-let foodtype = [
-  {
-    id: 1,
-    name: "Gà rán",
-  },
-  {
-    id: 2,
-    name: "Hamburger",
-  },
-  {
-    id: 3,
-    name: "Cơm phần",
-  },
-  {
-    id: 4,
-    name: "Tráng miệng",
-  },
-  {
-    id: 5,
-    name: "Nước uống",
-  },
-];
 
-export default function FoodType({ toggle }) {
+export default function FoodType() {
+  const [FoodType, setFoodType] = useState([]);
+
+  const getFoodDataTest = async () => {
+    let data = await FoodTypeData();
+    setFoodType(data.DT);
+  };
+
+  useEffect(() => {
+    getFoodDataTest();
+  }, []);
+
   return (
     <Nav tabs className="nav nav-tabs pizza-items filters bg-primary">
-      {foodtype.map((foodtype, idx) => {
-        return (
-          <FoodTypeCart
-            key={idx}
-            foodtype={foodtype}
-            toggle={toggle}
-          />
-        );
+      {FoodType.map((foodtype, idx) => {
+        return <FoodTypeCart key={idx} foodtype={foodtype} />;
       })}
     </Nav>
   );

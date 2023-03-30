@@ -1,7 +1,15 @@
-import axios from "../setup/axios"
+import axios from "../setup/axios";
 
 const FoodData = () => {
   return axios.get(`api/food`);
-}
+};
 
-export { FoodData };
+const FoodTypeData = () => {
+  return axios.get(`api/foodtype`);
+};
+
+const FoodByTypeData = (id) => {
+  return axios.get(`api/foodtype/${id}`);
+};
+
+export { FoodData, FoodTypeData, FoodByTypeData };

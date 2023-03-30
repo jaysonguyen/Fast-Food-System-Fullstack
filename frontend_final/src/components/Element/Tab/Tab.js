@@ -1,11 +1,11 @@
 import React from "react";
-import FoodType from "../../Element/FoodType/FoodType";
-import Food from "../../Element/Food/Food";
+import FoodType from "../FoodType/FoodType";
+import Food from "../Food/Food";
 
 const Popups = () => {
 
   return (
-    <div>
+    <div className="col-8">
       <FoodType />
       <Food />
     </div>
