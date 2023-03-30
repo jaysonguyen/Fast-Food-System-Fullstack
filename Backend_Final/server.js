@@ -40,6 +40,8 @@ app.use("/api/food/", require("./src/routes/foodApi"));
 app.use("/api/foodtype/", require("./src/routes/foodTypeApi"));
 app.use("/api/order/", require("./src/routes/orderApi"));
 app.use("/api/staff/", require("./src/routes/staffApi"));
+app.use("/api/supplier/", require("./src/routes/supplierApi"));
+app.use("/api/promotion/", require("./src/routes/promotionApi"));
 
 app.listen(PORT, () => {
   console.log("App running on port: " + PORT);
