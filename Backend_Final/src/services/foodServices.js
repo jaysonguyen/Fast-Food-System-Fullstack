@@ -27,7 +27,7 @@ const getAllFood = async () => {
     return {
       EM: "Get data failed",
       EC: -1,
-      DT: "",
+      DT: error.message,
     };
   }
 };
