@@ -41,16 +41,19 @@ const getBillById = async (id) => {
     let data = await poolConnection.request().query(`
             exec getBillById ${id}
         `);
+
     poolConnection.close();
+    // det bill details
+    data.recordset[0].Details = await getBillDetails(id);
     if (data) {
       return {
-        EM: "Get all food success",
+        EM: "Get bill by id success",
         EC: 1,
         DT: data.recordset,
       };
     } else {
       return {
-        EM: "Get all food success but food is empty",
+        EM: "Get bill by id success but bill is empty",
         EC: 0,
         DT: [],
       };
@@ -107,6 +110,29 @@ const getAllBill = async () => {
     console.log(error.message);
     return {
       EM: "Get bill failed",
+      EC: -1,
+      DT: error.message,
+    };
+  }
+};
+
+const getBillDetails = async (billid) => {
+  try {
+    const poolConnection = await sql.connect(config);
+    console.log("Reading rows from Bill details Table..");
+    let data = await poolConnection.request().query(`
+            exec getBillDetails ${billid}
+        `);
+    poolConnection.close();
+    if (data) {
+      return data.recordset;
+    } else {
+      return [];
+    }
+  } catch (error) {
+    console.log(error.message);
+    return {
+      EM: "Get bill details failed",
       EC: -1,
       DT: error.message,
     };
@@ -170,4 +196,5 @@ module.exports = {
   addBillDetails,
   addBill,
   getBillIDByDate,
+  getBillDetails,
 };

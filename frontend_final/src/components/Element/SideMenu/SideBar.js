@@ -5,11 +5,17 @@ export default function SideBar() {
     <div id="sidebar">
       <ul class="nav-list">
         <li class="nav-item has-submenu">
-          <a class="nav-link active" href="#">
-            {" "}
-            Product{" "}
+          <a
+            class="nav-link active"
+            data-toggle="collapse"
+            href="#collapseExample"
+            role="button"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            Product
           </a>
-          <ul class="submenu collapse show">
+          <ul id="collapseExample" class="collapse show">
             <li>
               <a class="nav-link active" href="#">
                 Product
@@ -17,25 +23,24 @@ export default function SideBar() {
             </li>
             <li>
               <a class="nav-link" href="#">
-                Promotion{" "}
+                Promotion
               </a>
             </li>
             <li>
               <a class="nav-link" href="#">
-                Recipe{" "}
+                Recipe
               </a>
             </li>
             <li>
               <a class="nav-link" href="#">
-                Ingredients{" "}
+                Ingredients
               </a>
             </li>
           </ul>
         </li>
         <li class="nav-item has-submenu">
           <a class="nav-link" href="#">
-            {" "}
-            Categories{" "}
+            Categories
           </a>
           <ul class="submenu collapse">
             <li>
@@ -45,17 +50,17 @@ export default function SideBar() {
             </li>
             <li>
               <a class="nav-link" href="#">
-                item 5{" "}
+                item 5
               </a>
             </li>
             <li>
               <a class="nav-link" href="#">
-                item 6{" "}
+                item 6
               </a>
             </li>
             <li>
               <a class="nav-link" href="#">
-                item 7{" "}
+                item 7
               </a>
             </li>
           </ul>

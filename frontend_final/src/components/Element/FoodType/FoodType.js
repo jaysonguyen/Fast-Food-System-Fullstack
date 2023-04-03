@@ -3,7 +3,6 @@ import FoodTypeCart from "../Card/FoodTypeCart/FoodTypeCart";
 import { Nav } from "reactstrap";
 import { FoodTypeData } from "../../../api/tempAPI";
 
-
 export default function FoodType() {
   const [FoodType, setFoodType] = useState([]);
 
@@ -17,7 +16,7 @@ export default function FoodType() {
   }, []);
 
   return (
-    <Nav tabs className="nav nav-tabs pizza-items filters bg-primary">
+    <Nav tabs className="nav nav-tabs pizza-items filters my-bg-primary">
       {FoodType.map((foodtype, idx) => {
         return <FoodTypeCart key={idx} foodtype={foodtype} />;
       })}

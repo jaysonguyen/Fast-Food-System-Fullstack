@@ -2,10 +2,6 @@ import React from "react";
 import Header from "../components/Layout/Header/AuthHeader/AuthHeader";
 import SideBar from "../components/Element/SideMenu/SideBar";
 
-import "../css/root.css";
-import "../css/main.css";
-import "../js/main.js";
-
 export default function FoodList() {
   return (
     <div>

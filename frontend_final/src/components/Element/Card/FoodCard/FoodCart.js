@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { TabPane } from "reactstrap";
+import { TabPane, NavLink } from "reactstrap";
 import { FoodByTypeData } from "../../../../api/tempAPI";
 
 export default function FoodCart({ foodtype }) {
@@ -34,14 +34,16 @@ export default function FoodCart({ foodtype }) {
                     <del>45</del>
                     <span>{food.Price}</span>
                   </h5>
-                  <div className="cart-btn">
-                    {/* <Link
+                  <div className="cart-btn ">
+                    {/* <NavLink
                     to={"/shop-product-details"}
                     className="btn btnhover radius-xl"
                   >
                     <i className="ti-shopping-cart"></i> Add To Cart
-                  </Link> */}
-                    <i className="ti-shopping-cart"></i> Add to order
+                  </NavLink> */}
+                    <button class="order-btn btn">
+                      <i className="ti-shopping-cart"></i> Add to order
+                    </button>
                   </div>
                 </div>
               </div>

@@ -6,7 +6,7 @@ const {
   getBillIDByDate,
   getAllBillByDay,
 } = require("../services/orderServices");
-const { getCurrentDateTime } = require("../tool");
+const tools = require("../tool");
 
 const getBillList = async (req, res) => {
   try {
@@ -31,7 +31,7 @@ const createBill = async (req, res) => {
   try {
     const { StaffID } = req.body;
     const { BillDetails } = req.body; //array
-    const today = getCurrentDateTime();
+    const today = tools.getCurrentDateTime();
     console.log(today);
     //create bill
     let bill = await addBill(StaffID, today);
@@ -79,7 +79,33 @@ const createBill = async (req, res) => {
   }
 };
 
+const getLevel0 = async (req, res) => {
+  try {
+    console.log("order controller is running..");
+    let id = req.params.id;
+    let check = tools.isNumberic(id);
+    let data = [];
+    if (check) {
+      data = await getBillById(id);
+      console.log(data.DT);
+    }
+
+    return res.status(200).json({
+      EM: data.EM,
+      EC: data.EC,
+      DT: data.DT,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      EM: "Error at Controller",
+      EC: -1,
+      DT: "",
+    });
+  }
+};
+
 module.exports = {
   getBillList,
   createBill,
+  getLevel0,
 };

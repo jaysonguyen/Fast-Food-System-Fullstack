@@ -1,4 +1,4 @@
-import {Collapse} from "bootstrap";
+import { Collapse } from "bootstrap";
 
 window.bootstrap = require("bootstrap/dist/js/bootstrap.bundle.js");
 
