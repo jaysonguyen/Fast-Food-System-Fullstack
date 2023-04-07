@@ -2528,7 +2528,7 @@ label {
 /*radio & checkbox*/
 input[type="checkbox"],
 input[type="radio"] {
-  display: ;
+  /* display: ; */
   opacity: 0;
   margin-left: 1px !important;
   position: absolute;
@@ -3156,7 +3156,7 @@ blockquote cite {
   .logo-header,
   .is-fixed.header-curve .logo-header,
   .is-fixed .logo-header,
-  3 .is-fixed.header-curve .logo-header {
+  .is-fixed.header-curve .logo-header {
     width: 120px;
     max-width: 120px;
     height: 70px;
@@ -6247,7 +6247,7 @@ ol.comment-list li.comment .comment-respond .comment-form p {
 }
 .widget-testimonial .testimonial-position {
   text-transform: uppercase;
-  color: #888q;
+  color: #888;
   font-size: 12px;
   font-style: inherit;
 }
@@ -9727,7 +9727,7 @@ ul[class*="list-"] {
 .testimonial-9 .testimonial-position,
 .testimonial-10 .testimonial-position {
   text-transform: uppercase;
-  color: #888q;
+  color: #888;
   font-size: 12px;
   font-style: inherit;
 }
@@ -14648,11 +14648,15 @@ pre {
   height: 150px;
 }
 
+.nav-tabs.pizza-items .nav-item {
+  cursor: pointer;
+}
+
 .nav-tabs.pizza-items .item-icon-box.active:before {
   content: "";
   width: 20px;
   height: 20px;
-  background: var(--color-primary);
+  background: var(--clr-btn);
   position: absolute;
   bottom: -15px;
   transform: rotate(45deg) translateX(-50%);

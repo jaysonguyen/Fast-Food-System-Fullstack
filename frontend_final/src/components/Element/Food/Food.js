@@ -2,11 +2,10 @@ import FoodCart from "../Card/FoodCard/FoodCart";
 import { TabContent } from "reactstrap";
 import { ActiveContext } from "../../Context/ActiveContext";
 import { useContext, useState, useEffect } from "react";
-import { FoodTypeData } from "../../../api/tempAPI";
+import { FoodTypeData } from "../../../api/callApi";
 
 export default function Food() {
   const context = useContext(ActiveContext);
-  const classes = `mt-4`;
   const [FoodType, setFoodType] = useState([]);
 
   const getFoodDataTest = async () => {
@@ -19,7 +18,7 @@ export default function Food() {
   }, []);
 
   return (
-    <TabContent className={classes} activeTab={context.activeTab}>
+    <TabContent className="mt-4 overflow-auto" activeTab={context.activeTab}>
       {FoodType.map((foodtype, idx) => {
         return <FoodCart key={idx} foodtype={foodtype} />;
       })}

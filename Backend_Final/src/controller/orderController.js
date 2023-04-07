@@ -5,6 +5,10 @@ const {
   addBill,
   getBillIDByDate,
   getAllBillByDay,
+  deleteBillByID,
+  updateBillStatus,
+  getBillUnfinished,
+  getBillFinished,
 } = require("../services/orderServices");
 const tools = require("../tool");
 
@@ -88,6 +92,10 @@ const getLevel0 = async (req, res) => {
     if (check) {
       data = await getBillById(id);
       console.log(data.DT);
+    } else {
+      //get bill with status = 0
+      if (id == "unfinished") data = await getBillUnfinished();
+      else if (id == "finished") data = await getBillFinished();
     }
 
     return res.status(200).json({
@@ -104,8 +112,53 @@ const getLevel0 = async (req, res) => {
   }
 };
 
+const deleteBill = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const check = tools.isNumberic(id);
+    let data = [];
+    if (check) {
+      data = await deleteBillByID(id);
+    }
+
+    return res.status(200).json({
+      EM: data.EM,
+      EC: data.EC,
+      DT: data.DT,
+    });
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json({
+      EM: "Error at Controller",
+      EC: -2,
+      DT: error.message,
+    });
+  }
+};
+
+const updateBill = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const data = await updateBillStatus(id);
+
+    return res.status(200).json({
+      EM: data.EM,
+      EC: data.EC,
+      DT: data.DT,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      EM: "Error at Controller",
+      EC: -1,
+      DT: error.message,
+    });
+  }
+};
+
 module.exports = {
   getBillList,
   createBill,
   getLevel0,
+  deleteBill,
+  updateBill,
 };

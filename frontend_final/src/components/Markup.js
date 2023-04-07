@@ -1,16 +1,20 @@
 import React from "react";
-import Home from "../pages/Home";
-import FoodList from "../pages/FoodList";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { NavBar } from "./NavBar";
+import {Home} from "../components/Element/"
 
 import "../css/plugins.css";
 // require("bootstrap");
 
 function Markup() {
   return (
-    <div>
-      {/* <FoodList /> */}
-      <Home />
-    </div>
+    <Router>
+      <NavBar />
+      <Routes>
+        <Route path="/" />
+        <Route path="/home" />
+      </Routes>
+    </Router>
   );
 }
 

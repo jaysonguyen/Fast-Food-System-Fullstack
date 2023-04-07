@@ -1,22 +1,30 @@
 import { useState, useEffect } from "react";
 import FoodTypeCart from "../Card/FoodTypeCart/FoodTypeCart";
 import { Nav } from "reactstrap";
-import { FoodTypeData } from "../../../api/tempAPI";
+import { FoodTypeData } from "../../../api/callApi";
+import { FoodTypeDT } from "../../../api/tempApi";
+
+import { getFoodTypeService } from "../../../services/foodTypeServices";
 
 export default function FoodType() {
   const [FoodType, setFoodType] = useState([]);
 
-  const getFoodDataTest = async () => {
-    let data = await FoodTypeData();
-    setFoodType(data.DT);
+  const getFoodTypeData = async () => {
+    let data = [];
+    try {
+      data = await getFoodTypeService();
+      setFoodType(data);
+    } catch (error) {
+      setFoodType(FoodTypeDT);
+    }
   };
 
   useEffect(() => {
-    getFoodDataTest();
+    getFoodTypeData();
   }, []);
 
   return (
-    <Nav tabs className="nav nav-tabs pizza-items filters my-bg-primary">
+    <Nav tabs className="nav nav-tabs pizza-items filters bg-gr-primary">
       {FoodType.map((foodtype, idx) => {
         return <FoodTypeCart key={idx} foodtype={foodtype} />;
       })}

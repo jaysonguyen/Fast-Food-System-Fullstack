@@ -44,7 +44,13 @@ const getBillById = async (id) => {
 
     poolConnection.close();
     // det bill details
-    data.recordset[0].Details = await getBillDetails(id);
+    let details = [];
+    try {
+      details = await getBillDetails(id);
+    } catch (error) {
+      console.log(error.message);
+    }
+    data.recordset[0].Details = await details;
     if (data) {
       return {
         EM: "Get bill by id success",
@@ -139,6 +145,50 @@ const getBillDetails = async (billid) => {
   }
 };
 
+const getBillUnfinished = async () => {
+  try {
+    const poolConnection = await sql.connect(config);
+    const data = await poolConnection.request().query(`
+      exec getBillByStatus 0
+    `);
+    poolConnection.close();
+
+    return {
+      EM: "Get bill unfinished successfully",
+      EC: 1,
+      DT: data.recordset,
+    };
+  } catch (error) {
+    return {
+      EM: "Error at order services",
+      EC: -2,
+      DT: error.message,
+    };
+  }
+};
+
+const getBillFinished = async () => {
+  try {
+    const poolConnection = await sql.connect(config);
+    const data = await poolConnection.request().query(`
+      exec getBillByStatus 1
+    `);
+    poolConnection.close();
+
+    return {
+      EM: "Get bill finished successfully",
+      EC: 1,
+      DT: data.recordset,
+    };
+  } catch (error) {
+    return {
+      EM: "Error at order services",
+      EC: -2,
+      DT: error.message,
+    };
+  }
+};
+
 const addBill = async (staffid, today) => {
   try {
     const poolConnection = await sql.connect(config);
@@ -189,6 +239,48 @@ const addBillDetails = async (billid, staffid, foodid, quantity, price) => {
   }
 };
 
+const deleteBillByID = async (id) => {
+  try {
+    const poolConnection = await sql.connect(config);
+    await poolConnection.request().query(`
+      exec sp_deleteBill ${id}
+    `);
+    poolConnection.close();
+    return {
+      EM: "delete bill successfully",
+      EC: 1,
+      DT: [],
+    };
+  } catch (error) {
+    return {
+      EM: "Error at OrderServices",
+      EC: -1,
+      DT: error.message,
+    };
+  }
+};
+
+const updateBillStatus = async (id) => {
+  try {
+    const poolConnection = await sql.connect(config);
+    const data = await poolConnection.request().query(`
+      exec sp_updateBillStatus ${id}
+    `);
+    poolConnection.close();
+    return {
+      EM: "update bill status successfully",
+      EC: 1,
+      DT: [],
+    };
+  } catch (error) {
+    return {
+      EM: "Error at bill status services",
+      EC: -1,
+      DT: error.message,
+    };
+  }
+};
+
 module.exports = {
   getAllBillByDay,
   getBillById,
@@ -197,4 +289,8 @@ module.exports = {
   addBill,
   getBillIDByDate,
   getBillDetails,
+  deleteBillByID,
+  updateBillStatus,
+  getBillUnfinished,
+  getBillFinished,
 };

@@ -18,6 +18,7 @@ body {
     rgba(210, 72, 80, 0.6369398101037289) 15%,
     rgba(223, 73, 73, 0.7377801462381828) 51%
   ); */
+  /* overflow: hidden; */
 }
 
 .bg-gr-bg {
@@ -52,7 +53,8 @@ li {
 .nav-link.active {
 }
 
-#header .nav-link.active {
+#auth-header .nav-link.active,
+#casher-header .nav-link.active {
   border-radius: 10%;
   background-color: #fff;
   color: #333 !important;
@@ -69,7 +71,7 @@ li {
   color: var(--clr-btn);
 }
 
-#header .nav-link {
+#auth-header .nav-link {
   color: #d7d7d7;
 }
 
@@ -121,6 +123,10 @@ select:focus,
   text-decoration: none;
 }
 
+.btn:has(:not(a)) {
+  padding: 10px 15px;
+}
+
 .btn-sml {
   padding: 5px 20px;
 }
@@ -137,8 +143,23 @@ select:focus,
 }
 
 .btn-clr-danger {
-  background-color: rgb(45, 0, 0);
+  background-color: rgb(161, 0, 0);
   color: #fff;
+}
+
+.btn-clr-success {
+  background-color: rgb(13, 135, 74);
+  color: #fff;
+}
+
+/* table */
+td .nav-link {
+  transition: all 0.3s;
+}
+td .nav-link:hover {
+  background-color: var(--clr-btn);
+  color: #fff;
+  border-radius: 100%;
 }
 
 .main-body {
@@ -183,6 +204,7 @@ select:focus,
   font: var(--fa-font-solid);
   content: "\f0da";
   margin-left: 15px;
+  /* margin-right: 10px; */
 }
 
 .breadcumb a:not(.bc-prev) {
@@ -191,11 +213,33 @@ select:focus,
   border-radius: 10px;
 }
 
+.breadcumb a.bc-prev:hover {
+  font-weight: 800;
+  color: var(--clr-btn);
+}
+
 /* product */
 .information {
   /* position: relative; */
   margin-bottom: 20px;
   color: #333;
+}
+
+.information,
+.information .info-card,
+.information .info-card::after {
+  transition: 0.3s;
+}
+
+.information .col:hover .info-card,
+.information .info-card:hover {
+  background-color: var(--clr-btn);
+  color: #fff;
+  cursor: pointer;
+}
+
+.information .info-card:hover::after {
+  background-color: var(--clr-btn);
 }
 
 .information .info-card {
@@ -227,4 +271,30 @@ select:focus,
   padding: 7px;
   border-radius: 5px;
   border: solid 1px #ced4da;
+}
+
+/* sidebar */
+#sidebar > div {
+  width: 275px;
+}
+
+#sidebar > div .logo {
+  height: 200px;
+}
+
+#sidebar #menu .nav-item:has(a.active) {
+  border-left: 5px solid #fff;
+}
+
+#sidebar #menu .nav-item a.active {
+  background-color: antiquewhite;
+  color: #333;
+}
+
+#sidebar #menu .nav-item a {
+  font-size: 20px;
+  border-radius: 10px;
+  margin: 15px 15px 15px 40px;
+  padding: 10px 20px;
+  color: #fff;
 }
