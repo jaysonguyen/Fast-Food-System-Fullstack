@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Manage Category</title>
+  </head>
+  <body>
+    <h1>Manage Category</h1>
+    <form>
+      <fieldset>
+        <legend>Add Category</legend>
+        <label for="category-name">Name:</label>
+        <input type="text" id="category-name" name="category-name">
+        <br>
+        <label for="category-description">Description:</label>
+        <textarea id="category-description" name="category-description"></textarea>
+        <br>
+        <button type="submit">Add</button>
+      </fieldset>
+    </form>
+    <hr>
+    <h2>List of Categories</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Category 1</td>
+          <td>Description of Category 1</td>
+          <td>
+            <button>Edit</button>
+            <button>Delete</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Category 2</td>
+          <td>Description of Category 2</td>
+          <td>
+            <button>Edit</button>
+            <button>Delete</button>
+          </td>
+        </tr>
+        <!-- Add more rows here for additional categories -->
+      </tbody>
+    </table>
+  </body>
+</html>
