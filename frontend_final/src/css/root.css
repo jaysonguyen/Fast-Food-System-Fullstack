@@ -4,6 +4,12 @@
   --clr-btn: #94355c;
   --clr-card: #ffe4e7;
   --clr-card-shadow: #f6dfe2;
+
+  --clr-bg-body: rgba(255, 189, 205, 0.5);
+  --clr-font-primary: rgb(130, 37, 94);
+  --clr-font-secondary: rgb(165, 0, 85);
+  --clr-font-third: ;
+
   --red: red;
 }
 

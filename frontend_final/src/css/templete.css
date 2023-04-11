@@ -1,9 +1,8 @@
 /*==========================
 	Custom css
 ==========================*/
-
+@import "./root.css";
 /* Body */
-
 .container {
   max-width: 1270px;
 }
@@ -1541,9 +1540,9 @@
   flex: 0 0 20%;
 }
 .shop-item.style2 {
-  background: #fff;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+  background: transparent;
+  /* border: 2px solid rgba(0, 0, 0, 0.1); */
+  /* border-radius: 10px; */
   overflow: hidden;
   height: 100%;
 }
@@ -1555,10 +1554,14 @@
     -ms-transform: translateX(-50%);
     -o-transform: translateX(-50%); */
 }
+
 .shop-item.style2 .item-info {
   margin-bottom: 0;
   padding: 0 20px 30px 20px;
   position: relative;
+
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 
   background: #fff;
   transition: all 0.5s;
@@ -1586,6 +1589,7 @@
   position: unset;
   display: block;
   background: transparent;
+  color: var(--clr-font-primary);
   padding: 0;
   font-weight: 700;
   margin-bottom: 0;
@@ -1600,7 +1604,7 @@
   font-size: 22px;
   opacity: 1;
   margin-right: 10px;
-  color: #999;
+  color: var(--clr-font-primary);
   font-weight: 200;
 }
 .shop-item.style2 .item-title {
@@ -1615,7 +1619,7 @@
   width: 100%;
   height: 100%;
   top: 200%;
-  background: #fff;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;

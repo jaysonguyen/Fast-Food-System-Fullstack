@@ -30,7 +30,7 @@ export default function FoodCart({ foodtype }) {
   }, [foods]);
 
   return (
-    <TabPane tabId={foodtype.ID}>
+    <TabPane tabId={foodtype.ID} style={{ overflowY: "scroll" }}>
       <div className="row ">
         {foods.map((food, idx) => {
           return (
@@ -40,10 +40,8 @@ export default function FoodCart({ foodtype }) {
                   <img src={require("../../../../images/pic1.png")} alt="" />
                 </div>
                 <div className="item-info text-center">
-                  <h4 className="item-title">
-                    {food.Name}
-                  </h4>
-                  <p className="price text-primary">
+                  <h4 className="item-title">{food.Name}</h4>
+                  <p className="price ">
                     <del>45</del>
                     {food.Price.toLocaleString("de-DE")}
                     <sup>&#8363;</sup>

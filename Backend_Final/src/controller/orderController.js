@@ -11,11 +11,17 @@ const {
   getBillFinished,
 } = require("../services/orderServices");
 const tools = require("../tool");
+const moment = require("moment");
 
 const getBillList = async (req, res) => {
   try {
     console.log("get bill list");
     let data = await getAllBill();
+    data.DT.forEach((item) => {
+      item.Date = moment(moment(item.Date).toDate()).format(
+        "DD/MM/YYYY hh:mm:ss"
+      );
+    });
     return res.status(200).json({
       EM: data.EM,
       EC: data.EC,
@@ -49,7 +55,7 @@ const createBill = async (req, res) => {
         let billdetails = await addBillDetails(
           billID,
           StaffID,
-          detail.FoodID,
+          detail.ID,
           detail.Quantity,
           detail.Price
         );
@@ -91,13 +97,18 @@ const getLevel0 = async (req, res) => {
     let data = [];
     if (check) {
       data = await getBillById(id);
+
       console.log(data.DT);
     } else {
       //get bill with status = 0
       if (id == "unfinished") data = await getBillUnfinished();
       else if (id == "finished") data = await getBillFinished();
     }
-
+    data.DT.forEach((item) => {
+      item.Date = moment(moment(item.Date).toDate()).format(
+        "DD/MM/YYYY hh:mm:ss"
+      );
+    });
     return res.status(200).json({
       EM: data.EM,
       EC: data.EC,

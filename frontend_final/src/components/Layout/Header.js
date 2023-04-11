@@ -10,8 +10,8 @@ export const DefaultHeader = () => {
 export const CasherHeader = () => {
   return (
     <div id="casher-header" className="bg-gr-bg">
-      <div className="container-fluid bg-gr-primary py-1">
-        <div className="d-flex flex-row justify-between text-white">
+      <div className="container-fluid bg-gr-primary py-1 px-xxl-5 ">
+        <div className="container d-flex flex-row justify-between text-white">
           <div className="main-nav">
             <div className="container">
               <nav className="navbar navbar-expand-lg navbar-dark">
@@ -38,18 +38,18 @@ export const CasherHeader = () => {
                       {/* Order */}
                       <li className="nav-item">
                         <Link to={"/order"} className="nav-link">
-                          Order
+                          Make Order
                         </Link>
                       </li>
                       {/* <!-- Order history --> */}
                       <li className="nav-item">
-                        <Link to={"/orderhistory"} className="nav-link">
-                          Order History
+                        <Link to={"/orders"} className="nav-link">
+                          Orders
                         </Link>
                       </li>
                       {/* <!-- menu management --> */}
                       <li className="nav-item">
-                        <Link to={"/menumanagement"} className="nav-link">
+                        <Link to={"/menu"} className="nav-link">
                           Menu Management
                         </Link>
                       </li>
@@ -179,5 +179,26 @@ export const AuthHeader = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+export const OrderSubHeader = () => {
+  return (
+    <>
+      <div className="d-flex flex-row mt-3">
+        <Link to="/orders/all" className="nav-link mx-3">
+          All Orders
+        </Link>
+        <Link to="/orders/processing" className="nav-link mx-3">
+          Processing
+        </Link>
+        <Link to="/orders/completed " className="nav-link mx-3">
+          Completed
+        </Link>
+        <Link to={"/"} className="nav-link mx-3">
+          Cancelled
+        </Link>
+      </div>
+    </>
   );
 };

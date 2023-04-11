@@ -1,8 +1,15 @@
 import React from "react";
 
-import { CasherHeader } from "./Layout/Header";
-import { CasherSideBar } from "./Layout/SideMenu/SideBar";
+import { CasherHeader, AuthHeader, DefaultHeader } from "./Layout/Header";
 
 export const NavBar = () => {
-  return <CasherHeader />;
+  let user = "casher";
+  switch (user) {
+    case "casher":
+      return <CasherHeader />;
+    case "admin":
+      return <AuthHeader />;
+    default:
+      return <DefaultHeader />;
+  }
 };

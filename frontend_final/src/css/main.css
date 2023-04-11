@@ -1,4 +1,5 @@
 @import "./root.css";
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
 
 * {
   box-sizing: border-box;
@@ -18,6 +19,7 @@ body {
     rgba(210, 72, 80, 0.6369398101037289) 15%,
     rgba(223, 73, 73, 0.7377801462381828) 51%
   ); */
+  background-color: var(--clr-bg-body);
   /* overflow: hidden; */
 }
 
@@ -52,6 +54,110 @@ li {
 
 .nav-link.active {
 }
+
+.title {
+  font-family: "Lobster", cursive;
+}
+
+/* login */
+
+#loginContent,
+#loginContent .bg-left > div {
+  height: 100vh;
+}
+
+#loginContent {
+  background-size: cover;
+  background: rgb(255, 127, 132);
+}
+
+#loginContent .bg-left {
+  padding: 0;
+  overflow: hidden;
+  /* background-color: var(--clr-btn); */
+}
+
+#loginContent {
+  /* background-image: url("/images/login-bg.jpg"); */
+}
+
+#loginContent .bg-right {
+  background: linear-gradient(
+    257deg,
+    rgba(255, 127, 132, 1) 5%,
+    rgba(255, 100, 136, 1) 35%,
+    rgba(231, 110, 160, 1) 83%
+  );
+}
+
+#loginContent #loginForm {
+  position: absolute;
+
+  height: 85vh;
+  width: 80vw;
+  margin: auto;
+
+  border-radius: 20px;
+  overflow: hidden;
+  color: #ffe6fd;
+}
+
+#loginContent #loginForm .form-title {
+  font-size: 32px;
+  margin-top: 100px;
+  /* margin-left: 4em; */
+  text-transform: uppercase;
+}
+
+#loginContent #loginForm input {
+  padding: 10px 10px;
+}
+
+#loginContent #loginForm a {
+  color: #66115f;
+}
+
+#loginContent #loginForm .submit-btn {
+  background-color: #fff;
+  color: var(--clr-btn);
+  width: 25%;
+  font-weight: 600;
+  padding: 10px 25px;
+}
+
+#loginContent #loginForm .submit-btn:hover {
+  background-color: #fff;
+  color: var(--clr-btn);
+  box-shadow: 5px 5px 0px var(--clr-btn);
+}
+
+#loginContent #loginForm .bg-left {
+  background-color: rgb(148, 53, 92, 40%);
+}
+
+#loginContent #loginForm .bg-left img {
+  height: auto;
+  width: 100%;
+  margin: auto 0;
+}
+
+#loginContent #loginForm .bg-right {
+  background: linear-gradient(
+    32deg,
+    rgba(175, 22, 27, 0.6) 5%,
+    rgba(190, 42, 103, 0.7) 82%
+  );
+}
+
+#loginContent #loginForm .bg {
+  height: 100%;
+}
+
+#loginContent #loginForm .form-container {
+  padding: 5em 8em 15em 8em;
+}
+
+/* header */
 
 #auth-header .nav-link.active,
 #casher-header .nav-link.active {
@@ -127,6 +233,10 @@ select:focus,
   padding: 10px 15px;
 }
 
+.btn:has(svg) {
+  padding: 0;
+}
+
 .btn-sml {
   padding: 5px 20px;
 }
@@ -153,6 +263,60 @@ select:focus,
 }
 
 /* table */
+.table-wrapper {
+  background-color: #fff;
+  padding: 15px 20px;
+  border-radius: 10px;
+  border: 2px solid var(--clr-btn);
+  box-shadow: 5px 5px 0px var(--clr-gradient-1);
+}
+
+.table-wrapper .table {
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+.table-wrapper .table thead {
+  background-color: rgb(255, 121, 143);
+  border-bottom: 2px solid var(--clr-btn);
+}
+
+.table-wrapper .table th {
+  position: relative;
+  color: #fff;
+}
+
+.table-wrapper .table tr {
+  border-bottom: 0.5px solid var(--clr-btn) !important;
+}
+
+.table-wrapper .table th:before {
+  content: "";
+  position: absolute;
+  height: 3px;
+  width: 8px;
+
+  right: 18px;
+  top: 30px;
+  z-index: 1;
+
+  border-radius: 10px;
+  background-color: var(--clr-btn);
+}
+
+.table-wrapper .table th:after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 22px;
+  right: 18px;
+  top: 30px;
+
+  border-radius: 10px;
+  /* box-shadow: -1px 1px 1px var(--clr-gradient-1); */
+  background-color: var(--clr-btn);
+}
+
 td .nav-link {
   transition: all 0.3s;
 }
@@ -279,7 +443,7 @@ td .nav-link:hover {
 }
 
 #sidebar > div .logo {
-  height: 200px;
+  height: 180px;
 }
 
 #sidebar #menu .nav-item:has(a.active) {
@@ -297,4 +461,165 @@ td .nav-link:hover {
   margin: 15px 15px 15px 40px;
   padding: 10px 20px;
   color: #fff;
+}
+
+/* make order page */
+#orderTable {
+  height: 80vh;
+}
+
+#orderTable thead {
+  background-color: transparent;
+}
+
+#checkout {
+  position: fixed;
+
+  background-color: transparent;
+
+  width: 500px;
+  top: 85vh;
+  left: 67vw;
+}
+
+/* tab */
+.tab-content .tab-pane {
+  height: 70vh;
+}
+
+/* food list 2 slider */
+#SliderContainer .item-container {
+  /* height: 180px; */
+}
+
+.slick-slider {
+  height: 180px;
+  overflow: hidden;
+}
+
+.menu-title {
+  font-size: 22px;
+  color: var(--clr-font-primary);
+  /* font-weight: 600; */
+}
+
+.slick-dots {
+  opacity: 0;
+  z-index: -1;
+}
+
+.slick-arrow {
+  position: absolute;
+}
+
+.slick-arrow.slick-next {
+  left: 100%;
+}
+
+.slick-list {
+  overflow: hidden;
+  flex-wrap: none;
+}
+
+.slick-list .card-item {
+  position: relative;
+  /* height: 100%; */
+  margin-right: 20px;
+  border-radius: 10px;
+}
+
+.slick-list .card-img {
+  width: 95%;
+  max-width: 95%;
+  height: 180px;
+  overflow: hidden;
+  position: relative;
+  /* border-radius: 10px; */
+}
+
+.slick-list .card-item .card-name {
+  /* color: #fff; */
+  color: var(--clr-btn);
+  font-weight: 600;
+}
+
+.slick-list .card-item .card-img img {
+  /* width: 100%; */
+  height: 180px;
+
+  object-fit: cover;
+}
+
+.slick-list .card-item .card-info {
+  /* position: absolute; */
+  left: 50%;
+
+  width: 60%;
+  height: 50%;
+  padding: 5px 20px;
+  margin: 0 20px;
+  border-left: 3px var(--clr-btn) solid;
+  color: var(--clr-btn);
+
+  transition: all 0.5s;
+  /* opacity: 0; */
+}
+
+.slick-list .card-item .card-info .price {
+  color: #fff !important;
+  text-align: center;
+  border-radius: 10px;
+  background-color: var(--clr-font-secondary);
+  padding: 5px;
+  box-shadow: 1px 2px 2px #333;
+}
+
+.slick-list .card-wrapper {
+  width: 50%;
+  /* max-width: 33.3333%; */
+  /* min-width: 30%; */
+  position: relative;
+  transition: all 0.5s;
+}
+
+.slick-list .card-wrapper:hover {
+  margin-right: 180px;
+}
+
+.slick-list .card-wrapper:hover .card-img button {
+  opacity: 1;
+  border-radius: 10px;
+}
+
+.slick-list .card-wrapper:hover .card-info {
+  opacity: 1;
+
+  transition: all 0.5s;
+  left: 100%;
+}
+
+.slick-list .card-item .card-img button {
+  position: absolute;
+  opacity: 0;
+
+  width: 100%;
+  background-color: rgb(2, 0, 36, 50%);
+  z-index: 1;
+  font-size: 12px;
+  transition: all 0.3s;
+}
+
+.slick-list .card-item .card-img button div {
+  padding: 10px 20px;
+  background-color: var(--clr-btn);
+  color: #fff;
+  border-radius: 20px;
+  width: 150px;
+  margin: 0px auto;
+}
+
+.slick-list .card-item .card-img button div:hover {
+  background-color: #fff;
+  color: var(--clr-btn);
+  font-weight: 600;
 }

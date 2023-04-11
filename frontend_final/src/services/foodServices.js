@@ -1,5 +1,5 @@
-import { FoodData } from "../api/callApi";
-import { Food } from "../api/tempApi";
+import { FoodData, FoodByTypeData } from "../api/callApi";
+import { FoodDT } from "../api/tempApi";
 
 const getFoodData = async () => {
   let data = [];
@@ -7,8 +7,18 @@ const getFoodData = async () => {
     data = await FoodData();
     return data.DT;
   } catch (error) {
-    return Food;
+    return FoodDT;
   }
 };
 
-export { getFoodData };
+const getFoodByTypeData = async (id) => {
+  let data = [];
+  try {
+    data = await FoodByTypeData(id);
+    return data.DT;
+  } catch (error) {
+    return FoodDT;
+  }
+}
+
+export { getFoodData, getFoodByTypeData };

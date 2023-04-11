@@ -1,6 +1,7 @@
 const express = require("express");
-// const bodyParser = require("body-parser");
 const bodyParser = require("body-parser");
+const cors = require("cors");
+
 require("dotenv");
 // require("dotenv").config();
 // const errorHandler = require("./src/middleware/errorHandler");
@@ -19,9 +20,11 @@ app.use(function (req, res, next) {
   );
 
   // Request headers you wish to allow
+  res.setHeader("Access-Control-Allow-Headers", "Origin, Content-Type, Accept");
+
   res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type"
+    "Access-Control-Request-Headers",
+    "Origin, Content-Type, Accept"
   );
 
   // Set to true if you need the website to include cookies in the requests sent

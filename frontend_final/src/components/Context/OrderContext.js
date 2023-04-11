@@ -7,10 +7,11 @@ function orderReducer(state, action) {
     case "ADD_TO_ORDER":
       const item = state.find((item) => item.ID === action.payload.ID);
       if (item) {
-        item.quantity++;
+        item.Quantity += 1;
         return [...state];
       } else {
-        return [...state, { ...action.payload, quantity: 1 }];
+        // chưa có staffId nên tạm thời để mặc đinh
+        return [...state, { ...action.payload, Quantity: 1 }];
       }
     case "REMOVE_FROM_ORDER":
       return state.filter((item) => item.ID !== action.payload.ID);
@@ -20,7 +21,7 @@ function orderReducer(state, action) {
         ...state,
         cartItems: state.cartItems.map((item) =>
           item.id === action.payload.id
-            ? { ...item, quantity: item.quantity + 1 }
+            ? { ...item, Quantity: item.Quantity + 1 }
             : item
         ),
       };
@@ -30,7 +31,7 @@ function orderReducer(state, action) {
         ...state,
         cartItems: state.cartItems.map((item) =>
           item.id === action.payload.id
-            ? { ...item, quantity: item.quantity - 1 }
+            ? { ...item, Quantity: item.Quantity - 1 }
             : item
         ),
       };
@@ -41,7 +42,7 @@ function orderReducer(state, action) {
           if (item.id === action.payload.id) {
             return {
               ...item,
-              quantity: action.payload.quantity,
+              Quantity: action.payload.Quantity,
             };
           }
           return item;
@@ -73,8 +74,8 @@ const OrderProvider = ({ children }) => {
     dispatch({ type: "DECREMENT_QUANTITY", payload: item });
   };
 
-  const updateQuantity = (item, quantity) => {
-    dispatch({ type: "UPDATE_QUANTITY", payload: { id: item.id, quantity } });
+  const updateQuantity = (item, Quantity) => {
+    dispatch({ type: "UPDATE_QUANTITY", payload: { id: item.id, Quantity } });
   };
 
   const emptyOrder = () => {

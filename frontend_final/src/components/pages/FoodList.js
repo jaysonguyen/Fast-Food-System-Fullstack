@@ -1,18 +1,18 @@
 import React from "react";
-import Header from "../components/Layout/Header/AuthHeader/AuthHeader";
-import SideBar from "../components/Element/SideMenu/SideBar";
+import { AuthHeader } from "../Layout/Header";
+import { AdminSideBar } from "../Layout/SideMenu/SideBar";
 
-export default function FoodList() {
+export function FoodList() {
   return (
     <div>
-      <Header />
+      <AuthHeader />
 
       <div id="body">
         <div class="container">
           <div class="container-fluid main-body">
             <div class="d-flex flex-col">
               <div class="col-2">
-                <SideBar />
+                <AdminSideBar />
               </div>
               <div class="col ms-4">
                 <div class="information">
