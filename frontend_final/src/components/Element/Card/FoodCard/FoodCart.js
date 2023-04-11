@@ -3,7 +3,7 @@ import { OrderContext } from "../../../Context/OrderContext";
 
 import { TabPane, NavLink } from "reactstrap";
 import { FoodByTypeData } from "../../../../api/callApi";
-import { FoodDT } from "../../../../api/tempApi";
+//import { FoodDT } from "../../../../api/tempApi";
 
 export default function FoodCart({ foodtype }) {
   const [foods, setFoods] = useState([]);

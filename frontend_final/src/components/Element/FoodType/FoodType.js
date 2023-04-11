@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import FoodTypeCart from "../Card/FoodTypeCart/FoodTypeCart";
 import { Nav } from "reactstrap";
 import { FoodTypeData } from "../../../api/callApi";
-import { FoodTypeDT } from "../../../api/tempApi";
+//import { FoodTypeDT } from "../../../api/tempApi";
 
 import { getFoodTypeService } from "../../../services/foodTypeServices";
 

@@ -1,5 +1,5 @@
 import { FoodTypeData } from "../api/callApi";
-import { FoodTypeDT } from "../api/tempApi";
+//import { FoodTypeDT } from "../api/tempApi";
 
 const getFoodTypeService = async () => {
   let data = [];
