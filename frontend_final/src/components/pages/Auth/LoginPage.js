@@ -6,7 +6,7 @@ export const LoginPage = () => {
   return (
     <div
       id="loginContent"
-      style={{ backgroundImage: `url(${loginBG})` }}
+      style={{ backgroundImage: `url(${loginBG})`, backgroundSize: "contain" }}
       class="row position-relative"
     >
       <div class="col bg-left"></div>
@@ -17,7 +17,7 @@ export const LoginPage = () => {
             {/* <!-- <img src="../../images/abstract-img.png" alt="" /> --> */}
           </div>
           <div class="col bg-right">
-            <div class="form-title w-100 text-center">Tạo tài khoản</div>
+            <div class="form-title w-100 text-center">Đăng nhập</div>
             <div class="form-container">
               <form>
                 {/* <!-- Email input --> */}
@@ -37,18 +37,6 @@ export const LoginPage = () => {
                   />
                   <label class="form-label" for="form2Example2">
                     Mật khẩu
-                  </label>
-                </div>
-
-                {/* <!-- Password input --> */}
-                <div class="form-outline mb-4">
-                  <input
-                    type="password"
-                    id="form2Example2"
-                    class="form-control"
-                  />
-                  <label class="form-label" for="form2Example2">
-                    Nhập lại mật khẩu
                   </label>
                 </div>
 
@@ -78,7 +66,7 @@ export const LoginPage = () => {
 
                 {/* <!-- Submit button --> */}
                 <button type="button" class="submit-btn btn btn-block mb-4">
-                  Đăng ký
+                  Đăng nhập
                 </button>
               </form>
             </div>
