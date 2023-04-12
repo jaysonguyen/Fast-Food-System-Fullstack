@@ -54,6 +54,25 @@ export const InsertFood = (name, price, image, type, recipe, status) => {
   });
 };
 
+export const InsertFoodTyppe = (name) => {
+  return axios.post(`api/foodtype`, { name });
+};
+
+export const InsertStaff = (name, dob, gender, startAt, position, address) => {
+  return axios.post(`api/staff/create`, {
+    name,
+    dob,
+    gender,
+    startAt,
+    position,
+    address,
+  });
+};
+
+export const InsertSupplier = (name, contact, note) => {
+  return axios.post(`/api/supplier/create`, { name, contact, note });
+};
+
 export const AddNewOrderData = (orders) => {
   axios
     .post("api/order", orders)

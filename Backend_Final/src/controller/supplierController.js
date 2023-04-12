@@ -34,7 +34,7 @@ const getSupplier = async (req, res) => {
 
 const addSupplier = async (req, res) => {
   try {
-    let { name, contact, note } = req.body;
+    const { name, contact, note } = req.body;
     const data = await createSupplier(name, contact, note);
     if (data && data.EC != -1) {
       return res.status(200).json({

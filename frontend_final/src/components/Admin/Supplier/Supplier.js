@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { getAllSupplier, removeSupplier } from "../../../services/supplier";
+import SupplierModal from "./SupplierModal";
 
 const Supplier = (props) => {
   const [supplier, setSupplier] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   const fetchSupplier = async () => {
     let dataSupplier = await getAllSupplier();
@@ -12,17 +14,21 @@ const Supplier = (props) => {
   };
 
   const handelDeleteSupplier = async (id) => {
-    let data = await removeSupplier(id) ;
+    let data = await removeSupplier(id);
     if (data && +data.EC === 1) {
       alert("Xoa oke");
     }
     console.log(id);
-
   };
 
   useEffect(() => {
     fetchSupplier();
   }, [supplier]);
+
+  const handleShowModal = () => {
+    let flag = !showModal;
+    setShowModal(flag);
+  };
 
   return (
     <div id="body">
@@ -65,7 +71,7 @@ const Supplier = (props) => {
                   </div>
                   <div class="col text-end me-2">
                     <button class="btn btn-clr-normal">
-                      <a href="./create.html" class="nav-link">
+                      <a onClick={() => handleShowModal()} class="nav-link">
                         Add supplier
                       </a>
                     </button>
@@ -111,8 +117,13 @@ const Supplier = (props) => {
                                     <AiOutlineEdit className="edit-icon" />
                                   </a>
                                   <a href="#" className="nav-link">
-                                    <AiOutlineDelete className="del-icon" id={supplier.ID} 
-                                    onClick={async(e) =>handelDeleteSupplier(e.target.id)}/>
+                                    <AiOutlineDelete
+                                      className="del-icon"
+                                      id={supplier.ID}
+                                      onClick={async (e) =>
+                                        handelDeleteSupplier(e.target.id)
+                                      }
+                                    />
                                   </a>
                                 </div>
                               </td>
@@ -128,6 +139,7 @@ const Supplier = (props) => {
           </div>
         </div>
       </div>
+      <SupplierModal show={showModal} onHide={handleShowModal} />
     </div>
   );
 };

@@ -66,31 +66,27 @@ const getFoodTypeById = async (req, res) => {
 
 const createFoodType = async (name) => {
   try {
-    let poolConnection = await sql.connect(config);
-    let data = await poolConnection
-      .request()
-      .query(`exec sp_insertFoodType N'${name}'`);
+    const poolConnection = await sql.connect(config);
+    const data = await poolConnection.query(
+      `exec sp_insertFoodType N'${name}'`
+    );
     poolConnection.close();
-
     if (data) {
       return {
         EM: "Create food type success",
         EC: 1,
-        DT: data.recordset,
       };
     } else {
       return {
         EM: "Create food type success",
         EC: 1,
-        DT: [],
       };
     }
   } catch (error) {
     console.log(error.message);
     return {
       EM: "Create food type failed",
-      EC: 0,
-      DT: eror.message,
+      EC: -1,
     };
   }
 };

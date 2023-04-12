@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { getAllStaff, removeStaff } from "../../../services/staff";
+import StaffModal from "./StaffModal";
 
 const Staff = (props) => {
   const [staff, setStaff] = useState([]);
@@ -21,6 +22,12 @@ const Staff = (props) => {
   useEffect(() => {
     fetchStaff();
   }, [staff]);
+
+  const [showModal, setShowModal] = useState(false);
+  const handleShowModal = () => {
+    let flag = !showModal;
+    setShowModal(flag);
+  };
 
   return (
     <div id="body">
@@ -63,7 +70,7 @@ const Staff = (props) => {
                   </div>
                   <div class="col text-end me-2">
                     <button class="btn btn-clr-normal">
-                      <a href="./create.html" class="nav-link">
+                      <a onClick={() => handleShowModal()} class="nav-link">
                         Add staff
                       </a>
                     </button>
@@ -118,9 +125,13 @@ const Staff = (props) => {
                                     <AiOutlineEdit className="edit-icon" />
                                   </a>
                                   <a href="#" className="nav-link">
-                                    <AiOutlineDelete className="del-icon"  id={staff.ID} 
-                                    onClick={async(e) =>
-                                    await handleDeleteStaff(e.target.id)}/>
+                                    <AiOutlineDelete
+                                      className="del-icon"
+                                      id={staff.ID}
+                                      onClick={async (e) =>
+                                        await handleDeleteStaff(e.target.id)
+                                      }
+                                    />
                                   </a>
                                 </div>
                               </td>
@@ -136,6 +147,7 @@ const Staff = (props) => {
           </div>
         </div>
       </div>
+      <StaffModal show={showModal} onHide={handleShowModal} />
     </div>
   );
 };
