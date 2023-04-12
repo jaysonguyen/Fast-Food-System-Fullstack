@@ -24,16 +24,28 @@ export const OrderCompletedData = () => {
   return axios.get("api/order/finished");
 };
 
+export const InsertFood = (name, price, image, type, recipe, status) => {
+  return axios.post(`api/food`, {
+    name,
+    price,
+    image,
+    type,
+    recipe,
+    status,
+  });
+};
+
 export const AddNewOrderData = (orders) => {
-  axios.post('api/order', orders)
-      .then((response) => {
-        // Xử lý phản hồi từ server nếu cần
-        console.log(response.data);
-        return 1;
-      })
-      .catch((error) => {
-        // Xử lý lỗi nếu có
-        console.log(error);
-        return -1;
-      });
-}
+  axios
+    .post("api/order", orders)
+    .then((response) => {
+      // Xử lý phản hồi từ server nếu cần
+      console.log(response.data);
+      return 1;
+    })
+    .catch((error) => {
+      // Xử lý lỗi nếu có
+      console.log(error);
+      return -1;
+    });
+};

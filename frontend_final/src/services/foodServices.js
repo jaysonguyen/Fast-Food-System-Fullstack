@@ -1,4 +1,4 @@
-import { FoodData, FoodByTypeData } from "../api/callApi";
+import { FoodData, FoodByTypeData, InsertFood } from "../api/callApi";
 //import { FoodDT } from "../api/tempApi";
 
 const getFoodData = async () => {
@@ -19,6 +19,20 @@ const getFoodByTypeData = async (id) => {
   } catch (error) {
     return FoodDT;
   }
-}
+};
 
-export { getFoodData, getFoodByTypeData };
+const AddFood = async (name, price, image, type, recipe, status) => {
+  try {
+    let data = await InsertFood(name, price, image, type, recipe, status);
+    if (data) {
+      return {
+        EM: data.EM,
+        EC: data.EC
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { getFoodData, getFoodByTypeData, AddFood };

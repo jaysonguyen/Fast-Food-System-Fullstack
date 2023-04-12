@@ -1,61 +1,69 @@
-import React from "react";
+import React, { useState } from "react";
 import "../css/root.css";
 import "../css/main.css";
+import ProductModal from "./ProductModal";
 
 const Production = (props) => {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleShowModal = () => {
+    let flag = !showModal;
+    setShowModal(flag);
+  };
+
   return (
     <>
       <div id="body">
-        <div class="container">
-          <div class="container-fluid main-body">
-            <div class="d-flex flex-col">
-              <div class="col ms-4">
-                <div class="information">
-                  <div class="row">
-                    <div class="col">
-                      <div class="info-card d-flex flex-col gap-4">
+        <div className="container">
+          <div className="container-fluid main-body">
+            <div className="d-flex flex-col">
+              <div className="col ms-4">
+                <div className="information">
+                  <div className="row">
+                    <div className="col">
+                      <div className="info-card d-flex flex-col gap-4">
                         <h4>20%</h4>
                         <div>sub title</div>
                       </div>
                     </div>
-                    <div class="col">
-                      <div class="info-card d-flex flex-col gap-4">
+                    <div className="col">
+                      <div className="info-card d-flex flex-col gap-4">
                         <h4>20%</h4>
                         <div>sub title</div>
                       </div>
                     </div>
-                    <div class="col">
-                      <div class="info-card d-flex flex-col gap-4">
+                    <div className="col">
+                      <div className="info-card d-flex flex-col gap-4">
                         <h4>20%</h4>
                         <div>sub title</div>
                       </div>
                     </div>
-                    <div class="col">
-                      <div class="info-card d-flex flex-col gap-4">
+                    <div className="col">
+                      <div className="info-card d-flex flex-col gap-4">
                         <h4>20%</h4>
                         <div>sub title</div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="main-content rounded-3 border border-2 py-4 px-3">
-                  <div class="table-header row">
-                    <div class="col-3">
-                      <h3 class="title">Product List</h3>
+                <div className="main-content rounded-3 border border-2 py-4 px-3">
+                  <div className="table-header row">
+                    <div className="col-3">
+                      <h3 className="title">Product List</h3>
                       <p>sub title</p>
                     </div>
-                    <div class="col text-end me-2">
-                      <button class="btn btn-clr-normal">
-                        <a href="./create.html" class="nav-link">
+                    <div className="col text-end me-2">
+                      <button className="btn btn-clr-normal">
+                        <a onClick={() => handleShowModal()} className="nav-link">
                           Add product
                         </a>
                       </button>
                     </div>
                   </div>
-                  <div class="text-white">
-                    <div class="bg-white">
-                      <table class="table align-middle mb-0">
-                        <thead class="">
+                  <div className="text-white">
+                    <div className="bg-white">
+                      <table className="table align-middle mb-0">
+                        <thead className="">
                           <tr>
                             <th>Product name</th>
                             <th>Category</th>
@@ -67,96 +75,96 @@ const Production = (props) => {
                         <tbody>
                           <tr>
                             <td>
-                              <div class="d-flex align-items-center">
-                                <div class="">
-                                  <p class="fw-bold mb-1">Iphone X ProMax</p>
-                                  <p class="text-muted mb-0">
+                              <div className="d-flex align-items-center">
+                                <div className="">
+                                  <p className="fw-bold mb-1">Iphone X ProMax</p>
+                                  <p className="text-muted mb-0">
                                     john.doe@gmail.com
                                   </p>
                                 </div>
                               </div>
                             </td>
                             <td>
-                              <p class="fw-normal mb-1">Software engineer</p>
-                              <p class="text-muted mb-0">IT department</p>
+                              <p className="fw-normal mb-1">Software engineer</p>
+                              <p className="text-muted mb-0">IT department</p>
                             </td>
                             <td>
-                              <span class="badge badge-success rounded-pill d-inline">
+                              <span className="badge badge-success rounded-pill d-inline">
                                 Active
                               </span>
                             </td>
                             <td>Senior</td>
                             <td>
-                              <div class="d-flex flex-row gap-1">
-                                <a href="./edit.html" class="nav-link">
-                                  <i class="fa-solid fa-pen"></i>
+                              <div className="d-flex flex-row gap-1">
+                                <a href="./edit.html" className="nav-link">
+                                  <i className="fa-solid fa-pen"></i>
                                 </a>
-                                <a href="#" class="nav-link">
-                                  <i class="fa-solid fa-trash"></i>
+                                <a href="#" className="nav-link">
+                                  <i className="fa-solid fa-trash"></i>
                                 </a>
                               </div>
                             </td>
                           </tr>
                           <tr>
                             <td>
-                              <div class="d-flex align-items-center">
-                                <div class="">
-                                  <p class="fw-bold mb-1">Alex Ray</p>
-                                  <p class="text-muted mb-0">
+                              <div className="d-flex align-items-center">
+                                <div className="">
+                                  <p className="fw-bold mb-1">Alex Ray</p>
+                                  <p className="text-muted mb-0">
                                     alex.ray@gmail.com
                                   </p>
                                 </div>
                               </div>
                             </td>
                             <td>
-                              <p class="fw-normal mb-1">Consultant</p>
-                              <p class="text-muted mb-0">Finance</p>
+                              <p className="fw-normal mb-1">Consultant</p>
+                              <p className="text-muted mb-0">Finance</p>
                             </td>
                             <td>
-                              <span class="badge badge-primary rounded-pill d-inline">
+                              <span className="badge badge-primary rounded-pill d-inline">
                                 Onboarding
                               </span>
                             </td>
                             <td>Junior</td>
                             <td>
-                              <div class="d-flex flex-row gap-1">
-                                <a href="./edit.html" class="nav-link">
-                                  <i class="fa-solid fa-pen"></i>
+                              <div className="d-flex flex-row gap-1">
+                                <a href="./edit.html" className="nav-link">
+                                  <i className="fa-solid fa-pen"></i>
                                 </a>
-                                <a href="#" class="nav-link">
-                                  <i class="fa-solid fa-trash"></i>
+                                <a href="#" className="nav-link">
+                                  <i className="fa-solid fa-trash"></i>
                                 </a>
                               </div>
                             </td>
                           </tr>
                           <tr>
                             <td>
-                              <div class="d-flex align-items-center">
-                                <div class="">
-                                  <p class="fw-bold mb-1">Kate Hunington</p>
-                                  <p class="text-muted mb-0">
+                              <div className="d-flex align-items-center">
+                                <div className="">
+                                  <p className="fw-bold mb-1">Kate Hunington</p>
+                                  <p className="text-muted mb-0">
                                     kate.hunington@gmail.com
                                   </p>
                                 </div>
                               </div>
                             </td>
                             <td>
-                              <p class="fw-normal mb-1">Designer</p>
-                              <p class="text-muted mb-0">UI/UX</p>
+                              <p className="fw-normal mb-1">Designer</p>
+                              <p className="text-muted mb-0">UI/UX</p>
                             </td>
                             <td>
-                              <span class="badge badge-warning rounded-pill d-inline">
+                              <span className="badge badge-warning rounded-pill d-inline">
                                 Awaiting
                               </span>
                             </td>
                             <td>Senior</td>
                             <td>
-                              <div class="d-flex flex-row gap-1">
-                                <a href="./edit.html" class="nav-link">
-                                  <i class="fa-solid fa-pen"></i>
+                              <div className="d-flex flex-row gap-1">
+                                <a href="./edit.html" className="nav-link">
+                                  <i className="fa-solid fa-pen"></i>
                                 </a>
-                                <a href="#" class="nav-link">
-                                  <i class="fa-solid fa-trash"></i>
+                                <a href="#" className="nav-link">
+                                  <i className="fa-solid fa-trash"></i>
                                 </a>
                               </div>
                             </td>
@@ -170,6 +178,7 @@ const Production = (props) => {
             </div>
           </div>
         </div>
+        {<ProductModal show={showModal} onHide={handleShowModal} />}
       </div>
     </>
   );
