@@ -32,24 +32,22 @@ const getAllFood = async () => {
   }
 };
 
-const createOneFood = async (name, price, type) => {
+const createOneFood = async (name, price, image, type, recipe) => {
   try {
     const poolConnection = await sql.connect(config);
     let data = await poolConnection.query(
-      `exec sp_insertFood N'${name}', ${price}, ${type}, 1`
+      `exec sp_insertFood N'${name}', ${price}, '${image}', ${type}, ${recipe}, 1`
     );
     poolConnection.close();
     if (data) {
       return {
         EM: "Create one food success",
         EC: 1,
-        DT: data.recordset,
       };
     } else {
       return {
         EM: "food get empty, create successfully",
         EC: 0,
-        DT: [],
       };
     }
   } catch (error) {
@@ -66,7 +64,7 @@ const deleteFood = async (id) => {
   try {
     const poolConnection = await sql.connect(config);
     let data = await poolConnection.query(`
-      exec sp_deleteFood ${id}
+      exec sp_delete_food ${id}
     `);
     poolConnection.close();
     if (data) {

@@ -1,11 +1,11 @@
-import {Collapse} from "bootstrap";
-
-window.bootstrap = require("bootstrap/dist/js/bootstrap.bundle.js");
-
 document.addEventListener("DOMContentLoaded", function () {
   dropDownSideBar();
+  toggleAddProductForm();
+  console.log("run into this");
 });
 // DOMContentLoaded  end
+
+setSideNav();
 
 function dropDownSideBar() {
   document.querySelectorAll("#sidebar .nav-link").forEach(function (element) {
@@ -15,7 +15,7 @@ function dropDownSideBar() {
 
       if (nextEl) {
         e.preventDefault();
-        let mycollapse = new Collapse(nextEl);
+        let mycollapse = new bootstrap.Collapse(nextEl);
 
         if (nextEl.classList.contains("show")) {
           mycollapse.hide();
@@ -27,10 +27,46 @@ function dropDownSideBar() {
             parentEl.parentElement.querySelector(".submenu.show");
           // if it exists, then close all of them
           if (opened_submenu) {
-            new Collapse(opened_submenu);
+            new bootstrap.Collapse(opened_submenu);
           }
         }
       }
     }); // addEventListener
   }); // forEach
+}
+
+function toggleAddProductForm() {
+  $("#addProduct").click(() => {
+    $("#addProductForm").removeClass("d-none");
+    $("#addProduct").addClass("d-none");
+  });
+
+  $("#removeAddProductForm").click(() => {
+    $("#addProductForm").addClass("d-none");
+    $("#addProduct").removeClass("d-none");
+  });
+}
+
+function setSideNav() {
+  let route = window.location.pathname.split("/")[2];
+  let route2 = window.location.pathname.split("/")[3];
+
+  console.log(route, route2);
+
+  $item = $("#sidebar .nav-link").filter(function () {
+    return (
+      $(this).prop("href").split("/").splice(-1)[0].indexOf(route) !== -1 ||
+      $(this).prop("href").split("/").splice(-1)[0].indexOf(route2) !== -1
+    );
+  });
+
+  $authHeader = $("#auth-header .nav-link").filter(function () {
+    return (
+      $(this).prop("href").split("/").splice(-1)[0].indexOf(route) !== -1 ||
+      $(this).prop("href").split("/").splice(-1)[0].indexOf(route2) !== -1
+    );
+  });
+
+  $item.map((idx, val) => val.classList.toggle("active"));
+  $authHeader.map((idx, val) => val.classList.toggle("active"));
 }

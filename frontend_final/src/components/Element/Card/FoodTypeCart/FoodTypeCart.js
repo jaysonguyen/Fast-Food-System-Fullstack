@@ -7,6 +7,7 @@ import { NavItem, NavLink } from "reactstrap";
 export default function FoodTypeCart({ foodtype }) {
   const context = useContext(ActiveContext);
   const active = context.activeTab === foodtype.ID ? "active" : "";
+  let icon = `/images/icon/${foodtype.icon}`;
 
   return (
     <NavItem className="nav-item item">
@@ -15,7 +16,7 @@ export default function FoodTypeCart({ foodtype }) {
         className={classnames({ active }, "item-icon-box nav-link")}
         onClick={() => context.toggle(foodtype.ID)}
       >
-        <i className="flaticon-pizza-slice"></i>
+        <img src={icon} />
         <span>{foodtype.Name}</span>
       </NavLink>
     </NavItem>

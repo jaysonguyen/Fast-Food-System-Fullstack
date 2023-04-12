@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function OrderDetails() {
+export default function OrderDetails({orderItem, removeFromOrder}) {
   return (
     <tr className="alert">
       <td className="product-item-img">

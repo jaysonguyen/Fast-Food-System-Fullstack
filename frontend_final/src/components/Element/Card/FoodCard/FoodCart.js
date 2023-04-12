@@ -1,47 +1,58 @@
-import React, { useState, useEffect } from "react";
-import { TabPane } from "reactstrap";
-import { FoodByTypeData } from "../../../../api/tempAPI";
+import React, { useState, useEffect, useContext, useReducer } from "react";
+import { OrderContext } from "../../../Context/OrderContext";
+
+import { TabPane, NavLink } from "reactstrap";
+import { FoodByTypeData } from "../../../../api/callApi";
+//import { FoodDT } from "../../../../api/tempApi";
 
 export default function FoodCart({ foodtype }) {
-  const [food, setFood] = useState([]);
+  const [foods, setFoods] = useState([]);
+
+  const { addToOrder } = useContext(OrderContext);
+
+  // const addToOrder = (food) => {
+  //   dispatch({ type: "ADD_TO_ORDER", payload: food });
+  // };
 
   const getFoodDataTest = async () => {
-    let data = await FoodByTypeData(foodtype.ID);
-    console.log(data);
-    setFood(data.DT);
+    try {
+      let data = await FoodByTypeData(foodtype.ID);
+      if (data.EM.includes("Error")) {
+        setFoods(FoodDT);
+      } else {setFoods(data.DT); console.log(data.DT);}
+    } catch (error) {
+      setFoods(FoodDT);
+    }
   };
 
   useEffect(() => {
     getFoodDataTest();
-  }, []);
+  }, [foods]);
 
   return (
-    <TabPane tabId={foodtype.ID}>
-      <div className="row">
-        {food.map((food) => {
+    <TabPane tabId={foodtype.ID} style={{ overflowY: "scroll" }}>
+      <div className="row ">
+        {foods.map((food, idx) => {
           return (
-            <div className="dz-col col m-b30">
+            <div key={idx} className="dz-col col m-b30">
               <div className="item-box shop-item style2">
                 <div className="item-img">
                   <img src={require("../../../../images/pic1.png")} alt="" />
                 </div>
                 <div className="item-info text-center">
-                  <h4 className="item-title">
-                    {/* <Link to={"/shop-product-details"}>{food.name}</Link> */}
-                    {food.Name}
-                  </h4>
-                  <h5 className="price text-primary">
+                  <h4 className="item-title">{food.Name}</h4>
+                  <p className="price ">
                     <del>45</del>
-                    <span>{food.Price}</span>
-                  </h5>
-                  <div className="cart-btn">
-                    {/* <Link
-                    to={"/shop-product-details"}
-                    className="btn btnhover radius-xl"
-                  >
-                    <i className="ti-shopping-cart"></i> Add To Cart
-                  </Link> */}
-                    <i className="ti-shopping-cart"></i> Add to order
+                    {food.Price.toLocaleString("de-DE")}
+                    <sup>&#8363;</sup>
+                  </p>
+                  <div className="cart-btn ">
+                    <button
+                      className="order-btn btn"
+                      onClick={() => addToOrder(food)}
+                    >
+                      <i className="ti-shopping-cart"></i> Add to order
+                    </button>
                   </div>
                 </div>
               </div>

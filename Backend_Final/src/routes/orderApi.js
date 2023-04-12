@@ -1,8 +1,22 @@
 const express = require("express");
 const router = express.Router();
-const { getBillList, createBill } = require("../controller/orderController");
+const {
+  getBillList,
+  createBill,
+  getLevel0,
+  deleteBill,
+  updateBill,
+} = require("../controller/orderController");
 
+// api/order
 router.route("/").get(getBillList);
 router.route("/").post(createBill);
+
+router.route("/:id").get(getLevel0);
+router.route("/unfinished").get(getLevel0);
+router.route("/finished").get(getLevel0);
+
+router.route("/:id").delete(deleteBill);
+router.route("/:id").put(updateBill);
 
 module.exports = router;

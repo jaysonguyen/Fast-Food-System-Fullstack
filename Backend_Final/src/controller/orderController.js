@@ -5,13 +5,23 @@ const {
   addBill,
   getBillIDByDate,
   getAllBillByDay,
+  deleteBillByID,
+  updateBillStatus,
+  getBillUnfinished,
+  getBillFinished,
 } = require("../services/orderServices");
-const { getCurrentDateTime } = require("../tool");
+const tools = require("../tool");
+const moment = require("moment");
 
 const getBillList = async (req, res) => {
   try {
     console.log("get bill list");
     let data = await getAllBill();
+    data.DT.forEach((item) => {
+      item.Date = moment(moment(item.Date).toDate()).format(
+        "DD/MM/YYYY hh:mm:ss"
+      );
+    });
     return res.status(200).json({
       EM: data.EM,
       EC: data.EC,
@@ -31,7 +41,7 @@ const createBill = async (req, res) => {
   try {
     const { StaffID } = req.body;
     const { BillDetails } = req.body; //array
-    const today = getCurrentDateTime();
+    const today = tools.getCurrentDateTime();
     console.log(today);
     //create bill
     let bill = await addBill(StaffID, today);
@@ -45,7 +55,7 @@ const createBill = async (req, res) => {
         let billdetails = await addBillDetails(
           billID,
           StaffID,
-          detail.FoodID,
+          detail.ID,
           detail.Quantity,
           detail.Price
         );
@@ -79,7 +89,87 @@ const createBill = async (req, res) => {
   }
 };
 
+const getLevel0 = async (req, res) => {
+  try {
+    console.log("order controller is running..");
+    let id = req.params.id;
+    let check = tools.isNumberic(id);
+    let data = [];
+    if (check) {
+      data = await getBillById(id);
+
+      console.log(data.DT);
+    } else {
+      //get bill with status = 0
+      if (id == "unfinished") data = await getBillUnfinished();
+      else if (id == "finished") data = await getBillFinished();
+    }
+    data.DT.forEach((item) => {
+      item.Date = moment(moment(item.Date).toDate()).format(
+        "DD/MM/YYYY hh:mm:ss"
+      );
+    });
+    return res.status(200).json({
+      EM: data.EM,
+      EC: data.EC,
+      DT: data.DT,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      EM: "Error at Controller",
+      EC: -1,
+      DT: "",
+    });
+  }
+};
+
+const deleteBill = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const check = tools.isNumberic(id);
+    let data = [];
+    if (check) {
+      data = await deleteBillByID(id);
+    }
+
+    return res.status(200).json({
+      EM: data.EM,
+      EC: data.EC,
+      DT: data.DT,
+    });
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json({
+      EM: "Error at Controller",
+      EC: -2,
+      DT: error.message,
+    });
+  }
+};
+
+const updateBill = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const data = await updateBillStatus(id);
+
+    return res.status(200).json({
+      EM: data.EM,
+      EC: data.EC,
+      DT: data.DT,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      EM: "Error at Controller",
+      EC: -1,
+      DT: error.message,
+    });
+  }
+};
+
 module.exports = {
   getBillList,
   createBill,
+  getLevel0,
+  deleteBill,
+  updateBill,
 };
