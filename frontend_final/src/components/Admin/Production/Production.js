@@ -1,19 +1,29 @@
 import React, { useEffect, useState } from "react";
 import "../css/root.css";
 import "../css/main.css";
+import ProductModal from "./ProductModal";
+
 import { getAllProduct } from "../../../services/productList";
 import { getAllProductType } from "../../../services/productType";
+import { removeFood } from "../../../services/foodServices";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
-
 
 const Production = (props) => {
   const [product, setProduct] = useState([]);
   const [proType, setProType] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   const fetchProType = async () => {
     let dataProType = await getAllProductType();
-    console.log(dataProType.DT);
     setProType(dataProType.DT);
+  };
+
+  const handleDeleteFood = async (id) => {
+    let data = await removeFood(id);
+    if (data && +data.EC === 1) {
+      alert("Xoa oke")
+    }
+    console.log(id);
   };
 
   const fetchProduct = async () => {
@@ -25,37 +35,42 @@ const Production = (props) => {
   useEffect(() => {
     fetchProduct();
     fetchProType();
-  }, []);
+  }, [product]);
+
+  const handleShowModal = () => {
+    let flag = !showModal;
+    setShowModal(flag);
+  };
 
   return (
     <>
       <div id="body">
-        <div class="container">
-          <div class="container-fluid main-body">
-            <div class="d-flex flex-col">
-              <div class="col ms-4">
-                <div class="information">
-                  <div class="row">
-                    <div class="col">
-                      <div class="info-card d-flex flex-col gap-4">
+        <div className="container">
+          <div className="container-fluid main-body">
+            <div className="d-flex flex-col">
+              <div className="col ms-4">
+                <div className="information">
+                  <div className="row">
+                    <div className="col">
+                      <div className="info-card d-flex flex-col gap-4">
                         <h4>20%</h4>
                         <div>sub title</div>
                       </div>
                     </div>
-                    <div class="col">
-                      <div class="info-card d-flex flex-col gap-4">
+                    <div className="col">
+                      <div className="info-card d-flex flex-col gap-4">
                         <h4>20%</h4>
                         <div>sub title</div>
                       </div>
                     </div>
-                    <div class="col">
-                      <div class="info-card d-flex flex-col gap-4">
+                    <div className="col">
+                      <div className="info-card d-flex flex-col gap-4">
                         <h4>20%</h4>
                         <div>sub title</div>
                       </div>
                     </div>
-                    <div class="col">
-                      <div class="info-card d-flex flex-col gap-4">
+                    <div className="col">
+                      <div className="info-card d-flex flex-col gap-4">
                         <h4>20%</h4>
                         <div>sub title</div>
                       </div>
@@ -67,9 +82,12 @@ const Production = (props) => {
                     <div class="col-3">
                       <h3 class="title">Product List</h3>
                     </div>
-                    <div class="col text-end me-2">
-                      <button class="btn btn-clr-normal">
-                        <a href="./create.html" class="nav-link">
+                    <div className="col text-end me-2">
+                      <button className="btn btn-clr-normal">
+                        <a
+                          onClick={() => handleShowModal()}
+                          className="nav-link"
+                        >
                           Add product
                         </a>
                       </button>
@@ -115,20 +133,32 @@ const Production = (props) => {
                                   <img src={product.Image} />
                                 </td>
                                 <td>
-                                <div className={ product.Status == 1 ? "text-center px-1 w-75 btn-sml btn-clr-success rounded-1" : "text-center px-1 w-75 btn-sml btn-clr-danger rounded-1"}>
-                                  {product.Status == 1 ? "ON" : "OFF"}
-                                </div>
-                               </td>
-                               <td>
-                                <div className="d-flex flex-row gap-1">
-                                  <a href="./edit.html" className="nav-link">
-                                    <AiOutlineEdit className="edit-icon" />
-                                  </a>
-                                  <a href="#" className="nav-link">
-                                    <AiOutlineDelete className="del-icon" />
-                                  </a>
-                                </div>
-                              </td>
+                                  <div
+                                    className={
+                                      product.Status == 1
+                                        ? "text-center px-1 w-75 btn-sml btn-clr-success rounded-1"
+                                        : "text-center px-1 w-75 btn-sml btn-clr-danger rounded-1"
+                                    }
+                                  >
+                                    {product.Status == 1 ? "ON" : "OFF"}
+                                  </div>
+                                </td>
+                                <td>
+                                  <div className="d-flex flex-row gap-1">
+                                    <a href="./edit.html" className="nav-link">
+                                      <AiOutlineEdit className="edit-icon" />
+                                    </a>
+                                    <a href="#" className="nav-link">
+                                      <AiOutlineDelete
+                                        className="del-icon"
+                                        id={product.ID}
+                                        onClick={async (e) =>
+                                          await handleDeleteFood(e.target.id)
+                                        }
+                                      />
+                                    </a>
+                                  </div>
+                                </td>
                               </tr>
                             );
                           })}
@@ -141,6 +171,7 @@ const Production = (props) => {
             </div>
           </div>
         </div>
+        {<ProductModal show={showModal} onHide={handleShowModal} />}
       </div>
     </>
   );

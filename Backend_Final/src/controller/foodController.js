@@ -31,25 +31,26 @@ const getFoodList = async (req, res) => {
 
 const createFood = async (req, res) => {
   try {
-    const { Name, Price, Type } = req.body;
+    const { name, price, image, type, recipe } = req.body;
 
-    const data = await createOneFood(Name, Price, Type);
-    if (data.EM.includes("Success")) {
-      return res.status(201).json({
-        EM: "Create success",
-        EC: 1,
-        DT: "",
+    const data = await createOneFood(name, price, image, type, recipe);
+    if (data) {
+      return res.status(200).json({
+        EM: data.EM,
+        EC: data.EC,
       });
-    } else if (data.EM.includes("Error")) {
-      return res.status(500).json({
-        EM: "Error",
-        EC: 1,
-        DT: data.DT,
+    } else {
+      return res.status(200).json({
+        EM: "Food exsits or invalid value",
+        EC: -1,
       });
     }
   } catch (error) {
     console.log(error);
-    return res.status(500).json(error.message);
+    return res.status(500).json({
+      EM: "Error from server",
+      EC: -1,
+    });
   }
 };
 

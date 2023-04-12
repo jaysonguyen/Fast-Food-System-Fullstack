@@ -49,16 +49,19 @@ const getFoodByT = async (req, res) => {
 const createNewFoodT = async (req, res) => {
   try {
     let data = await createFoodType(req.body.Name);
-    if (data.DT)
+    if (data && data.EC != -1) {
       return res.status(200).json({
         EM: data.EM,
         EC: data.EC,
-        DT: data.DT,
+        DT: "",
       });
-
-    return res.status(200).json({
-      message: "Create Food Type Success",
-    });
+    } else {
+      return res.status(200).json({
+        EM: "Insert khong than công",
+        EC: -1,
+        DT: "",
+      });
+    }
   } catch (error) {
     return res.status(500).json({
       message: "Error: " + error.message,
