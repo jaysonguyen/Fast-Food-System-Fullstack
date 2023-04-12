@@ -84,8 +84,15 @@ const removeStaff = async (req, res) => {
 
 const addStaff = async (req, res) => {
   try {
-    const { name, dob, gender, startAt, position } = req.body;
-    const data = await createStaff(name, dob, gender, startAt, position);
+    const { name, dob, gender, startAt, position, address } = req.body;
+    const data = await createStaff(
+      name,
+      dob,
+      gender,
+      startAt,
+      position,
+      address
+    );
     if (data) {
       return res.status(200).json({
         EM: data.EM,
@@ -102,11 +109,11 @@ const addStaff = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.status(200).json({
-      EM: 'Error from server',
+      EM: "Error from server",
       EC: -1,
       data: "",
     });
   }
 };
 
-module.exports = { readStaffList, updateStaff, removeStaff, addStaff};
+module.exports = { readStaffList, updateStaff, removeStaff, addStaff };

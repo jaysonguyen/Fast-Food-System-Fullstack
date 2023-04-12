@@ -82,33 +82,34 @@ const deleteStaff = async (id) => {
   }
 };
 
-
-const createStaff = async (name, dob, gender, startAt, position) => {
+const createStaff = async (name, dob, gender, startAt, position, address) => {
   try {
     const poolConnection = await sql.connect(config);
-    const data = await poolConnection.query(`Exec sp_insertStaff N'${name}', '${dob}', ${gender}, '${startAt}', ${position}`);
+    const data = await poolConnection.query(
+      `Exec sp_insertStaff N'${name}', '${dob}', ${gender}, '${startAt}', ${position}, N'${address}'`
+    );
     poolConnection.close();
-    if(data) {
+    if (data) {
       return {
-        EM: 'Create staff success',
+        EM: "Create staff success",
         EC: 1,
-        DT: data.recordset
-      }
+        DT: data.recordset,
+      };
     } else {
       return {
-        EM: 'Create staff success',
+        EM: "Create staff success",
         EC: 1,
-        DT: []
-      } 
+        DT: [],
+      };
     }
-  } catch(error) {
+  } catch (error) {
     console.log(error);
     return {
-      EM: 'Error from services',
+      EM: "Error from services",
       EC: -1,
-      DT: []
-    } 
+      DT: [],
+    };
   }
-}
+};
 
-module.exports = { getStaffList, updateStaffList, deleteStaff, createStaff};
+module.exports = { getStaffList, updateStaffList, deleteStaff, createStaff };

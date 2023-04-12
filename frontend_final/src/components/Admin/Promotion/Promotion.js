@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "../css/main.css";
 import "../css/root.css";
-import { getAllPromotion } from "../../../services/promotion";
+import { getAllPromotion, InsertPromotion } from "../../../services/promotion";
 import "./Promotion.css";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 
 const Promotion = (props) => {
   const [promotion, setPromotion] = useState([]);
+  const [name, setName] = useState("");
+  const [cost, setCost] = useState("");
+  const [status, setStatus] = useState(1);
+  const [dateStart, setDateStart] = useState("");
+  const [dateExp, setDateExp] = useState("");
 
   const fetchPromotion = async () => {
     try {
@@ -18,9 +23,25 @@ const Promotion = (props) => {
     }
   };
 
+  const handleInsertPromotion = async (e) => {
+    e.preventDefault();
+    try {
+      let data = await InsertPromotion(name, cost, status, dateStart, dateExp);
+      console.log(name, cost, status, dateStart, dateExp);
+      if (data && +data.EC == 1) {
+        console.log("INSERT THANH CONG");
+      }
+      if (data && +data.EC != 1) {
+        console.log("INSERT THAT BAI");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     fetchPromotion();
-  }, []);
+  }, [promotion]);
 
   return (
     <div id="body">
@@ -41,6 +62,8 @@ const Promotion = (props) => {
                         <input
                           type="text"
                           id="form6Example3"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
                           class="form-control"
                         />
                         <label class="form-label" for="form6Example3">
@@ -49,7 +72,11 @@ const Promotion = (props) => {
                       </div>
                     </div>
                     <div class="col-2">
-                      <select class="select w-100">
+                      <select
+                        class="select w-100"
+                        value={status}
+                        onChange={(e) => setStatus(e.target.value)}
+                      >
                         <option value="1">ON</option>
                         <option value="2">OFF</option>
                       </select>
@@ -57,23 +84,39 @@ const Promotion = (props) => {
                         Status
                       </label>
                     </div>
+                    <div class="col-6">
+                      <input
+                        type="text"
+                        id="form6Example3"
+                        value={cost}
+                        onChange={(e) => setCost(e.target.value)}
+                        class="form-control"
+                      />
+                      <label class="form-label" for="form6Example3">
+                        Cost
+                      </label>
+                    </div>
                   </div>
                   <div class="row">
                     <div class="col">
                       <input
-                        type="datetime-local"
+                        type="date"
                         id="birthdaytime"
                         name="birthdaytime"
+                        value={dateStart}
+                        onChange={(e) => setDateStart(e.target.value)}
                         class="form-control"
                       />
                       <label for="birthdaytime">Begin</label>
                     </div>
                     <div class="col">
                       <input
-                        type="datetime-local"
+                        type="date"
                         id="birthdaytime"
                         name="birthdaytime"
                         class="form-control"
+                        value={dateExp}
+                        onChange={(e) => setDateExp(e.target.value)}
                       />
                       <label for="birthdaytime">End</label>
                     </div>
@@ -81,6 +124,7 @@ const Promotion = (props) => {
                   <div class="col-2 mt-4">
                     <button
                       type="submit"
+                      onClick={(e) => handleInsertPromotion(e)}
                       class="btn btn-clr-normal btn-block mb-4 w-50"
                     >
                       Save
@@ -129,18 +173,22 @@ const Promotion = (props) => {
                               </td>
                               <td>
                                 <p className="fw-normal mb-1">
-                                  Software engineer
+                                  {promotion.dateStart}
                                 </p>
-                                <p className="text-muted mb-0">IT department</p>
                               </td>
                               <td>
                                 <p className="fw-normal mb-1">
-                                  Software engineer
+                                  {promotion.dateExp}
                                 </p>
-                                <p className="text-muted mb-0">IT department</p>
                               </td>
                               <td>
-                                <div className={ promotion.Status == 1 ? "text-center px-1 w-75 btn-sml btn-clr-success rounded-1" : "text-center px-1 w-75 btn-sml btn-clr-danger rounded-1"}>
+                                <div
+                                  className={
+                                    promotion.Status == 1
+                                      ? "text-center px-1 w-75 btn-sml btn-clr-success rounded-1"
+                                      : "text-center px-1 w-75 btn-sml btn-clr-danger rounded-1"
+                                  }
+                                >
                                   {promotion.Status == 1 ? "ON" : "OFF"}
                                 </div>
                               </td>

@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
+import StaffModal from "./StaffModal";
 
 const Staff = (props) => {
+  const [showModal, setShowModal] = useState(false);
+  const handleShowModal = () => {
+    let flag = !showModal;
+    setShowModal(flag);
+  };
+
   return (
     <div id="body">
       <div class="container">
@@ -43,7 +50,7 @@ const Staff = (props) => {
                   </div>
                   <div class="col text-end me-2">
                     <button class="btn btn-clr-normal">
-                      <a href="./create.html" class="nav-link">
+                      <a onClick={() => handleShowModal()} class="nav-link">
                         Add staff
                       </a>
                     </button>
@@ -101,7 +108,6 @@ const Staff = (props) => {
                             </div>
                           </td>
                         </tr>
-                        
                       </tbody>
                     </table>
                   </div>
@@ -111,6 +117,7 @@ const Staff = (props) => {
           </div>
         </div>
       </div>
+      <StaffModal show={showModal} onHide={handleShowModal} />
     </div>
   );
 };

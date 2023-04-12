@@ -14,7 +14,7 @@ const ProductModal = (props) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
-  const [type, setType] = useState("");
+  const [type, setType] = useState(1);
   const [recipe, setRecipe] = useState("");
   const [note, setNote] = useState("");
 

@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
+import SupplierModal from "./SupplierModal";
 
 const Supplier = (props) => {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleShowModal = () => {
+    let flag = !showModal;
+    setShowModal(flag);
+  };
+
   return (
     <div id="body">
       <div class="container">
@@ -43,7 +51,7 @@ const Supplier = (props) => {
                   </div>
                   <div class="col text-end me-2">
                     <button class="btn btn-clr-normal">
-                      <a href="./create.html" class="nav-link">
+                      <a onClick={() => handleShowModal()} class="nav-link">
                         Add supplier
                       </a>
                     </button>
@@ -101,7 +109,6 @@ const Supplier = (props) => {
                             </div>
                           </td>
                         </tr>
-                        
                       </tbody>
                     </table>
                   </div>
@@ -111,6 +118,7 @@ const Supplier = (props) => {
           </div>
         </div>
       </div>
+      <SupplierModal show={showModal} onHide={handleShowModal} />
     </div>
   );
 };

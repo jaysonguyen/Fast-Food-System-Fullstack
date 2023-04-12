@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
+import { InsertFoodTyppe } from "../../../api/callApi";
 
 const Catagories = (props) => {
+  const [name, setName] = useState("");
+
+  const handleAddTypeFood = async (e) => {
+    e.preventDefault();
+    try {
+      let data = await InsertFoodTyppe(name);
+      if (data && +data.EC == 1) {
+        console.log("INSERT THANH CONG");
+      }
+      if (data && +data.EC != 1) {
+        console.log("INSERT THAT BAI");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div id="body">
       <div class="container">
@@ -21,6 +39,8 @@ const Catagories = (props) => {
                         <input
                           type="text"
                           id="form6Example3"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
                           class="form-control"
                         />
                         <label class="form-label" for="form6Example3">
@@ -32,6 +52,7 @@ const Catagories = (props) => {
                   <div class="col-2 mt-4">
                     <button
                       type="submit"
+                      onClick={(e) => handleAddTypeFood(e)}
                       class="btn btn-clr-normal btn-block mb-4 w-50"
                     >
                       Save
@@ -90,7 +111,6 @@ const Catagories = (props) => {
                             </div>
                           </td>
                         </tr>
-                        
                       </tbody>
                     </table>
                   </div>

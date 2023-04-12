@@ -50,4 +50,5 @@ const AddFood = async (name, price, image, type, recipe, status) => {
   }
 };
 
+
 export { getFoodData, getFoodByTypeData, AddFood, removeFood};
