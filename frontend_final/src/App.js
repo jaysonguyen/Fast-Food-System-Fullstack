@@ -2,7 +2,9 @@ import React, { useState, StrictMode } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { NavBar } from "./components/NavBar";
-import AdminSideBar from "./components/Admin/Admin_side_bar/AdminSideBar";
+import AdminHeader from "./components/Admin/Admin_Header/AdminHeader";
+import AdminSideBar from "./components/Admin/Admin_Header/AdminSideBar";
+import Production from "./components/Admin/Production/Production";
 
 // casher
 import OrderPage from "./components/pages/Casher/MakeOrderPage";
@@ -18,7 +20,9 @@ import { FoodList } from "./components/pages/FoodList";
 import "./css/plugins.css";
 import Admin from "./components/Admin/Admin";
 import Promotion from "./components/Admin/Promotion/Promotion";
-import EditPromotion from "./components/Admin/Promotion/EditPromotion";
+import Catagories from "./components/Admin/Catagories/Catagories";
+import Supplier from "./components/Admin/Supplier/Supplier";
+import Staff from "./components/Admin/Staff/Staff";
 
 function App() {
   const pathname = window.location.pathname;
@@ -29,7 +33,8 @@ function App() {
   return (
     <StrictMode>
       <Router>
-        {flag === false ? <NavBar /> : <AdminSideBar />}
+        {pathname.includes("/admin") ? <AdminHeader /> : <NavBar />}
+        {pathname.includes("/admin") ? <AdminSideBar /> : ""}
         <Routes>
           <Route path="/login" element={<LoginPage />} />
 
@@ -40,9 +45,13 @@ function App() {
             <Route path="/orders/processing" element={<OrderProcessing />} />
             <Route path="/orders/completed" element={<OrderCompleted />} />
           </Route>
-          {/* <Route path="/admin" element={<Admin />} /> */}
-          {/* <Route path="/admin" element={<Promotion />} /> */}
-          <Route path="/admin" element={<EditPromotion />}/>
+
+          <Route path="/admin" element={<Admin />}></Route>
+          <Route path="/admin/production" element={<Production />}></Route>
+          <Route path="/admin/promotion" element={<Promotion />}></Route>
+          <Route path="/admin/catagories" element={<Catagories />}></Route>
+          <Route path="/admin/supplier" element={<Supplier />}></Route>
+          <Route path="/admin/staff" element={<Staff />}></Route>
           <Route path="/admin/food" element={<FoodList />} />
         </Routes>
       </Router>
