@@ -17,9 +17,6 @@ const Catagories = (props) => {
   }, [catagory]);
 
 
-
-
-
   const [name, setName] = useState("");
 
   const handleAddTypeFood = async (e) => {
