@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
+import { getAllStaff, removeStaff } from "../../../services/staff";
 
 const Staff = (props) => {
+  const [staff, setStaff] = useState([]);
+
+  const fetchStaff = async () => {
+    let dataStaff = await getAllStaff();
+    setStaff(dataStaff.DT);
+  };
+
+  const handleDeleteStaff = async (id) => {
+    let data = await removeStaff(id);
+    if (data && +data.EC === 1) {
+      alert("Xoa oke");
+    }
+    console.log(id);
+  };
+
+  useEffect(() => {
+    fetchStaff();
+  }, [staff]);
+
   return (
     <div id="body">
       <div class="container">
@@ -55,53 +75,58 @@ const Staff = (props) => {
                     <table class="table align-middle mb-0">
                       <thead class="">
                         <tr>
-                          <th>Product name</th>
-                          <th>Category</th>
-                          <th>Brand</th>
-                          <th>Price</th>
+                          <th>Staff name</th>
+                          <th>Gender</th>
+                          <th>Address</th>
+                          <th>Start day</th>
+                          <th>Position</th>
                           <th>Actions</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <img
-                                src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                                alt=""
-                                style={{ width: "45px", height: "45px" }}
-                                class="rounded-circle"
-                              />
-                              <div class="ms-3">
-                                <p class="fw-bold mb-1">John Doe</p>
+                        {staff.map((staff, key) => {
+                          return (
+                            <tr>
+                              <td>
+                                <div class="d-flex align-items-center">
+                                  <img
+                                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                                    alt=""
+                                    style={{ width: "45px", height: "45px" }}
+                                    class="rounded-circle"
+                                  />
+                                  <div class="ms-3">
+                                    <p class="fw-bold mb-1">{staff.Name}</p>
+                                    <p class="text-muted mb-0">{staff.Birth}</p>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>
                                 <p class="text-muted mb-0">
-                                  john.doe@gmail.com
+                                  {staff.Gender == 0 ? "Nam" : "Nữ"}
                                 </p>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            <p class="fw-normal mb-1">Software engineer</p>
-                            <p class="text-muted mb-0">IT department</p>
-                          </td>
-                          <td>
-                            <span class="badge badge-success rounded-pill d-inline">
-                              Active
-                            </span>
-                          </td>
-                          <td>Senior</td>
-                          <td>
-                            <div className="d-flex flex-row gap-1">
-                              <a href="./edit.html" className="nav-link">
-                                <AiOutlineEdit className="edit-icon" />
-                              </a>
-                              <a href="#" className="nav-link">
-                                <AiOutlineDelete className="del-icon" />
-                              </a>
-                            </div>
-                          </td>
-                        </tr>
-                        
+                              </td>
+                              <td>
+                                {" "}
+                                <p class="fw-normal mb-1">{staff.Address}</p>
+                              </td>
+                              <td>{staff.StartAt}</td>
+                              <td>{staff.Position}</td>
+                              <td>
+                                <div className="d-flex flex-row gap-1">
+                                  <a href="./edit.html" className="nav-link">
+                                    <AiOutlineEdit className="edit-icon" />
+                                  </a>
+                                  <a href="#" className="nav-link">
+                                    <AiOutlineDelete className="del-icon"  id={staff.ID} 
+                                    onClick={async(e) =>
+                                    await handleDeleteStaff(e.target.id)}/>
+                                  </a>
+                                </div>
+                              </td>
+                            </tr>
+                          );
+                        })}
                       </tbody>
                     </table>
                   </div>

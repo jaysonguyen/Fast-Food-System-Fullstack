@@ -52,9 +52,9 @@ const AdminHeader = (props) => {
             <div className="container">
               <nav className="navbar navbar-expand-lg navbar-dark">
                 <div className="container-fluid">
-                  <a className="navbar-brand" href="#">
+                  {/* <a className="navbar-brand" href="#">
                     Admin
-                  </a>
+                  </a> */}
                   <button
                     className="navbar-toggler"
                     type="button"
@@ -70,14 +70,14 @@ const AdminHeader = (props) => {
                     className="collapse navbar-collapse"
                     id="navbarSupportedContent"
                   >
-                    <ul className="navbar-nav nav-list me-auto mb-2 mb-lg-0">
+                    {/* <ul className="navbar-nav nav-list me-auto mb-2 mb-lg-0">
                       <li className="nav-item">
-                        <a className="nav-link" aria-current="page" href="#">
+                        <a className="nav-link active" aria-current="page" href="#">
                           Dashboard
-                        </a>
+                        </a> 
                       </li>
                       <li className="nav-item">
-                        <Link className="nav-link active" to="/admin/production">
+                        <Link className="nav-link " to="/admin/production">
                           Product
                         </Link>
                       </li>
@@ -101,7 +101,7 @@ const AdminHeader = (props) => {
                           Performance
                         </Link>
                       </li>
-                    </ul>
+                    </ul> */}
                   </div>
                 </div>
               </nav>

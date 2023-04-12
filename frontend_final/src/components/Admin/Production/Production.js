@@ -21,7 +21,7 @@ const Production = (props) => {
   const handleDeleteFood = async (id) => {
     let data = await removeFood(id);
     if (data && +data.EC === 1) {
-      alert("Xoa oke")
+      alert("Xoa oke");
     }
     console.log(id);
   };
@@ -115,22 +115,21 @@ const Production = (props) => {
                                   <div class="d-flex align-items-center">
                                     <div class="">
                                       <p class="fw-bold mb-1">{product.Name}</p>
-                                      <p class="text-muted mb-0">
-                                        john.doe@gmail.com
-                                      </p>
                                     </div>
                                   </div>
                                 </td>
                                 <td>
                                   <p class="fw-normal mb-1">{product.Type}</p>
-                                  <p class="text-muted mb-0">IT department</p>
                                 </td>
                                 <td>
                                   {product.Price.toLocaleString("de-DE")}{" "}
                                   <span>&#8363;</span>
                                 </td>
                                 <td>
-                                  <img src={product.Image} />
+                                  <img
+                                    src={product.Image}
+                                    className="image-product"
+                                  />
                                 </td>
                                 <td>
                                   <div

@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
+import { getAllProductType } from "../../../services/productType";
 
 const Catagories = (props) => {
+  const [catagory, setCatagory] = useState([]);
+
+  const fetchCatagory = async () => {
+    let dataCatagory = await getAllProductType();
+    setCatagory(dataCatagory.DT);
+  };
+
+  useEffect(() => {
+    fetchCatagory();
+  }, []);
+
   return (
     <div id="body">
       <div class="container">
@@ -43,7 +55,6 @@ const Catagories = (props) => {
                 <div class="table-header row">
                   <div class="col-3">
                     <h3 class="title">Categories</h3>
-                    <p>sub title</p>
                   </div>
                 </div>
                 <div class="text-white">
@@ -52,45 +63,40 @@ const Catagories = (props) => {
                       <thead class="">
                         <tr>
                           <th>Category Name</th>
-                          <th>Created at</th>
-                          <th>Updated at</th>
-                          <th>Products</th>
+                          <th>Description</th>
+                          <th>Image</th>
                           <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <div class="">
-                                <p class="fw-bold mb-1">Iphone X ProMax</p>
-                                <p class="text-muted mb-0">
-                                  john.doe@gmail.com
-                                </p>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            <p class="fw-normal mb-1">Software engineer</p>
-                            <p class="text-muted mb-0">IT department</p>
-                          </td>
-                          <td>
-                            <p class="fw-normal mb-1">Software engineer</p>
-                            <p class="text-muted mb-0">IT department</p>
-                          </td>
-                          <td>100</td>
-                          <td>
-                            <div className="d-flex flex-row gap-1">
-                              <a href="./edit.html" className="nav-link">
-                                <AiOutlineEdit className="edit-icon" />
-                              </a>
-                              <a href="#" className="nav-link">
-                                <AiOutlineDelete className="del-icon" />
-                              </a>
-                            </div>
-                          </td>
-                        </tr>
-                        
+                        {catagory.map((catagory, key) => {
+                          return (
+                            <tr key={key}>
+                              <td>
+                                <div class="d-flex align-items-center">
+                                  <div class="">
+                                    <p class="fw-bold mb-1">{catagory.Name}</p>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>{catagory.Descript}</td>
+                              <td>
+                                {" "}
+                                <img src={catagory.icon} />
+                              </td>
+                              <td>
+                                <div className="d-flex flex-row gap-1">
+                                  <a href="./edit.html" className="nav-link">
+                                    <AiOutlineEdit className="edit-icon" />
+                                  </a>
+                                  <a href="#" className="nav-link">
+                                    <AiOutlineDelete className="del-icon" />
+                                  </a>
+                                </div>
+                              </td>
+                            </tr>
+                          );
+                        })}
                       </tbody>
                     </table>
                   </div>

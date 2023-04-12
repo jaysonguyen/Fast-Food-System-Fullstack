@@ -1,5 +1,20 @@
 import axios from "../setup/axios";
 
+
+//Promotion 
+export const deletePromotion = (id) => {
+  return axios.delete(`/api/promotion/remove/${id}`)
+}
+
+// Supplier
+export const deleteSupplier = (id) => {
+  return axios.delete(`/api/supplier/remove/${id}`)
+}
+// Staff
+export const deleteStaff = (id) => {
+  return axios.delete(`/api/staff/delete/${id}`)
+}
+// Product
 export const FoodData = () => {
   return axios.get(`api/food`);
 };

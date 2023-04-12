@@ -1,7 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
+import { getAllSupplier, removeSupplier } from "../../../services/supplier";
 
 const Supplier = (props) => {
+  const [supplier, setSupplier] = useState([]);
+
+  const fetchSupplier = async () => {
+    let dataSupplier = await getAllSupplier();
+    console.log(dataSupplier.DT);
+    setSupplier(dataSupplier.DT);
+  };
+
+  const handelDeleteSupplier = async (id) => {
+    let data = await removeSupplier(id) ;
+    if (data && +data.EC === 1) {
+      alert("Xoa oke");
+    }
+    console.log(id);
+
+  };
+
+  useEffect(() => {
+    fetchSupplier();
+  }, [supplier]);
+
   return (
     <div id="body">
       <div class="container">
@@ -56,52 +78,47 @@ const Supplier = (props) => {
                       <thead class="">
                         <tr>
                           <th>Supplier name</th>
-                          <th>Category</th>
-                          <th>Brand</th>
-                          <th>Price</th>
+                          <th>Contact</th>
+                          <th>Description</th>
                           <th>Actions</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <img
-                                src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                                alt=""
-                                style={{ width: "45px", height: "45px" }}
-                                class="rounded-circle"
-                              />
-                              <div class="ms-3">
-                                <p class="fw-bold mb-1">John Doe</p>
-                                <p class="text-muted mb-0">
-                                  john.doe@gmail.com
-                                </p>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            <p class="fw-normal mb-1">Software engineer</p>
-                            <p class="text-muted mb-0">IT department</p>
-                          </td>
-                          <td>
-                            <span class="badge badge-success rounded-pill d-inline">
-                              Active
-                            </span>
-                          </td>
-                          <td>Senior</td>
-                          <td>
-                            <div className="d-flex flex-row gap-1">
-                              <a href="./edit.html" className="nav-link">
-                                <AiOutlineEdit className="edit-icon" />
-                              </a>
-                              <a href="#" className="nav-link">
-                                <AiOutlineDelete className="del-icon" />
-                              </a>
-                            </div>
-                          </td>
-                        </tr>
-                        
+                        {supplier.map((supplier, key) => {
+                          return (
+                            <tr key={key}>
+                              <td>
+                                <div class="d-flex align-items-center">
+                                  <img
+                                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                                    alt=""
+                                    style={{ width: "45px", height: "45px" }}
+                                    class="rounded-circle"
+                                  />
+                                  <div class="ms-3">
+                                    <p class="fw-bold mb-1">{supplier.Name}</p>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>
+                                <p class="fw-normal mb-1">{supplier.Contact}</p>
+                              </td>
+
+                              <td>{supplier.Note}</td>
+                              <td>
+                                <div className="d-flex flex-row gap-1">
+                                  <a href="./edit.html" className="nav-link">
+                                    <AiOutlineEdit className="edit-icon" />
+                                  </a>
+                                  <a href="#" className="nav-link">
+                                    <AiOutlineDelete className="del-icon" id={supplier.ID} 
+                                    onClick={async(e) =>handelDeleteSupplier(e.target.id)}/>
+                                  </a>
+                                </div>
+                              </td>
+                            </tr>
+                          );
+                        })}
                       </tbody>
                     </table>
                   </div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../css/main.css";
 import "../css/root.css";
-import { getAllPromotion } from "../../../services/promotion";
+import { getAllPromotion, removePromotion } from "../../../services/promotion";
 import "./Promotion.css";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 
@@ -18,9 +18,19 @@ const Promotion = (props) => {
     }
   };
 
+  const handleDeletePromotion = async (id) => {
+    let data = removePromotion(id) ;
+    if(data && +data.EC === 1){
+      alert("Xoa thanh cong");
+
+    } 
+    console.log(id);
+
+  };
+
   useEffect(() => {
     fetchPromotion();
-  }, []);
+  }, [promotion]);
 
   return (
     <div id="body">
@@ -117,9 +127,7 @@ const Promotion = (props) => {
                                     <p className="fw-bold mb-1">
                                       {promotion.Name}
                                     </p>
-                                    <p className="text-muted mb-0">
-                                      john.doe@gmail.com
-                                    </p>
+                                   
                                   </div>
                                 </div>
                               </td>
@@ -128,19 +136,19 @@ const Promotion = (props) => {
                                 <span>&#8363;</span>
                               </td>
                               <td>
-                                <p className="fw-normal mb-1">
-                                  Software engineer
-                                </p>
-                                <p className="text-muted mb-0">IT department</p>
+                                <p className="fw-normal mb-1"></p>
                               </td>
                               <td>
-                                <p className="fw-normal mb-1">
-                                  Software engineer
-                                </p>
-                                <p className="text-muted mb-0">IT department</p>
+                                <p className="fw-normal mb-1"></p>
                               </td>
                               <td>
-                                <div className={ promotion.Status == 1 ? "text-center px-1 w-75 btn-sml btn-clr-success rounded-1" : "text-center px-1 w-75 btn-sml btn-clr-danger rounded-1"}>
+                                <div
+                                  className={
+                                    promotion.Status == 1
+                                      ? "text-center px-1 w-75 btn-sml btn-clr-success rounded-1"
+                                      : "text-center px-1 w-75 btn-sml btn-clr-danger rounded-1"
+                                  }
+                                >
                                   {promotion.Status == 1 ? "ON" : "OFF"}
                                 </div>
                               </td>
@@ -150,7 +158,8 @@ const Promotion = (props) => {
                                     <AiOutlineEdit className="edit-icon" />
                                   </a>
                                   <a href="#" className="nav-link">
-                                    <AiOutlineDelete className="del-icon" />
+                                    <AiOutlineDelete className="del-icon" id={promotion.ID} 
+                                    onClick={async(e) => await handleDeletePromotion(e.target.id)}/>
                                   </a>
                                 </div>
                               </td>
