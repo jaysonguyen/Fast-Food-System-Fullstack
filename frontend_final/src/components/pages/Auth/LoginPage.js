@@ -1,6 +1,6 @@
 import React from "react";
 
-const loginBG = require("../../../images/login-bg.jpg");
+const loginBG = require("../../../images/admin/login-bg.jpg");
 
 export const LoginPage = () => {
   return (

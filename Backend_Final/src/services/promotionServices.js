@@ -29,22 +29,23 @@ const readPromotion = async () => {
   }
 };
 
-const createPromotion = async (name, price, status) => {
+const createPromotion = async (name, price, status, dateStart, dateExp) => {
   try {
     const poolConnection = await sql.connect(config);
-    const data = await poolConnection.query(`exec sp_insert_discount N'${name}', ${price}, ${status}`);
+    const data = await poolConnection.query(
+      `exec sp_insert_discount N'${name}', ${price}, ${status}, '${dateStart}', '${dateExp}'`
+    );
     poolConnection.close();
     if (data) {
+      console.log(data)
       return {
         EM: "Create promotion Success",
         EC: 1,
-        DT: "",
       };
     } else {
       return {
         EM: "Create promotion Success",
         EC: 1,
-        DT: "",
       };
     }
   } catch (error) {
@@ -83,7 +84,9 @@ const deletePromotion = async (id) => {
 const updatePromotion = async (id, name, price, status) => {
   try {
     const poolConnection = await sql.connect(config);
-    const data = poolConnection.query(`exec sp_update_discount ${id}, N'${name}', ${price}, ${status}`);
+    const data = poolConnection.query(
+      `exec sp_update_discount ${id}, N'${name}', ${price}, ${status}`
+    );
     if (data) {
       return {
         EM: "Update promotion success",
@@ -106,7 +109,6 @@ const updatePromotion = async (id, name, price, status) => {
     };
   }
 };
-
 
 module.exports = {
   readPromotion,
