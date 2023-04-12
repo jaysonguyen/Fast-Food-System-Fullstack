@@ -19,7 +19,7 @@ export default function FoodCart({ foodtype }) {
       let data = await FoodByTypeData(foodtype.ID);
       if (data.EM.includes("Error")) {
         setFoods(FoodDT);
-      } else setFoods(data.DT);
+      } else {setFoods(data.DT); console.log(data.DT);}
     } catch (error) {
       setFoods(FoodDT);
     }

@@ -19,12 +19,12 @@ const Admin = (props) => {
                       </a>
                       <ul class="submenu collapse show">
                         <li>
-                          <a class="nav-link" href="#">
+                          <a class="nav-link active" href="#">
                             Product
                           </a>
                         </li>
                         <li>
-                          <a class="nav-link active" href="#">
+                          <a class="nav-link " href="#">
                             Promotion{" "}
                           </a>
                         </li>

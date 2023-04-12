@@ -17,6 +17,8 @@ import { FoodList } from "./components/pages/FoodList";
 
 import "./css/plugins.css";
 import Admin from "./components/Admin/Admin";
+import Promotion from "./components/Admin/Promotion/Promotion";
+import EditPromotion from "./components/Admin/Promotion/EditPromotion";
 
 function App() {
   const pathname = window.location.pathname;
@@ -38,8 +40,9 @@ function App() {
             <Route path="/orders/processing" element={<OrderProcessing />} />
             <Route path="/orders/completed" element={<OrderCompleted />} />
           </Route>
-          <Route path="/admin" element={<Admin />} />
-
+          {/* <Route path="/admin" element={<Admin />} /> */}
+          {/* <Route path="/admin" element={<Promotion />} /> */}
+          <Route path="/admin" element={<EditPromotion />}/>
           <Route path="/admin/food" element={<FoodList />} />
         </Routes>
       </Router>

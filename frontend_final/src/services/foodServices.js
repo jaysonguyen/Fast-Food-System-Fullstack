@@ -7,7 +7,7 @@ const getFoodData = async () => {
     data = await FoodData();
     return data.DT;
   } catch (error) {
-    return FoodDT;
+    return error ;
   }
 };
 
@@ -17,7 +17,7 @@ const getFoodByTypeData = async (id) => {
     data = await FoodByTypeData(id);
     return data.DT;
   } catch (error) {
-    return FoodDT;
+    return error;
   }
 }
 
