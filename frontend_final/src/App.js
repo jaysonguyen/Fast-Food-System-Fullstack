@@ -2,7 +2,9 @@ import React, { useState, StrictMode } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { NavBar } from "./components/NavBar";
-import AdminSideBar from "./components/Admin/Admin_side_bar/AdminSideBar";
+import AdminHeader from "./components/Admin/Admin_Header/AdminHeader";
+import AdminSideBar from "./components/Admin/Admin_Header/AdminSideBar";
+import Production from "./components/Admin/Production/Production";
 
 // casher
 import OrderPage from "./components/pages/Casher/MakeOrderPage";
@@ -17,6 +19,7 @@ import { FoodList } from "./components/pages/FoodList";
 
 import "./css/plugins.css";
 import Admin from "./components/Admin/Admin";
+import Promotion from "./components/Admin/Promotion/Promotion";
 
 function App() {
   const pathname = window.location.pathname;
@@ -27,7 +30,8 @@ function App() {
   return (
     <StrictMode>
       <Router>
-        {flag === false ? <NavBar /> : <AdminSideBar />}
+        {pathname.includes("/admin") ? <AdminHeader /> : <NavBar />}
+        {pathname.includes("/admin") ? <AdminSideBar /> : ""}
         <Routes>
           <Route path="/login" element={<LoginPage />} />
 
@@ -38,8 +42,10 @@ function App() {
             <Route path="/orders/processing" element={<OrderProcessing />} />
             <Route path="/orders/completed" element={<OrderCompleted />} />
           </Route>
-          <Route path="/admin" element={<Admin />} />
 
+          <Route path="/admin" element={<Admin />}></Route>
+          <Route path="/admin/production" element={<Production />}></Route>
+          <Route path="/admin/promotion" element={<Promotion />}></Route>
           <Route path="/admin/food" element={<FoodList />} />
         </Routes>
       </Router>

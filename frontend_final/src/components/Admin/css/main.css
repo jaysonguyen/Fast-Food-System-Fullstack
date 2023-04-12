@@ -368,6 +368,13 @@ td .nav-link:hover {
 }
 
 /* sidebar */
+
+#sidebar {
+  display: inline-block;
+  width: 20%;
+  float: left;
+}
+
 #sidebar > div {
   width: 275px;
 }
