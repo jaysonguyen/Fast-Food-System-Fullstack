@@ -7,7 +7,7 @@ import { NavItem, NavLink } from "reactstrap";
 export default function FoodTypeCart({ foodtype }) {
   const context = useContext(ActiveContext);
   const active = context.activeTab === foodtype.ID ? "active" : "";
-  let icon = `/images/icon/${foodtype.icon}`;
+  let icon = `/images/icon/${foodtype.Image}`;
 
   return (
     <NavItem className="nav-item item">

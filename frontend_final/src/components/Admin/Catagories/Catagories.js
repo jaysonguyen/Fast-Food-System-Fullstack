@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { getAllProductType } from "../../../services/productType";
@@ -15,10 +14,6 @@ const Catagories = (props) => {
   useEffect(() => {
     fetchCatagory();
   }, [catagory]);
-
-
-
-
 
   const [name, setName] = useState("");
 
@@ -108,7 +103,7 @@ const Catagories = (props) => {
                               <td>{catagory.Descript}</td>
                               <td>
                                 {" "}
-                                <img src={catagory.icon} />
+                                <img src={catagory.Image} />
                               </td>
                               <td>
                                 <div className="d-flex flex-row gap-1">
