@@ -6,6 +6,7 @@ import { InsertFoodTyppe } from "../../../api/callApi";
 
 const Catagories = (props) => {
   const [catagory, setCatagory] = useState([]);
+  const [name, setName] = useState("");
 
   const fetchCatagory = async () => {
     let dataCatagory = await getAllProductType();
@@ -16,11 +17,7 @@ const Catagories = (props) => {
     fetchCatagory();
   }, [catagory]);
 
-
-
-
-
-  const [name, setName] = useState("");
+ 
 
   const handleAddTypeFood = async (e) => {
     e.preventDefault();
@@ -108,16 +105,16 @@ const Catagories = (props) => {
                               <td>{catagory.Descript}</td>
                               <td>
                                 {" "}
-                                <img src={catagory.icon} />
+                                {catagory.Image} 
                               </td>
                               <td>
                                 <div className="d-flex flex-row gap-1">
                                   <a href="./edit.html" className="nav-link">
                                     <AiOutlineEdit className="edit-icon" />
                                   </a>
-                                  <a href="#" className="nav-link">
+                                  <span className="nav-link">
                                     <AiOutlineDelete className="del-icon" />
-                                  </a>
+                                  </span>
                                 </div>
                               </td>
                             </tr>

@@ -124,15 +124,15 @@ const Staff = (props) => {
                                   <a href="./edit.html" className="nav-link">
                                     <AiOutlineEdit className="edit-icon" />
                                   </a>
-                                  <a href="#" className="nav-link">
+                                  <span className="nav-link">
                                     <AiOutlineDelete
                                       className="del-icon"
-                                      id={staff.ID}
+                                      id={staff.StaffID}
                                       onClick={async (e) =>
                                         await handleDeleteStaff(e.target.id)
                                       }
                                     />
-                                  </a>
+                                  </span>
                                 </div>
                               </td>
                             </tr>

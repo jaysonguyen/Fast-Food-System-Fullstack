@@ -147,7 +147,7 @@ const Production = (props) => {
                                     <a href="./edit.html" className="nav-link">
                                       <AiOutlineEdit className="edit-icon" />
                                     </a>
-                                    <a href="#" className="nav-link">
+                                    <span className="nav-link">
                                       <AiOutlineDelete
                                         className="del-icon"
                                         id={product.ID}
@@ -155,7 +155,7 @@ const Production = (props) => {
                                           await handleDeleteFood(e.target.id)
                                         }
                                       />
-                                    </a>
+                                    </span>
                                   </div>
                                 </td>
                               </tr>
