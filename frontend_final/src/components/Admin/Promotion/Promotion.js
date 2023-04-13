@@ -4,6 +4,7 @@ import "../css/root.css";
 import { getAllPromotion, removePromotion, InsertPromotion } from "../../../services/promotion";
 import "./Promotion.css";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
+import { toast } from "react-toastify";
 
 const Promotion = (props) => {
 
@@ -28,9 +29,11 @@ const Promotion = (props) => {
   const handleDeletePromotion = async (id) => {
     let data = removePromotion(id) ;
     if(data && +data.EC === 1){
-      alert("Xoa thanh cong");
-
+     toast.success(data.EM)
     } 
+    if(data && +data.EC != 1) {
+      toast.error(data.EM)
+    }
     console.log(id);
   };
 
@@ -40,10 +43,10 @@ const Promotion = (props) => {
       let data = await InsertPromotion(name, cost, status, dateStart, dateExp);
       console.log(name, cost, status, dateStart, dateExp);
       if (data && +data.EC == 1) {
-        console.log("INSERT THANH CONG");
+        toast.success(data.EM)
       }
       if (data && +data.EC != 1) {
-        console.log("INSERT THAT BAI");
+        toast.error(data.EM)
       }
     } catch (error) {
       console.log(error);

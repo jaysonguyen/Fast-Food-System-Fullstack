@@ -7,6 +7,7 @@ import "../Production/Production.css";
 import Form from "react-bootstrap/Form";
 import { AddFood } from "../../../services/foodServices";
 import { InsertSupplier } from "../../../api/callApi";
+import { toast } from "react-toastify";
 
 const SupplierModal = (props) => {
   const [show, setShow] = useState(props.show);
@@ -24,14 +25,14 @@ const SupplierModal = (props) => {
     e.preventDefault();
     let data = await InsertSupplier(name, contact, note);
     if (data && +data.EC === 1) {
-      alert("add data succeed");
+      toast.success(data.EM)
       console.log(data);
       location.reload();
     } else if (data && +data.EC != 1) {
-      alert("add data failed");
+      toast.error(data.EM);
       console.log(data);
     } else {
-      alert("add data failed");
+      toast.error("Error from server");
     }
   };
 

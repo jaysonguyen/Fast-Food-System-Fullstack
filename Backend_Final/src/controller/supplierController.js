@@ -44,7 +44,7 @@ const addSupplier = async (req, res) => {
       });
     } else {
       return res.status(200).json({
-        EM: "create data success",
+        EM: "Create data failed",
         EC: 0,
         DT: [],
       });
@@ -65,15 +65,13 @@ const removeSupplier = async (req, res) => {
     let data = deleteSupplier(id);
     if (data && data.EC != -1) {
       return res.status(200).json({
-        EM: "Delete data success",
-        EC: 0,
-        DT: "",
+        EM: data.EM,
+        EC: data.EC,
       });
     } else {
       return res.status(200).json({
-        EM: "Delete data success",
-        EC: 0,
-        DT: "",
+        EM: data.EM,
+        EC: data.EC,
       });
     }
   } catch (error) {

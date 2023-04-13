@@ -7,6 +7,7 @@ import { getAllProduct } from "../../../services/productList";
 import { getAllProductType } from "../../../services/productType";
 import { removeFood } from "../../../services/foodServices";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
+import { toast } from "react-toastify";
 
 const Production = (props) => {
   const [product, setProduct] = useState([]);
@@ -21,7 +22,7 @@ const Production = (props) => {
   const handleDeleteFood = async (id) => {
     let data = await removeFood(id);
     if (data && +data.EC === 1) {
-      alert("Xoa oke");
+      toast.success(data.EM);
     }
     console.log(id);
   };

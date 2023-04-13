@@ -6,6 +6,7 @@ import "./Staff.css";
 import Form from "react-bootstrap/Form";
 import { AddFood } from "../../../services/foodServices";
 import { InsertStaff } from "../../../api/callApi";
+import { toast } from "react-toastify";
 
 const StaffModal = (props) => {
   const [show, setShow] = useState(props.show);
@@ -26,14 +27,13 @@ const StaffModal = (props) => {
     e.preventDefault();
     let data = await InsertStaff(name, dob, gender,startAt, position, address);
     if (data && +data.EC === 1) {
-      alert("add data succeed");
-      console.log(data);
+      toast.success(data.EM);
       location.reload();
     } else if (data && +data.EC != 1) {
-      alert("add data failed");
+      toast.error(data.EM);
       console.log(data);
     } else {
-      alert("add data failed");
+      toast.error("Error server");
     }
   };
 

@@ -5,6 +5,7 @@ import { Modal, Button } from "react-bootstrap";
 import "./Production.css";
 import Form from "react-bootstrap/Form";
 import { AddFood } from "../../../services/foodServices";
+import { toast } from "react-toastify";
 
 const ProductModal = (props) => {
   const [show, setShow] = useState(props.show);
@@ -23,16 +24,15 @@ const ProductModal = (props) => {
 
   const handleCreateFood = async (e) => {
     e.preventDefault();
-    let data = await AddFood(name, price, image, type, recipe);
+    const data = await AddFood(name, price, image, type, recipe);
     if (data && +data.EC === 1) {
-      alert("add data succeed");
-      console.log(data);
+      toast.success(data.EM);
       location.reload();
     } else if (data && +data.EC != 1) {
-      alert("add data failed");
+      toast.error(data.EM);
       console.log(data);
     } else {
-      alert("add data failed");
+      toast.error("add data failed");
     }
   };
 
