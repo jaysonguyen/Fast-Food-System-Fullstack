@@ -37,19 +37,19 @@ export const CasherHeader = () => {
                     <ul className="navbar-nav nav-list me-auto mb-2 mb-lg-0">
                       {/* Order */}
                       <li className="nav-item">
-                        <Link to={"/order"} className="nav-link">
+                        <Link to={"/casher/order"} className="nav-link">
                           Make Order
                         </Link>
                       </li>
                       {/* <!-- Order history --> */}
                       <li className="nav-item">
-                        <Link to={"/orders"} className="nav-link">
+                        <Link to={"/casher/orders"} className="nav-link">
                           Orders
                         </Link>
                       </li>
                       {/* <!-- menu management --> */}
                       <li className="nav-item">
-                        <Link to={"/menu"} className="nav-link">
+                        <Link to={"/casher/menu"} className="nav-link">
                           Menu Management
                         </Link>
                       </li>
@@ -186,16 +186,16 @@ export const OrderSubHeader = () => {
   return (
     <>
       <div className="d-flex flex-row mt-3">
-        <Link to="/orders/all" className="nav-link mx-3">
+        <Link to="/casher/orders/all" className="nav-link mx-3">
           All Orders
         </Link>
-        <Link to="/orders/processing" className="nav-link mx-3">
+        <Link to="/casher/orders/processing" className="nav-link mx-3">
           Processing
         </Link>
-        <Link to="/orders/completed " className="nav-link mx-3">
+        <Link to="/casher/orders/completed " className="nav-link mx-3">
           Completed
         </Link>
-        <Link to={"/"} className="nav-link mx-3">
+        <Link to={"/casher/"} className="nav-link mx-3">
           Cancelled
         </Link>
       </div>

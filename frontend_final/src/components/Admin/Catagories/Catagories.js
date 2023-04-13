@@ -104,7 +104,7 @@ const Catagories = (props) => {
                               <td>{catagory.Descript}</td>
                               <td>
                                 {" "}
-                                <img src={catagory.icon} />
+                                <img src={catagory.Image} />
                               </td>
                               <td>
                                 <div className="d-flex flex-row gap-1">

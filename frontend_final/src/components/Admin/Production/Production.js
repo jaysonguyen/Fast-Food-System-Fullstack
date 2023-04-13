@@ -50,34 +50,6 @@ const Production = (props) => {
           <div className="container-fluid main-body">
             <div className="d-flex flex-col">
               <div className="col ms-4">
-                <div className="information">
-                  <div className="row">
-                    <div className="col">
-                      <div className="info-card d-flex flex-col gap-4">
-                        <h4>20%</h4>
-                        <div>sub title</div>
-                      </div>
-                    </div>
-                    <div className="col">
-                      <div className="info-card d-flex flex-col gap-4">
-                        <h4>20%</h4>
-                        <div>sub title</div>
-                      </div>
-                    </div>
-                    <div className="col">
-                      <div className="info-card d-flex flex-col gap-4">
-                        <h4>20%</h4>
-                        <div>sub title</div>
-                      </div>
-                    </div>
-                    <div className="col">
-                      <div className="info-card d-flex flex-col gap-4">
-                        <h4>20%</h4>
-                        <div>sub title</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
                 <div class="main-content rounded-3 border border-2 py-4 px-3">
                   <div class="table-header row">
                     <div class="col-3">

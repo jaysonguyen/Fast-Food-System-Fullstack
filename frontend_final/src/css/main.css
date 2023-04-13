@@ -67,8 +67,7 @@ li {
 }
 
 #loginContent {
-  background-size: cover;
-  background: rgb(255, 127, 132);
+  background: rgb(255, 161, 164);
 }
 
 #loginContent .bg-left {
@@ -92,6 +91,7 @@ li {
 
 #loginContent #loginForm {
   position: absolute;
+  font-size: 12px;
 
   height: 85vh;
   width: 80vw;
@@ -104,7 +104,7 @@ li {
 
 #loginContent #loginForm .form-title {
   font-size: 32px;
-  margin-top: 100px;
+  margin-top: 2em;
   /* margin-left: 4em; */
   text-transform: uppercase;
 }
@@ -114,21 +114,24 @@ li {
 }
 
 #loginContent #loginForm a {
-  color: #66115f;
+  color: #fff;
 }
 
 #loginContent #loginForm .submit-btn {
-  background-color: #fff;
-  color: var(--clr-btn);
-  width: 25%;
+  background-color: transparent;
+  color: #fff;
   font-weight: 600;
+  border: 2px solid var(--clr-btn);
+  box-shadow: 5px 5px 0px var(--clr-btn);
+
+  font-size: 14px;
   padding: 10px 25px;
 }
 
 #loginContent #loginForm .submit-btn:hover {
   background-color: #fff;
   color: var(--clr-btn);
-  box-shadow: 5px 5px 0px var(--clr-btn);
+  font-weight: 600;
 }
 
 #loginContent #loginForm .bg-left {
@@ -154,7 +157,7 @@ li {
 }
 
 #loginContent #loginForm .form-container {
-  padding: 5em 8em 15em 8em;
+  padding: 5em 6em 5em 6em;
 }
 
 /* header */
@@ -183,7 +186,7 @@ li {
 
 #body {
   height: 100vh;
-  background: url("https://pin.it/2CMKmML") no-repeat;
+  /* background: url("https://pin.it/2CMKmML") no-repeat; */
   background-position: center center;
   background-size: cover;
 }
@@ -277,7 +280,7 @@ select:focus,
 }
 
 .table-wrapper .table thead {
-  background-color: rgb(255, 121, 143);
+  background-color: rgb(145, 0, 24);
   border-bottom: 2px solid var(--clr-btn);
 }
 
