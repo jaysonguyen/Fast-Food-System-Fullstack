@@ -67,7 +67,7 @@ li {
 }
 
 #loginContent {
-  background: rgb(255, 127, 132);
+  background: rgb(255, 161, 164);
 }
 
 #loginContent .bg-left {
@@ -186,7 +186,7 @@ li {
 
 #body {
   height: 100vh;
-  background: url("https://pin.it/2CMKmML") no-repeat;
+  /* background: url("https://pin.it/2CMKmML") no-repeat; */
   background-position: center center;
   background-size: cover;
 }
@@ -280,7 +280,7 @@ select:focus,
 }
 
 .table-wrapper .table thead {
-  background-color: rgb(255, 121, 143);
+  background-color: rgb(145, 0, 24);
   border-bottom: 2px solid var(--clr-btn);
 }
 

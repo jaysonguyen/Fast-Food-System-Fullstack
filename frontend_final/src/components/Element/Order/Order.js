@@ -80,7 +80,10 @@ export default function Order() {
               {orderList.map((item, idx) => (
                 <tr key={idx} className="alert align-items-center">
                   <td className="product-item-name">{item.Name}</td>
-                  <td className="product-item-price">{item.Price}</td>
+                  <td className="product-item-price">
+                    {item.Price.toLocaleString("de-DE")}
+                    <sup>&#8363;</sup>
+                  </td>
                   <td className="product-item-quantity">
                     <div className="quantity btn-quantity max-w80 d-flex flex-row">
                       <div className=" form-control">
@@ -95,7 +98,8 @@ export default function Order() {
                     </div>
                   </td>
                   <td className="product-item-totle">
-                    {item.Price * item.Quantity}
+                    {(item.Price * item.Quantity).toLocaleString("de-DE")}
+                    <sup>&#8363;</sup>
                   </td>
                   <td className="product-item-close">
                     <img

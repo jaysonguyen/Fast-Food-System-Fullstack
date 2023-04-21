@@ -105,7 +105,11 @@ const Catagories = (props) => {
                               <td>{catagory.Descript}</td>
                               <td>
                                 {" "}
+<<<<<<< HEAD
                                 {catagory.Image} 
+=======
+                                <img src={catagory.Image} />
+>>>>>>> 262bd937cf43478e875e8061f80ada47a3895234
                               </td>
                               <td>
                                 <div className="d-flex flex-row gap-1">
