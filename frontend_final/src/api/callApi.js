@@ -1,19 +1,22 @@
 import axios from "../setup/axios";
 
-
-//Promotion 
+//Promotion
 export const deletePromotion = (id) => {
-  return axios.delete(`/api/promotion/remove/${id}`)
-}
+  return axios.delete(`/api/promotion/remove/${id}`);
+};
 
 // Supplier
 export const deleteSupplier = (id) => {
-  return axios.delete(`/api/supplier/remove/${id}`)
-}
+  return axios.delete(`/api/supplier/remove/${id}`);
+};
+
+export const InsertSupplier = (name, contact, note) => {
+  return axios.post(`/api/supplier/create`, { name, contact, note });
+};
 // Staff
 export const deleteStaff = (id) => {
-  return axios.delete(`/api/staff/delete/${id}`)
-}
+  return axios.delete(`/api/staff/delete/${id}`);
+};
 // Product
 export const FoodData = () => {
   return axios.get(`api/food`);
@@ -69,9 +72,9 @@ export const InsertStaff = (name, dob, gender, startAt, position, address) => {
   });
 };
 
-export const InsertSupplier = (name, contact, note) => {
+/* export const InsertSupplier = (name, contact, note) => {
   return axios.post(`/api/supplier/create`, { name, contact, note });
-};
+}; */
 
 export const AddNewOrderData = (orders) => {
   axios
@@ -86,4 +89,18 @@ export const AddNewOrderData = (orders) => {
       console.log(error);
       return -1;
     });
+};
+
+export const getFoodById = (id) => {
+  return axios.get(`/api/food/getId/${id}`);
+};
+
+export const updateFood = (id, Name, Price, Type, Status) => {
+  return axios.put(`/api/food/update`, {
+    id,
+    Name,
+    Price,
+    Type,
+    Status,
+  });
 };

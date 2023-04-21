@@ -1,8 +1,8 @@
-
 import React, { useEffect, useState } from "react";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { getAllProductType } from "../../../services/productType";
 import { InsertFoodTyppe } from "../../../api/callApi";
+import { toast } from "react-toastify";
 
 const Catagories = (props) => {
   const [catagory, setCatagory] = useState([]);
@@ -24,13 +24,13 @@ const Catagories = (props) => {
     try {
       let data = await InsertFoodTyppe(name);
       if (data && +data.EC == 1) {
-        console.log("INSERT THANH CONG");
+        toast.success(data.EM);
       }
       if (data && +data.EC != 1) {
-        console.log("INSERT THAT BAI");
+        toast.error(data.EM);
       }
     } catch (error) {
-      console.log(error);
+      toast.error(error);
     }
   };
 

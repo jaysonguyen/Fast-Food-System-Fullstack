@@ -5,6 +5,8 @@ import { NavBar } from "./components/NavBar";
 import AdminHeader from "./components/Admin/Admin_Header/AdminHeader";
 import AdminSideBar from "./components/Admin/Admin_Header/AdminSideBar";
 import Production from "./components/Admin/Production/Production";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // casher
 import OrderPage from "./components/pages/Casher/MakeOrderPage";
@@ -61,6 +63,19 @@ function App() {
           <Route path="/admin/food" element={<FoodList />} />
         </Routes>
       </Router>
+
+      <ToastContainer
+        position="bottom-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </StrictMode>
   );
 }

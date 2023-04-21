@@ -56,10 +56,8 @@ const createFood = async (req, res) => {
 
 const updateF = async (req, res) => {
   try {
-    // const { id, nameFood } = req.query;
-    // console.log(req.params.id, req.body.nameFood);
     const data = await updateFood(
-      req.params.id,
+      req.body.id,
       req.body.Name,
       req.body.Price,
       req.body.Type,
@@ -82,6 +80,27 @@ const updateF = async (req, res) => {
     console.log(error.message);
     return res.status(500).json({
       message: "Error at controller: " + error.message,
+    });
+  }
+};
+
+const getFoodById = async (req, res) => {
+  try {
+    let id = req.params.id;
+    let data = await getOneFood(id);
+    if (data.DT)
+      return res.status(200).json({
+        EM: data.EM,
+        EC: data.EC,
+        DT: data.DT,
+      });
+
+    return res.status(404).json({
+      message: "Cannot get Food Type",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error: " + error.message,
     });
   }
 };
@@ -145,5 +164,6 @@ module.exports = {
   createFood,
   updateF,
   deteleF,
+  getFoodById,
   getLevel0,
 };

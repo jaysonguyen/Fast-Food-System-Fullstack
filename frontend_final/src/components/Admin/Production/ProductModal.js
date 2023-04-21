@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../css/main.css";
 import "../css/root.css";
 import { Modal, Button } from "react-bootstrap";
 import "./Production.css";
 import Form from "react-bootstrap/Form";
 import { AddFood } from "../../../services/foodServices";
+import { toast } from "react-toastify";
+import { getFoodById } from "../../../api/callApi";
+import { updateFood } from "../../../api/callApi";
 
 const ProductModal = (props) => {
   const [show, setShow] = useState(props.show);
@@ -14,27 +17,83 @@ const ProductModal = (props) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
-  const [type, setType] = useState(1);
+  const [type, setType] = useState("");
   const [recipe, setRecipe] = useState("");
   const [note, setNote] = useState("");
+  const [dataFood, setDataFood] = useState({});
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  console.log(props.action);
+
   const handleCreateFood = async (e) => {
     e.preventDefault();
-    let data = await AddFood(name, price, image, type, recipe);
+    const data = await AddFood(name, price, image, type, recipe);
     if (data && +data.EC === 1) {
-      alert("add data succeed");
-      console.log(data);
+      toast.success(data.EM);
       location.reload();
     } else if (data && +data.EC != 1) {
-      alert("add data failed");
+      toast.error(data.EM);
       console.log(data);
     } else {
-      alert("add data failed");
+      toast.error("add data failed");
     }
   };
+
+  const handleGetProductByID = async (id) => {
+    try {
+      const data = await getFoodById(id);
+      if (data && +data.EC == 1) {
+        console.log(data);
+        setName(data.DT[0].Name);
+        setPrice(data.DT[0].Price);
+        setImage(data.DT[0].Image);
+        setType(data.DT[0].Type);
+        setRecipe(data.DT[0].Recipe);
+        setDataFood({
+          ID: id,
+          Name: name,
+          Price: price,
+          Image: image,
+          Type: type,
+          Recipe: recipe,
+        });
+      }
+      if (data && +data.EC != 1) {
+        console.log("Khong duoc goi dai vuong oi");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleUpdatePro = async () => {
+    console.log("Log ne log ne")
+    setDataFood({
+      ...dataFood,
+      Name: name,
+      Price: price,
+      Image: image,
+      Type: type,
+      Recipe: recipe,
+    });
+
+    console.log(dataFood);
+
+    // let data = await updateFood(dataFood);
+    // if(data && +data.EC == 1) {
+    //   console.log(setDataFood)
+    // }
+    // if(data && +data.EC != 1) {
+    //   console.log("Khong on dai vuong oi")
+    // }
+  };
+
+  useEffect(() => {
+    handleGetProductByID(props.idFood);
+    console.log(dataFood);
+  }, [name, price, image, type, recipe, status]);
 
   return (
     <>
@@ -46,7 +105,9 @@ const ProductModal = (props) => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title className="title">Create Product</Modal.Title>
+          <Modal.Title className="title">
+            {props.action == "CREATE" ? "CREATE PRODUCT" : "UPDATE PRODUCT"}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form className="create-form">
@@ -174,9 +235,11 @@ const ProductModal = (props) => {
                 id="form6Example8"
                 checked
               />
-              <label className="form-check-label" for="form6Example8">
-                Create an account?
-              </label>
+              {props.action == "CREATE" && (
+                <label className="form-check-label" for="form6Example8">
+                  Create a food
+                </label>
+              )}
             </div>
           </form>
         </Modal.Body>
@@ -187,9 +250,13 @@ const ProductModal = (props) => {
           <Button
             className=""
             variant="primary"
-            onClick={(e) => handleCreateFood(e)}
+            onClick={(e) =>
+              props.action == "CREATE"
+                ? handleCreateFood(e)
+                : handleUpdatePro(e)
+            }
           >
-            Create
+            {props.action == "CREATE" ? "Create" : "Update"}
           </Button>
         </Modal.Footer>
       </Modal>

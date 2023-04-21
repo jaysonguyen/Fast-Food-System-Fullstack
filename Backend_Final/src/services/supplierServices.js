@@ -8,14 +8,14 @@ const readSupplier = async () => {
     poolConnection.close();
     if (data) {
       return {
-        EM: "Get Supplier success",
+        EM: "Get data succeed",
         EC: 1,
         DT: data.recordset,
       };
     } else {
       return {
-        EM: "Get Supplier success",
-        EC: 1,
+        EM: "Get data failed",
+        EC: 0,
         DT: [],
       };
     }
@@ -45,14 +45,14 @@ const createSupplier = async (name, contact, note) => {
     } else {
       return {
         EM: "Create Supplier Success",
-        EC: 1,
+        EC: 0,
         DT: "",
       };
     }
   } catch (error) {
     console.log(error);
     return {
-      EM: "Create Supplier failed",
+      EM: error,
       EC: -1,
       DT: "",
     };
@@ -71,6 +71,12 @@ const deleteSupplier = async (id) => {
         EC: 1,
         DT: "",
       };
+    } else {
+      return {
+        EM: "Delete Supplier failed",
+        EC: 0,
+        DT: "",
+      };
     }
   } catch (error) {
     console.log(error);
@@ -85,7 +91,9 @@ const deleteSupplier = async (id) => {
 const updateSupplier = async (id, contact, note) => {
   try {
     const poolConnection = await sql.connect(config);
-    let data = poolConnection.query(`exec sp_update_supplier ${id}, N'${contact}', N'${note}'`);
+    let data = poolConnection.query(
+      `exec sp_update_supplier ${id}, N'${contact}', N'${note}'`
+    );
 
     if (data) {
       return {
@@ -110,4 +118,9 @@ const updateSupplier = async (id, contact, note) => {
   }
 };
 
-module.exports = { readSupplier, createSupplier, updateSupplier, deleteSupplier };
+module.exports = {
+  readSupplier,
+  createSupplier,
+  updateSupplier,
+  deleteSupplier,
+};

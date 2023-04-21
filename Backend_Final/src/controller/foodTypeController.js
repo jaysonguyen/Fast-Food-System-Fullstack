@@ -26,6 +26,9 @@ const getFoodTypeList = async (req, res) => {
   }
 };
 
+
+
+
 const getFoodByT = async (req, res) => {
   try {
     let data = await getFoodByType(req.params.id);
@@ -62,6 +65,7 @@ const createNewFoodT = async (req, res) => {
       });
     }
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       message: "Error: " + error.message,
     });

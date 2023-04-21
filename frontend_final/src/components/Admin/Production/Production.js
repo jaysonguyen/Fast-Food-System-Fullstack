@@ -7,11 +7,15 @@ import { getAllProduct } from "../../../services/productList";
 import { getAllProductType } from "../../../services/productType";
 import { removeFood } from "../../../services/foodServices";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
+import { toast } from "react-toastify";
 
 const Production = (props) => {
   const [product, setProduct] = useState([]);
   const [proType, setProType] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [idFood, setIdFood] = useState(1);
+
+  const [action, setAction] = useState("CREATE");
 
   const fetchProType = async () => {
     let dataProType = await getAllProductType();
@@ -21,10 +25,11 @@ const Production = (props) => {
   const handleDeleteFood = async (id) => {
     let data = await removeFood(id);
     if (data && +data.EC === 1) {
-      alert("Xoa oke");
+      toast.success(data.EM);
     }
     console.log(id);
   };
+
 
   const fetchProduct = async () => {
     let dataProduct = await getAllProduct();
@@ -35,12 +40,18 @@ const Production = (props) => {
   useEffect(() => {
     fetchProduct();
     fetchProType();
-  }, [product]);
+  }, []);
 
   const handleShowModal = () => {
     let flag = !showModal;
     setShowModal(flag);
   };
+
+  const handleAction = (id) => {
+    setAction("UPDATE");
+    setIdFood(id);
+    handleShowModal();
+  }
 
   return (
     <>
@@ -144,9 +155,9 @@ const Production = (props) => {
                                 </td>
                                 <td>
                                   <div className="d-flex flex-row gap-1">
-                                    <a href="./edit.html" className="nav-link">
-                                      <AiOutlineEdit className="edit-icon" />
-                                    </a>
+                                    <span className="nav-link">
+                                      <AiOutlineEdit className="edit-icon" id={product.ID} onClick={(e) => handleAction(e.target.id)}/>
+                                    </span>
                                     <span className="nav-link">
                                       <AiOutlineDelete
                                         className="del-icon"
@@ -170,7 +181,7 @@ const Production = (props) => {
             </div>
           </div>
         </div>
-        {<ProductModal show={showModal} onHide={handleShowModal} />}
+        {<ProductModal show={showModal} onHide={handleShowModal} action={action} idFood={idFood} />}
       </div>
     </>
   );

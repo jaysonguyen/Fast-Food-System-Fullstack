@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { getAllSupplier, removeSupplier } from "../../../services/supplier";
 import SupplierModal from "./SupplierModal";
+import { toast } from "react-toastify";
 
 const Supplier = (props) => {
   const [supplier, setSupplier] = useState([]);
@@ -14,9 +15,12 @@ const Supplier = (props) => {
   };
 
   const handelDeleteSupplier = async (id) => {
-    let data = await removeSupplier(id);
-    if (data && +data.EC === 1) {
-      alert("Xoa oke");
+    const data = await removeSupplier(id);
+    if (data && +data.EC == 1) {
+      toast.success("Delete data succeed")
+    }
+    if (data && +data.EC != 1) {
+      toast.error(data.EM);
     }
     console.log(id);
   };
