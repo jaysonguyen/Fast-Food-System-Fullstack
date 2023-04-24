@@ -210,10 +210,10 @@ const Promotion = (props) => {
                                   <a href="./edit.html" className="nav-link">
                                     <AiOutlineEdit className="edit-icon" />
                                   </a>
-                                  <a href="#" className="nav-link">
+                                  <span className="nav-link">
                                     <AiOutlineDelete className="del-icon" id={promotion.ID} 
                                     onClick={async(e) => await handleDeletePromotion(e.target.id)}/>
-                                  </a>
+                                  </span>
                                 </div>
                               </td>
                             </tr>

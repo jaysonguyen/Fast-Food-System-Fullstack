@@ -13,6 +13,9 @@ const Production = (props) => {
   const [product, setProduct] = useState([]);
   const [proType, setProType] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [idFood, setIdFood] = useState(1);
+
+  const [action, setAction] = useState("CREATE");
 
   const fetchProType = async () => {
     let dataProType = await getAllProductType();
@@ -27,6 +30,7 @@ const Production = (props) => {
     console.log(id);
   };
 
+
   const fetchProduct = async () => {
     let dataProduct = await getAllProduct();
     console.log(dataProduct.DT);
@@ -36,12 +40,18 @@ const Production = (props) => {
   useEffect(() => {
     fetchProduct();
     fetchProType();
-  }, [product]);
+  }, []);
 
   const handleShowModal = () => {
     let flag = !showModal;
     setShowModal(flag);
   };
+
+  const handleAction = (id) => {
+    setAction("UPDATE");
+    setIdFood(id);
+    handleShowModal();
+  }
 
   return (
     <>
@@ -50,34 +60,6 @@ const Production = (props) => {
           <div className="container-fluid main-body">
             <div className="d-flex flex-col">
               <div className="col ms-4">
-                <div className="information">
-                  <div className="row">
-                    <div className="col">
-                      <div className="info-card d-flex flex-col gap-4">
-                        <h4>20%</h4>
-                        <div>sub title</div>
-                      </div>
-                    </div>
-                    <div className="col">
-                      <div className="info-card d-flex flex-col gap-4">
-                        <h4>20%</h4>
-                        <div>sub title</div>
-                      </div>
-                    </div>
-                    <div className="col">
-                      <div className="info-card d-flex flex-col gap-4">
-                        <h4>20%</h4>
-                        <div>sub title</div>
-                      </div>
-                    </div>
-                    <div className="col">
-                      <div className="info-card d-flex flex-col gap-4">
-                        <h4>20%</h4>
-                        <div>sub title</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
                 <div class="main-content rounded-3 border border-2 py-4 px-3">
                   <div class="table-header row">
                     <div class="col-3">
@@ -145,10 +127,10 @@ const Production = (props) => {
                                 </td>
                                 <td>
                                   <div className="d-flex flex-row gap-1">
-                                    <a href="./edit.html" className="nav-link">
-                                      <AiOutlineEdit className="edit-icon" />
-                                    </a>
-                                    <a href="#" className="nav-link">
+                                    <span className="nav-link">
+                                      <AiOutlineEdit className="edit-icon" id={product.ID} onClick={(e) => handleAction(e.target.id)}/>
+                                    </span>
+                                    <span className="nav-link">
                                       <AiOutlineDelete
                                         className="del-icon"
                                         id={product.ID}
@@ -156,7 +138,7 @@ const Production = (props) => {
                                           await handleDeleteFood(e.target.id)
                                         }
                                       />
-                                    </a>
+                                    </span>
                                   </div>
                                 </td>
                               </tr>
@@ -171,7 +153,7 @@ const Production = (props) => {
             </div>
           </div>
         </div>
-        {<ProductModal show={showModal} onHide={handleShowModal} />}
+        {<ProductModal show={showModal} onHide={handleShowModal} action={action} idFood={idFood} />}
       </div>
     </>
   );

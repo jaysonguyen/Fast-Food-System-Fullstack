@@ -45,14 +45,14 @@ const createSupplier = async (name, contact, note) => {
     } else {
       return {
         EM: "Create Supplier Success",
-        EC: 1,
+        EC: 0,
         DT: "",
       };
     }
   } catch (error) {
     console.log(error);
     return {
-      EM: "Create Supplier failed",
+      EM: error,
       EC: -1,
       DT: "",
     };

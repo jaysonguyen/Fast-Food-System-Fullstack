@@ -40,34 +40,6 @@ const Supplier = (props) => {
         <div class="container-fluid main-body">
           <div class="d-flex flex-col">
             <div class="col ms-4">
-              <div class="information">
-                <div class="row">
-                  <div class="col">
-                    <div class="info-card d-flex flex-col gap-4">
-                      <h4>20%</h4>
-                      <div>sub title</div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="info-card d-flex flex-col gap-4">
-                      <h4>20%</h4>
-                      <div>sub title</div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="info-card d-flex flex-col gap-4">
-                      <h4>20%</h4>
-                      <div>sub title</div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="info-card d-flex flex-col gap-4">
-                      <h4>20%</h4>
-                      <div>sub title</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
               <div class="main-content rounded-3 border border-2 py-4 px-3">
                 <div class="table-header row">
                   <div class="col-3">
@@ -120,7 +92,7 @@ const Supplier = (props) => {
                                   <a href="./edit.html" className="nav-link">
                                     <AiOutlineEdit className="edit-icon" />
                                   </a>
-                                  <a href="#" className="nav-link">
+                                  <span className="nav-link">
                                     <AiOutlineDelete
                                       className="del-icon"
                                       id={supplier.ID}
@@ -128,7 +100,7 @@ const Supplier = (props) => {
                                         handelDeleteSupplier(e.target.id)
                                       }
                                     />
-                                  </a>
+                                  </span>
                                 </div>
                               </td>
                             </tr>
