@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import "../css/root.css";
 import "../css/main.css";
 import ProductModal from "./ProductModal";
@@ -10,10 +10,21 @@ import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { toast } from "react-toastify";
 
 const Production = (props) => {
-  const [product, setProduct] = useState([]);
   const [proType, setProType] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [idFood, setIdFood] = useState(1);
+
+  const [name, setName] = useState("");
+  const [id, setid] = useState("");
+  const [price, setPrice] = useState("");
+  const [image, setImage] = useState("");
+  const [type, setType] = useState("");
+  const [recipe, setRecipe] = useState("");
+  const [note, setNote] = useState("");
+  const [status, setStatus] = useState(0);
+  const [productList, setProductList] = useState([]);
+  const [dataFood, setDataFood] = useState({});
+  const [selectedProductId, setSelectedProductId] = useState(null);
 
   const [action, setAction] = useState("CREATE");
 
@@ -27,19 +38,14 @@ const Production = (props) => {
     if (data && +data.EC === 1) {
       toast.success(data.EM);
     }
-    console.log(id);
-  };
-
-
-  const fetchProduct = async () => {
-    let dataProduct = await getAllProduct();
-    console.log(dataProduct.DT);
-    setProduct(dataProduct.DT);
   };
 
   useEffect(() => {
-    fetchProduct();
-    fetchProType();
+    const fetchData = async () => {
+      const dataProduct = await getAllProduct();
+      setProductList(dataProduct.DT);
+    };
+    fetchData();
   }, []);
 
   const handleShowModal = () => {
@@ -47,11 +53,42 @@ const Production = (props) => {
     setShowModal(flag);
   };
 
-  const handleAction = (id) => {
-    setAction("UPDATE");
-    setIdFood(id);
+  const handleCreateProduct = () => {
     handleShowModal();
-  }
+    setAction("CREATE");
+  };
+
+  const handleAction = useCallback(
+    (productId) => {
+      setSelectedProductId(productId);
+      const selectedProduct = productList.find(
+        (product) => product.ID == productId
+      );
+      if (selectedProduct) {
+        setid(productId);
+        setName(selectedProduct.Name);
+        setPrice(selectedProduct.Price);
+        setImage(selectedProduct.Image);
+        setType(selectedProduct.Type);
+        setRecipe(selectedProduct.Recipe);
+        setStatus(selectedProduct.Status);
+        setDataFood({
+          id: productId,
+          name: selectedProduct.Name,
+          price: selectedProduct.Price,
+          image: selectedProduct.Image,
+          type: selectedProduct.Type,
+          recipe: selectedProduct.Recipe,
+          status: selectedProduct.Status,
+        });
+      }
+      if (dataFood) {
+        setAction("UPDATE");
+        handleShowModal();
+      }
+    },
+    [productList]
+  );
 
   return (
     <>
@@ -60,15 +97,15 @@ const Production = (props) => {
           <div className="container-fluid main-body">
             <div className="d-flex flex-col">
               <div className="col ms-4">
-                <div class="main-content rounded-3 border border-2 py-4 px-3">
-                  <div class="table-header row">
-                    <div class="col-3">
-                      <h3 class="title">Product List</h3>
+                <div className="main-content rounded-3 border border-2 py-4 px-3">
+                  <div className="table-header row">
+                    <div className="col-3">
+                      <h3 className="title">Product List</h3>
                     </div>
                     <div className="col text-end me-2">
                       <button className="btn btn-clr-normal">
                         <a
-                          onClick={() => handleShowModal()}
+                          onClick={() => handleCreateProduct()}
                           className="nav-link"
                         >
                           Add product
@@ -77,10 +114,10 @@ const Production = (props) => {
                     </div>
                   </div>
                   <br></br>
-                  <div class="text-white">
-                    <div class="bg-white">
-                      <table class="table align-middle mb-0">
-                        <thead class="">
+                  <div className="text-white">
+                    <div className="bg-white">
+                      <table className="table align-middle mb-0">
+                        <thead className="">
                           <tr>
                             <th>Product name</th>
                             <th>Category</th>
@@ -91,18 +128,22 @@ const Production = (props) => {
                           </tr>
                         </thead>
                         <tbody>
-                          {product.map((product, key) => {
+                          {productList.map((product, key) => {
                             return (
                               <tr key={key}>
                                 <td>
-                                  <div class="d-flex align-items-center">
-                                    <div class="">
-                                      <p class="fw-bold mb-1">{product.Name}</p>
+                                  <div className="d-flex align-items-center">
+                                    <div className="">
+                                      <p className="fw-bold mb-1">
+                                        {product.Name}
+                                      </p>
                                     </div>
                                   </div>
                                 </td>
                                 <td>
-                                  <p class="fw-normal mb-1">{product.Type}</p>
+                                  <p className="fw-normal mb-1">
+                                    {product.Type}
+                                  </p>
                                 </td>
                                 <td>
                                   {product.Price.toLocaleString("de-DE")}{" "}
@@ -128,7 +169,13 @@ const Production = (props) => {
                                 <td>
                                   <div className="d-flex flex-row gap-1">
                                     <span className="nav-link">
-                                      <AiOutlineEdit className="edit-icon" id={product.ID} onClick={(e) => handleAction(e.target.id)}/>
+                                      <AiOutlineEdit
+                                        className="edit-icon"
+                                        id={product.ID}
+                                        onClick={(e) =>
+                                          handleAction(e.target.id)
+                                        }
+                                      />
                                     </span>
                                     <span className="nav-link">
                                       <AiOutlineDelete
@@ -153,7 +200,14 @@ const Production = (props) => {
             </div>
           </div>
         </div>
-        {<ProductModal show={showModal} onHide={handleShowModal} action={action} idFood={idFood} />}
+        {
+          <ProductModal
+            show={showModal}
+            onHide={handleShowModal}
+            action={action}
+            dataFood={dataFood}
+          />
+        }
       </div>
     </>
   );

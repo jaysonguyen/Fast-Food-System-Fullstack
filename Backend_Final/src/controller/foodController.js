@@ -56,13 +56,8 @@ const createFood = async (req, res) => {
 
 const updateF = async (req, res) => {
   try {
-    const data = await updateFood(
-      req.body.id,
-      req.body.Name,
-      req.body.Price,
-      req.body.Type,
-      req.body.Status
-    );
+    const id = req.params.id;
+    const data = await updateFood(id, req.body);
     if (data.EM.includes("Success")) {
       return res.status(201).json({
         EM: "Update success",

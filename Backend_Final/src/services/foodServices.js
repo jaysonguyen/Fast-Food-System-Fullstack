@@ -183,12 +183,12 @@ const deleteFoodPermanently = async (id) => {
   }
 };
 
-const updateFood = async (id, name, price, type, status) => {
+const updateFood = async (id, rawdata) => {
   try {
     console.log(typeof price);
     const poolConnection = await sql.connect(config);
     let data = await poolConnection.query(
-      `exec sp_updateFood ${id}, N'${name}', ${price}, ${type}, ${status}`
+      `exec sp_updateFood ${id}, N'${rawdata.name}', '${rawdata.image}', ${rawdata.price}, ${rawdata.type}, ${rawdata.status}, ${rawdata.recipe}`
     );
     poolConnection.close();
     if (data) {

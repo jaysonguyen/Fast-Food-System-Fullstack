@@ -95,12 +95,8 @@ export const getFoodById = (id) => {
   return axios.get(`/api/food/getId/${id}`);
 };
 
-export const updateFood = (id, Name, Price, Type, Status) => {
-  return axios.put(`/api/food/update`, {
-    id,
-    Name,
-    Price,
-    Type,
-    Status,
+export const updateFood = (id, rawData) => {
+  return axios.put(`/api/food/update/${id}`, {
+   ...rawData
   });
 };
