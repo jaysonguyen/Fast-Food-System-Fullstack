@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
-import { getAllStaff, removeStaff } from "../../../services/staff";
+import { getAllStaff, removeStaff } from "../../../../services/staff";
 import StaffModal from "./StaffModal";
 import { toast } from "react-toastify";
 
@@ -15,10 +15,10 @@ const Staff = (props) => {
   const handleDeleteStaff = async (id) => {
     let data = await removeStaff(id);
     if (data && +data.EC === 1) {
-      toast.success(data.EM)
+      toast.success(data.EM);
     }
     if (data && +data.EC != 1) {
-      toast.error(data.EM)
+      toast.error(data.EM);
     }
     console.log(id);
   };

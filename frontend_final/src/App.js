@@ -28,7 +28,7 @@ import Admin from "./components/Admin/Admin";
 import Promotion from "./components/Admin/Promotion/Promotion";
 import Catagories from "./components/Admin/Catagories/Catagories";
 import Supplier from "./components/Admin/Supplier/Supplier";
-import Staff from "./components/Admin/Staff/Staff";
+import Staff from "./components/Admin/Store/Staff/Staff";
 
 import "jquery/dist/jquery.min.js";
 import "popper.js/dist/popper.min.js";
