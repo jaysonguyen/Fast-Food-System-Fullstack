@@ -120,7 +120,7 @@ html {
 }
 body {
   background-color: #fff;
-  font-family: "Poppins", sans-serif;
+  /* font-family: "Poppins", sans-serif; */
   font-size: 16px;
   font-weight: 400;
   color: #0a0a0a;
@@ -2387,10 +2387,11 @@ label {
 .form-control {
   border-color: #777;
   box-shadow: none;
-  height: 45px;
-  font-size: 15px;
+  height: 37px;
+  width: 200px;
+  font-size: 12px;
   line-height: 20px;
-  padding: 10px 20px;
+  padding: 5px 10px;
   border-radius: 5px !important;
 }
 .form-control:focus {
@@ -6619,7 +6620,8 @@ button:focus {
 .btn,
 .btn-secondry {
   color: #fff;
-  padding: 12px 25px;
+  padding: 5px 10px;
+  font-size: 14px;
   display: inline-block;
   font-size: 16px;
   outline: none;
@@ -7549,7 +7551,7 @@ button:focus {
 .btn-link.yellow:hover,
 .btn-link.yellow:active,
 .btn-link.yellow:focus {
-  color: ##d4af19;
+  color: #d4af19;
 }
 /* purple */
 
@@ -10378,7 +10380,7 @@ ul[class*="list-"] {
 .overlay-primary-middle:after,
 .overlay-primary-dark:after,
 .overlay-primary:after {
-  background: ;
+  /* background: ; */
 }
 .overlay-black-light:after {
   opacity: 0.3;

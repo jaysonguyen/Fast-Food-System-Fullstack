@@ -8,8 +8,9 @@ document.addEventListener("DOMContentLoaded", function () {
 setSideNav();
 
 function dropDownSideBar() {
-  document.querySelectorAll("#sidebar .nav-link").forEach(function (element) {
+  document.querySelectorAll(".sidebar .nav-link").forEach(function (element) {
     element.addEventListener("click", function (e) {
+      console.log("Click");
       let nextEl = element.nextElementSibling;
       let parentEl = element.parentElement;
 
@@ -21,7 +22,6 @@ function dropDownSideBar() {
           mycollapse.hide();
         } else {
           mycollapse.show();
-          this.toggle("active");
           // find other submenus with class=show
           var opened_submenu =
             parentEl.parentElement.querySelector(".submenu.show");
@@ -32,7 +32,7 @@ function dropDownSideBar() {
         }
       }
     }); // addEventListener
-  }); // forEach
+  });
 }
 
 function toggleAddProductForm() {

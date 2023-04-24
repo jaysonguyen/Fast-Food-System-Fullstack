@@ -95,7 +95,7 @@ const updatePromotion = async (id, name, price, status) => {
       };
     } else {
       return {
-        EM: "Update promotion success",
+        EM: "Update promotion failed",
         EC: 0,
         DT: "",
       };

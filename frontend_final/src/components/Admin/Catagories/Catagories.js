@@ -35,51 +35,58 @@ const Catagories = (props) => {
   };
 
   return (
-    <div id="body">
-      <div class="container">
-        <div class="container-fluid main-body">
-          <div class="d-flex flex-col">
-            <div class="col ms-4">
-              <div class="add-inline-form main-content rounded-3 border border-2 py-4 px-3 mb-3">
-                <div class="table-header row">
-                  <div class="col-3">
-                    <h3 class="title">Add Category</h3>
-                  </div>
+    <div class="d-flex flex-col">
+      <div class="col ms-4">
+        <div class="form-list">
+          <div class="table-header row">
+            <div class="col-3">
+              <h3 class="title">Add Category</h3>
+            </div>
+          </div>
+          <form class="create-form">
+            <div class="row">
+              <div class="col-10">
+                <div class="form-outline mb-4">
+                  <input
+                    type="text"
+                    id="form6Example3"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    class="form-control w-100"
+                  />
+                  <label class="form-label" for="form6Example3">
+                    Category name
+                  </label>
                 </div>
-                <form class="create-form">
-                  <div class="row">
-                    <div class="col-10">
-                      <div class="form-outline mb-4">
-                        <input
-                          type="text"
-                          id="form6Example3"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          class="form-control"
-                        />
-                        <label class="form-label" for="form6Example3">
-                          Category name
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-2 mt-4">
-                    <button
-                      type="submit"
-                      onClick={(e) => handleAddTypeFood(e)}
-                      class="btn btn-clr-normal btn-block mb-4 w-50"
-                    >
-                      Save
-                    </button>
-                  </div>
-                </form>
               </div>
-              <div class="main-content rounded-3 border border-2 py-4 px-3">
-                <div class="table-header row">
-                  <div class="col-3">
-                    <h3 class="title">Categories</h3>
-                  </div>
+              <div class="col-2">
+                <button
+                  type="submit"
+                  onClick={(e) => handleAddTypeFood(e)}
+                  class="btn btn-clr-normal btn-block w-75 h-50"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="form-list mt-3">
+          <div class="table-header row">
+            <div class="col-3">
+              <h3 class="title">Categories</h3>
+            </div>
+          </div>
+          <div class="">
+            <div class="bg-white">
+              <div class="table-wrapper mb-0">
+                <div class="row row-header">
+                  <div class="col-lg-4">Category Name</div>
+                  <div class="col-lg-4">Description</div>
+                  <div class="col-lg-2">Image</div>
+                  <div class="col-lg-2">Action</div>
                 </div>
+<<<<<<< HEAD
                 <div class="text-white">
                   <div class="bg-white">
                     <table class="table align-middle mb-0">
@@ -127,6 +134,36 @@ const Catagories = (props) => {
                       </tbody>
                     </table>
                   </div>
+=======
+                <div class="table-body">
+                  {catagory.map((catagory, key) => {
+                    return (
+                      <div key={key} class="row item-list">
+                        <div class="col-lg-4">
+                          <div class="d-flex align-items-center">
+                            <div class="">
+                              <p class="fw-bold mb-1">{catagory.Name}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-4">{catagory.Descript}</div>
+                        <div class="col-lg-2">
+                          <img src={catagory.Image} />
+                        </div>
+                        <div class="col-lg-2">
+                          <div className="d-flex flex-row gap-1">
+                            <a href="./edit.html" className="nav-link">
+                              <AiOutlineEdit className="edit-icon" />
+                            </a>
+                            <a href="#" className="nav-link">
+                              <AiOutlineDelete className="del-icon" />
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+>>>>>>> 2aa3115fc243f3dc9df0eb40875abd6c5e3ae869
                 </div>
               </div>
             </div>

@@ -7,7 +7,9 @@ export const OrderManagement = () => {
   return (
     <div className="container-fluid">
       <div className="container row mx-auto">
-        <CasherSideBar />
+        <div id="sidebar" className="sidebar col-2 py-4">
+          <CasherSideBar />
+        </div>
         <div className="main-content col">
           <div className="content py-3 px-5">
             <div className="title fs-2">Orders</div>
