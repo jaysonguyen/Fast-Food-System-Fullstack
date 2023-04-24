@@ -17,7 +17,7 @@ const Supplier = (props) => {
   const handelDeleteSupplier = async (id) => {
     const data = await removeSupplier(id);
     if (data && +data.EC == 1) {
-      toast.success("Delete data succeed")
+      toast.success("Delete data succeed");
     }
     if (data && +data.EC != 1) {
       toast.error(data.EM);
@@ -54,22 +54,20 @@ const Supplier = (props) => {
                   </div>
                 </div>
                 <br></br>
-                <div class="text-white">
+                <div class="">
                   <div class="bg-white">
-                    <table class="table align-middle mb-0">
-                      <thead class="">
-                        <tr>
-                          <th>Supplier name</th>
-                          <th>Contact</th>
-                          <th>Description</th>
-                          <th>Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody>
+                    <div class="table-wrapper mb-0">
+                      <div class="row row-header">
+                        <div class="col-lg-4">Supplier Name</div>
+                        <div class="col-lg-3">Description</div>
+                        <div class="col-lg-3">Contact</div>
+                        <div class="col-lg-2">Actions</div>
+                      </div>
+                      <div class="table-body">
                         {supplier.map((supplier, key) => {
                           return (
-                            <tr key={key}>
-                              <td>
+                            <div key={key} class="row item-list">
+                              <div class="col-lg-4">
                                 <div class="d-flex align-items-center">
                                   <img
                                     src="https://mdbootstrap.com/img/new/avatars/8.jpg"
@@ -81,13 +79,13 @@ const Supplier = (props) => {
                                     <p class="fw-bold mb-1">{supplier.Name}</p>
                                   </div>
                                 </div>
-                              </td>
-                              <td>
+                              </div>
+                              <div class="col-lg-3">
                                 <p class="fw-normal mb-1">{supplier.Contact}</p>
-                              </td>
+                              </div>
 
-                              <td>{supplier.Note}</td>
-                              <td>
+                              <div class="col-lg-3">{supplier.Note}</div>
+                              <div class="col-lg-2">
                                 <div className="d-flex flex-row gap-1">
                                   <a href="./edit.html" className="nav-link">
                                     <AiOutlineEdit className="edit-icon" />
@@ -102,12 +100,12 @@ const Supplier = (props) => {
                                     />
                                   </a>
                                 </div>
-                              </td>
-                            </tr>
+                              </div>
+                            </div>
                           );
                         })}
-                      </tbody>
-                    </table>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

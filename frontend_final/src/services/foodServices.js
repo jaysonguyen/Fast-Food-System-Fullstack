@@ -26,6 +26,15 @@ const getFoodByTypeData = async (id) => {
   }
 };
 
+const getFoodByID = async (id) => {
+  try {
+    let data = await axios.get(`api/food/${id}`);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const removeFood = async (id) => {
   try {
     let data = await FoodDelete(id);
@@ -34,7 +43,6 @@ const removeFood = async (id) => {
     console.log(error);
   }
 };
-
 
 const AddFood = async (name, price, image, type, recipe, status) => {
   try {
@@ -50,5 +58,30 @@ const AddFood = async (name, price, image, type, recipe, status) => {
   }
 };
 
+const updateFood = async (id, name, price, type, status) => {
+  try {
+    let data = await axios.put(`api/food/${id}`, {
+      name,
+      price,
+      type,
+      status,
+    });
+    if (data) {
+      return {
+        EM: data.EM,
+        EC: data.EC,
+      };
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-export { getFoodData, getFoodByTypeData, AddFood, removeFood};
+export {
+  getFoodData,
+  getFoodByTypeData,
+  AddFood,
+  removeFood,
+  updateFood,
+  getFoodByID,
+};

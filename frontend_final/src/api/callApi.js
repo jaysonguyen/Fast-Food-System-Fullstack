@@ -1,19 +1,18 @@
 import axios from "../setup/axios";
 
-
-//Promotion 
+//Promotion
 export const deletePromotion = (id) => {
-  return axios.delete(`/api/promotion/remove/${id}`)
-}
+  return axios.delete(`/api/promotion/remove/${id}`);
+};
 
 // Supplier
 export const deleteSupplier = (id) => {
-  return axios.delete(`/api/supplier/remove/${id}`)
-}
+  return axios.delete(`/api/supplier/remove/${id}`);
+};
 // Staff
 export const deleteStaff = (id) => {
-  return axios.delete(`/api/staff/delete/${id}`)
-}
+  return axios.delete(`/api/staff/delete/${id}`);
+};
 // Product
 export const FoodData = () => {
   return axios.get(`api/food`);
@@ -31,6 +30,8 @@ export const FoodByTypeData = (id) => {
   return axios.get(`api/foodtype/${id}`);
 };
 
+// order
+
 export const OrderData = () => {
   return axios.get("api/order");
 };
@@ -42,6 +43,8 @@ export const OrderProcessingData = () => {
 export const OrderCompletedData = () => {
   return axios.get("api/order/finished");
 };
+
+// insert
 
 export const InsertFood = (name, price, image, type, recipe, status) => {
   return axios.post(`api/food`, {
@@ -86,4 +89,15 @@ export const AddNewOrderData = (orders) => {
       console.log(error);
       return -1;
     });
+};
+
+// update
+export const UpdateFood = (id, name, price, type, status) => {
+  return axios.put(`api/food/${id}`, {
+    id,
+    name,
+    price,
+    type,
+    status,
+  });
 };

@@ -3,13 +3,12 @@ import React from "react";
 import { CasherHeader, AuthHeader, DefaultHeader } from "./Layout/Header";
 
 export const NavBar = () => {
-  let user = "casher";
-  switch (user) {
-    case "casher":
-      return <CasherHeader />;
-    case "admin":
-      return <AuthHeader />;
-    default:
-      return <DefaultHeader />;
+  const pathname = window.location.pathname;
+  if (pathname.includes("/admin")) {
+    return <AuthHeader />;
+  } else if (pathname.includes("/casher")) {
+    return <CasherHeader />;
+  } else {
+    return <DefaultHeader />;
   }
 };

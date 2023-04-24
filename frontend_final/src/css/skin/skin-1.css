@@ -2,10 +2,10 @@
 	Premery bg color 
 =====================*/
 
-:root{
-	--color-primary: #5fcac7;
-	--color-secondry: #44b5b2;
-	--color-hover: #44b5b2;
+:root {
+  --color-primary: #5fcac7;
+  --color-secondry: #44b5b2;
+  --color-hover: #44b5b2;
 }
 
 /* Hex */
@@ -22,7 +22,6 @@
 .overlay-primary-middle:after,
 .overlay-primary-dark:after,
 .widget-title:after,
-.btn,
 .comments-area .comment-form p input[type="submit"],
 .pagination > .active > a,
 .pagination > .active > span,
@@ -43,21 +42,21 @@
 .header-style-4.style-1 .header-nav .nav > li.active a:before,
 .header-style-4.style-1 .header-nav .nav > li:hover > a:before,
 .dlab-project-left:after,
-.service-carousel .owl-prev, 
+.service-carousel .owl-prev,
 .service-carousel .owl-next,
 .about-us .dlab-tabs .nav-tabs li.active a,
 .testimonial-text.bg-primary,
 .sidenav ul li a:hover,
 .owl-theme.dots-style-2 .owl-dots .owl-dot.active span,
-.owl-btn-1.primary .owl-prev, 
+.owl-btn-1.primary .owl-prev,
 .owl-btn-1.primary .owl-next,
-.owl-btn-2.primary .owl-prev, 
+.owl-btn-2.primary .owl-prev,
 .owl-btn-2.primary .owl-next,
-.owl-slider-banner .owl-theme .owl-dots .owl-dot.active span, 
+.owl-slider-banner .owl-theme .owl-dots .owl-dot.active span,
 .owl-slider-banner .owl-theme .owl-dots .owl-dot:hover span,
 .product-item-size .btn.active,
 .ui-widget-header,
-.owl-theme.dots-style-3 .owl-dots .owl-dot.active span, 
+.owl-theme.dots-style-3 .owl-dots .owl-dot.active span,
 .owl-theme.dots-style-3 .owl-dots .owl-dot:hover span,
 .owl-item.active.center .testimonial-text,
 .icon-bx-wraper.hover:hover,
@@ -68,14 +67,14 @@
 .widget_getintuch ul li:hover i,
 .social-list li a:hover,
 .btn.white:hover,
-.widget.widget_tag_cloud .tagcloud a, 
+.widget.widget_tag_cloud .tagcloud a,
 .dlab-post-tags .post-tags a,
-.fc-day-header.fc-widget-header, 
-.fc-button.fc-state-default:hover, 
-.fc-button.fc-state-down, 
-.fc-button.fc-state-active, 
-.fc-button.fc-state-default{
-    background-color: #5fcac7;
+.fc-day-header.fc-widget-header,
+.fc-button.fc-state-default:hover,
+.fc-button.fc-state-down,
+.fc-button.fc-state-active,
+.fc-button.fc-state-default {
+  background-color: #5fcac7;
 }
 
 /*Hex color :hover */
@@ -84,36 +83,36 @@
 .btn:focus,
 .active > .btn,
 .bg-primary-dark,
-.pagination > li > a:hover, 
-.pagination > li > span:hover, 
-.pagination > li > a:focus, 
-.pagination > li > span:focus ,
-.pagination > .active > a, 
-.pagination > .active > span, 
-.pagination > .active > a:hover, 
-.pagination > .active > span:hover, 
-.pagination > .active > a:focus, 
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus,
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
 .pagination > .active > span:focus,
 .sidenav .closebtn:hover,
 .sidenav .closebtn:focus,
-.owl-btn-1.primary .owl-prev:hover, 
+.owl-btn-1.primary .owl-prev:hover,
 .owl-btn-1.primary .owl-next:hover,
-.owl-btn-2.primary .owl-prev:hover, 
-.owl-btn-2.primary .owl-next:hover{
-    background-color: #44b5b2;
+.owl-btn-2.primary .owl-prev:hover,
+.owl-btn-2.primary .owl-next:hover {
+  background-color: #44b5b2;
 }
-.about-us .dlab-tabs .nav-tabs li.active{
-	border-right: 4px solid #44b5b2;
+.about-us .dlab-tabs .nav-tabs li.active {
+  border-right: 4px solid #44b5b2;
 }
 /* Rgba color */
 .dlab-info-has.bg-primary,
 .dlab-info-has.bg-secondry:hover,
 .tp-bannertimer.tp-bottom {
-    background-color: rgba(26, 188, 156, 0.9);
+  background-color: rgba(26, 188, 156, 0.9);
 }
 .dlab-social-icon.dlab-social-icon-lg li a:focus,
-.dlab-social-icon.dlab-social-icon-lg li a:hover{
-    background-color: #44b5b2 !important;
+.dlab-social-icon.dlab-social-icon-lg li a:hover {
+  background-color: #44b5b2 !important;
 }
 /*===================== 
 	Premery text color 
@@ -123,7 +122,16 @@ a,
 .primary li:before,
 .breadcrumb-row ul li a,
 .header-nav .nav > li.active > a,
-.header-nav .nav > li.current-menu-item > a .header-nav .nav > li .sub-menu li a:hover,
+.header-nav
+  .nav
+  > li.current-menu-item
+  > a
+  .header-nav
+  .nav
+  > li
+  .sub-menu
+  li
+  a:hover,
 .header-nav .nav > li:hover > a,
 .header-nav .nav > li .mega-menu > li ul a:hover,
 .header-nav .nav > li .sub-menu li:hover > a,
@@ -167,18 +175,18 @@ h6 a:hover,
 .dlab-post-meta i,
 .comments-area p:before,
 .about-8-service .icon-bx-wraper:hover a,
-.header-nav .nav > li > a.nav-link.active{
-    color: #5fcac7;
+.header-nav .nav > li > a.nav-link.active {
+  color: #5fcac7;
 }
-.text-primary{
-	color: #5fcac7!important;
+.text-primary {
+  color: #5fcac7 !important;
 }
 @media only screen and (max-width: 991px) {
-	.nav-dark.header-nav .nav > li > a:hover, 
-	.nav-dark.header-nav .nav > li > a:active, 
-	.nav-dark.header-nav .nav > li > a:focus{
-		color: #44b5b2;
-	}
+  .nav-dark.header-nav .nav > li > a:hover,
+  .nav-dark.header-nav .nav > li > a:active,
+  .nav-dark.header-nav .nav > li > a:focus {
+    color: #44b5b2;
+  }
 }
 /*===================== 
 	Premery border color 
@@ -189,84 +197,73 @@ h6 a:hover,
 .testimonial-4 [class*="quote-"],
 button.scroltop,
 .widget_gallery li:hover,
-.owl-slider-banner .owl-theme .owl-dots .owl-dot.active, 
+.owl-slider-banner .owl-theme .owl-dots .owl-dot.active,
 .owl-slider-banner .owl-theme .owl-dots .owl-dot:hover,
 .ui-state-default,
 .ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default,
 input[type="checkbox"]:checked + label:before,
-input[type="checkbox"] + label:hover:before, 
+input[type="checkbox"] + label:hover:before,
 input[type="radio"] + label:hover:before,
-.owl-theme.dots-style-3 .owl-dots .owl-dot.active, 
+.owl-theme.dots-style-3 .owl-dots .owl-dot.active,
 .owl-theme.dots-style-3 .owl-dots .owl-dot:hover,
-.side-bar .widget_tag_cloud a:hover{
-    border-color: #44b5b2;
+.side-bar .widget_tag_cloud a:hover {
+  border-color: #44b5b2;
 }
-.owl-item.active.center .testimonial-8 .testimonial-text:after{
-	border-top:25px solid #44b5b2;
+.owl-item.active.center .testimonial-8 .testimonial-text:after {
+  border-top: 25px solid #44b5b2;
 }
-.dlab-tabs.border-top .nav-tabs > li.active > a{
-	border-top-color: #44b5b2;
+.dlab-tabs.border-top .nav-tabs > li.active > a {
+  border-top-color: #44b5b2;
 }
 /*===================== 
 	Secondery bg color
  =====================*/
 .bg-secondry {
-    background-color: #141719;
+  background-color: #141719;
 }
 
 /*===================== 
 	Secondery text color
  =====================*/
 .text-secondry {
-    color: #141719;
+  color: #141719;
 }
 
 /* white css */
-.site-header.header-black .header-nav .nav > li > a{
-	color: #000!important;
+.site-header.header-black .header-nav .nav > li > a {
+  color: #000 !important;
 }
 .footer-copyright p,
 .site-footer .widget.widget_about .footer-title,
-.split-content .description, 
+.split-content .description,
 .services-box .description,
 .split-content .text-white,
 .split-content .title,
 .page-banner .video-box .content-box .social-list ul li a,
 .page-banner .video-box .content-box p,
 .page-banner .video-box .content-box .title,
-.site-header.header-black .video-wraper .video-play a span{
-	color: #000 !important;
+.site-header.header-black .video-wraper .video-play a span {
+  color: #000 !important;
 }
 .social-section .title a,
-.site-footer .widget.widget_about .footer-title a, 
-.site-footer .social-link li a span{
-	background-image: linear-gradient(90deg,#ff0000,#ff0000 50%,#000 0);
+.site-footer .widget.widget_about .footer-title a,
+.site-footer .social-link li a span {
+  background-image: linear-gradient(90deg, #ff0000, #ff0000 50%, #000 0);
 }
-.site-footer .footer-bottom-in{
-	border-top: 1px solid rgba(0,0,0,0.1);
+.site-footer .footer-bottom-in {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
-.my-bg-primary{
-	background-color: #5fcac7 !important;
+.my-bg-primary {
+  background-color: #5fcac7 !important;
 }
 
 /* Text Selection */
 ::selection {
-	background: #5fcac7;
-	color: #fff;
+  background: #5fcac7;
+  color: #fff;
 }
 ::-moz-selection {
-	background: #5fcac7;
-	color: #fff;
+  background: #5fcac7;
+  color: #fff;
 }
-
-
-
-
-
-
-
-
-
-
-
