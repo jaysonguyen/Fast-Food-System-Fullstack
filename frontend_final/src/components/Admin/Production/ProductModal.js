@@ -22,8 +22,7 @@ const ProductModal = (props) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleCreateFood = async (e) => {
-    e.preventDefault();
+  const handleCreateFood = async () => {
     const data = await AddFood(name, price, image, type, recipe);
     if (data && +data.EC === 1) {
       toast.success(data.EM);
