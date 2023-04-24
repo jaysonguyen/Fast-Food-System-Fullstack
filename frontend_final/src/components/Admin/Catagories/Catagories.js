@@ -86,55 +86,7 @@ const Catagories = (props) => {
                   <div class="col-lg-2">Image</div>
                   <div class="col-lg-2">Action</div>
                 </div>
-<<<<<<< HEAD
-                <div class="text-white">
-                  <div class="bg-white">
-                    <table class="table align-middle mb-0">
-                      <thead class="">
-                        <tr>
-                          <th>Category Name</th>
-                          <th>Description</th>
-                          <th>Image</th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {catagory.map((catagory, key) => {
-                          return (
-                            <tr key={key}>
-                              <td>
-                                <div class="d-flex align-items-center">
-                                  <div class="">
-                                    <p class="fw-bold mb-1">{catagory.Name}</p>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>{catagory.Descript}</td>
-                              <td>
-                                {" "}
-<<<<<<< HEAD
-                                {catagory.Image} 
-=======
-                                <img src={catagory.Image} />
->>>>>>> 262bd937cf43478e875e8061f80ada47a3895234
-                              </td>
-                              <td>
-                                <div className="d-flex flex-row gap-1">
-                                  <a href="./edit.html" className="nav-link">
-                                    <AiOutlineEdit className="edit-icon" />
-                                  </a>
-                                  <span className="nav-link">
-                                    <AiOutlineDelete className="del-icon" />
-                                  </span>
-                                </div>
-                              </td>
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
-                  </div>
-=======
+                
                 <div class="table-body">
                   {catagory.map((catagory, key) => {
                     return (
@@ -163,7 +115,6 @@ const Catagories = (props) => {
                       </div>
                     );
                   })}
->>>>>>> 2aa3115fc243f3dc9df0eb40875abd6c5e3ae869
                 </div>
               </div>
             </div>
@@ -171,6 +122,7 @@ const Catagories = (props) => {
         </div>
       </div>
     </div>
+   
   );
 };
 

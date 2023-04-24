@@ -6,7 +6,6 @@ console.log("orderServices is running..");
 const getAllBillByDay = async (date) => {
   try {
     const poolConnection = await sql.connect(config);
-    console.log("Reading rows from Bill Table..");
     let data = await poolConnection.request().query(`
             exec getBillByDay ${date}
         `);
@@ -37,7 +36,6 @@ const getAllBillByDay = async (date) => {
 const getBillById = async (id) => {
   try {
     const poolConnection = await sql.connect(config);
-    console.log("Reading rows from Bill Table..");
     let data = await poolConnection.request().query(`
             exec getBillById ${id}
         `);
@@ -94,7 +92,6 @@ const getBillIDByDate = async (date) => {
 const getAllBill = async () => {
   try {
     const poolConnection = await sql.connect(config);
-    console.log("Reading rows from Bill Table..");
     let data = await poolConnection.request().query(`
               exec getAllBill
           `);
@@ -125,7 +122,6 @@ const getAllBill = async () => {
 const getBillDetails = async (billid) => {
   try {
     const poolConnection = await sql.connect(config);
-    console.log("Reading rows from Bill details Table..");
     let data = await poolConnection.request().query(`
             exec getBillDetails ${billid}
         `);

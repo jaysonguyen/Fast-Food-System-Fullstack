@@ -57,15 +57,6 @@ const createFood = async (req, res) => {
 
 const updateF = async (req, res) => {
   try {
-<<<<<<< HEAD
-    const data = await updateFood(
-      req.body.id,
-      req.body.Name,
-      req.body.Price,
-      req.body.Type,
-      req.body.Status
-    );
-=======
     // const { id, nameFood } = req.query;
     // console.log(req.params.id, req.body.nameFood);
     let data = [];
@@ -83,7 +74,6 @@ const updateF = async (req, res) => {
       );
     }
 
->>>>>>> 2aa3115fc243f3dc9df0eb40875abd6c5e3ae869
     if (data.EM.includes("Success")) {
       return res.status(201).json({
         EM: "Update success",

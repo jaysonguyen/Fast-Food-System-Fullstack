@@ -6,7 +6,6 @@ console.log("Starting...");
 const getAllFood = async () => {
   try {
     const poolConnection = await sql.connect(config);
-    console.log("Reading rows from the Table...");
     let data = await poolConnection.request().query("Select * from Food");
     poolConnection.close();
     if (data) {

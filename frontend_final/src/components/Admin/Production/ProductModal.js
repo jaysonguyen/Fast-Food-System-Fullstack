@@ -1,19 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
+import { Modal, Button } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
+import { toast } from "react-toastify";
+import { getFoodById, updateFood } from "../../../api/callApi";
+import { AddFood } from "../../../services/foodServices";
 import "../css/main.css";
 import "../css/root.css";
-import { Modal, Button } from "react-bootstrap";
 import "./Production.css";
-import Form from "react-bootstrap/Form";
-import { AddFood } from "../../../services/foodServices";
-import { toast } from "react-toastify";
-import { getFoodById } from "../../../api/callApi";
-import { updateFood } from "../../../api/callApi";
 
 const ProductModal = (props) => {
   const [show, setShow] = useState(props.show);
-
-  //name, price, image, type, recipe, status
-
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
@@ -25,10 +21,13 @@ const ProductModal = (props) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+
   console.log(props.action);
 
   //use for update
   const initialFoodInfo = async () => {};
+
+
 
 
   const handleCreateFood = async (e) => {
@@ -45,23 +44,23 @@ const ProductModal = (props) => {
     }
   };
 
-  const handleGetProductByID = async (id) => {
+  const handleGetProductByID = useCallback(async (id) => {
     try {
       const data = await getFoodById(id);
       if (data && +data.EC == 1) {
-        console.log(data);
-        setName(data.DT[0].Name);
-        setPrice(data.DT[0].Price);
-        setImage(data.DT[0].Image);
-        setType(data.DT[0].Type);
-        setRecipe(data.DT[0].Recipe);
+        const [food] = data.DT;
+        setName(food.Name);
+        setPrice(food.Price);
+        setImage(food.Image);
+        setType(food.Type);
+        setRecipe(food.Recipe);
         setDataFood({
           ID: id,
-          Name: name,
-          Price: price,
-          Image: image,
-          Type: type,
-          Recipe: recipe,
+          Name: food.Name,
+          Price: food.Price,
+          Image: food.Image,
+          Type: food.Type,
+          Recipe: food.Recipe,
         });
       }
       if (data && +data.EC != 1) {
@@ -70,10 +69,9 @@ const ProductModal = (props) => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, []);
 
   const handleUpdatePro = async () => {
-    console.log("Log ne log ne")
     setDataFood({
       ...dataFood,
       Name: name,
@@ -83,21 +81,15 @@ const ProductModal = (props) => {
       Recipe: recipe,
     });
 
-    console.log(dataFood);
-
-    // let data = await updateFood(dataFood);
-    // if(data && +data.EC == 1) {
-    //   console.log(setDataFood)
-    // }
-    // if(data && +data.EC != 1) {
-    //   console.log("Khong on dai vuong oi")
-    // }
+    let data = await updateFood(dataFood);
+    if (data && +data.EC == 1) {
+      console.log(setDataFood);
+    }
   };
 
   useEffect(() => {
     handleGetProductByID(props.idFood);
-    console.log(dataFood);
-  }, [name, price, image, type, recipe, status]);
+  }, []);
 
   return (
     <>
@@ -171,12 +163,26 @@ const ProductModal = (props) => {
                 <div className="form-outline mb-4">
                   <input
                     type="text"
-                    id="form6Example3"
+                    id="form6Example4"
+                    className="form-control"
+                    value={note}
+                    onChange={(e) => setNote(e.target.value)}
+                  />
+                  <label className="form-label" for="form6Example4">
+                    Note
+                  </label>
+                </div>
+              </div>
+              <div className="col-4">
+                <div className="form-outline mb-4">
+                  <input
+                    type="number"
+                    id="form6Example5"
                     className="form-control"
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
                   />
-                  <label className="form-label" for="form6Example3">
+                  <label className="form-label" for="form6Example5">
                     Price
                   </label>
                 </div>
@@ -234,8 +240,6 @@ const ProductModal = (props) => {
             <div className="form-check d-flex mb-4">
               <input
                 className="form-check-input me-2"
-                type="checkbox"
-                value=""
                 id="form6Example8"
                 checked
               />

@@ -80,32 +80,6 @@ const Supplier = (props) => {
                         <p class="fw-normal mb-1">{supplier.Contact}</p>
                       </div>
 
-<<<<<<< HEAD
-                              <td>{supplier.Note}</td>
-                              <td>
-                                <div className="d-flex flex-row gap-1">
-                                  <a href="./edit.html" className="nav-link">
-                                    <AiOutlineEdit className="edit-icon" />
-                                  </a>
-                                  <span className="nav-link">
-                                    <AiOutlineDelete
-                                      className="del-icon"
-                                      id={supplier.ID}
-                                      onClick={async (e) =>
-                                        handelDeleteSupplier(e.target.id)
-                                      }
-                                    />
-                                  </span>
-                                </div>
-                              </td>
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-=======
                       <div class="col-lg-3">{supplier.Note}</div>
                       <div class="col-lg-2">
                         <div className="d-flex flex-row gap-1">
@@ -126,7 +100,6 @@ const Supplier = (props) => {
                     </div>
                   );
                 })}
->>>>>>> 2aa3115fc243f3dc9df0eb40875abd6c5e3ae869
               </div>
             </div>
           </div>
