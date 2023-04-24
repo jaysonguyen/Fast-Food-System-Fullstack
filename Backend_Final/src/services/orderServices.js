@@ -96,6 +96,20 @@ const getAllBill = async () => {
               exec getAllBill
           `);
     poolConnection.close();
+    const newData = data.recordset.map(async (item, idx) => {
+      // det bill details
+      let details = [];
+      try {
+        details = await getBillDetails(item.ID);
+        // console.log(data.recordset[idx]);
+      } catch (error) {
+        console.log(error.message);
+      }
+      data.recordset[idx].Details = await details;
+    });
+
+    const result = await Promise.all(newData);
+
     if (data) {
       return {
         EM: "Get all bill success",
@@ -148,6 +162,19 @@ const getBillUnfinished = async () => {
       exec getBillByStatus 0
     `);
     poolConnection.close();
+    const newData = data.recordset.map(async (item, idx) => {
+      // det bill details
+      let details = [];
+      try {
+        details = await getBillDetails(item.ID);
+        // console.log(data.recordset[idx]);
+      } catch (error) {
+        console.log(error.message);
+      }
+      data.recordset[idx].Details = await details;
+    });
+
+    const result = await Promise.all(newData);
 
     return {
       EM: "Get bill unfinished successfully",
@@ -170,6 +197,19 @@ const getBillFinished = async () => {
       exec getBillByStatus 1
     `);
     poolConnection.close();
+    const newData = data.recordset.map(async (item, idx) => {
+      // det bill details
+      let details = [];
+      try {
+        details = await getBillDetails(item.ID);
+        // console.log(data.recordset[idx]);
+      } catch (error) {
+        console.log(error.message);
+      }
+      data.recordset[idx].Details = await details;
+    });
+
+    const result = await Promise.all(newData);
 
     return {
       EM: "Get bill finished successfully",

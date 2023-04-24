@@ -30,6 +30,10 @@ import Catagories from "./components/Admin/Catagories/Catagories";
 import Supplier from "./components/Admin/Supplier/Supplier";
 import Staff from "./components/Admin/Store/Staff/Staff";
 
+// kitchen
+import { KitchenLayout } from "./components/Layout/KitchenLayout";
+import { Orders } from "./components/Kitchen/Orders";
+
 import "jquery/dist/jquery.min.js";
 import "popper.js/dist/popper.min.js";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -64,6 +68,7 @@ function App() {
               element={<OrderCompleted />}
             />
           </Route>
+          {/* admin */}
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="/admin/dashboard" element={<Production />}></Route>
             {/* production */}
@@ -82,6 +87,10 @@ function App() {
             ></Route>
             {/* store */}
             <Route path="/admin/store/staff" element={<Staff />}></Route>
+          </Route>
+          {/* kitchen */}
+          <Route path="/kitchen" element={<KitchenLayout />}>
+            <Route path="/kitchen/orders" element={<Orders />}></Route>
           </Route>
         </Routes>
       </Router>

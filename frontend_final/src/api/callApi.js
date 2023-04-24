@@ -10,11 +10,9 @@ export const deleteSupplier = (id) => {
   return axios.delete(`/api/supplier/remove/${id}`);
 };
 
-
 export const InsertSupplier = (name, contact, note) => {
   return axios.post(`/api/supplier/create`, { name, contact, note });
 };
-
 
 // Staff
 export const deleteStaff = (id) => {
@@ -49,6 +47,10 @@ export const OrderProcessingData = () => {
 
 export const OrderCompletedData = () => {
   return axios.get("api/order/finished");
+};
+
+export const getOrderById = (id) => {
+  return axios.get(`api/order/${id}`);
 };
 
 // insert
@@ -98,7 +100,6 @@ export const AddNewOrderData = (orders) => {
     });
 };
 
-
 export const getFoodById = (id) => {
   return axios.get(`/api/food/getId/${id}`);
 };
@@ -110,7 +111,8 @@ export const updateFood = (id, Name, Price, Type, Status) => {
     Price,
     Type,
     Status,
-  });};
+  });
+};
 // update
 export const UpdateFood = (id, name, price, type, status) => {
   return axios.put(`api/food/${id}`, {
@@ -119,6 +121,5 @@ export const UpdateFood = (id, name, price, type, status) => {
     price,
     type,
     status,
-
   });
 };

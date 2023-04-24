@@ -26,3 +26,20 @@ export function CasherSideBar() {
     </ul>
   );
 }
+
+export function KitchenSideBar() {
+  return (
+    <ul className="nav-list">
+      <li className="nav-item">
+        <Link to="/kitchen/orders" className="nav-link">
+          <b>Orders</b>
+        </Link>
+      </li>
+      <li className="nav-item">
+        <a href="#" className="nav-link">
+          <b>Notify</b>
+        </a>
+      </li>
+    </ul>
+  );
+}

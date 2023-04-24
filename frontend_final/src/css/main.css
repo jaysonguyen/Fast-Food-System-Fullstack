@@ -167,7 +167,8 @@ li {
 /* header */
 
 #auth-header .nav-link.active,
-#casher-header .nav-link.active {
+#casher-header .nav-link.active,
+#kitchen-header .nav-link.active {
   border-radius: 10%;
   background-color: #fff;
   color: #333 !important;
@@ -639,24 +640,27 @@ td .nav-link:hover {
 }
 
 /* table list */
-.table-wrapper .row {
-  padding: 7px 7px;
-  margin: 7px 0;
+.order-card {
+  width: 25vw;
+  background-color: #fff;
+  padding: 10px 20px;
   border-radius: 10px;
 }
 
-.table-wrapper .row.row-header {
-  font-weight: 600;
-  background-color: var(--clr-btn);
-  color: #fff;
+.order-table {
+  padding-left: 20px;
 }
 
-.item-list {
-  border: 1px solid #e6e6e6;
-  background-color: #fff1f1;
-  align-items: center;
+.order-code {
+  background-color: var(--clr-card);
+  border-radius: 10px;
 }
 
-.item-list > div {
-  word-wrap: break-word;
+.order-table .row {
+  border-radius: 10px;
+  margin-top: 3px;
+}
+
+.order-table-title {
+  background-color: var(--clr-bg-body);
 }
