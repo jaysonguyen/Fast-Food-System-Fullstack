@@ -84,7 +84,7 @@ const Production = (props) => {
       }
       if (dataFood) {
         setAction("UPDATE");
-        handleShowModal();
+        setShowModal(true);
       }
     },
     [productList]

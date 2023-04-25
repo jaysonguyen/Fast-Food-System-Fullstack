@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "../css/main.css";
 import "../css/root.css";
-import { getAllPromotion, removePromotion, InsertPromotion } from "../../../services/promotion";
+import {
+  getAllPromotion,
+  removePromotion,
+  InsertPromotion,
+} from "../../../services/promotion";
 import "./Promotion.css";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { toast } from "react-toastify";
 
 const Promotion = (props) => {
-
   const [promotion, setPromotion] = useState([]);
   const [name, setName] = useState("");
   const [cost, setCost] = useState("");
@@ -20,19 +23,20 @@ const Promotion = (props) => {
       let dataPromotion = await getAllPromotion();
       console.log("data promotion ", dataPromotion.DT);
       setPromotion(dataPromotion.DT);
+      if (dataPromotion) {
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
-
   const handleDeletePromotion = async (id) => {
-    let data = removePromotion(id) ;
-    if(data && +data.EC === 1){
-     toast.success(data.EM)
-    } 
-    if(data && +data.EC != 1) {
-      toast.error(data.EM)
+    let data = removePromotion(id);
+    if (data && +data.EC === 1) {
+      toast.success(data.EM);
+    }
+    if (data && +data.EC != 1) {
+      toast.error(data.EM);
     }
     console.log(id);
   };
@@ -43,20 +47,32 @@ const Promotion = (props) => {
       let data = await InsertPromotion(name, cost, status, dateStart, dateExp);
       console.log(name, cost, status, dateStart, dateExp);
       if (data && +data.EC == 1) {
-        toast.success(data.EM)
+        toast.success(data.EM);
       }
       if (data && +data.EC != 1) {
-        toast.error(data.EM)
+        toast.error(data.EM);
       }
     } catch (error) {
       console.log(error);
     }
+  };
 
+  const updateStatusPromotion = () => {
+    const today = new Date();
+    const promotions = [...promotion]; // make a copy of the original array
+    promotions.forEach(async (promo) => {
+      const expDate = new Date(promo.dateExp);
+      if (expDate < today) {
+        console.log(`${promo.dateExp} is expired`);
+      } else {
+        console.log(`${promo.dateExp} is still valid`);
+      }
+    });
   };
 
   useEffect(() => {
     fetchPromotion();
-  }, [promotion]);
+  }, []);
 
   return (
     <div id="body">
@@ -176,7 +192,6 @@ const Promotion = (props) => {
                                     <p className="fw-bold mb-1">
                                       {promotion.Name}
                                     </p>
-                                   
                                   </div>
                                 </div>
                               </td>
@@ -211,8 +226,13 @@ const Promotion = (props) => {
                                     <AiOutlineEdit className="edit-icon" />
                                   </a>
                                   <span className="nav-link">
-                                    <AiOutlineDelete className="del-icon" id={promotion.ID} 
-                                    onClick={async(e) => await handleDeletePromotion(e.target.id)}/>
+                                    <AiOutlineDelete
+                                      className="del-icon"
+                                      id={promotion.ID}
+                                      onClick={async (e) =>
+                                        await handleDeletePromotion(e.target.id)
+                                      }
+                                    />
                                   </span>
                                 </div>
                               </td>

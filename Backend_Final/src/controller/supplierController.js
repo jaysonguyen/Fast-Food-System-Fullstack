@@ -9,7 +9,7 @@ const getSupplier = async (req, res) => {
   try {
     const data = await readSupplier();
     console.log(data);
-    if (data && data.EC != -1) {
+    if (data && data.EC === 1) {
       return res.status(200).json({
         EM: data.EM,
         EC: data.EC,
@@ -86,20 +86,17 @@ const removeSupplier = async (req, res) => {
 
 const editSupplier = async (req, res) => {
   try {
-    let { contact, note } = req.body;
-    let id = req.params.id;
-    let data = updateSupplier(id, contact, note);
-    if (data && data.EC != -1) {
+    const id = req.params.id;
+    const data = await updateSupplier(id, req.body);
+    if (data && +data.EC != 1) {
       return res.status(200).json({
         EM: data.EM,
         EC: data.EC,
-        DT: data.DT,
       });
     } else {
       return res.status(200).json({
-        EM: "Get data success",
-        EC: 0,
-        DT: [],
+        EM: data.EM,
+        EC: data.EC,
       });
     }
   } catch (error) {

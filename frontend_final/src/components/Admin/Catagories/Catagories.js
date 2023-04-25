@@ -1,23 +1,57 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { getAllProductType } from "../../../services/productType";
-import { InsertFoodTyppe } from "../../../api/callApi";
+import {
+  InsertFoodTyppe,
+  updateFood,
+  updateFoodType,
+} from "../../../api/callApi";
 import { toast } from "react-toastify";
 
 const Catagories = (props) => {
   const [catagory, setCatagory] = useState([]);
+  const [action, setaction] = useState("CREATE");
   const [name, setName] = useState("");
+  const [selectedtypeID, setSelectedtypeID] = useState(null);
+  const [dataType, setDatatype] = useState();
 
   const fetchCatagory = async () => {
     let dataCatagory = await getAllProductType();
     setCatagory(dataCatagory.DT);
   };
 
+  const handleAction = useCallback(
+    (typeID) => {
+      setSelectedtypeID(typeID);
+      const selectedType = catagory.find((catagory) => catagory.ID == typeID);
+      if (selectedType) {
+        setaction("UPDATE");
+        setDatatype(selectedType.ID);
+      }
+    },
+    [catagory]
+  );
+
+  const handleUpdateFood = async (e) => {
+    e.preventDefault();
+    //const data = await updateFood(selectedtypeID.ID, name);
+    if (dataType) {
+      console.log(dataType, name);
+      let data = await updateFoodType(dataType, name);
+      if (data && +data.EC === 1) {
+        toast.success(data.EM);
+        setName("");
+        setaction("CREATE");
+      }
+      if (data && +data.EC != 1) {
+        toast.error(data.EM);
+      }
+    }
+  };
+
   useEffect(() => {
     fetchCatagory();
   }, [catagory]);
-
- 
 
   const handleAddTypeFood = async (e) => {
     e.preventDefault();
@@ -36,54 +70,60 @@ const Catagories = (props) => {
 
   return (
     <div id="body">
-      <div class="container">
-        <div class="container-fluid main-body">
-          <div class="d-flex flex-col">
-            <div class="col ms-4">
-              <div class="add-inline-form main-content rounded-3 border border-2 py-4 px-3 mb-3">
-                <div class="table-header row">
-                  <div class="col-3">
-                    <h3 class="title">Add Category</h3>
+      <div className="container">
+        <div className="container-fluid main-body">
+          <div className="d-flex flex-col">
+            <div className="col ms-4">
+              <div className="add-inline-form main-content rounded-3 border border-2 py-4 px-3 mb-3">
+                <div className="table-header row">
+                  <div className="col-3">
+                    <h3 className="title">
+                      {action == "CREATE" ? "Add Category" : "Update category"}
+                    </h3>
                   </div>
                 </div>
-                <form class="create-form">
-                  <div class="row">
-                    <div class="col-10">
-                      <div class="form-outline mb-4">
+                <form className="create-form">
+                  <div className="row">
+                    <div className="col-10">
+                      <div className="form-outline mb-4">
                         <input
                           type="text"
                           id="form6Example3"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
-                          class="form-control"
+                          className="form-control"
                         />
-                        <label class="form-label" for="form6Example3">
+                        <label className="form-label" htmlFor="form6Example3">
                           Category name
                         </label>
                       </div>
                     </div>
                   </div>
-                  <div class="col-2 mt-4">
+                  <div className="col-2 mt-4">
                     <button
                       type="submit"
-                      onClick={(e) => handleAddTypeFood(e)}
-                      class="btn btn-clr-normal btn-block mb-4 w-50"
+                      onClick={
+                        action == "CREATE"
+                          ? (e) => handleAddTypeFood(e)
+                          : (e) => handleUpdateFood(e)
+                      }
+                      className="btn btn-clr-normal btn-block mb-4 w-50"
                     >
                       Save
                     </button>
                   </div>
                 </form>
               </div>
-              <div class="main-content rounded-3 border border-2 py-4 px-3">
-                <div class="table-header row">
-                  <div class="col-3">
-                    <h3 class="title">Categories</h3>
+              <div className="main-content rounded-3 border border-2 py-4 px-3">
+                <div className="table-header row">
+                  <div className="col-3">
+                    <h3 className="title">Categories</h3>
                   </div>
                 </div>
-                <div class="text-white">
-                  <div class="bg-white">
-                    <table class="table align-middle mb-0">
-                      <thead class="">
+                <div className="text-white">
+                  <div className="bg-white">
+                    <table className="table align-middle mb-0">
+                      <thead className="">
                         <tr>
                           <th>Category Name</th>
                           <th>Description</th>
@@ -96,9 +136,11 @@ const Catagories = (props) => {
                           return (
                             <tr key={key}>
                               <td>
-                                <div class="d-flex align-items-center">
-                                  <div class="">
-                                    <p class="fw-bold mb-1">{catagory.Name}</p>
+                                <div className="d-flex align-items-center">
+                                  <div className="">
+                                    <p className="fw-bold mb-1">
+                                      {catagory.Name}
+                                    </p>
                                   </div>
                                 </div>
                               </td>
@@ -109,8 +151,12 @@ const Catagories = (props) => {
                               </td>
                               <td>
                                 <div className="d-flex flex-row gap-1">
-                                  <a href="./edit.html" className="nav-link">
-                                    <AiOutlineEdit className="edit-icon" />
+                                  <a className="nav-link">
+                                    <AiOutlineEdit
+                                      id={catagory.ID}
+                                      className="edit-icon"
+                                      onClick={(e) => handleAction(e.target.id)}
+                                    />
                                   </a>
                                   <span className="nav-link">
                                     <AiOutlineDelete className="del-icon" />

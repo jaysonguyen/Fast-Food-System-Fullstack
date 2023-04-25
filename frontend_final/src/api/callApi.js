@@ -97,6 +97,26 @@ export const getFoodById = (id) => {
 
 export const updateFood = (id, rawData) => {
   return axios.put(`/api/food/update/${id}`, {
-   ...rawData
+    ...rawData,
+  });
+};
+
+export const updateFoodType = (id, name) => {
+  return axios.put(`/api/foodtype/update`, {
+    id,
+    name,
+  });
+};
+
+export const updateVendors = (id, rawData) => {
+  return axios.put(`/api/supplier/edit/${id}`, {
+    ...rawData,
+  });
+};
+
+export const updatePromo = (id, status) => {
+  return axios.put(`/api/promotion/edit`, {
+    id,
+    status,
   });
 };

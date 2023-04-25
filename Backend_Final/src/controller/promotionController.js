@@ -85,9 +85,8 @@ const removePromotion = async (req, res) => {
 
 const editPromotion = async (req, res) => {
   try {
-    let id = req.params.id;
-    let { name, price, status } = req.body;
-    let data = updatePromotion(id, name, price, status);
+    let { id, status } = req.body;
+    let data = updatePromotion(id, status);
     if (data && data.EC != -1) {
       return res.status(200).json({
         EM: data.EM,
