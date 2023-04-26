@@ -19,7 +19,7 @@ body {
     rgba(210, 72, 80, 0.6369398101037289) 15%,
     rgba(223, 73, 73, 0.7377801462381828) 51%
   ); */
-  background-color: var(--clr-bg-body);
+  /* background-color: var(--clr-bg-body); */
   /* overflow: hidden; */
 }
 
@@ -167,7 +167,8 @@ li {
 /* header */
 
 #auth-header .nav-link.active,
-#casher-header .nav-link.active {
+#casher-header .nav-link.active,
+#kitchen-header .nav-link.active {
   border-radius: 10%;
   background-color: #fff;
   color: #333 !important;
@@ -511,6 +512,10 @@ td .nav-link:hover {
   overflow: hidden;
 }
 
+.slick-slide {
+  margin: 0 10px;
+}
+
 .menu-title {
   font-size: 22px;
   color: var(--clr-font-primary);
@@ -639,24 +644,245 @@ td .nav-link:hover {
 }
 
 /* table list */
-.table-wrapper .row {
-  padding: 7px 7px;
-  margin: 7px 0;
+
+.order-container .slick-slider {
+  height: auto !important;
+}
+
+.order-card {
+  width: 250px;
+  height: 200px;
+  overflow: hidden;
+  background-color: #fff;
+  padding: 10px 20px;
   border-radius: 10px;
 }
 
-.table-wrapper .row.row-header {
-  font-weight: 600;
-  background-color: var(--clr-btn);
+.order-table {
+  padding-left: 20px;
+}
+
+.order-code {
+  background-color: var(--clr-card);
+  border-radius: 10px;
+}
+
+.order-table .row {
+  border-radius: 10px;
+  margin-top: 3px;
+}
+
+.order-table-title {
+  background-color: var(--clr-bg-body);
+}
+
+/* new sidebar */
+#wapper {
+  max-width: 100vw;
+  overflow: hidden;
+}
+
+#mySidebar {
+  box-shadow: 1px 1px 2px #d3d3d3;
+}
+/* logo */
+#mySidebar .logo {
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 25px;
+}
+
+#mySidebar .logo .logo-img {
+  width: 40%;
+}
+
+#mySidebar .logo .logo-img img,
+#mySidebar .account-card .account-img img,
+#myMain .food-list .food-img img {
+  width: 100%;
+}
+/* nav-list */
+#mySidebar .nav {
+  display: flex;
+  flex-direction: column;
+}
+
+#mySidebar .nav .nav-item {
+  margin: 0px 10px;
+}
+
+#mySidebar .nav .nav-item .nav-link {
+  padding: 15px 15px;
+  border-radius: 15px;
+  color: #333;
+}
+
+#mySidebar .nav .nav-item .nav-link.active {
+  background-color: #ffca40;
   color: #fff;
 }
 
-.item-list {
-  border: 1px solid #e6e6e6;
-  background-color: #fff1f1;
-  align-items: center;
+#mySidebar .subtitle {
+  color: #747474;
+  font-size: 11px;
 }
 
-.item-list > div {
-  word-wrap: break-word;
+/* account */
+#mySidebar .account-card {
+  margin: 0 30px;
+  padding: 20px 0;
+  width: 80%;
+  height: 170px;
+  box-shadow: 2px 2px 5px #b1b1b1;
+}
+
+#mySidebar .account-card .account-img {
+  width: 50px;
+  height: 50px;
+  margin: 0px auto;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+/* #mySidebar .account-card .account-img img {
+  width: 100%;
+} */
+/* new main */
+#myMain {
+  padding: 40px 50px;
+}
+/* breadcumb */
+#myMain .main-header .breadcumb .rev {
+}
+
+#myMain .sub-header {
+  padding: 20px 10px;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+#myMain .main-body {
+  margin: 0;
+  padding: 0;
+}
+
+/* foodlist */
+#myMain .main-body .food-list {
+  max-height: 75vh;
+  overflow-y: scroll;
+}
+
+#myMain .food-list .food-card {
+  box-shadow: 2px 3px 5px #a3a3a3;
+  border-radius: 20px;
+  text-align: center;
+  padding: 20px 10px;
+  margin: 10px auto;
+  width: 30%;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+#myMain .food-list .food-card:hover {
+  background-color: #ffca40;
+  color: #fff;
+}
+
+#myMain .food-list .food-card:hover .food-price {
+  color: #fff;
+}
+
+#myMain .food-list .food-card .food-price {
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffca40;
+}
+
+#myMain .food-list .food-img {
+  width: 130px;
+  margin: 10px auto;
+}
+
+/* order */
+#myMain #orderArea {
+  padding: 0 10px;
+}
+
+#myMain #orderArea .order-area {
+  padding: 0 10px;
+}
+
+#myMain #orderArea .order-header {
+  background-color: #ffca40;
+  margin: 0;
+  padding: 10px 0;
+  border-radius: 10px;
+  color: #fff;
+}
+
+#myMain #orderArea .order-details {
+  height: 60vh;
+  overflow-y: scroll;
+}
+
+#myMain #orderArea .order-details .row {
+  border: 1px solid #a3a3a3;
+  border-radius: 10px;
+  padding: 10px 0;
+  margin: 5px 0;
+}
+
+#myMain #orderArea .checkout {
+  padding: 10px 0;
+}
+
+/* order page */
+#myMain .bill-list .session-bill {
+  overflow-y: scroll;
+  height: 90vh;
+}
+
+#myMain .bill-list .bill-item {
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px #a3a3a3;
+  padding: 10px 20px;
+  margin: 10px 25px;
+  height: 100px;
+}
+
+#myMain .bill-list .bill-item .order-id {
+  font-weight: 800;
+  font-size: 22px;
+  color: #656565;
+}
+
+#myMain .bill-list .bill-item .order-price {
+  font-weight: 800;
+  color: #ffca40;
+}
+
+#myMain .details-list {
+  margin-right: 30px;
+}
+
+#myMain .details-list .info {
+  height: 57vh;
+}
+
+#myMain .details-list .info .details-header {
+  padding: 10px 20px;
+  border-radius: 10px;
+  background-color: #ffdcdc;
+}
+
+#myMain .details-list .details-item {
+  padding: 10px 20px;
+}
+
+#myMain .details-header .btn {
+  width: 220px;
+  padding: 10px;
+  margin-left: 45%;
 }

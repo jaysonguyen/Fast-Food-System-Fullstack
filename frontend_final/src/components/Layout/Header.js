@@ -74,6 +74,67 @@ export const CasherHeader = () => {
   );
 };
 
+export const KitchenHeader = () => {
+  return (
+    <div id="kitchen-header" className="bg-gr-bg">
+      <div className="container-fluid bg-gr-primary py-1 px-xxl-5 ">
+        <div className="container d-flex flex-row justify-between text-white">
+          <div className="main-nav">
+            <div className="container">
+              <nav className="navbar navbar-expand-lg navbar-dark">
+                <div className="container-fluid">
+                  <a className="navbar-brand" href="#">
+                    Kitchen
+                  </a>
+                  <button
+                    className="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                  >
+                    <span className="navbar-toggler-icon"></span>
+                  </button>
+                  <div
+                    className="collapse navbar-collapse"
+                    id="navbarSupportedContent"
+                  >
+                    <ul className="navbar-nav nav-list me-auto mb-2 mb-lg-0">
+                      {/* <!-- Order  --> */}
+                      <li className="nav-item">
+                        <Link to={"/casher/orders"} className="nav-link">
+                          Orders
+                        </Link>
+                      </li>
+                      {/* <!-- menu management --> */}
+                      <li className="nav-item">
+                        <Link to={"/casher/menu"} className="nav-link">
+                          Notify
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+            </div>
+          </div>
+          <div className="profile">
+            <div id="userNav" className="h-3">
+              <img
+                // src="../../../../images/user-default.jpg"
+                className=""
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export const AuthHeader = () => {
   return (
     <div id="auth-header" className="bg-gr-bg">
@@ -158,9 +219,9 @@ export const AuthHeader = () => {
                         </Link>
                       </li>
                       <li className="nav-item">
-                        <a className="nav-link" href="#">
+                        <Link className="nav-link" to="/admin/store">
                           Store
-                        </a>
+                        </Link>
                       </li>
                       <li className="nav-item">
                         <a className="nav-link" href="#">

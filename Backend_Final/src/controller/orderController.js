@@ -22,6 +22,9 @@ const getBillList = async (req, res) => {
         "DD/MM/YYYY hh:mm:ss"
       );
     });
+    data.DT.forEach(async (item) => {
+
+    })
     return res.status(200).json({
       EM: data.EM,
       EC: data.EC,

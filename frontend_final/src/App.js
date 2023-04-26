@@ -30,12 +30,18 @@ import Catagories from "./components/Admin/Catagories/Catagories";
 import Supplier from "./components/Admin/Supplier/Supplier";
 import Staff from "./components/Admin/Store/Staff/Staff";
 
+// kitchen
+import { KitchenLayout } from "./components/Layout/KitchenLayout";
+import { OrderPage as KitchenOrder } from "./components/pages/Kitchen/OrderPage";
+
 import "jquery/dist/jquery.min.js";
 import "popper.js/dist/popper.min.js";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+
 import { AdminLayout } from "./components/Layout/AdminLayout";
-import { AdminDB } from "./components/pages/admin/AdminDB";
 import AllOder from "./components/Kitchen/AllOder/AllOder";
+
+import "./js/main.js";
 
 function App() {
   const pathname = window.location.pathname;
@@ -47,10 +53,10 @@ function App() {
     <StrictMode>
       <Router>
         {/* {pathname.includes("/admin") ? <AdminHeader /> : <NavBar />} */}
-        <NavBar />
+        {/* <NavBar /> */}
         {/* {pathname.includes("/admin") ? <AdminSideBar /> : ""} */}
         <Routes>
-          <Route  path="/kitchen" element={<AllOder/>}/>
+          <Route path="/kitchen" element={<AllOder />} />
           <Route path="/login" element={<LoginPage />} />
 
           <Route path="/casher/order" element={<OrderPage />} />
@@ -66,6 +72,7 @@ function App() {
               element={<OrderCompleted />}
             />
           </Route>
+          {/* admin */}
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="/admin/dashboard" element={<Production />}></Route>
             {/* production */}
@@ -84,6 +91,10 @@ function App() {
             ></Route>
             {/* store */}
             <Route path="/admin/store/staff" element={<Staff />}></Route>
+          </Route>
+          {/* kitchen */}
+          <Route path="/kitchen" element={<KitchenLayout />}>
+            <Route path="/kitchen/orders" element={<KitchenOrder />}></Route>
           </Route>
         </Routes>
       </Router>
