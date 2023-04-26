@@ -60,7 +60,10 @@ export default function FoodType() {
                 />
               </div>
               <h4 className="food_feed_item_name">{food.Name}</h4>
-              <p className="food_feed_item_price">{food.Price}</p>
+              <p className="food_feed_item_price">
+                {food.Price.toLocaleString("de-DE")}
+                  <sup className="price_contaier_currency">&#8363;</sup>
+              </p>
               <div className="food_feed_add_cart_btn">
                 <AiOutlinePlus
                   className="food_feed_add_cart_btn--icon"

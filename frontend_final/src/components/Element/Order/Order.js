@@ -31,6 +31,7 @@ export default function Order() {
 
   const clearOrder = () => {
     setOrderList([]);
+    setTotal(0);
   };
 
   const addOrderData = async () => {
@@ -38,6 +39,7 @@ export default function Order() {
     console.log(orderData);
     const res = await addNewOrder(orderData);
     setOrderList([]);
+    setTotal(0);
     console.log(res);
     switch (res) {
       case 0:
@@ -132,17 +134,17 @@ export default function Order() {
               <div className="total_order_container">
                 <p className="total_order">Total: </p>
                 <p className="total_order_amount">
-                  {total.toLocaleString("de-DE")}{" "}
+                  {total.toLocaleString("de-DE")}
                   <sup className="price_contaier_currency">&#8363;</sup>
                 </p>
               </div>
               <div className="d-flex flex-column gap-2 ">
                 {/* <button
-              className="btn btn-clr-danger px-5 py-2"
-              onClick={clearOrder}
-            >
-              Clear
-            </button> */}
+                  className="btn btn-clr-danger px-5 py-2"
+                  onClick={clearOrder}
+                >
+                  Clear
+                </button> */}
                 <button className="checkoutbtn" onClick={addOrderData}>
                   Checkout
                 </button>
