@@ -35,6 +35,7 @@ import "popper.js/dist/popper.min.js";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { AdminLayout } from "./components/Layout/AdminLayout";
 import { AdminDB } from "./components/pages/admin/AdminDB";
+import AllOder from "./components/Kitchen/AllOder/AllOder";
 
 function App() {
   const pathname = window.location.pathname;
@@ -49,6 +50,7 @@ function App() {
         <NavBar />
         {/* {pathname.includes("/admin") ? <AdminSideBar /> : ""} */}
         <Routes>
+          <Route  path="/kitchen" element={<AllOder/>}/>
           <Route path="/login" element={<LoginPage />} />
 
           <Route path="/casher/order" element={<OrderPage />} />
