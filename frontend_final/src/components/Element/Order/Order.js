@@ -31,12 +31,15 @@ export default function Order() {
 
   const clearOrder = () => {
     setOrderList([]);
+    setTotal(0);
   };
 
   const addOrderData = async () => {
     orderData.BillDetails = orderList;
     console.log(orderData);
     const res = await addNewOrder(orderData);
+    setOrderList([]);
+    setTotal(0);
     console.log(res);
     switch (res) {
       case 0:
@@ -68,7 +71,7 @@ export default function Order() {
 
   return (
     <div
-      className="col-3 stickyPosition overflowy_hidden"
+      className="col-3 stickyPosition overflowy_hidden h-100"
       style={{ backgroundColor: "#fff" }}
     >
       <div className=" position-relative">
@@ -89,116 +92,64 @@ export default function Order() {
           <div className="order_table_body">
             <h6 className="order_table_body_heading">Order menu</h6>
             <div className="order_table_body_list_order">
-              <div className="order_table_body_list_order_item">
-                <div className="list_order_item_image">
-                  <img src="https://content.jdmagicbox.com/comp/jaipur/r6/0141px141.x141.170124113438.h4r6/catalogue/burger-farm-mahapura-jaipur-fast-food-restaurants-00x5rykmqj.jpg" />
-                </div>
-                <div className="list_order_item_name_contaiter">
-                  <p className="item_name_container_name_food">Buger king</p>
-                  <div className="name_food_quantity">
-                    <AiOutlineMinus className="quantity_icon" />
-                    <span className="quantity">10</span>
-                    <IoAdd className="quantity_icon" />
+              {orderList.map((order) => (
+                <div className="order_table_body_list_order_item mt-2">
+                  <div className="list_order_item_image">
+                    <img
+                      src={
+                        order.Image !== null &&
+                        order.Image !== undefined &&
+                        order.Image !== "null"
+                          ? order.Image
+                          : "../images/default.jpg"
+                      }
+                    />
+                  </div>
+                  <div className="list_order_item_name_contaiter">
+                    <p className="item_name_container_name_food">
+                      {order.Name}
+                    </p>
+                    <div className="name_food_quantity">
+                      <AiOutlineMinus className="quantity_icon" />
+                      <span className="quantity">{order.Quantity}</span>
+                      <IoAdd className="quantity_icon" />
+                    </div>
+                  </div>
+                  <div className="list_orderr_item_price_container">
+                    <h6>
+                      <span className="price_contaier_currency">$</span>
+                      <span className="price_container_price">
+                        {order.Total}
+                      </span>
+                    </h6>
                   </div>
                 </div>
-                <div className="list_orderr_item_price_container">
-                  <h6>
-                    <span className="price_contaier_currency">$</span>
-                    <span className="price_container_price">7.65</span>
-                  </h6>
-                </div>
-              </div>
+              ))}
             </div>
-            <div className="order_table_body_list_order">
-              <div className="order_table_body_list_order_item">
-                <div className="list_order_item_image">
-                  <img src="https://content.jdmagicbox.com/comp/jaipur/r6/0141px141.x141.170124113438.h4r6/catalogue/burger-farm-mahapura-jaipur-fast-food-restaurants-00x5rykmqj.jpg" />
-                </div>
-                <div className="list_order_item_name_contaiter">
-                  <p className="item_name_container_name_food">Buger king</p>
-                  <div className="name_food_quantity">
-                    <AiOutlineMinus className="quantity_icon" />
-                    <span className="quantity">10</span>
-                    <IoAdd className="quantity_icon" />
-                  </div>
-                </div>
-                <div className="list_orderr_item_price_container">
-                  <h6>
-                    <span className="price_contaier_currency">$</span>
-                    <span className="price_container_price">7.65</span>
-                  </h6>
-                </div>
-              </div>
-            </div>
-            <div className="order_table_body_list_order">
-              <div className="order_table_body_list_order_item">
-                <div className="list_order_item_image">
-                  <img src="https://content.jdmagicbox.com/comp/jaipur/r6/0141px141.x141.170124113438.h4r6/catalogue/burger-farm-mahapura-jaipur-fast-food-restaurants-00x5rykmqj.jpg" />
-                </div>
-                <div className="list_order_item_name_contaiter">
-                  <p className="item_name_container_name_food">Buger king</p>
-                  <div className="name_food_quantity">
-                    <AiOutlineMinus className="quantity_icon" />
-                    <span className="quantity">10</span>
-                    <IoAdd className="quantity_icon" />
-                  </div>
-                </div>
-                <div className="list_orderr_item_price_container">
-                  <h6>
-                    <span className="price_contaier_currency">$</span>
-                    <span className="price_container_price">7.65</span>
-                  </h6>
-                </div>
-              </div>
-            </div>
-            <div className="order_table_body_list_order">
-              <div className="order_table_body_list_order_item">
-                <div className="list_order_item_image">
-                  <img src="https://content.jdmagicbox.com/comp/jaipur/r6/0141px141.x141.170124113438.h4r6/catalogue/burger-farm-mahapura-jaipur-fast-food-restaurants-00x5rykmqj.jpg" />
-                </div>
-                <div className="list_order_item_name_contaiter">
-                  <p className="item_name_container_name_food">Buger king</p>
-                  <div className="name_food_quantity">
-                    <AiOutlineMinus className="quantity_icon" />
-                    <span className="quantity">10</span>
-                    <IoAdd className="quantity_icon" />
-                  </div>
-                </div>
-                <div className="list_orderr_item_price_container">
-                  <h6>
-                    <span className="price_contaier_currency">$</span>
-                    <span className="price_container_price">7.65</span>
-                  </h6>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* Checkout */}
-        <div
-          id="checkout"
-          className="justify-content-between align-items-center"
-        >
-          <div className="total_order_container">
-            <p className="total_order">Total: </p>
-            <p className="total_order_amount">
-              {total.toLocaleString("de-DE")}{" "}
-              <sup className="price_contaier_currency">&#8363;</sup>
-            </p>
-          </div>
-          <div className="d-flex flex-column gap-2 ">
-            {/* <button
-              className="btn btn-clr-danger px-5 py-2"
-              onClick={clearOrder}
+            {/* Checkout */}
+            <div
+              id="checkout"
+              className="justify-content-between align-items-center"
             >
-              Clear
-            </button> */}
-            <button
-              className="checkoutbtn"
-              onClick={addOrderData}
-            >
-              Checkout
-            </button>
+              <div className="total_order_container">
+                <p className="total_order">Total: </p>
+                <p className="total_order_amount">
+                  {total.toLocaleString("de-DE")}
+                  <sup className="price_contaier_currency">&#8363;</sup>
+                </p>
+              </div>
+              <div className="d-flex flex-column gap-2 ">
+                {/* <button
+                  className="btn btn-clr-danger px-5 py-2"
+                  onClick={clearOrder}
+                >
+                  Clear
+                </button> */}
+                <button className="checkoutbtn" onClick={addOrderData}>
+                  Checkout
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
