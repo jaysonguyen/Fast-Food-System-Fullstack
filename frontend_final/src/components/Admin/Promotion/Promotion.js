@@ -31,6 +31,8 @@ const Promotion = (props) => {
       let dataPromotion = await getAllPromotion();
       console.log("data promotion ", dataPromotion.DT);
       setPromotion(dataPromotion.DT);
+      if (dataPromotion) {
+      }
     } catch (error) {
       console.log(error);
     }
@@ -64,9 +66,10 @@ const Promotion = (props) => {
     }
   };
 
+
   useEffect(() => {
     fetchPromotion();
-  }, [promotion]);
+  }, []);
 
   return (
     <>

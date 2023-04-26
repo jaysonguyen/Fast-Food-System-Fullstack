@@ -2,19 +2,21 @@ import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { Modal, Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { toast } from "react-toastify";
-import { getFoodById, updateFood } from "../../../api/callApi";
 import { AddFood } from "../../../services/foodServices";
 import "../css/main.css";
 import "../css/root.css";
 import "./Production.css";
+import { updateFood } from "../../../api/callApi";
 
 const ProductModal = (props) => {
   const [show, setShow] = useState(props.show);
+  const [idF, setidF] = useState(props.show);
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
   const [type, setType] = useState("");
-  const [recipe, setRecipe] = useState("");
+  const [recipe, setRecipe] = useState(1);
+  const [status, setStatus] = useState(1);
   const [note, setNote] = useState("");
   const [dataFood, setDataFood] = useState({});
 
@@ -44,52 +46,46 @@ const ProductModal = (props) => {
     }
   };
 
-  const handleGetProductByID = useCallback(async (id) => {
-    try {
-      const data = await getFoodById(id);
-      if (data && +data.EC == 1) {
-        const [food] = data.DT;
-        setName(food.Name);
-        setPrice(food.Price);
-        setImage(food.Image);
-        setType(food.Type);
-        setRecipe(food.Recipe);
-        setDataFood({
-          ID: id,
-          Name: food.Name,
-          Price: food.Price,
-          Image: food.Image,
-          Type: food.Type,
-          Recipe: food.Recipe,
-        });
-      }
-      if (data && +data.EC != 1) {
-        console.log("Khong duoc goi dai vuong oi");
-      }
-    } catch (error) {
-      console.log(error);
+  const handleSetDataDefault = () => {
+    if (props.dataFood) {
+      setidF(props.dataFood.id);
+      setName(props.dataFood.name);
+      setImage(props.dataFood.image);
+      setPrice(props.dataFood.price);
+      setType(props.dataFood.type);
+      setStatus(props.dataFood.status);
+      setRecipe(props.dataFood.recipe);
     }
-  }, []);
+  };
 
-  const handleUpdatePro = async () => {
-    setDataFood({
-      ...dataFood,
-      Name: name,
-      Price: price,
-      Image: image,
-      Type: type,
-      Recipe: recipe,
-    });
-
-    let data = await updateFood(dataFood);
-    if (data && +data.EC == 1) {
-      console.log(setDataFood);
+  const handleUpdateProduct = async () => {
+    if (props.dataFood.name == name) {
+      toast.error("New data must different form old data");
+    } else {
+      setDataFood((prevData) => ({
+        ...prevData,
+        name,
+        image,
+        price,
+        type,
+        status,
+        recipe,
+      }));
+      const data = await updateFood(idF, { ...dataFood });
+      console.log(idF, { ...dataFood });
+      if (data && +data.EC === 1) {
+        toast.success(data.EM);
+        location.reload();
+      }
+      if (data && data.EC != 1) {
+        toast.error(data.EM);
+      }
     }
   };
 
   useEffect(() => {
-    handleGetProductByID(props.idFood);
-  }, []);
+    handleSetDataDefault();
+  }, [props.dataFood]);
 
   return (
     <>
@@ -117,7 +113,7 @@ const ProductModal = (props) => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                   />
-                  <label className="form-label" for="form6Example1">
+                  <label className="form-label" htmlFor="form6Example1">
                     Product Name
                   </label>
                 </div>
@@ -138,7 +134,7 @@ const ProductModal = (props) => {
                     <option value="7">Seven</option>
                     <option value="8">Eight</option>
                   </select>
-                  <label className="form-label" for="inlineFormSelectPref">
+                  <label className="form-label" htmlFor="inlineFormSelectPref">
                     Category
                   </label>
                 </div>
@@ -154,7 +150,7 @@ const ProductModal = (props) => {
                     value={recipe}
                     onChange={(e) => setRecipe(e.target.value)}
                   />
-                  <label className="form-label" for="form6Example3">
+                  <label className="form-label" htmlFor="form6Example3">
                     Recipe
                   </label>
                 </div>
@@ -165,11 +161,11 @@ const ProductModal = (props) => {
                     type="text"
                     id="form6Example4"
                     className="form-control"
-                    value={note}
-                    onChange={(e) => setNote(e.target.value)}
+                    value={status}
+                    onChange={(e) => setStatus(e.target.value)}
                   />
-                  <label className="form-label" for="form6Example4">
-                    Note
+                  <label className="form-label" htmlFor="form6Example4">
+                    status
                   </label>
                 </div>
               </div>
@@ -182,7 +178,7 @@ const ProductModal = (props) => {
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
                   />
-                  <label className="form-label" for="form6Example5">
+                  <label className="form-label" htmlFor="form6Example5">
                     Price
                   </label>
                 </div>
@@ -222,8 +218,8 @@ const ProductModal = (props) => {
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
               ></textarea>
-              <label className="form-label" for="form6Example7">
-                Note
+              <label className="form-label" htmlFor="form6Example7">
+                note
               </label>
             </div>
             <div className="form-outline mb-4">
@@ -233,18 +229,14 @@ const ProductModal = (props) => {
                   alt=""
                 />
               </div>
-              <label className="form-label" for="form6Example4">
+              <label className="form-label" htmlFor="form6Example4">
                 Image
               </label>
             </div>
             <div className="form-check d-flex mb-4">
-              <input
-                className="form-check-input me-2"
-                id="form6Example8"
-                checked
-              />
+              <input className="form-check-input me-2" id="form6Example8" />
               {props.action == "CREATE" && (
-                <label className="form-check-label" for="form6Example8">
+                <label className="form-check-label" htmlFor="form6Example8">
                   Create a food
                 </label>
               )}
@@ -261,7 +253,7 @@ const ProductModal = (props) => {
             onClick={(e) =>
               props.action == "CREATE"
                 ? handleCreateFood(e)
-                : handleUpdatePro(e)
+                : handleUpdateProduct()
             }
           >
             {props.action == "CREATE" ? "Create" : "Update"}
