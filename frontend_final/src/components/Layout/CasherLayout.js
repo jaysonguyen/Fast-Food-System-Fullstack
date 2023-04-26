@@ -1,8 +1,8 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { KitchenSideBar } from "./SideMenu/SideBar";
+import { CasherSideBar } from "./SideMenu/SideBar";
 
-export const KitchenLayout = () => {
+export const CasherLayout = () => {
   return (
     <div id="wapper" className="flex-wrapcontainer-fluid">
       <div className="row flex-nowrap">
@@ -14,7 +14,7 @@ export const KitchenLayout = () => {
               </div>
               <span>FoodiePos</span>
             </div>
-            <KitchenSideBar />
+            <CasherSideBar />
           </div>
           <div className="account my-3">
             <div className="account-card text-center">
@@ -22,12 +22,12 @@ export const KitchenLayout = () => {
                 <img src="../images/default.jpg" alt="account image" />
               </div>
               <div className="my-2">Thao My</div>
-              <div className="my-2">Kitchen</div>
+              <div className="my-2">Casher</div>
               <button className="btn btn-clr-normal">Details</button>
             </div>
           </div>
         </div>
-        <div id="myMain">
+        <div id="myMain" className="make-order">
           <Outlet />
         </div>
       </div>

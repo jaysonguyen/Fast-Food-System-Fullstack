@@ -11,7 +11,8 @@ import { isNumberic } from "../../tool";
 
 export default function Order() {
   // const { orderDetails, removeFromOrder } = useContext(OrderContext);
-  const { removeFromOrder, orderDetails } = useContext(OrderContext);
+  const { removeFromOrder, orderDetails, emptyOrder } =
+    useContext(OrderContext);
   let orderData = { StaffID: 3, BillDetails: [] };
   const [orderList, setOrderList] = useState([]);
   const [total, setTotal] = useState(0);
@@ -62,82 +63,42 @@ export default function Order() {
   useEffect(() => {}, [total]);
 
   return (
-    <div className="col-4 px-0">
-      <div className=" position-relative">
-        {/* order details */}
-        <div id="orderTable" className="table-responsive ">
-          <table className="table check-tbl">
-            <thead className="sticky-top ">
-              <tr>
-                <th className="w-25">Product name</th>
-                <th>Unit Price</th>
-                <th>Quantity</th>
-                <th className="w-25">Total</th>
-                <th className="w-25">Close</th>
-              </tr>
-            </thead>
-            <tbody style={{ overflowY: "scroll" }}>
-              {/* render order list */}
-              {orderList.map((item, idx) => (
-                <tr key={idx} className="alert align-items-center">
-                  <td className="product-item-name">{item.Name}</td>
-                  <td className="product-item-price">
-                    {item.Price.toLocaleString("de-DE")}
-                    <sup>&#8363;</sup>
-                  </td>
-                  <td className="product-item-quantity">
-                    <div className="quantity btn-quantity max-w80 d-flex flex-row">
-                      <div className=" form-control">
-                        <input
-                          className="w-100 border-0"
-                          type="number"
-                          id="quantity"
-                          name="quantity"
-                          value={item.Quantity}
-                        />
-                      </div>
-                    </div>
-                  </td>
-                  <td className="product-item-totle">
-                    {(item.Price * item.Quantity).toLocaleString("de-DE")}
-                    <sup>&#8363;</sup>
-                  </td>
-                  <td className="product-item-close">
-                    <img
-                      src="/images/icon/close.png"
-                      className="d-block h-auto w-25"
-                      onClick={() => removeFromOrder(item)}
-                    />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+    <>
+      <div className="order-details">
+        {/* render order list */}
+        {orderList.map((item, idx) => (
+          <div className="w-100 row">
+            <div className="col-3">{item.Name}</div>
+            <div className="col-2">{item.Quantity}</div>
+            <div className="col-2">
+              {item.Price.toLocaleString("de-DE")}
+              <sup>&#8363;</sup>
+            </div>
+            <div className="col-2">
+              {(item.Price * item.Quantity).toLocaleString("de-DE")}
+            </div>
+            <div className="col-1" onClick={() => removeFromOrder(item)}>
+              x
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="checkout ms-4 text-start">
+        <div className="row">
+          <div className="col-6">Total: </div>
+          <div className="col-6 order-total">
+            {total.toLocaleString("de-DE")} <sup>&#8363;</sup>{" "}
+          </div>
         </div>
-        {/* Checkout */}
-        <div
-          id="checkout"
-          className="d-flex flex-row justify-content-between align-items-center"
-        >
-          <div className="total form-control me-2 fs-5">
-            {total.toLocaleString("de-DE")} <sup>&#8363;</sup>
-          </div>
-          <div className="d-flex flex-row gap-2 ">
-            <button
-              className="btn btn-clr-danger px-5 py-2"
-              onClick={clearOrder}
-            >
-              Clear
-            </button>
-            <button
-              className="btn btn-clr-normal px-5 py-2"
-              onClick={addOrderData}
-            >
-              Checkout
-            </button>
-          </div>
+        <div className="row mt-3 gap-2">
+          <button className="col-5 btn btn-clr-normal" onClick={emptyOrder}>
+            Clear
+          </button>
+          <button className="col-5 btn btn-clr-normal" onClick={addOrderData}>
+            Check Out
+          </button>
         </div>
       </div>
-    </div>
+    </>
   );
 }

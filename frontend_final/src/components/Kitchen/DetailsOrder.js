@@ -40,15 +40,15 @@ export const DetailsOrder = ({ order }) => {
             </div>
           ))}
       </div>
-      <div className="checkout ms-4 text-start">
+      <div className="checkout text-start">
         <div className="row">
-          <div className="col-6">Total: </div>
+          <div className="col-6 fs-5 my-auto px-4">Total: </div>
           <div className="col-6 order-total">{order.Total} </div>
         </div>
-        <div className="row mt-3 gap-2">
+        {/* <div className="row mt-3 gap-2">
           <button className="col-5 btn btn-clr-normal">Clear</button>
           <button className="col-5 btn btn-clr-normal">Check Out</button>
-        </div>
+        </div> */}
       </div>
     </>
   );

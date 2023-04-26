@@ -19,7 +19,10 @@ export default function FoodCart({ foodtype }) {
       let data = await FoodByTypeData(foodtype.ID);
       if (data.EM.includes("Error")) {
         setFoods(FoodDT);
-      } else {setFoods(data.DT); console.log(data.DT);}
+      } else {
+        setFoods(data.DT);
+        console.log(data.DT);
+      }
     } catch (error) {
       setFoods(FoodDT);
     }
@@ -30,36 +33,25 @@ export default function FoodCart({ foodtype }) {
   }, [foods]);
 
   return (
-    <TabPane tabId={foodtype.ID} style={{ overflowY: "scroll" }}>
-      <div className="row ">
-        {foods.map((food, idx) => {
-          return (
-            <div key={idx} className="dz-col col m-b30">
-              <div className="item-box shop-item style2">
-                <div className="item-img">
-                  <img src={require("../../../../images/pic1.png")} alt="" />
-                </div>
-                <div className="item-info text-center">
-                  <h4 className="item-title">{food.Name}</h4>
-                  <p className="price ">
-                    <del>45</del>
-                    {food.Price.toLocaleString("de-DE")}
-                    <sup>&#8363;</sup>
-                  </p>
-                  <div className="cart-btn ">
-                    <button
-                      className="order-btn btn"
-                      onClick={() => addToOrder(food)}
-                    >
-                      <i className="ti-shopping-cart"></i> Add to order
-                    </button>
-                  </div>
-                </div>
-              </div>
+    <TabPane
+      className="food-list"
+      tabId={foodtype.ID}
+      style={{ overflowY: "scroll" }}
+    >
+      {foods.map((food, idx) => {
+        return (
+          <div
+            class=" mx-2 food-card float-start"
+            onClick={() => addToOrder(food)}
+          >
+            <div class="food-img">
+              <img src="../images/default.jpg" alt="food image" />
             </div>
-          );
-        })}
-      </div>
+            <div class="food-name">{food.Name}</div>
+            <div class="food-price">{food.Price}</div>
+          </div>
+        );
+      })}
     </TabPane>
   );
 }

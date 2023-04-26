@@ -3,6 +3,7 @@ import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Bell, Clock } from "phosphor-react";
 
 import { DetailsOrder } from "./DetailsOrder";
 
@@ -26,8 +27,12 @@ export const Orders = ({ orderNewData }) => {
           </div>
         </div>
         <div className="col right d-flex flex-row gap-3 align-items-center">
-          <div className="noti">noti</div>
-          <div className="time">time</div>
+          <div className="noti">
+            <Bell size={30} color="#3a3a3a" weight="fill" />
+          </div>
+          <div className="time">
+            <Clock size={30} color="#3a3a3a" weight="fill" />
+          </div>
           <div className="search">
             <i className="fa fa-search"></i>
             <input type="text" />
@@ -43,7 +48,7 @@ export const Orders = ({ orderNewData }) => {
           <div className="session-bill row">
             {orderNewData.map((order) => (
               <div
-              key={order.ID}
+                key={order.ID}
                 className="col-10 bill-item "
                 onClick={() => getOrder(order)}
               >

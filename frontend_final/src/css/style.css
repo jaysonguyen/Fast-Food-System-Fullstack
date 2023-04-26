@@ -14661,6 +14661,7 @@ pre {
   background: var(--clr-btn);
   position: absolute;
   bottom: -15px;
+  z-index: 2;
   transform: rotate(45deg) translateX(-50%);
   -moz-transform: rotate(45deg) translateX(-50%);
   -webkit-transform: rotate(45deg) translateX(-50%);
