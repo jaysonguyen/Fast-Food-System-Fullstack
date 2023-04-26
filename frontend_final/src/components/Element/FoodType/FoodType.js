@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import FoodTypeCart from "../Card/FoodTypeCart/FoodTypeCart";
 import { Nav } from "reactstrap";
 import { getFoodTypeService } from "../../../services/foodTypeServices";
 import "./FoodType.css";
-import { useContext } from "react";
 import { FoodTypeIDContext } from "../Card/FoodTypeCart/FoodTypeCart";
 import { NavItem, NavLink } from "reactstrap";
 import { BiCaretRightCircle } from "react-icons/bi";
@@ -11,10 +10,13 @@ import { AiOutlinePlus } from "react-icons/ai";
 import "../Card/FoodTypeCart/FoodTypeCart.css";
 import { FoodData } from "../../../api/callApi";
 
+import { OrderContext } from "../../Context/OrderContext";
+
 export default function FoodType() {
   const [FoodType, setFoodType] = useState([]);
   const [idType, setidType] = useState("");
   const foodTypeID = useContext(FoodTypeIDContext);
+  const { addToOrder } = useContext(OrderContext);
   const [foodList, setFoodList] = useState([]);
 
   const getFoodTypeData = async () => {
@@ -44,106 +46,29 @@ export default function FoodType() {
     <>
       <div className="food_feed_container">
         <div className="row">
-          <div className="col col-3 food_feed_item_container">
-            <div className="image_food_feed">
-              <img src="https://content.jdmagicbox.com/comp/jaipur/r6/0141px141.x141.170124113438.h4r6/catalogue/burger-farm-mahapura-jaipur-fast-food-restaurants-00x5rykmqj.jpg" />
+          {foodList.map((food) => (
+            <div className="col col-3 food_feed_item_container">
+              <div className="image_food_feed">
+                <img
+                  src={
+                    food.Image !== null &&
+                    food.Image !== undefined &&
+                    food.Image !== "null"
+                      ? food.Image
+                      : "../images/default.jpg"
+                  }
+                />
+              </div>
+              <h4 className="food_feed_item_name">{food.Name}</h4>
+              <p className="food_feed_item_price">{food.Price}</p>
+              <div className="food_feed_add_cart_btn">
+                <AiOutlinePlus
+                  className="food_feed_add_cart_btn--icon"
+                  onClick={() => addToOrder(food)}
+                />
+              </div>
             </div>
-            <h4 className="food_feed_item_name">Burger ngon</h4>
-            <p className="food_feed_item_price">$14.00</p>
-            <div className="food_feed_add_cart_btn">
-              <AiOutlinePlus className="food_feed_add_cart_btn--icon" />
-            </div>
-          </div>
-          <div className="col col-3 food_feed_item_container">
-            <div className="image_food_feed">
-              <img src="https://content.jdmagicbox.com/comp/jaipur/r6/0141px141.x141.170124113438.h4r6/catalogue/burger-farm-mahapura-jaipur-fast-food-restaurants-00x5rykmqj.jpg" />
-            </div>
-            <h4 className="food_feed_item_name">Burger ngon</h4>
-            <p className="food_feed_item_price">$14.00</p>
-            <div className="food_feed_add_cart_btn">
-              <AiOutlinePlus className="food_feed_add_cart_btn--icon" />
-            </div>
-          </div>
-          <div className="col col-3 food_feed_item_container">
-            <div className="image_food_feed">
-              <img src="https://content.jdmagicbox.com/comp/jaipur/r6/0141px141.x141.170124113438.h4r6/catalogue/burger-farm-mahapura-jaipur-fast-food-restaurants-00x5rykmqj.jpg" />
-            </div>
-            <h4 className="food_feed_item_name">Burger ngon</h4>
-            <p className="food_feed_item_price">$14.00</p>
-            <div className="food_feed_add_cart_btn">
-              <AiOutlinePlus className="food_feed_add_cart_btn--icon" />
-            </div>
-          </div>
-          <div className="col col-3 food_feed_item_container">
-            <div className="image_food_feed">
-              <img src="https://content.jdmagicbox.com/comp/jaipur/r6/0141px141.x141.170124113438.h4r6/catalogue/burger-farm-mahapura-jaipur-fast-food-restaurants-00x5rykmqj.jpg" />
-            </div>
-            <h4 className="food_feed_item_name">Burger ngon</h4>
-            <p className="food_feed_item_price">$14.00</p>
-            <div className="food_feed_add_cart_btn">
-              <AiOutlinePlus className="food_feed_add_cart_btn--icon" />
-            </div>
-          </div>
-          <div className="col col-3 food_feed_item_container">
-            <div className="image_food_feed">
-              <img src="https://content.jdmagicbox.com/comp/jaipur/r6/0141px141.x141.170124113438.h4r6/catalogue/burger-farm-mahapura-jaipur-fast-food-restaurants-00x5rykmqj.jpg" />
-            </div>
-            <h4 className="food_feed_item_name">Burger ngon</h4>
-            <p className="food_feed_item_price">$14.00</p>
-            <div className="food_feed_add_cart_btn">
-              <AiOutlinePlus className="food_feed_add_cart_btn--icon" />
-            </div>
-          </div>
-          <div className="col col-3 food_feed_item_container">
-            <div className="image_food_feed">
-              <img src="https://content.jdmagicbox.com/comp/jaipur/r6/0141px141.x141.170124113438.h4r6/catalogue/burger-farm-mahapura-jaipur-fast-food-restaurants-00x5rykmqj.jpg" />
-            </div>
-            <h4 className="food_feed_item_name">Burger ngon</h4>
-            <p className="food_feed_item_price">$14.00</p>
-            <div className="food_feed_add_cart_btn">
-              <AiOutlinePlus className="food_feed_add_cart_btn--icon" />
-            </div>
-          </div>
-          <div className="col col-3 food_feed_item_container">
-            <div className="image_food_feed">
-              <img src="https://content.jdmagicbox.com/comp/jaipur/r6/0141px141.x141.170124113438.h4r6/catalogue/burger-farm-mahapura-jaipur-fast-food-restaurants-00x5rykmqj.jpg" />
-            </div>
-            <h4 className="food_feed_item_name">Burger ngon</h4>
-            <p className="food_feed_item_price">$14.00</p>
-            <div className="food_feed_add_cart_btn">
-              <AiOutlinePlus className="food_feed_add_cart_btn--icon" />
-            </div>
-          </div>
-          <div className="col col-3 food_feed_item_container">
-            <div className="image_food_feed">
-              <img src="https://content.jdmagicbox.com/comp/jaipur/r6/0141px141.x141.170124113438.h4r6/catalogue/burger-farm-mahapura-jaipur-fast-food-restaurants-00x5rykmqj.jpg" />
-            </div>
-            <h4 className="food_feed_item_name">Burger ngon</h4>
-            <p className="food_feed_item_price">$14.00</p>
-            <div className="food_feed_add_cart_btn">
-              <AiOutlinePlus className="food_feed_add_cart_btn--icon" />
-            </div>
-          </div>
-          <div className="col col-3 food_feed_item_container">
-            <div className="image_food_feed">
-              <img src="https://content.jdmagicbox.com/comp/jaipur/r6/0141px141.x141.170124113438.h4r6/catalogue/burger-farm-mahapura-jaipur-fast-food-restaurants-00x5rykmqj.jpg" />
-            </div>
-            <h4 className="food_feed_item_name">Burger ngon</h4>
-            <p className="food_feed_item_price">$14.00</p>
-            <div className="food_feed_add_cart_btn">
-              <AiOutlinePlus className="food_feed_add_cart_btn--icon" />
-            </div>
-          </div>
-          <div className="col col-3 food_feed_item_container">
-            <div className="image_food_feed">
-              <img src="https://content.jdmagicbox.com/comp/jaipur/r6/0141px141.x141.170124113438.h4r6/catalogue/burger-farm-mahapura-jaipur-fast-food-restaurants-00x5rykmqj.jpg" />
-            </div>
-            <h4 className="food_feed_item_name">Burger ngon</h4>
-            <p className="food_feed_item_price">$14.00</p>
-            <div className="food_feed_add_cart_btn">
-              <AiOutlinePlus className="food_feed_add_cart_btn--icon" />
-            </div>
-          </div>
+          ))}
         </div>
       </div>
       <div tabs className="casher-nav">
