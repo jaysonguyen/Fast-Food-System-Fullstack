@@ -28,11 +28,9 @@ body {
 }
 
 .bg-gr-primary {
-  background: linear-gradient(
-    90deg,
-    rgba(210, 72, 80, 0.6369398101037289) 15%,
-    rgba(223, 73, 73, 0.7377801462381828) 51%
-  );
+  background: linear-gradient(90deg,
+      rgba(210, 72, 80, 0.6369398101037289) 15%,
+      rgba(223, 73, 73, 0.7377801462381828) 51%);
 }
 
 a,
@@ -56,8 +54,7 @@ li {
   color: var(--clr-font-primary) !important;
 }
 
-.nav-link.active {
-}
+.nav-link.active {}
 
 .title {
   font-family: "Lobster", cursive;
@@ -66,7 +63,7 @@ li {
 /* login */
 
 #loginContent,
-#loginContent .bg-left > div {
+#loginContent .bg-left>div {
   height: 100vh;
 }
 
@@ -85,12 +82,10 @@ li {
 }
 
 #loginContent .bg-right {
-  background: linear-gradient(
-    257deg,
-    rgba(255, 127, 132, 1) 5%,
-    rgba(255, 100, 136, 1) 35%,
-    rgba(231, 110, 160, 1) 83%
-  );
+  background: linear-gradient(257deg,
+      rgba(255, 127, 132, 1) 5%,
+      rgba(255, 100, 136, 1) 35%,
+      rgba(231, 110, 160, 1) 83%);
 }
 
 #loginContent #loginForm {
@@ -149,11 +144,9 @@ li {
 }
 
 #loginContent #loginForm .bg-right {
-  background: linear-gradient(
-    32deg,
-    rgba(175, 22, 27, 0.6) 5%,
-    rgba(190, 42, 103, 0.7) 82%
-  );
+  background: linear-gradient(32deg,
+      rgba(175, 22, 27, 0.6) 5%,
+      rgba(190, 42, 103, 0.7) 82%);
 }
 
 #loginContent #loginForm .bg {
@@ -335,6 +328,7 @@ select:focus,
 td .nav-link {
   transition: all 0.3s;
 }
+
 td .nav-link:hover {
   background-color: var(--clr-btn);
   color: #fff;
@@ -453,11 +447,11 @@ td .nav-link:hover {
 }
 
 /* sidebar */
-#sidebar > div {
+#sidebar>div {
   width: 275px;
 }
 
-#sidebar > div .logo {
+#sidebar>div .logo {
   height: 180px;
 }
 
@@ -489,12 +483,10 @@ td .nav-link:hover {
 
 #checkout {
   position: fixed;
-
   background-color: transparent;
-
-  width: 500px;
-  top: 85vh;
-  left: 67vw;
+  width: 344px;
+  top: 78vh;
+  left: 75vw;
 }
 
 /* tab */
@@ -693,6 +685,7 @@ td .nav-link:hover {
   /* position: fixed; */
   box-shadow: 1px 1px 2px #d3d3d3;
 }
+
 /* logo */
 #mySidebar .logo {
   text-align: center;
@@ -711,6 +704,7 @@ td .nav-link:hover {
 #myMain .food-list .food-img img {
   width: 100%;
 }
+
 /* nav-list */
 #mySidebar .nav {
   display: flex;
@@ -766,9 +760,9 @@ td .nav-link:hover {
   padding: 40px 50px;
   width: 90vw;
 }
+
 /* breadcumb */
-#myMain .main-header .breadcumb .rev {
-}
+#myMain .main-header .breadcumb .rev {}
 
 #myMain .sub-header {
   padding: 20px 10px;
@@ -947,34 +941,4 @@ td .nav-link:hover {
   width: 220px;
   padding: 10px;
   margin-left: 45%;
-}
-
-/* header */
-#wapper .main-header .search {
-  box-shadow: 1px 2px 5px #3a3a3a;
-  border-radius: 10px;
-  padding: 5px 15px;
-}
-
-#wapper .main-header .search input {
-  border: none;
-}
-
-#wapper .main-header .breadcumb .prev::after {
-  display: inline-block;
-  font-style: normal;
-  font-variant: normal;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900;
-  content: "\f054";
-  margin-left: 10px;
-}
-
-#wapper .main-header .breadcumb .curr {
-  background-color: var(--clr-primary);
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 10px;
 }

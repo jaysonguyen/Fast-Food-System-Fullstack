@@ -14,9 +14,6 @@ export const InsertSupplier = (name, contact, note) => {
   return axios.post(`/api/supplier/create`, { name, contact, note });
 };
 
-
-
-// Staff
 export const deleteStaff = (id) => {
   return axios.delete(`/api/staff/delete/${id}`);
 };
@@ -128,6 +125,7 @@ export const updateVendors = (id, rawData) => {
 export const updatePromo = (id, status) => {
   return axios.put(`/api/promotion/edit`, {
     id,
-    status,
+    Status,
+
   });
 };

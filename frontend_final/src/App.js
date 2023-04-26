@@ -43,6 +43,8 @@ import { AdminLayout } from "./components/Layout/AdminLayout";
 import AllOder from "./components/Kitchen/AllOder/AllOder";
 
 import "./js/main.js";
+import FoodType from "./components/Element/FoodType/FoodType";
+import Order from "./components/Element/Order/Order";
 
 function App() {
   const pathname = window.location.pathname;
@@ -55,25 +57,22 @@ function App() {
       <Router>
         {/* {pathname.includes("/admin") ? <AdminHeader /> : <NavBar />} */}
         {/* <NavBar /> */}
-        {/* {pathname.includes("/admin") ? <AdminSideBar /> : ""} */}
         <Routes>
           <Route path="/kitchen" element={<AllOder />} />
           <Route path="/login" element={<LoginPage />} />
 
-          <Route path="/casher" element={<CasherLayout />}>
-            <Route path="/casher/order" element={<OrderPage />} />
-            <Route path="/casher/menu" element={<MenuManagementPage />} />
-            <Route path="/casher/orders" element={<OrderManagement />}>
-              <Route path="/casher/orders/all" element={<OrderHistory />} />
-              <Route
-                path="/casher/orders/processing"
-                element={<OrderProcessing />}
-              />
-              <Route
-                path="/casher/orders/completed"
-                element={<OrderCompleted />}
-              />
-            </Route>
+          <Route path="/" element={<OrderPage />} />
+          <Route path="/casher/menu" element={<MenuManagementPage />} />
+          <Route path="/casher/orders" element={<OrderManagement />}>
+            <Route path="/casher/orders/all" element={<OrderHistory />} />
+            <Route
+              path="/casher/orders/processing"
+              element={<OrderProcessing />}
+            />
+            <Route
+              path="/casher/orders/completed"
+              element={<OrderCompleted />}
+            />
           </Route>
 
           {/* admin */}

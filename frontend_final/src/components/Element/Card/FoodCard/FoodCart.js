@@ -14,6 +14,7 @@ export default function FoodCart({ foodtype }) {
   //   dispatch({ type: "ADD_TO_ORDER", payload: food });
   // };
 
+
   const getFoodDataTest = async () => {
     try {
       let data = await FoodByTypeData(foodtype.ID);
@@ -28,9 +29,20 @@ export default function FoodCart({ foodtype }) {
     }
   };
 
-  useEffect(() => {
-    getFoodDataTest();
-  }, [foods]);
+  // const getFoodDataTest = async () => {
+  //   try {
+  //     let data = await FoodByTypeData(foodtype.ID);
+  //     if (data.EM.includes("Error")) {
+  //       setFoods(FoodDT);
+  //     } else {setFoods(data.DT); console.log(data.DT);}
+  //   } catch (error) {
+  //     setFoods(FoodDT);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   getFoodDataTest();
+  // }, [foods]);
 
   return (
     <TabPane
