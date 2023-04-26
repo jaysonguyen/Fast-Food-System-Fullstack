@@ -57,18 +57,6 @@ const Promotion = (props) => {
     }
   };
 
-  const updateStatusPromotion = () => {
-    const today = new Date();
-    const promotions = [...promotion]; // make a copy of the original array
-    promotions.forEach(async (promo) => {
-      const expDate = new Date(promo.dateExp);
-      if (expDate < today) {
-        console.log(`${promo.dateExp} is expired`);
-      } else {
-        console.log(`${promo.dateExp} is still valid`);
-      }
-    });
-  };
 
   useEffect(() => {
     fetchPromotion();
