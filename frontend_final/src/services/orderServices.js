@@ -12,15 +12,7 @@ export const getAllOrder = async () => {
   let food = await getFoodData();
   try {
     data = await OrderData();
-    const newData = data.DT.map((item) =>
-      item.Details.map((d, idx) => {
-        const foodItem = food.find((f) => f.ID === d.FoodID);
-        if (foodItem) {
-          item.Details[idx] = { ...d, FoodName: foodItem.Name };
-        }
-      })
-    );
-    return data.DT;
+    return data;
   } catch (error) {
     console.log(error.message);
     return [];

@@ -12,12 +12,12 @@
 }
 
 body {
-  background: rgb(255, 212, 214);
+  /* background: rgb(255, 212, 214);
   background: linear-gradient(
     90deg,
     rgba(255, 200, 203, 0.637) 15%,
     rgba(255, 199, 199, 0.738) 51%
-  );
+  );*/
 }
 
 .bg-gr-bg {

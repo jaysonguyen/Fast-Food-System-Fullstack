@@ -1,74 +1,77 @@
 import React, { useState, useEffect } from "react";
-import {
-  getOrderByID,
-  getOrderProcessing,
-  getOrderCompleted,
-} from "../../services/orderServices";
-import { getFoodData } from "../../services/foodServices";
+import Slider from "react-slick";
 
-export const Orders = () => {
-  const [food, setFood] = useState([]);
-  const [orderNew, setOrderNew] = useState([]);
-  const [orderCompleted, setOrderCompleted] = useState([]);
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-  const getAllFood = async () => {
-    let data = await getFoodData();
-    setFood(data);
+import { DetailsOrder } from "./DetailsOrder";
+
+export const Orders = ({ orderNewData }) => {
+  const [orderPicked, setOrderPicked] = useState([]);
+
+  const getOrder = (order) => {
+    setOrderPicked(order);
   };
 
-  const getAllOrderNew = async () => {
-    let data = await getOrderProcessing();
-    const newData = data.DT.map((item) =>
-      item.Details.map((d, idx) => {
-        const foodItem = food.find((f) => f.ID === d.FoodID);
-        if (foodItem) {
-          item.Details[idx] = { ...d, FoodName: foodItem.Name };
-        }
-      })
-    );
-    setOrderNew(data.DT);
-  };
-
-  const getAllOrderCompleted = async () => {
-    let data = await getOrderCompleted();
-    setOrderCompleted(data.DT);
-  };
-
-  useEffect(() => {
-    getAllFood();
-    getAllOrderNew();
-    getAllOrderCompleted();
-  }, [orderNew, orderCompleted]);
+  useEffect(() => {}, [orderPicked]);
 
   return (
     <>
-      <div className="order-title">New</div>
-      <div className="d-flex flex-col">
-        {orderNew.map((order, idx) => (
-          <div className="order-card">
-            <div className="row order-list-title mb-2">
-              <div className="col order-code">Order {order.ID}</div>
-              <div className="col-3">
-                <button className="btn btn-clr-normal">Done</button>
-              </div>
-            </div>
-            {order.Details.map((d) => (
-              <div className="row order-table">
-                <div className="row order-table-title">
-                  <div className="col ">Food Name</div>
-                  <div className="col-lg-4 ">Quantity</div>
-                </div>
-                <div className="row order-table-item">
-                  <div className="col ">{d.FoodName}</div>
-                  <div className="col-lg-4 ">{d.Quantity}</div>
+      <div className="main-header row">
+        <div className="col left d-flex flex-row gap-3 align-items-center">
+          <button className="btn btn-clr-normal">{"<-"}</button>
+          <div className="breadcumb d-flex flex-row gap-3 align-items-center">
+            <div className="prev">Dashboard</div>
+            <div className="curr">Sales statistics</div>
+          </div>
+        </div>
+        <div className="col right d-flex flex-row gap-3 align-items-center">
+          <div className="noti">noti</div>
+          <div className="time">time</div>
+          <div className="search">
+            <i className="fa fa-search"></i>
+            <input type="text" />
+          </div>
+        </div>
+      </div>
+      <div className="main-body row">
+        <div className="col-4 bill-list">
+          <div className="sub-header d-flex flex-row justify-between">
+            <div className="big-title">Bill</div>
+          </div>
+          <div className="session-nav">All</div>
+          <div className="session-bill row">
+            {orderNewData.map((order) => (
+              <div
+              key={order.ID}
+                className="col-10 bill-item "
+                onClick={() => getOrder(order)}
+              >
+                <div className="row">
+                  <div className="col-7">
+                    <div className=" d-flex flex-row align-items-center">
+                      <div className="order-id me-3">Order {order.ID}</div>
+                      <div className="order-status">{order.Status}</div>
+                    </div>
+                    <div className="">Quantity: {order.Quantity}</div>
+                  </div>
+                  <div className="col-5 text-end">
+                    <div className="order-price">{order.Total}</div>
+                    <div className="order-time">14:50</div>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
-        ))}
-      </div>
+        </div>
+        <div className="details-list col px-lg-5">
+          <div className="sub-header d-flex flex-row justify-between">
+            <div className="big-title">Details</div>
+          </div>
 
-      <div className="order-title">Completed</div>
+          <DetailsOrder order={orderPicked} />
+        </div>
+      </div>
     </>
   );
 };
