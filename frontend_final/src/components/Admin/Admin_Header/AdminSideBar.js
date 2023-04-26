@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../css/root.css"
-import "../css/main.css"
+import "../css/root.css";
+import "../css/main.css";
 
 const AdminSideBar = (props) => {
   return (
-    <div >
+    <div>
       <div id="sidebar">
         <ul className="nav-list">
           <li className="nav-item has-submenu">
@@ -18,18 +18,17 @@ const AdminSideBar = (props) => {
                   Product
                 </Link>
               </li>
-              
+
               <li>
                 <Link className="nav-link active" to="/admin/catagories">
                   Catagories
                 </Link>
               </li>
-             
             </ul>
           </li>
           <li className="nav-item has-submenu">
             <Link className="nav-link active" href="#">
-            <b>Supplier Management </b>
+              <b>Supplier Management </b>
             </Link>
             <ul className="submenu collapse show">
               <li>
@@ -37,12 +36,11 @@ const AdminSideBar = (props) => {
                   Supplier
                 </Link>
               </li>
-              
             </ul>
           </li>
           <li className="nav-item has-submenu">
             <Link className="nav-link active" href="#">
-            <b>Staff Management </b>
+              <b>Staff Management </b>
             </Link>
             <ul className="submenu collapse show">
               <li>
@@ -50,12 +48,11 @@ const AdminSideBar = (props) => {
                   Staff
                 </Link>
               </li>
-              
             </ul>
           </li>
           <li className="nav-item has-submenu">
             <Link className="nav-link active" href="#">
-            <b>Promotion Management </b>
+              <b>Promotion Management </b>
             </Link>
             <ul className="submenu collapse show">
               <li>
@@ -63,10 +60,8 @@ const AdminSideBar = (props) => {
                   Promotion
                 </Link>
               </li>
-              
             </ul>
           </li>
-         
         </ul>
       </div>
     </div>

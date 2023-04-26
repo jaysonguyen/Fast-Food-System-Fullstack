@@ -93,9 +93,9 @@ const editPromotion = async (req, res) => {
         EC: data.EC,
         DT: "",
       });
-    } else {
+    } if(data && +data.EC != 1) {
       return res.status(200).json({
-        EM: "update data success",
+        EM: "update data failed",
         EC: 0,
         DT: "",
       });

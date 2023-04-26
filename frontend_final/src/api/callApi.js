@@ -34,6 +34,8 @@ export const FoodByTypeData = (id) => {
   return axios.get(`api/foodtype/${id}`);
 };
 
+// order
+
 export const OrderData = () => {
   return axios.get("api/order");
 };
@@ -45,6 +47,8 @@ export const OrderProcessingData = () => {
 export const OrderCompletedData = () => {
   return axios.get("api/order/finished");
 };
+
+// insert
 
 export const InsertFood = (name, price, image, type, recipe, status) => {
   return axios.post(`api/food`, {

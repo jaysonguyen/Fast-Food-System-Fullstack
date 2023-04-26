@@ -45,6 +45,9 @@ const Production = (props) => {
       const dataProduct = await getAllProduct();
       setProductList(dataProduct.DT);
     };
+    if (productList) {
+      console.log(productList);
+    }
     fetchData();
   }, []);
 
@@ -89,126 +92,98 @@ const Production = (props) => {
     },
     [productList]
   );
-
   return (
     <>
-      <div id="body">
-        <div className="container">
-          <div className="container-fluid main-body">
-            <div className="d-flex flex-col">
-              <div className="col ms-4">
-                <div className="main-content rounded-3 border border-2 py-4 px-3">
-                  <div className="table-header row">
-                    <div className="col-3">
-                      <h3 className="title">Product List</h3>
-                    </div>
-                    <div className="col text-end me-2">
-                      <button className="btn btn-clr-normal">
-                        <a
-                          onClick={() => handleCreateProduct()}
-                          className="nav-link"
-                        >
-                          Add product
-                        </a>
-                      </button>
-                    </div>
-                  </div>
-                  <br></br>
-                  <div className="text-white">
-                    <div className="bg-white">
-                      <table className="table align-middle mb-0">
-                        <thead className="">
-                          <tr>
-                            <th>Product name</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th>Image</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {productList.map((product, key) => {
-                            return (
-                              <tr key={key}>
-                                <td>
-                                  <div className="d-flex align-items-center">
-                                    <div className="">
-                                      <p className="fw-bold mb-1">
-                                        {product.Name}
-                                      </p>
-                                    </div>
-                                  </div>
-                                </td>
-                                <td>
-                                  <p className="fw-normal mb-1">
-                                    {product.Type}
-                                  </p>
-                                </td>
-                                <td>
-                                  {product.Price.toLocaleString("de-DE")}{" "}
-                                  <span>&#8363;</span>
-                                </td>
-                                <td>
-                                  <img
-                                    src={product.Image}
-                                    className="image-product"
-                                  />
-                                </td>
-                                <td>
-                                  <div
-                                    className={
-                                      product.Status == 1
-                                        ? "text-center px-1 w-75 btn-sml btn-clr-success rounded-1"
-                                        : "text-center px-1 w-75 btn-sml btn-clr-danger rounded-1"
-                                    }
-                                  >
-                                    {product.Status == 1 ? "ON" : "OFF"}
-                                  </div>
-                                </td>
-                                <td>
-                                  <div className="d-flex flex-row gap-1">
-                                    <span className="nav-link">
-                                      <AiOutlineEdit
-                                        className="edit-icon"
-                                        id={product.ID}
-                                        onClick={(e) =>
-                                          handleAction(e.target.id)
-                                        }
-                                      />
-                                    </span>
-                                    <span className="nav-link">
-                                      <AiOutlineDelete
-                                        className="del-icon"
-                                        id={product.ID}
-                                        onClick={async (e) =>
-                                          await handleDeleteFood(e.target.id)
-                                        }
-                                      />
-                                    </span>
-                                  </div>
-                                </td>
-                              </tr>
-                            );
-                          })}
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div class="table-header row">
+        <div class="col-3">
+          <h3 class="title">Product List</h3>
         </div>
-        {
-          <ProductModal
-            show={showModal}
-            onHide={handleShowModal}
-            action={action}
-            dataFood={dataFood}
-          />
-        }
+        <div className="col text-end me-2">
+          <button className="btn btn-clr-normal">
+            <a onClick={() => handleShowModal()} className="nav-link">
+              Add product
+            </a>
+          </button>
+        </div>
       </div>
+      <div class="">
+        <div class="form-list">
+          <table class="table-wrapper mb-0">
+            <div class="row row-header">
+              <div class="col-lg-3">Product Name</div>
+              <div class="col-lg-2">Category</div>
+              <div class="col-lg-2">Price</div>
+              <div class="col-lg-2">Image</div>
+              <div class="col-lg-1">Status</div>
+              <div class="col-lg-2">Actions</div>
+            </div>
+            <div class="table-body">
+              {productList.map((product, key) => {
+                return (
+                  <div key={key} class="row item-list">
+                    <div class="col-lg-3">
+                      <div class="d-flex align-items-center">
+                        <div class="">
+                          <p class="fw-bold mb-1">{product.Name}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-2">
+                      <p class="fw-normal mb-1">{product.NameType}</p>
+                    </div>
+                    <div class="col-lg-2">
+                      {product.Price.toLocaleString("de-DE")}{" "}
+                      <span>&#8363;</span>
+                    </div>
+                    <div class="col-lg-2">
+                      <img src={product.Image} className="image-product" />
+                    </div>
+                    <div class="col-lg-1">
+                      <div
+                        className={
+                          product.Status == 1
+                            ? "text-center px-1 w-75 btn-sml btn-clr-success rounded-1"
+                            : "text-center px-1 w-75 btn-sml btn-clr-danger rounded-1"
+                        }
+                      >
+                        {product.Status == 1 ? "ON" : "OFF"}
+                      </div>
+                    </div>
+                    <div class="col-lg-2">
+                      <div className="d-flex flex-row gap-1">
+                        <a className="nav-link">
+                          <AiOutlineEdit
+                            className="edit-icon"
+                            id={product.ID}
+                            onClick={(e) => handleAction(e.target.id)}
+                          />
+                        </a>
+                        <a href="#" className="nav-link">
+                          <AiOutlineDelete
+                            className="del-icon"
+                            id={product.ID}
+                            onClick={async (e) =>
+                              await handleDeleteFood(e.target.id)
+                            }
+                          />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </table>
+        </div>
+      </div>
+      {
+        <ProductModal
+          show={showModal}
+          onHide={handleShowModal}
+          action={action}
+          dataFood={dataFood}
+        />
+      }
     </>
   );
 };

@@ -23,6 +23,9 @@ const ProductModal = (props) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  //use for update
+  const initialFoodInfo = async () => {};
+
   const handleCreateFood = async (e) => {
     e.preventDefault();
     const data = await AddFood(name, price, image, type, recipe);

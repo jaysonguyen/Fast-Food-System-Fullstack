@@ -69,106 +69,96 @@ const Catagories = (props) => {
   };
 
   return (
-    <div id="body">
-      <div className="container">
-        <div className="container-fluid main-body">
-          <div className="d-flex flex-col">
-            <div className="col ms-4">
-              <div className="add-inline-form main-content rounded-3 border border-2 py-4 px-3 mb-3">
-                <div className="table-header row">
-                  <div className="col-3">
-                    <h3 className="title">
-                      {action == "CREATE" ? "Add Category" : "Update category"}
-                    </h3>
-                  </div>
+    <div class="d-flex flex-col">
+      <div class="col ms-4">
+        <div class="form-list">
+          <div class="table-header row">
+            <div class="col-3">
+              <h3 class="title">
+                {" "}
+                {action == "CREATE" ? "Add Category" : "Update category"}
+              </h3>
+            </div>
+          </div>
+          <form class="create-form">
+            <div class="row">
+              <div class="col-10">
+                <div class="form-outline mb-4">
+                  <input
+                    type="text"
+                    id="form6Example3"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    class="form-control w-100"
+                  />
+                  <label class="form-label" for="form6Example3">
+                    Category name
+                  </label>
                 </div>
-                <form className="create-form">
-                  <div className="row">
-                    <div className="col-10">
-                      <div className="form-outline mb-4">
-                        <input
-                          type="text"
-                          id="form6Example3"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          className="form-control"
-                        />
-                        <label className="form-label" htmlFor="form6Example3">
-                          Category name
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-2 mt-4">
-                    <button
-                      type="submit"
-                      onClick={
-                        action == "CREATE"
-                          ? (e) => handleAddTypeFood(e)
-                          : (e) => handleUpdateFood(e)
-                      }
-                      className="btn btn-clr-normal btn-block mb-4 w-50"
-                    >
-                      Save
-                    </button>
-                  </div>
-                </form>
               </div>
-              <div className="main-content rounded-3 border border-2 py-4 px-3">
-                <div className="table-header row">
-                  <div className="col-3">
-                    <h3 className="title">Categories</h3>
-                  </div>
+              <div class="col-2">
+                <button
+                  type="submit"
+                  onClick={
+                    action == "CREATE"
+                      ? (e) => handleAddTypeFood(e)
+                      : (e) => handleUpdateFood(e)
+                  }
+                  class="btn btn-clr-normal btn-block w-75 h-50"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="form-list mt-3">
+          <div class="table-header row">
+            <div class="col-3">
+              <h3 class="title">Categories</h3>
+            </div>
+          </div>
+          <div class="">
+            <div class="bg-white">
+              <div class="table-wrapper mb-0">
+                <div class="row row-header">
+                  <div class="col-lg-4">Category Name</div>
+                  <div class="col-lg-4">Description</div>
+                  <div class="col-lg-2">Image</div>
+                  <div class="col-lg-2">Action</div>
                 </div>
-                <div className="text-white">
-                  <div className="bg-white">
-                    <table className="table align-middle mb-0">
-                      <thead className="">
-                        <tr>
-                          <th>Category Name</th>
-                          <th>Description</th>
-                          <th>Image</th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {catagory.map((catagory, key) => {
-                          return (
-                            <tr key={key}>
-                              <td>
-                                <div className="d-flex align-items-center">
-                                  <div className="">
-                                    <p className="fw-bold mb-1">
-                                      {catagory.Name}
-                                    </p>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>{catagory.Descript}</td>
-                              <td>
-                                {" "}
-                                <img src={catagory.Image} />
-                              </td>
-                              <td>
-                                <div className="d-flex flex-row gap-1">
-                                  <a className="nav-link">
-                                    <AiOutlineEdit
-                                      id={catagory.ID}
-                                      className="edit-icon"
-                                      onClick={(e) => handleAction(e.target.id)}
-                                    />
-                                  </a>
-                                  <span className="nav-link">
-                                    <AiOutlineDelete className="del-icon" />
-                                  </span>
-                                </div>
-                              </td>
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
-                  </div>
+                <div class="table-body">
+                  {catagory.map((catagory, key) => {
+                    return (
+                      <div key={key} class="row item-list">
+                        <div class="col-lg-4">
+                          <div class="d-flex align-items-center">
+                            <div class="">
+                              <p class="fw-bold mb-1">{catagory.Name}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-4">{catagory.Descript}</div>
+                        <div class="col-lg-2">
+                          <img src={catagory.Image} />
+                        </div>
+                        <div class="col-lg-2">
+                          <div className="d-flex flex-row gap-1">
+                            <a className="nav-link">
+                              <AiOutlineEdit
+                                id={catagory.ID}
+                                className="edit-icon"
+                                onClick={(e) => handleAction(e.target.id)}
+                              />
+                            </a>
+                            <a className="nav-link">
+                              <AiOutlineDelete className="del-icon" />
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
