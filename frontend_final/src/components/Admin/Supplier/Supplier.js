@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { getAllSupplier, removeSupplier } from "../../../services/supplier";
 import SupplierModal from "./SupplierModal";
+import { toast } from "react-toastify";
 
 const Supplier = (props) => {
   const [supplier, setSupplier] = useState([]);
@@ -14,9 +15,12 @@ const Supplier = (props) => {
   };
 
   const handelDeleteSupplier = async (id) => {
-    let data = await removeSupplier(id);
-    if (data && +data.EC === 1) {
-      alert("Xoa oke");
+    const data = await removeSupplier(id);
+    if (data && +data.EC == 1) {
+      toast.success("Delete data succeed");
+    }
+    if (data && +data.EC != 1) {
+      toast.error(data.EM);
     }
     console.log(id);
   };
@@ -31,88 +35,78 @@ const Supplier = (props) => {
   };
 
   return (
-    <div id="body">
-      <div class="container">
-        <div class="container-fluid main-body">
-          <div class="d-flex flex-col">
-            <div class="col ms-4">
-              <div class="main-content rounded-3 border border-2 py-4 px-3">
-                <div class="table-header row">
-                  <div class="col-3">
-                    <h3 class="title">Supplier List</h3>
-                  </div>
-                  <div class="col text-end me-2">
-                    <button class="btn btn-clr-normal">
-                      <a onClick={() => handleShowModal()} class="nav-link">
-                        Add supplier
-                      </a>
-                    </button>
-                  </div>
-                </div>
-                <br></br>
-                <div class="text-white">
-                  <div class="bg-white">
-                    <table class="table align-middle mb-0">
-                      <thead class="">
-                        <tr>
-                          <th>Supplier name</th>
-                          <th>Contact</th>
-                          <th>Description</th>
-                          <th>Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {supplier.map((supplier, key) => {
-                          return (
-                            <tr key={key}>
-                              <td>
-                                <div class="d-flex align-items-center">
-                                  <img
-                                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                                    alt=""
-                                    style={{ width: "45px", height: "45px" }}
-                                    class="rounded-circle"
-                                  />
-                                  <div class="ms-3">
-                                    <p class="fw-bold mb-1">{supplier.Name}</p>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <p class="fw-normal mb-1">{supplier.Contact}</p>
-                              </td>
+    <>
+      <div class="form-list">
+        <div class="table-header row">
+          <div class="col-3">
+            <h3 class="title">Supplier List</h3>
+          </div>
+          <div class="col text-end me-2">
+            <button class="btn btn-clr-normal">
+              <a onClick={() => handleShowModal()} class="nav-link">
+                Add supplier
+              </a>
+            </button>
+          </div>
+        </div>
+        <br></br>
+        <div class="">
+          <div class="bg-white">
+            <div class="table-wrapper mb-0">
+              <div class="row row-header">
+                <div class="col-lg-4">Supplier Name</div>
+                <div class="col-lg-3">Description</div>
+                <div class="col-lg-3">Contact</div>
+                <div class="col-lg-2">Actions</div>
+              </div>
+              <div class="table-body">
+                {supplier.map((supplier, key) => {
+                  return (
+                    <div key={key} class="row item-list">
+                      <div class="col-lg-4">
+                        <div class="d-flex align-items-center">
+                          <img
+                            src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                            alt=""
+                            style={{ width: "45px", height: "45px" }}
+                            class="rounded-circle"
+                          />
+                          <div class="ms-3">
+                            <p class="fw-bold mb-1">{supplier.Name}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <p class="fw-normal mb-1">{supplier.Contact}</p>
+                      </div>
 
-                              <td>{supplier.Note}</td>
-                              <td>
-                                <div className="d-flex flex-row gap-1">
-                                  <a href="./edit.html" className="nav-link">
-                                    <AiOutlineEdit className="edit-icon" />
-                                  </a>
-                                  <a href="#" className="nav-link">
-                                    <AiOutlineDelete
-                                      className="del-icon"
-                                      id={supplier.ID}
-                                      onClick={async (e) =>
-                                        handelDeleteSupplier(e.target.id)
-                                      }
-                                    />
-                                  </a>
-                                </div>
-                              </td>
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
+                      <div class="col-lg-3">{supplier.Note}</div>
+                      <div class="col-lg-2">
+                        <div className="d-flex flex-row gap-1">
+                          <a href="./edit.html" className="nav-link">
+                            <AiOutlineEdit className="edit-icon" />
+                          </a>
+                          <a href="#" className="nav-link">
+                            <AiOutlineDelete
+                              className="del-icon"
+                              id={supplier.ID}
+                              onClick={async (e) =>
+                                handelDeleteSupplier(e.target.id)
+                              }
+                            />
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
         </div>
       </div>
       <SupplierModal show={showModal} onHide={handleShowModal} />
-    </div>
+    </>
   );
 };
 

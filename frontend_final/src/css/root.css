@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap");
+
 :root {
   --clr-gradient-1: #d24850;
   --clr-gradient-2: #df4949;
@@ -11,6 +13,10 @@
   --clr-font-third: ;
 
   --red: red;
+}
+
+body {
+  font-family: "Fira Sans", sans-serif;
 }
 
 /****** File input ******/

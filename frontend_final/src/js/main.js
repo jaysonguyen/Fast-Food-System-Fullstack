@@ -1,15 +1,19 @@
+import $ from "jquery";
+
 document.addEventListener("DOMContentLoaded", function () {
   dropDownSideBar();
   toggleAddProductForm();
+  setSideNav();
   console.log("run into this");
 });
 // DOMContentLoaded  end
 
-setSideNav();
+// setSideNav();
 
 function dropDownSideBar() {
-  document.querySelectorAll("#sidebar .nav-link").forEach(function (element) {
+  document.querySelectorAll(".sidebar .nav-link").forEach(function (element) {
     element.addEventListener("click", function (e) {
+      console.log("Click");
       let nextEl = element.nextElementSibling;
       let parentEl = element.parentElement;
 
@@ -21,7 +25,6 @@ function dropDownSideBar() {
           mycollapse.hide();
         } else {
           mycollapse.show();
-          this.toggle("active");
           // find other submenus with class=show
           var opened_submenu =
             parentEl.parentElement.querySelector(".submenu.show");
@@ -32,7 +35,7 @@ function dropDownSideBar() {
         }
       }
     }); // addEventListener
-  }); // forEach
+  });
 }
 
 function toggleAddProductForm() {
@@ -60,6 +63,13 @@ function setSideNav() {
     );
   });
 
+  $item2 = $("#mySidebar .nav-link").filter(function () {
+    return (
+      $(this).prop("href").split("/").splice(-1)[0].indexOf(route) !== -1 ||
+      $(this).prop("href").split("/").splice(-1)[0].indexOf(route2) !== -1
+    );
+  });
+
   $authHeader = $("#auth-header .nav-link").filter(function () {
     return (
       $(this).prop("href").split("/").splice(-1)[0].indexOf(route) !== -1 ||
@@ -67,6 +77,9 @@ function setSideNav() {
     );
   });
 
+  console.log($item2);
+
   $item.map((idx, val) => val.classList.toggle("active"));
+  $item2.map((idx, val) => val.classList.toggle("active"));
   $authHeader.map((idx, val) => val.classList.toggle("active"));
 }

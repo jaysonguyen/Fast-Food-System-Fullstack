@@ -6,6 +6,7 @@ const {
   deleteFood,
   deleteList,
   getFoodByName,
+  updateFoodStatus,
 } = require("../services/foodServices");
 
 const tools = require("../tool");
@@ -58,13 +59,21 @@ const updateF = async (req, res) => {
   try {
     // const { id, nameFood } = req.query;
     // console.log(req.params.id, req.body.nameFood);
-    const data = await updateFood(
-      req.params.id,
-      req.body.Name,
-      req.body.Price,
-      req.body.Type,
-      req.body.Status
-    );
+    let data = [];
+    if (req.body.Name == undefined) {
+      //update food status only
+      data = await updateFoodStatus(req.params.id, req.body.Status);
+    } else {
+      data = await updateFood(
+        //update full food
+        req.params.id,
+        req.body.Name,
+        req.body.Price,
+        req.body.Type,
+        req.body.Status
+      );
+    }
+
     if (data.EM.includes("Success")) {
       return res.status(201).json({
         EM: "Update success",
@@ -73,7 +82,7 @@ const updateF = async (req, res) => {
       });
     } else if (data.EM.includes("Error")) {
       return res.status(500).json({
-        EM: "Error at service",
+        EM: data.EM,
         EC: 1,
         DT: data.DT,
       });
@@ -82,6 +91,27 @@ const updateF = async (req, res) => {
     console.log(error.message);
     return res.status(500).json({
       message: "Error at controller: " + error.message,
+    });
+  }
+};
+
+const getFoodById = async (req, res) => {
+  try {
+    let id = req.params.id;
+    let data = await getOneFood(id);
+    if (data.DT)
+      return res.status(200).json({
+        EM: data.EM,
+        EC: data.EC,
+        DT: data.DT,
+      });
+
+    return res.status(404).json({
+      message: "Cannot get Food Type",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error: " + error.message,
     });
   }
 };
@@ -145,5 +175,6 @@ module.exports = {
   createFood,
   updateF,
   deteleF,
+  getFoodById,
   getLevel0,
 };

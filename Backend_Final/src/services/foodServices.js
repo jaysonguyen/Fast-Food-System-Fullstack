@@ -6,7 +6,6 @@ console.log("Starting...");
 const getAllFood = async () => {
   try {
     const poolConnection = await sql.connect(config);
-    console.log("Reading rows from the Table...");
     let data = await poolConnection.request().query("Select * from Food");
     poolConnection.close();
     if (data) {
@@ -215,6 +214,36 @@ const updateFood = async (id, name, price, type, status) => {
   }
 };
 
+const updateFoodStatus = async (id, status) => {
+  try {
+    const poolConnection = await sql.connect(config);
+    let data = await poolConnection.query(
+      `exec sp_updateFoodStatus ${id}, ${status}`
+    );
+    poolConnection.close();
+    if (data) {
+      return {
+        EM: "Update Success",
+        EC: 1,
+        DT: data.recordset,
+      };
+    } else {
+      return {
+        EM: "Empty",
+        EC: 0,
+        DT: [],
+      };
+    }
+  } catch (error) {
+    console.log(`Update failed: ${error}`);
+    return {
+      EM: "Error at service",
+      EC: 0,
+      DT: error.message,
+    };
+  }
+};
+
 //get food by id
 const getOneFood = async (id) => {
   try {
@@ -285,4 +314,5 @@ module.exports = {
   updateFood,
   deleteList,
   getFoodByName,
+  updateFoodStatus,
 };

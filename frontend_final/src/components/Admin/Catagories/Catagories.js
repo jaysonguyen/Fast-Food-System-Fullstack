@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { getAllProductType } from "../../../services/productType";
 import { InsertFoodTyppe } from "../../../api/callApi";
+import { toast } from "react-toastify";
 
 const Catagories = (props) => {
   const [catagory, setCatagory] = useState([]);
+  const [name, setName] = useState("");
 
   const fetchCatagory = async () => {
     let dataCatagory = await getAllProductType();
@@ -15,112 +17,104 @@ const Catagories = (props) => {
     fetchCatagory();
   }, [catagory]);
 
-  const [name, setName] = useState("");
+ 
 
   const handleAddTypeFood = async (e) => {
     e.preventDefault();
     try {
       let data = await InsertFoodTyppe(name);
       if (data && +data.EC == 1) {
-        console.log("INSERT THANH CONG");
+        toast.success(data.EM);
       }
       if (data && +data.EC != 1) {
-        console.log("INSERT THAT BAI");
+        toast.error(data.EM);
       }
     } catch (error) {
-      console.log(error);
+      toast.error(error);
     }
   };
 
   return (
-    <div id="body">
-      <div class="container">
-        <div class="container-fluid main-body">
-          <div class="d-flex flex-col">
-            <div class="col ms-4">
-              <div class="add-inline-form main-content rounded-3 border border-2 py-4 px-3 mb-3">
-                <div class="table-header row">
-                  <div class="col-3">
-                    <h3 class="title">Add Category</h3>
-                  </div>
+    <div class="d-flex flex-col">
+      <div class="col ms-4">
+        <div class="form-list">
+          <div class="table-header row">
+            <div class="col-3">
+              <h3 class="title">Add Category</h3>
+            </div>
+          </div>
+          <form class="create-form">
+            <div class="row">
+              <div class="col-10">
+                <div class="form-outline mb-4">
+                  <input
+                    type="text"
+                    id="form6Example3"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    class="form-control w-100"
+                  />
+                  <label class="form-label" for="form6Example3">
+                    Category name
+                  </label>
                 </div>
-                <form class="create-form">
-                  <div class="row">
-                    <div class="col-10">
-                      <div class="form-outline mb-4">
-                        <input
-                          type="text"
-                          id="form6Example3"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          class="form-control"
-                        />
-                        <label class="form-label" for="form6Example3">
-                          Category name
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-2 mt-4">
-                    <button
-                      type="submit"
-                      onClick={(e) => handleAddTypeFood(e)}
-                      class="btn btn-clr-normal btn-block mb-4 w-50"
-                    >
-                      Save
-                    </button>
-                  </div>
-                </form>
               </div>
-              <div class="main-content rounded-3 border border-2 py-4 px-3">
-                <div class="table-header row">
-                  <div class="col-3">
-                    <h3 class="title">Categories</h3>
-                  </div>
+              <div class="col-2">
+                <button
+                  type="submit"
+                  onClick={(e) => handleAddTypeFood(e)}
+                  class="btn btn-clr-normal btn-block w-75 h-50"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="form-list mt-3">
+          <div class="table-header row">
+            <div class="col-3">
+              <h3 class="title">Categories</h3>
+            </div>
+          </div>
+          <div class="">
+            <div class="bg-white">
+              <div class="table-wrapper mb-0">
+                <div class="row row-header">
+                  <div class="col-lg-4">Category Name</div>
+                  <div class="col-lg-4">Description</div>
+                  <div class="col-lg-2">Image</div>
+                  <div class="col-lg-2">Action</div>
                 </div>
-                <div class="text-white">
-                  <div class="bg-white">
-                    <table class="table align-middle mb-0">
-                      <thead class="">
-                        <tr>
-                          <th>Category Name</th>
-                          <th>Description</th>
-                          <th>Image</th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {catagory.map((catagory, key) => {
-                          return (
-                            <tr key={key}>
-                              <td>
-                                <div class="d-flex align-items-center">
-                                  <div class="">
-                                    <p class="fw-bold mb-1">{catagory.Name}</p>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>{catagory.Descript}</td>
-                              <td>
-                                {" "}
-                                <img src={catagory.Image} />
-                              </td>
-                              <td>
-                                <div className="d-flex flex-row gap-1">
-                                  <a href="./edit.html" className="nav-link">
-                                    <AiOutlineEdit className="edit-icon" />
-                                  </a>
-                                  <a href="#" className="nav-link">
-                                    <AiOutlineDelete className="del-icon" />
-                                  </a>
-                                </div>
-                              </td>
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
-                  </div>
+                
+                <div class="table-body">
+                  {catagory.map((catagory, key) => {
+                    return (
+                      <div key={key} class="row item-list">
+                        <div class="col-lg-4">
+                          <div class="d-flex align-items-center">
+                            <div class="">
+                              <p class="fw-bold mb-1">{catagory.Name}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-4">{catagory.Descript}</div>
+                        <div class="col-lg-2">
+                          <img src={catagory.Image} />
+                        </div>
+                        <div class="col-lg-2">
+                          <div className="d-flex flex-row gap-1">
+                            <a href="./edit.html" className="nav-link">
+                              <AiOutlineEdit className="edit-icon" />
+                            </a>
+                            <a href="#" className="nav-link">
+                              <AiOutlineDelete className="del-icon" />
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -128,6 +122,7 @@ const Catagories = (props) => {
         </div>
       </div>
     </div>
+   
   );
 };
 

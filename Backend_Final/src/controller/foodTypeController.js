@@ -26,6 +26,9 @@ const getFoodTypeList = async (req, res) => {
   }
 };
 
+
+
+
 const getFoodByT = async (req, res) => {
   try {
     let data = await getFoodByType(req.params.id);
