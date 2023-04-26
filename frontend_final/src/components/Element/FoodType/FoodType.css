@@ -1,0 +1,73 @@
+.casher-nav {
+    max-width: 25%;
+    height: 100vh;
+    background-color: #fff !important;
+    position: sticky;
+    padding: 1px 0;
+}
+
+.food_feed_container {
+    height: 100vh;
+    margin-left: 25%;
+    padding-left: 30px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.food_feed_item_container {
+    background-color: #fff;
+    box-shadow: 0 0 10px #e2e2e2;
+    border-radius: 10px;
+    position: relative;
+    padding: 8px;
+    margin-top: 35px;
+    margin-right: 35px;
+}
+
+.image_food_feed {
+    width: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.image_food_feed img {
+    width: 100%;
+}
+
+.food_feed_item_name {
+    font-size: 15px;
+    text-align: left;
+    margin-bottom: 0;
+}
+
+.food_feed_item_price {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.food_feed_add_cart_btn {
+    position: absolute;
+    left: 85%;
+    top: 85%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.food_feed_add_cart_btn--icon {
+    color: #fff;
+    font-size: 20px;
+}
+
+.order_tabler_staff_icon {
+    margin-left: 15px;
+}
+
+.order_tabler_staff_icon--icon {
+    font-size: 20px;
+}

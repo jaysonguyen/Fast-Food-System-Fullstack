@@ -23,8 +23,14 @@ const ProductModal = (props) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+
+  console.log(props.action);
+
   //use for update
   const initialFoodInfo = async () => {};
+
+
+
 
   const handleCreateFood = async (e) => {
     e.preventDefault();

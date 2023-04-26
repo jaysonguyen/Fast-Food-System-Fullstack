@@ -30,11 +30,19 @@ import Catagories from "./components/Admin/Catagories/Catagories";
 import Supplier from "./components/Admin/Supplier/Supplier";
 import Staff from "./components/Admin/Store/Staff/Staff";
 
+// kitchen
+import { KitchenLayout } from "./components/Layout/KitchenLayout";
+import { OrderPage as KitchenOrder } from "./components/pages/Kitchen/OrderPage";
+
+import { AdminLayout } from "./components/Layout/AdminLayout";
+import { AdminDB } from "./components/pages/admin/AdminDB";
+
 import "jquery/dist/jquery.min.js";
 import "popper.js/dist/popper.min.js";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import { AdminLayout } from "./components/Layout/AdminLayout";
-import { AdminDB } from "./components/pages/admin/AdminDB";
+import "./js/main.js";
+import FoodType from "./components/Element/FoodType/FoodType";
+import Order from "./components/Element/Order/Order";
 
 function App() {
   const pathname = window.location.pathname;
@@ -46,12 +54,11 @@ function App() {
     <StrictMode>
       <Router>
         {/* {pathname.includes("/admin") ? <AdminHeader /> : <NavBar />} */}
-        <NavBar />
-        {/* {pathname.includes("/admin") ? <AdminSideBar /> : ""} */}
+        {/* <NavBar /> */}
         <Routes>
           <Route path="/login" element={<LoginPage />} />
 
-          <Route path="/casher/order" element={<OrderPage />} />
+          <Route path="/" element={<OrderPage />} />
           <Route path="/casher/menu" element={<MenuManagementPage />} />
           <Route path="/casher/orders" element={<OrderManagement />}>
             <Route path="/casher/orders/all" element={<OrderHistory />} />
@@ -64,6 +71,7 @@ function App() {
               element={<OrderCompleted />}
             />
           </Route>
+          {/* admin */}
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="/admin/dashboard" element={<Production />}></Route>
             {/* production */}
@@ -82,6 +90,10 @@ function App() {
             ></Route>
             {/* store */}
             <Route path="/admin/store/staff" element={<Staff />}></Route>
+          </Route>
+          {/* kitchen */}
+          <Route path="/kitchen" element={<KitchenLayout />}>
+            <Route path="/kitchen/orders" element={<KitchenOrder />}></Route>
           </Route>
         </Routes>
       </Router>

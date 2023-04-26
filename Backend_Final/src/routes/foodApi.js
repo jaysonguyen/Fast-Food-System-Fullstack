@@ -14,7 +14,7 @@ router.route("/").get(getFoodList);
 router.route("/").post(createFood);
 router.route("/update/:id").put(updateF);
 router.route("/:id").get(getLevel0);
-router.route("/getId/:id").get(getFoodById);
+//router.route("/getId/:id").get(getFoodById);
 // router.route("/delete/").get(getDeleteList);
 router.route("/delete/:id").delete(deteleF);
 

@@ -166,6 +166,7 @@ const Catagories = (props) => {
         </div>
       </div>
     </div>
+   
   );
 };
 

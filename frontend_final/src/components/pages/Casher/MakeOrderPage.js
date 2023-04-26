@@ -14,7 +14,7 @@ export default function OrderPage() {
   return (
     //active tab
     <ActiveProvider>
-      <div className="container-fluid">
+      <div className="container-fluid background_grey">
         <div className="row">
           <OrderProvider>
             <Tab />

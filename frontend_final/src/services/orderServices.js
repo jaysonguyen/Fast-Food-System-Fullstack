@@ -3,13 +3,16 @@ import {
   OrderProcessingData,
   OrderCompletedData,
   AddNewOrderData,
+  getOrderById,
 } from "../api/callApi";
+import { getFoodData } from "./foodServices";
 
 export const getAllOrder = async () => {
   let data = [];
+  let food = await getFoodData();
   try {
     data = await OrderData();
-    return data.DT;
+    return data;
   } catch (error) {
     console.log(error.message);
     return [];
@@ -29,7 +32,7 @@ export const getOrderProcessing = async () => {
   let data = [];
   try {
     data = await OrderProcessingData();
-    return data.DT;
+    return data;
   } catch (error) {
     console.log(error.message);
     return [];
@@ -40,6 +43,17 @@ export const getOrderCompleted = async () => {
   let data = [];
   try {
     data = await OrderCompletedData();
+    return data;
+  } catch (error) {
+    console.log(error.message);
+    return [];
+  }
+};
+
+export const getOrderByID = async (id) => {
+  let data = [];
+  try {
+    data = await getOrderById(id);
     return data.DT;
   } catch (error) {
     console.log(error.message);
