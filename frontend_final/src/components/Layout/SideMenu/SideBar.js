@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ProductionSB, StoreSB } from "./AdminSideBar";
+import { Scroll, ChartLine, BellSimpleRinging, Info } from "phosphor-react";
 
 const pathname = window.location.pathname;
 
@@ -12,18 +13,45 @@ export function AdminSideBar() {
 
 export function CasherSideBar() {
   return (
-    <ul className="nav-list">
-      <li className="nav-item">
-        <Link to="/orders/all" className="nav-link">
-          <b>Orders</b>
-        </Link>
-      </li>
-      <li className="nav-item">
-        <a href="#" className="nav-link">
-          <b>Notify</b>
-        </a>
-      </li>
-    </ul>
+    <>
+      <ul className="nav main-nav">
+        <li className="nav-item">
+          <Link to="/casher/orders/all" className="nav-link">
+            <ChartLine size={26} color="#3a3a3a" weight="fill" />
+            <span className="d-none d-sm-inline">Order List</span>
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link to="/casher/order" className="nav-link">
+            <Scroll size={26} color="#3a3a3a" weight="fill" />
+            <span className="d-none d-sm-inline">Make Order</span>
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link to="/casher/menu" className="nav-link">
+            <Scroll size={26} color="#3a3a3a" weight="fill" />
+            <span className="d-none d-sm-inline">Menu</span>
+          </Link>
+        </li>
+      </ul>
+      <div className="subnav">
+        <div className="sub-title my-2 mx-3">More options</div>
+        <ul className="nav main-nav">
+          <li className="nav-item">
+            <a href="/" className="nav-link">
+              <BellSimpleRinging size={26} color="#3a3a3a" weight="fill" />
+              <span className="d-none d-sm-inline">Notify</span>
+            </a>
+          </li>
+          <li className="nav-item">
+            <a href="/" className="nav-link">
+              <Info size={26} color="#3a3a3a" weight="fill" />
+              <span className="d-none d-sm-inline">Support</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </>
   );
 }
 
@@ -32,45 +60,35 @@ export function KitchenSideBar() {
     <>
       <ul className="nav main-nav">
         <li className="nav-item">
-          <a href="#" className="nav-link">
-            <i className="fa fa-table-list"></i>
+          <a href="/" className="nav-link">
+            <ChartLine size={26} color="#3a3a3a" weight="fill" />
             <span className="d-none d-sm-inline">Dashboard</span>
           </a>
         </li>
         <li className="nav-item">
           <Link to="/kitchen/orders" className="nav-link">
-            <i className="fa fa-table-list"></i>
+            <Scroll size={26} color="#3a3a3a" weight="fill" />
             <span className="d-none d-sm-inline">Order</span>
           </Link>
         </li>
-        <li className="nav-item">
-          <a href="#" className="nav-link">
-            <i className="fa fa-table-list"></i>
-            <span className="d-none d-sm-inline">Dashboard</span>
-          </a>
-        </li>
-        <li className="nav-item">
-          <a href="#" className="nav-link">
-            <i className="fa fa-table-list"></i>
-            <span className="d-none d-sm-inline">Dashboard</span>
-          </a>
-        </li>
       </ul>
-      <div className="sub-title my-2 mx-3">Order</div>
-      <ul className="nav main-nav">
-        <li className="nav-item">
-          <a href="#" className="nav-link active">
-            <i className="fa fa-table-list"></i>
-            <span className="d-none d-sm-inline">Notify</span>
-          </a>
-        </li>
-        <li className="nav-item">
-          <a href="#" className="nav-link">
-            <i className="fa fa-table-list"></i>
-            <span className="d-none d-sm-inline">Support</span>
-          </a>
-        </li>
-      </ul>
+      <div className="subnav">
+        <div className="sub-title my-2 mx-3">More options</div>
+        <ul className="nav main-nav">
+          <li className="nav-item">
+            <a href="/" className="nav-link">
+              <BellSimpleRinging size={26} color="#3a3a3a" weight="fill" />
+              <span className="d-none d-sm-inline">Notify</span>
+            </a>
+          </li>
+          <li className="nav-item">
+            <a href="/" className="nav-link">
+              <Info size={26} color="#3a3a3a" weight="fill" />
+              <span className="d-none d-sm-inline">Support</span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </>
   );
 }

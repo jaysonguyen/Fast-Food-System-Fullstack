@@ -682,7 +682,15 @@ td .nav-link:hover {
   overflow: hidden;
 }
 
+#myMain {
+}
+
+#myMain.make-order {
+  padding: 0;
+}
+
 #mySidebar {
+  /* position: fixed; */
   box-shadow: 1px 1px 2px #d3d3d3;
 }
 /* logo */
@@ -719,6 +727,10 @@ td .nav-link:hover {
   color: #333;
 }
 
+#mySidebar .nav .nav-item .nav-link span {
+  margin-left: 10px;
+}
+
 #mySidebar .nav .nav-item .nav-link.active {
   background-color: #ffca40;
   color: #fff;
@@ -731,10 +743,10 @@ td .nav-link:hover {
 
 /* account */
 #mySidebar .account-card {
-  margin: 0 30px;
+  margin: 50% 30px 0 30px;
   padding: 20px 0;
   width: 80%;
-  height: 170px;
+  height: 200px;
   box-shadow: 2px 2px 5px #b1b1b1;
 }
 
@@ -752,6 +764,7 @@ td .nav-link:hover {
 /* new main */
 #myMain {
   padding: 40px 50px;
+  width: 90vw;
 }
 /* breadcumb */
 #myMain .main-header .breadcumb .rev {
@@ -770,19 +783,35 @@ td .nav-link:hover {
 
 /* foodlist */
 #myMain .main-body .food-list {
-  max-height: 75vh;
+  height: 75vh;
   overflow-y: scroll;
 }
 
+#myMain.make-order .food-list {
+  height: 100vh !important;
+}
+
+#myMain .session-list .session-card,
 #myMain .food-list .food-card {
   box-shadow: 2px 3px 5px #a3a3a3;
   border-radius: 20px;
   text-align: center;
+  cursor: pointer;
+
   padding: 20px 10px;
   margin: 10px auto;
-  width: 30%;
-  cursor: pointer;
+
   transition: all 0.3s;
+}
+
+#myMain .food-list .food-card {
+  height: 280px;
+  width: 30%;
+}
+
+#myMain .session-list .session-card {
+  height: 280px;
+  width: 20%;
 }
 
 #myMain .food-list .food-card:hover {
@@ -814,28 +843,42 @@ td .nav-link:hover {
   padding: 0 10px;
 }
 
+#myMain #orderArea.make-order,
+#myMain #orderArea.make-order .order-area {
+  padding: 0 !important;
+}
+
 #myMain #orderArea .order-header {
   background-color: #ffca40;
   margin: 0;
   padding: 10px 0;
-  border-radius: 10px;
   color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  align-items: center;
+  height: 120px;
 }
 
 #myMain #orderArea .order-details {
-  height: 60vh;
+  height: 67vh;
+  margin-left: 10px;
   overflow-y: scroll;
 }
 
 #myMain #orderArea .order-details .row {
-  border: 1px solid #a3a3a3;
-  border-radius: 10px;
+  box-shadow: 2px 1px 5px #a3a3a3;
+  /* border-radius: 10px; */
   padding: 10px 0;
   margin: 5px 0;
+  align-items: center;
 }
 
 #myMain #orderArea .checkout {
   padding: 10px 0;
+}
+
+#myMain #orderArea .checkout .btn {
+  padding: 10px;
 }
 
 /* order page */
@@ -844,6 +887,17 @@ td .nav-link:hover {
   height: 90vh;
 }
 
+#myMain .container-list .list-item .img-container {
+  width: 70%;
+}
+
+#myMain .container-list .list-item img {
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+#myMain .container-list .list-item,
 #myMain .bill-list .bill-item {
   border-radius: 10px;
   box-shadow: 2px 2px 10px #a3a3a3;
@@ -864,11 +918,13 @@ td .nav-link:hover {
 }
 
 #myMain .details-list {
+  position: relative;
   margin-right: 30px;
+  width: 50%;
 }
 
 #myMain .details-list .info {
-  height: 57vh;
+  height: 60vh;
 }
 
 #myMain .details-list .info .details-header {
@@ -881,8 +937,44 @@ td .nav-link:hover {
   padding: 10px 20px;
 }
 
+#myMain .details-list .checkout .order-total {
+  padding: 12px 20px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px #3a3a3a;
+}
+
 #myMain .details-header .btn {
   width: 220px;
   padding: 10px;
   margin-left: 45%;
+}
+
+/* header */
+#wapper .main-header .search {
+  box-shadow: 1px 2px 5px #3a3a3a;
+  border-radius: 10px;
+  padding: 5px 15px;
+}
+
+#wapper .main-header .search input {
+  border: none;
+}
+
+#wapper .main-header .breadcumb .prev::after {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  content: "\f054";
+  margin-left: 10px;
+}
+
+#wapper .main-header .breadcumb .curr {
+  background-color: var(--clr-primary);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 10px;
 }

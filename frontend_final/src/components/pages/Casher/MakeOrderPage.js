@@ -12,16 +12,27 @@ export default function OrderPage() {
   // const { orderDetails, removeFromOrder } = useContext(OrderContext);
 
   return (
-    //active tab
-    <ActiveProvider>
-      <div className="container-fluid">
-        <div className="row">
-          <OrderProvider>
-            <Tab />
-            <Order />
-          </OrderProvider>
-        </div>
-      </div>
-    </ActiveProvider>
+    <div id="myMain" className="make-order ">
+      <ActiveProvider>
+        <OrderProvider>
+          <div className="main-body row">
+            <div className="col-6 row">
+              <Tab />
+            </div>
+            <div id="orderArea" className="make-order col-6">
+              <div className="order-area text-center">
+                <div className="order-header row">
+                  <div className="col-3">Food Name</div>
+                  <div className="col-2">Quantity</div>
+                  <div className="col-2">Unit Price</div>
+                  <div className="col-2">Total</div>
+                </div>
+                <Order />
+              </div>
+            </div>
+          </div>
+        </OrderProvider>
+      </ActiveProvider>
+    </div>  
   );
 }

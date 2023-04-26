@@ -17,11 +17,18 @@ export default function Food() {
     getFoodDataTest();
   }, []);
 
+  // return (
+  //   <TabContent className="mt-4 overflow-auto" activeTab={context.activeTab}>
+  //     {FoodType.map((foodtype, idx) => {
+  //       return <FoodCart key={idx} foodtype={foodtype} />;
+  //     })}
+  //   </TabContent>
+  // );
   return (
-    <TabContent className="mt-4 overflow-auto" activeTab={context.activeTab}>
-      {FoodType.map((foodtype, idx) => {
-        return <FoodCart key={idx} foodtype={foodtype} />;
-      })}
+    <TabContent className="p-0 m-0" activeTab={context.activeTab}>
+      {FoodType.map((foodtype, idx) => (
+        <FoodCart key={idx} foodtype={foodtype} />
+      ))}
     </TabContent>
   );
 }

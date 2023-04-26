@@ -14,6 +14,7 @@ import Production from "./components/Admin/Production/Production";
 import { ToastContainer } from "react-toastify";
 
 // casher
+import { CasherLayout } from "./components/Layout/CasherLayout";
 import OrderPage from "./components/pages/Casher/MakeOrderPage";
 import { MenuManagementPage } from "./components/pages/Casher/MenuManagementPage";
 import { OrderManagement } from "./components/pages/Casher/OrdersPage";
@@ -59,19 +60,22 @@ function App() {
           <Route path="/kitchen" element={<AllOder />} />
           <Route path="/login" element={<LoginPage />} />
 
-          <Route path="/casher/order" element={<OrderPage />} />
-          <Route path="/casher/menu" element={<MenuManagementPage />} />
-          <Route path="/casher/orders" element={<OrderManagement />}>
-            <Route path="/casher/orders/all" element={<OrderHistory />} />
-            <Route
-              path="/casher/orders/processing"
-              element={<OrderProcessing />}
-            />
-            <Route
-              path="/casher/orders/completed"
-              element={<OrderCompleted />}
-            />
+          <Route path="/casher" element={<CasherLayout />}>
+            <Route path="/casher/order" element={<OrderPage />} />
+            <Route path="/casher/menu" element={<MenuManagementPage />} />
+            <Route path="/casher/orders" element={<OrderManagement />}>
+              <Route path="/casher/orders/all" element={<OrderHistory />} />
+              <Route
+                path="/casher/orders/processing"
+                element={<OrderProcessing />}
+              />
+              <Route
+                path="/casher/orders/completed"
+                element={<OrderCompleted />}
+              />
+            </Route>
           </Route>
+
           {/* admin */}
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="/admin/dashboard" element={<Production />}></Route>
