@@ -14,6 +14,8 @@ export const InsertSupplier = (name, contact, note) => {
   return axios.post(`/api/supplier/create`, { name, contact, note });
 };
 
+
+
 // Staff
 export const deleteStaff = (id) => {
   return axios.delete(`/api/staff/delete/${id}`);
@@ -104,22 +106,28 @@ export const getFoodById = (id) => {
   return axios.get(`/api/food/getId/${id}`);
 };
 
-export const updateFood = (id, Name, Price, Type, Status) => {
-  return axios.put(`/api/food/update`, {
-    id,
-    Name,
-    Price,
-    Type,
-    Status,
+export const updateFood = (id, rawData) => {
+  return axios.put(`/api/food/update/${id}`, {
+    ...rawData,
   });
 };
-// update
-export const UpdateFood = (id, name, price, type, status) => {
-  return axios.put(`api/food/${id}`, {
+
+export const updateFoodType = (id, name) => {
+  return axios.put(`/api/foodtype/update`, {
     id,
     name,
-    price,
-    type,
+  });
+};
+
+export const updateVendors = (id, rawData) => {
+  return axios.put(`/api/supplier/edit/${id}`, {
+    ...rawData,
+  });
+};
+
+export const updatePromo = (id, status) => {
+  return axios.put(`/api/promotion/edit`, {
+    id,
     status,
   });
 };

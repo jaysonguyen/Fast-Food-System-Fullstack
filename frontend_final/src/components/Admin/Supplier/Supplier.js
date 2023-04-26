@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { getAllSupplier, removeSupplier } from "../../../services/supplier";
 import SupplierModal from "./SupplierModal";
@@ -7,6 +7,12 @@ import { toast } from "react-toastify";
 const Supplier = (props) => {
   const [supplier, setSupplier] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [selectedVendorID, setSelectedVendorID] = useState(null);
+  const [dataVendor, setDatavendor] = useState({});
+  const [name, setName] = useState({});
+  const [contact, setContact] = useState("");
+  const [note, setnote] = useState("");
+  const [action, setAction] = useState("CREATE");
 
   const fetchSupplier = async () => {
     let dataSupplier = await getAllSupplier();
@@ -25,9 +31,35 @@ const Supplier = (props) => {
     console.log(id);
   };
 
+  const handleAction = useCallback(
+    (vendorID) => {
+      setSelectedVendorID(vendorID);
+      const selectedVendor = supplier.find(
+        (supplier) => supplier.ID == vendorID
+      );
+      if (selectedVendor) {
+        setDatavendor(vendorID);
+        setContact(selectedVendor.Contact);
+        setName(selectedVendor.Name);
+        setnote(selectedVendor.Note);
+        setDatavendor({
+          id: vendorID,
+          name: selectedVendor.Name,
+          contact: selectedVendor.Contact,
+          note: selectedVendor.Note,
+        });
+      }
+      if (dataVendor) {
+        setAction("UPDATE");
+        setShowModal(true);
+      }
+    },
+    [supplier]
+  );
+
   useEffect(() => {
     fetchSupplier();
-  }, [supplier]);
+  }, []);
 
   const handleShowModal = () => {
     let flag = !showModal;
@@ -83,10 +115,14 @@ const Supplier = (props) => {
                       <div class="col-lg-3">{supplier.Note}</div>
                       <div class="col-lg-2">
                         <div className="d-flex flex-row gap-1">
-                          <a href="./edit.html" className="nav-link">
-                            <AiOutlineEdit className="edit-icon" />
+                          <a className="nav-link">
+                            <AiOutlineEdit
+                              className="edit-icon"
+                              id={supplier.ID}
+                              onClick={(e) => handleAction(e.target.id)}
+                            />
                           </a>
-                          <a href="#" className="nav-link">
+                          <a className="nav-link">
                             <AiOutlineDelete
                               className="del-icon"
                               id={supplier.ID}
@@ -105,7 +141,12 @@ const Supplier = (props) => {
           </div>
         </div>
       </div>
-      <SupplierModal show={showModal} onHide={handleShowModal} />
+      <SupplierModal
+        show={showModal}
+        action={action}
+        onHide={handleShowModal}
+        data={dataVendor}
+      />
     </>
   );
 };

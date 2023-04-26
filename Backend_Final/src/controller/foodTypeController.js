@@ -3,6 +3,7 @@ const {
   getFoodTypeById,
   createFoodType,
   getFoodByType,
+  updateTypeFood,
 } = require("../services/foodTypeServices");
 
 const getFoodTypeList = async (req, res) => {
@@ -25,9 +26,6 @@ const getFoodTypeList = async (req, res) => {
     });
   }
 };
-
-
-
 
 const getFoodByT = async (req, res) => {
   try {
@@ -72,4 +70,29 @@ const createNewFoodT = async (req, res) => {
   }
 };
 
-module.exports = { getFoodTypeList, getFoodByT, createNewFoodT };
+const ediTypeFood = async (req, res) => {
+  try {
+    const { id, name } = req.body;
+    console.log("NENENE", req.body.id, req.body.name);
+    const data = await updateTypeFood(id, name);
+    if (data && +data.EC == 1) {
+      return res.status(200).json({
+        EM: data.EM,
+        EC: data.EC,
+      });
+    }
+    if (data && +data.EC != 1) {
+      return res.status(200).json({
+        EM: "update Data failed",
+        EC: -1,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Error: " + error.message,
+    });
+  }
+};
+
+module.exports = { getFoodTypeList, getFoodByT, createNewFoodT, ediTypeFood };

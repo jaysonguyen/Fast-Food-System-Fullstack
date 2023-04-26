@@ -9,7 +9,7 @@ const {
 
 router.route(`/get`).get(getPromotion);
 router.route(`/create`).post(addPromotion);
-router.route(`/edit/:id`).put(editPromotion);
+router.route(`/edit`).put(editPromotion);
 router.route(`/remove/:id`).delete(removePromotion);
 
 module.exports = router;
