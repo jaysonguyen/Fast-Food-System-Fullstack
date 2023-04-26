@@ -25,10 +25,10 @@ export default function FoodType() {
 
   return (
     <Nav tabs className="nav nav-tabs pizza-items filters bg-gr-primary">
-      {FoodType.map((foodtype, idx) => {
-        if (idx > 0) return <FoodTypeCart key={idx} foodtype={foodtype} />;
-        return <></>;
-      })}
+      {FoodType &&
+        FoodType.map((foodtype, idx) => (
+          <FoodTypeCart key={idx} foodtype={foodtype} />
+        ))}
     </Nav>
   );
 }

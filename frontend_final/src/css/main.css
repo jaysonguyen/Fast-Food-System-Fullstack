@@ -682,11 +682,15 @@ td .nav-link:hover {
   overflow: hidden;
 }
 
+#myMain {
+}
+
 #myMain.make-order {
   padding: 0;
 }
 
 #mySidebar {
+  /* position: fixed; */
   box-shadow: 1px 1px 2px #d3d3d3;
 }
 /* logo */
@@ -787,15 +791,27 @@ td .nav-link:hover {
   height: 100vh !important;
 }
 
+#myMain .session-list .session-card,
 #myMain .food-list .food-card {
   box-shadow: 2px 3px 5px #a3a3a3;
   border-radius: 20px;
   text-align: center;
+  cursor: pointer;
+
   padding: 20px 10px;
   margin: 10px auto;
-  width: 30%;
-  cursor: pointer;
+
   transition: all 0.3s;
+}
+
+#myMain .food-list .food-card {
+  height: 280px;
+  width: 30%;
+}
+
+#myMain .session-list .session-card {
+  height: 280px;
+  width: 20%;
 }
 
 #myMain .food-list .food-card:hover {
@@ -840,11 +856,11 @@ td .nav-link:hover {
   font-size: 20px;
   font-weight: 600;
   align-items: center;
-  height: 92px;
+  height: 120px;
 }
 
 #myMain #orderArea .order-details {
-  height: 80vh;
+  height: 67vh;
   margin-left: 10px;
   overflow-y: scroll;
 }
@@ -861,12 +877,27 @@ td .nav-link:hover {
   padding: 10px 0;
 }
 
+#myMain #orderArea .checkout .btn {
+  padding: 10px;
+}
+
 /* order page */
 #myMain .bill-list .session-bill {
   overflow-y: scroll;
   height: 90vh;
 }
 
+#myMain .container-list .list-item .img-container {
+  width: 70%;
+}
+
+#myMain .container-list .list-item img {
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+#myMain .container-list .list-item,
 #myMain .bill-list .bill-item {
   border-radius: 10px;
   box-shadow: 2px 2px 10px #a3a3a3;

@@ -41,14 +41,24 @@ export default function FoodCart({ foodtype }) {
       {foods.map((food, idx) => {
         return (
           <div
-            class=" mx-2 food-card float-start"
+            key={idx}
+            className=" mx-2 food-card float-start"
             onClick={() => addToOrder(food)}
           >
-            <div class="food-img">
-              <img src="../images/default.jpg" alt="food image" />
+            <div className="food-img">
+              <img
+                src={
+                  food.Image !== null &&
+                  food.Image !== undefined &&
+                  food.Image !== "null"
+                    ? food.Image
+                    : "../images/default.jpg"
+                }
+                alt="food image"
+              />
             </div>
-            <div class="food-name">{food.Name}</div>
-            <div class="food-price">{food.Price}</div>
+            <div className="food-name">{food.Name}</div>
+            <div className="food-price">{food.Price}</div>
           </div>
         );
       })}

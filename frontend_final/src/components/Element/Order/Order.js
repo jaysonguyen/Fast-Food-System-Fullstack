@@ -67,7 +67,7 @@ export default function Order() {
       <div className="order-details">
         {/* render order list */}
         {orderList.map((item, idx) => (
-          <div className="w-100 row">
+          <div key={idx} className="w-100 row">
             <div className="col-3">{item.Name}</div>
             <div className="col-2">{item.Quantity}</div>
             <div className="col-2">

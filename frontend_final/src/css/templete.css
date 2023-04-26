@@ -2202,8 +2202,9 @@ ol.comment-list li.comment .reply a {
 .pizza-items {
   display: flex;
   overflow-x: scroll;
-  height: fit-content;
-  /* flex-wrap: wrap; */
+  overflow-y: hidden;
+  height: 120px;
+  flex-wrap: nowrap;
   border: 0;
 }
 .pizza-items .item {

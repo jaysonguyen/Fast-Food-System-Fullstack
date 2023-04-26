@@ -27,7 +27,7 @@ export const KitchenLayout = () => {
             </div>
           </div>
         </div>
-        <div id="myMain">
+        <div id="myMain" className="">
           <Outlet />
         </div>
       </div>

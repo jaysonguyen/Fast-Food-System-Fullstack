@@ -27,9 +27,7 @@ export const CasherLayout = () => {
             </div>
           </div>
         </div>
-        <div id="myMain" className="make-order">
-          <Outlet />
-        </div>
+        <Outlet />
       </div>
     </div>
   );

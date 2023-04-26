@@ -3,10 +3,10 @@ import $ from "jquery";
 document.addEventListener("DOMContentLoaded", function () {
   dropDownSideBar();
   toggleAddProductForm();
-  setSideNav();
   console.log("run into this");
 });
 // DOMContentLoaded  end
+setSideNav();
 
 // setSideNav();
 
