@@ -9,6 +9,7 @@ const {
   updateBillStatus,
   getBillUnfinished,
   getBillFinished,
+  getBillDetails,
 } = require("../services/orderServices");
 const tools = require("../tool");
 const moment = require("moment");
@@ -22,9 +23,6 @@ const getBillList = async (req, res) => {
         "DD/MM/YYYY hh:mm:ss"
       );
     });
-    data.DT.forEach(async (item) => {
-
-    })
     return res.status(200).json({
       EM: data.EM,
       EC: data.EC,
@@ -96,12 +94,17 @@ const getLevel0 = async (req, res) => {
   try {
     console.log("order controller is running..");
     let id = req.params.id;
+    console.log(id);
     let check = tools.isNumberic(id);
     let data = [];
     if (check) {
-      data = await getBillById(id);
-
-      console.log(data.DT);
+      data = await getBillDetails(id);
+      console.log(data);
+      return res.status(200).json({
+        EM: data.EM,
+        EC: data.EC,
+        DT: data.DT,
+      });
     } else {
       //get bill with status = 0
       if (id == "unfinished") data = await getBillUnfinished();

@@ -21,12 +21,12 @@ export function CasherSideBar() {
             <span className="d-none d-sm-inline">Order List</span>
           </Link>
         </li>
-        <li className="nav-item">
+        {/* <li className="nav-item">
           <Link to="/casher/order" className="nav-link">
             <Scroll size={26} color="#3a3a3a" weight="fill" />
             <span className="d-none d-sm-inline">Make Order</span>
           </Link>
-        </li>
+        </li> */}
         <li className="nav-item">
           <Link to="/casher/menu" className="nav-link">
             <Scroll size={26} color="#3a3a3a" weight="fill" />

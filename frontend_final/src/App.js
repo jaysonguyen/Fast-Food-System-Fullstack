@@ -60,17 +60,19 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
 
           <Route path="/" element={<OrderPage />} />
-          <Route path="/casher/menu" element={<MenuManagementPage />} />
-          <Route path="/casher/orders" element={<OrderManagement />}>
-            <Route path="/casher/orders/all" element={<OrderHistory />} />
-            <Route
-              path="/casher/orders/processing"
-              element={<OrderProcessing />}
-            />
-            <Route
-              path="/casher/orders/completed"
-              element={<OrderCompleted />}
-            />
+          <Route path="/casher" element={<CasherLayout />}>
+            <Route path="/casher/menu" element={<MenuManagementPage />} />
+            <Route path="/casher/orders" element={<OrderManagement />}>
+              <Route path="/casher/orders/all" element={<OrderHistory />} />
+              <Route
+                path="/casher/orders/processing"
+                element={<OrderProcessing />}
+              />
+              <Route
+                path="/casher/orders/completed"
+                element={<OrderCompleted />}
+              />
+            </Route>
           </Route>
 
           {/* admin */}

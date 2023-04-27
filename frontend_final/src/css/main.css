@@ -263,6 +263,11 @@ select:focus,
   border: solid 1px var(--clr-btn);
 }
 
+.main-content.product {
+  height: 100vh;
+  overflow-y: scroll;
+}
+
 .btn-clr-normal {
   background-color: var(--clr-btn);
   color: #fff;
@@ -772,8 +777,13 @@ td .nav-link:hover {
 } */
 /* new main */
 #myMain {
-  padding: 40px 50px;
-  width: 90vw;
+  padding: 40px 40px;
+  width: 84vw;
+}
+
+#myMain.scrolly {
+  max-height: 100vh;
+  overflow-y: scroll;
 }
 
 /* breadcumb */

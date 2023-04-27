@@ -9,7 +9,7 @@ export const AdminLayout = () => {
         <div id="sidebar" className="sidebar py-4 px-0 col-lg-2">
           <AdminSideBar />
         </div>
-        <div className="main-content px-0 col-lg-9">
+        <div className="main-content product px-0 col-lg-9">
           <div className="content py-4">
             <Outlet />
           </div>

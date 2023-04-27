@@ -140,8 +140,13 @@ const getBillDetails = async (billid) => {
             exec getBillDetails ${billid}
         `);
     poolConnection.close();
+    console.log("details from services: ", data.recordset);
     if (data) {
-      return data.recordset;
+      return {
+        EM: "get bill details success",
+        EC: 0,
+        DT: data.recordset,
+      };
     } else {
       return [];
     }

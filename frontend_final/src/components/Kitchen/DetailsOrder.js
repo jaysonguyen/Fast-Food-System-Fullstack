@@ -1,30 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+
+import { getOrderByID } from "../../services/orderServices";
 
 export const DetailsOrder = ({ order }) => {
   const [details, setDetails] = useState([]);
   const [orderCurr, setOrderCurr] = useState({});
   const [loading, setLoading] = useState(true);
 
-  console.log(order);
-  const init = () => {
-    if (order && order.Details != undefined) {
-      console.log(order.Details);
-    } else setDetails([]);
+  console.log("order: ", order);
 
-    if (order && order != undefined) setOrderCurr(order);
-    else
-      setOrderCurr({
-        Total: 0,
-      });
-    if (order.Details != undefined) {
-      setDetails(order.Details);
+  const getBillByID = async (id) => {
+    try {
+      let orderDT = await getOrderByID(id);
+      console.log(orderDT);
+      setDetails(orderDT);
       setLoading(false);
-    } else setDetails([]);
+    } catch (error) {
+      setLoading(true);
+      console.log("Cannot get details order");
+    }
   };
 
   useEffect(() => {
-    init();
-  }, [details, orderCurr]);
+    getBillByID(order.ID);
+  }, [order]);
 
   return (
     <>
@@ -41,8 +40,8 @@ export const DetailsOrder = ({ order }) => {
         {/* loading spinner */}
         {loading && <div>Loading...</div>}
         {!loading &&
-          order.Details &&
-          order.Details.map((d, idx) => (
+          details &&
+          details.map((d, idx) => (
             <div key={idx} className="row details-item">
               <div className="col-7">{d.FoodName}</div>
               <div className="col-2">{d.Quantity}</div>
@@ -56,9 +55,9 @@ export const DetailsOrder = ({ order }) => {
           <div className="col-6 order-total">{order.Total} </div>
         </div>
         {/* <div className="row mt-3 gap-2">
-          <button className="col-5 btn btn-clr-normal">Clear</button>
-          <button className="col-5 btn btn-clr-normal">Check Out</button>
-        </div> */}
+            <button className="col-5 btn btn-clr-normal">Clear</button>
+            <button className="col-5 btn btn-clr-normal">Check Out</button>
+          </div> */}
       </div>
     </>
   );
