@@ -9,6 +9,7 @@ import { BiCaretRightCircle } from "react-icons/bi";
 import { AiOutlinePlus } from "react-icons/ai";
 import "../Card/FoodTypeCart/FoodTypeCart.css";
 import { FoodData } from "../../../api/callApi";
+import { FoodByTypeData} from "../../../api/callApi";
 
 import { OrderContext } from "../../Context/OrderContext";
 
@@ -31,7 +32,7 @@ export default function FoodType() {
 
   const handleShowFood = async (id) => {
     if (id) {
-      const data = await FoodData();
+      const data = await FoodByTypeData(id);
       if (data && +data.EC == 1) {
         setFoodList(data.DT);
       }

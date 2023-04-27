@@ -11,7 +11,8 @@ export const OrderHistory = () => {
     let data = [];
     try {
       data = await getAllOrder();
-      SetOrders(data);
+      console.log(data.DT);
+      SetOrders(data.DT);
     } catch (error) {
       console.log(error.message);
       SetOrders([]);
@@ -42,8 +43,8 @@ export const OrderHistory = () => {
             </tr>
           </thead>
           <tbody className="">
-            {orders.length > 0
-              ? orders.map((item, idx) => (
+            { orders && 
+              orders.map((item, idx) => (
                   <tr key={idx}>
                     <td>
                       <div className="d-flex align-items-center">{item.ID}</div>
@@ -63,7 +64,7 @@ export const OrderHistory = () => {
                     </td>
                   </tr>
                 ))
-              : null}
+              }
           </tbody>
         </table>
       </div>
