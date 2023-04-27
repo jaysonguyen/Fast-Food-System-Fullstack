@@ -9,6 +9,7 @@ import { footypeHardApi } from "../../../api/tempAPI";
 export const MenuManagementPage = () => {
   const [FoodType, setFoodType] = useState([]);
   const [foodTypePicked, setFoodTypePicked] = useState({});
+  const [selected, setSelected] = useState(null);
 
   const getFoodTypeData = async () => {
     let data = [];
@@ -22,6 +23,7 @@ export const MenuManagementPage = () => {
   };
 
   const getFT = (ft) => {
+    setSelected(ft);
     setFoodTypePicked(ft);
   };
 
@@ -61,13 +63,15 @@ export const MenuManagementPage = () => {
               FoodType.map((item, idx) => (
                 <div
                   key={idx}
-                  className="row list-item text-center d-flex flex-row align-items-center"
+                  className={`list-item text-center d-flex flex-row align-items-center ${
+                    selected === item ? "active" : ""
+                  }`}
                   onClick={() => getFT(item)}
                 >
                   <div className="img-container">
                     <img src={`/images/icon/${item.Image}`} />
                   </div>
-                  <div>{item.Name}</div>
+                  <div className="ms-3">{item.Name}</div>
                 </div>
               ))}
           </div>

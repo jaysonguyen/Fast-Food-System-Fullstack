@@ -33,7 +33,7 @@ export default function Order() {
     orderData.BillDetails = orderList;
     console.log(orderData);
     const res = await addNewOrder(orderData);
-    console.log(res);
+    setOrderList([]);
     switch (res) {
       case 0:
         alert("Pending...");

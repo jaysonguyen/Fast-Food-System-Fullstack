@@ -55,7 +55,6 @@ export const MenuSection = ({ foodtype }) => {
       ))}
     </>
   );
-  // return (
   //   <div id="SliderContainer" className="container">
   //     {foodType.map((item, idx) => (
   //       <div className="item-container">
