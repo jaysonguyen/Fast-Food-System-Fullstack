@@ -28,9 +28,11 @@ body {
 }
 
 .bg-gr-primary {
-  background: linear-gradient(90deg,
-      rgba(210, 72, 80, 0.6369398101037289) 15%,
-      rgba(223, 73, 73, 0.7377801462381828) 51%);
+  background: linear-gradient(
+    90deg,
+    rgba(210, 72, 80, 0.6369398101037289) 15%,
+    rgba(223, 73, 73, 0.7377801462381828) 51%
+  );
 }
 
 a,
@@ -54,7 +56,8 @@ li {
   color: var(--clr-font-primary) !important;
 }
 
-.nav-link.active {}
+.nav-link.active {
+}
 
 .title {
   font-family: "Lobster", cursive;
@@ -63,7 +66,7 @@ li {
 /* login */
 
 #loginContent,
-#loginContent .bg-left>div {
+#loginContent .bg-left > div {
   height: 100vh;
 }
 
@@ -82,10 +85,12 @@ li {
 }
 
 #loginContent .bg-right {
-  background: linear-gradient(257deg,
-      rgba(255, 127, 132, 1) 5%,
-      rgba(255, 100, 136, 1) 35%,
-      rgba(231, 110, 160, 1) 83%);
+  background: linear-gradient(
+    257deg,
+    rgba(255, 127, 132, 1) 5%,
+    rgba(255, 100, 136, 1) 35%,
+    rgba(231, 110, 160, 1) 83%
+  );
 }
 
 #loginContent #loginForm {
@@ -144,9 +149,11 @@ li {
 }
 
 #loginContent #loginForm .bg-right {
-  background: linear-gradient(32deg,
-      rgba(175, 22, 27, 0.6) 5%,
-      rgba(190, 42, 103, 0.7) 82%);
+  background: linear-gradient(
+    32deg,
+    rgba(175, 22, 27, 0.6) 5%,
+    rgba(190, 42, 103, 0.7) 82%
+  );
 }
 
 #loginContent #loginForm .bg {
@@ -275,6 +282,7 @@ select:focus,
 .table-wrapper {
   background-color: #fff;
   border-radius: 10px;
+  overflow-y: scroll;
   /* border: 2px solid var(--clr-btn); */
   /* box-shadow: 5px 5px 0px var(--clr-gradient-1); */
 }
@@ -447,11 +455,11 @@ td .nav-link:hover {
 }
 
 /* sidebar */
-#sidebar>div {
+#sidebar > div {
   width: 275px;
 }
 
-#sidebar>div .logo {
+#sidebar > div .logo {
   height: 180px;
 }
 
@@ -762,7 +770,8 @@ td .nav-link:hover {
 }
 
 /* breadcumb */
-#myMain .main-header .breadcumb .rev {}
+#myMain .main-header .breadcumb .rev {
+}
 
 #myMain .sub-header {
   padding: 20px 10px;
@@ -878,7 +887,7 @@ td .nav-link:hover {
 /* order page */
 #myMain .bill-list .session-bill {
   overflow-y: scroll;
-  height: 90vh;
+  height: 70vh;
 }
 
 #myMain .container-list .list-item .img-container {

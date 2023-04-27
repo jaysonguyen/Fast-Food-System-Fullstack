@@ -11,7 +11,7 @@ export const OrderHistory = () => {
     let data = [];
     try {
       data = await getAllOrder();
-      SetOrders(data);
+      SetOrders(data.DT);
     } catch (error) {
       console.log(error.message);
       SetOrders([]);

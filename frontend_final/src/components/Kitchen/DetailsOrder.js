@@ -5,10 +5,11 @@ export const DetailsOrder = ({ order }) => {
   const [orderCurr, setOrderCurr] = useState({});
 
   const init = () => {
-    if (order.Details != undefined) setDetails(order.Details);
-    else setDetails([]);
+    if (order && order.Details != undefined) {
+      console.log(order.Details);
+    } else setDetails([]);
 
-    if (order != undefined) setOrderCurr(order);
+    if (order && order != undefined) setOrderCurr(order);
     else
       setOrderCurr({
         Total: 0,
@@ -17,7 +18,7 @@ export const DetailsOrder = ({ order }) => {
 
   useEffect(() => {
     // init();
-  }, [details, orderCurr]);
+  }, [order]);
 
   return (
     <>

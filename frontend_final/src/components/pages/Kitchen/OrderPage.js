@@ -20,7 +20,7 @@ export const OrderPage = () => {
 
   const getAllOrderNew = async () => {
     let data = await getOrderProcessing();
-    setOrderNew(data.DT);
+    setOrderNew(data.DT.reverse());
   };
 
   const getAllOrderCompleted = async () => {
