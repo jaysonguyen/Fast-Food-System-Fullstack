@@ -25,11 +25,9 @@ body {
 }
 
 .bg-gr-primary {
-  background: linear-gradient(
-    90deg,
-    rgba(210, 72, 80, 0.6369398101037289) 15%,
-    rgba(223, 73, 73, 0.7377801462381828) 51%
-  );
+  background: linear-gradient(90deg,
+      rgba(210, 72, 80, 0.6369398101037289) 15%,
+      rgba(223, 73, 73, 0.7377801462381828) 51%);
 }
 
 a,
@@ -49,8 +47,7 @@ li {
   padding: 5px 10px;
 }
 
-.nav-link.active {
-}
+.nav-link.active {}
 
 #auth-header .nav-link.active {
   border-radius: 10%;
@@ -153,7 +150,7 @@ select:focus,
 
 /* login */
 #loginContent,
-#loginContent .bg-left > div {
+#loginContent .bg-left>div {
   height: 100vh;
 }
 
@@ -172,12 +169,10 @@ select:focus,
 }
 
 #loginContent .bg-right {
-  background: linear-gradient(
-    257deg,
-    rgba(255, 127, 132, 1) 5%,
-    rgba(255, 100, 136, 1) 35%,
-    rgba(231, 110, 160, 1) 83%
-  );
+  background: linear-gradient(257deg,
+      rgba(255, 127, 132, 1) 5%,
+      rgba(255, 100, 136, 1) 35%,
+      rgba(231, 110, 160, 1) 83%);
 }
 
 #loginContent #loginForm {
@@ -232,11 +227,9 @@ select:focus,
 }
 
 #loginContent #loginForm .bg-right {
-  background: linear-gradient(
-    32deg,
-    rgba(175, 22, 27, 0.6) 5%,
-    rgba(190, 42, 103, 0.7) 82%
-  );
+  background: linear-gradient(32deg,
+      rgba(175, 22, 27, 0.6) 5%,
+      rgba(190, 42, 103, 0.7) 82%);
 }
 
 #loginContent #loginForm .bg {
@@ -251,6 +244,7 @@ select:focus,
 td .nav-link {
   transition: all 0.3s;
 }
+
 td .nav-link:hover {
   background-color: var(--clr-btn);
   color: #fff;
@@ -267,7 +261,7 @@ td .nav-link:hover {
 }
 
 .nav-list .nav-item {
-  margin: 8px 10px;
+  margin: 8px 0px;
 }
 
 .submenu .nav-link {
@@ -376,11 +370,11 @@ td .nav-link:hover {
   float: left;
 }
 
-#sidebar > div {
+#sidebar>div {
   width: 275px;
 }
 
-#sidebar > div .logo {
+#sidebar>div .logo {
   height: 200px;
 }
 
@@ -544,11 +538,11 @@ td .nav-link:hover {
   margin-right: 200px;
 }
 
-#card-list2 > div:hover .card-img button {
+#card-list2>div:hover .card-img button {
   opacity: 1;
 }
 
-#card-list2 > div:hover .card-info {
+#card-list2>div:hover .card-info {
   opacity: 1;
 
   transition: all 0.5s;

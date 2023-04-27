@@ -3,6 +3,8 @@ import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { getAllSupplier, removeSupplier } from "../../../services/supplier";
 import SupplierModal from "./SupplierModal";
 import { toast } from "react-toastify";
+import { IoIosAdd } from "react-icons/io";
+import { CiEdit } from "react-icons/ci";
 
 const Supplier = (props) => {
   const [supplier, setSupplier] = useState([]);
@@ -68,55 +70,44 @@ const Supplier = (props) => {
 
   return (
     <>
+      <h3 class="title categories-title">Supplier</h3>
+      <div className="add_promotion_big_btn" onClick={() => handleShowModal()}>
+        <IoIosAdd className="add_promotion_big_btn--icon" />
+        Add promotion
+      </div>
       <div class="form-list">
-        <div class="table-header row">
-          <div class="col-3">
-            <h3 class="title">Supplier List</h3>
-          </div>
-          <div class="col text-end me-2">
-            <button class="btn btn-clr-normal">
-              <a onClick={() => handleShowModal()} class="nav-link">
-                Add supplier
-              </a>
-            </button>
-          </div>
-        </div>
+        <div class="table-header row"></div>
         <br></br>
         <div class="">
           <div class="bg-white">
             <div class="table-wrapper mb-0">
               <div class="row row-header">
-                <div class="col-lg-4">Supplier Name</div>
-                <div class="col-lg-3">Description</div>
+                <div class="col-lg-3">Supplier Name</div>
+                <div class="col-lg-4">Description</div>
                 <div class="col-lg-3">Contact</div>
                 <div class="col-lg-2">Actions</div>
               </div>
+              <div className="seperate"></div>
               <div class="table-body">
                 {supplier.map((supplier, key) => {
                   return (
                     <div key={key} class="row item-list">
-                      <div class="col-lg-4">
+                      <div class="col-lg-3">
                         <div class="d-flex align-items-center">
-                          <img
-                            src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                            alt=""
-                            style={{ width: "45px", height: "45px" }}
-                            class="rounded-circle"
-                          />
                           <div class="ms-3">
-                            <p class="fw-bold mb-1">{supplier.Name}</p>
+                            <p class="mb-1">{supplier.Name}</p>
                           </div>
                         </div>
                       </div>
-                      <div class="col-lg-3">
-                        <p class="fw-normal mb-1">{supplier.Contact}</p>
+                      <div class="col-lg-4">
+                        <p class="fw-normal mb-1">{supplier.Note}</p>
                       </div>
 
-                      <div class="col-lg-3">{supplier.Note}</div>
+                      <div class="col-lg-3">{supplier.Contact}</div>
                       <div class="col-lg-2">
                         <div className="d-flex flex-row gap-1">
                           <a className="nav-link">
-                            <AiOutlineEdit
+                            <CiEdit
                               className="edit-icon"
                               id={supplier.ID}
                               onClick={(e) => handleAction(e.target.id)}

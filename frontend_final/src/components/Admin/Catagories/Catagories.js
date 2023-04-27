@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
+import { CiEdit } from "react-icons/ci";
 import { getAllProductType } from "../../../services/productType";
 import {
   InsertFoodTyppe,
@@ -7,6 +8,7 @@ import {
   updateFoodType,
 } from "../../../api/callApi";
 import { toast } from "react-toastify";
+import "./Catagories.css";
 
 const Catagories = (props) => {
   const [catagory, setCatagory] = useState([]);
@@ -69,104 +71,103 @@ const Catagories = (props) => {
   };
 
   return (
-    <div class="d-flex flex-col">
-      <div class="col ms-4">
-        <div class="form-list">
-          <div class="table-header row">
-            <div class="col-3">
-              <h3 class="title">
-                {" "}
-                {action == "CREATE" ? "Add Category" : "Update category"}
-              </h3>
-            </div>
-          </div>
-          <form class="create-form">
-            <div class="row">
-              <div class="col-10">
-                <div class="form-outline mb-4">
-                  <input
-                    type="text"
-                    id="form6Example3"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    class="form-control w-100"
-                  />
-                  <label class="form-label" for="form6Example3">
-                    Category name
-                  </label>
-                </div>
-              </div>
-              <div class="col-2">
-                <button
-                  type="submit"
-                  onClick={
-                    action == "CREATE"
-                      ? (e) => handleAddTypeFood(e)
-                      : (e) => handleUpdateFood(e)
-                  }
-                  class="btn btn-clr-normal btn-block w-75 h-50"
-                >
-                  Save
-                </button>
+    <>
+      <h3 class="title categories-title">Categories</h3>
+      <div class="d-flex flex-col">
+        <div class="col ms-4">
+          <div class="form-list">
+            <div class="table-header row">
+              <div class="col-3">
+                <h3 class="title">
+                  {" "}
+                  {action == "CREATE" ? "Add Category" : "Update category"}
+                </h3>
               </div>
             </div>
-          </form>
-        </div>
-        <div class="form-list mt-3">
-          <div class="table-header row">
-            <div class="col-3">
-              <h3 class="title">Categories</h3>
-            </div>
-          </div>
-          <div class="">
-            <div class="bg-white">
-              <div class="table-wrapper mb-0">
-                <div class="row row-header">
-                  <div class="col-lg-4">Category Name</div>
-                  <div class="col-lg-4">Description</div>
-                  <div class="col-lg-2">Image</div>
-                  <div class="col-lg-2">Action</div>
+            <form class="create-form">
+              <div class="row" style={{ alignItems: "center" }}>
+                <div class="col-10">
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form6Example3">
+                      Category name
+                    </label>
+                    <input
+                      type="text"
+                      id="form6Example3"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      class="form-control w-100"
+                    />
+                  </div>
                 </div>
-                <div class="table-body">
-                  {catagory.map((catagory, key) => {
-                    return (
-                      <div key={key} class="row item-list">
-                        <div class="col-lg-4">
-                          <div class="d-flex align-items-center">
-                            <div class="">
-                              <p class="fw-bold mb-1">{catagory.Name}</p>
+                <div class="col-2">
+                  <button
+                    type="submit"
+                    onClick={
+                      action == "CREATE"
+                        ? (e) => handleAddTypeFood(e)
+                        : (e) => handleUpdateFood(e)
+                    }
+                    class="btn btn_save_catagories btn-clr-normal btn-block w-75 h-50"
+                  >
+                    Save
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="form-list mt-3">
+            <div class="table-header row"></div>
+            <div class="">
+              <div class="bg-white">
+                <div class="table-wrapper mb-0">
+                  <div class="row row-header">
+                    <div class="col-lg-4">Category Name</div>
+                    <div class="col-lg-4">Description</div>
+                    <div class="col-lg-2">Image</div>
+                    <div class="col-lg-2">Action</div>
+                  </div>
+                  <div className="seperate"></div>
+                  <div class="table-body">
+                    {catagory.map((catagory, key) => {
+                      return (
+                        <div key={key} class="row item-list">
+                          <div class="col-lg-4">
+                            <div class="d-flex align-items-center">
+                              <div class="">
+                                <p class="mb-1">{catagory.Name}</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-4">{catagory.Descript}</div>
+                          <div class="col-lg-2">
+                            {/* <img src={catagory.Image} /> */}
+                          </div>
+                          <div class="col-lg-2">
+                            <div className="d-flex flex-row gap-1">
+                              <a className="nav-link">
+                                <CiEdit
+                                  id={catagory.ID}
+                                  className="edit-icon"
+                                  onClick={(e) => handleAction(e.target.id)}
+                                />
+                              </a>
+                              <a className="nav-link">
+                                <AiOutlineDelete className="del-icon" />
+                              </a>
                             </div>
                           </div>
                         </div>
-                        <div class="col-lg-4">{catagory.Descript}</div>
-                        <div class="col-lg-2">
-                          <img src={catagory.Image} />
-                        </div>
-                        <div class="col-lg-2">
-                          <div className="d-flex flex-row gap-1">
-                            <a className="nav-link">
-                              <AiOutlineEdit
-                                id={catagory.ID}
-                                className="edit-icon"
-                                onClick={(e) => handleAction(e.target.id)}
-                              />
-                            </a>
-                            <a className="nav-link">
-                              <AiOutlineDelete className="del-icon" />
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-   
+    </>
   );
 };
 

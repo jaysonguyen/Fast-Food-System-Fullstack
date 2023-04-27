@@ -12,6 +12,9 @@ export const Orders = ({ orderNewData }) => {
 
   const getOrder = (order) => {
     setOrderPicked(order);
+    if (orderPicked) {
+      console.log(orderPicked);
+    }
   };
 
   useEffect(() => {}, [orderPicked]);
