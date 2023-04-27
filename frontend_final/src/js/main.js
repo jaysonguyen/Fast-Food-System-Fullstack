@@ -70,15 +70,14 @@ function setSideNav() {
     );
   });
 
+  console.log("item2: ", $("#mySidebar .nav-link"));
+
   let $authHeader = $("#auth-header .nav-link").filter(function () {
     return (
       $(this).prop("href").split("/").splice(-1)[0].indexOf(route) !== -1 ||
       $(this).prop("href").split("/").splice(-1)[0].indexOf(route2) !== -1
     );
   });
-
-  console.log($item2);
-
   $item.map((idx, val) => val.classList.toggle("active"));
   $item2.map((idx, val) => val.classList.toggle("active"));
   $authHeader.map((idx, val) => val.classList.toggle("active"));

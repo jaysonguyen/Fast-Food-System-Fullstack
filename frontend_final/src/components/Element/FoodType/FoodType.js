@@ -24,6 +24,7 @@ export default function FoodType() {
     let data = [];
     try {
       data = await getFoodTypeService();
+      console.log("food type: ", data);
       setFoodType(data);
     } catch (error) {
       setFoodType(FoodTypeDT);

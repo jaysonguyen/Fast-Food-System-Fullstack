@@ -729,6 +729,13 @@ td .nav-link:hover {
   color: #333;
 }
 
+#mySidebar .nav .nav-item .nav-link:hover,
+#mainBody .session-list .list-item.active {
+  background-color: var(--clr-primary);
+  color: #fff;
+  font-weight: 700;
+}
+
 #mySidebar .nav .nav-item .nav-link span {
   margin-left: 10px;
 }
@@ -907,6 +914,22 @@ td .nav-link:hover {
   padding: 10px 20px;
   margin: 10px 25px;
   height: 100px;
+  cursor: pointer;
+}
+
+#myMain .container-list .list-item {
+  width: 90%;
+  margin: 10px 5px;
+}
+
+#myMain .container-list .list-item .img-container {
+  width: 40%;
+}
+
+#myMain .container-list .list-item:hover {
+  background-color: var(--clr-primary);
+  color: #fff;
+  font-weight: 700;
 }
 
 #myMain .bill-list .bill-item .order-id {

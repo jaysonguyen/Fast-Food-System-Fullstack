@@ -3,7 +3,9 @@ import React, { useState, useEffect } from "react";
 export const DetailsOrder = ({ order }) => {
   const [details, setDetails] = useState([]);
   const [orderCurr, setOrderCurr] = useState({});
+  const [loading, setLoading] = useState(true);
 
+  console.log(order);
   const init = () => {
     if (order && order.Details != undefined) {
       console.log(order.Details);
@@ -14,11 +16,15 @@ export const DetailsOrder = ({ order }) => {
       setOrderCurr({
         Total: 0,
       });
+    if (order.Details != undefined) {
+      setDetails(order.Details);
+      setLoading(false);
+    } else setDetails([]);
   };
 
   useEffect(() => {
-    // init();
-  }, [order]);
+    init();
+  }, [details, orderCurr]);
 
   return (
     <>
@@ -32,7 +38,10 @@ export const DetailsOrder = ({ order }) => {
           <div className="col-2">Quantity</div>
           <div className="col-3">Price</div>
         </div>
-        {order.Details &&
+        {/* loading spinner */}
+        {loading && <div>Loading...</div>}
+        {!loading &&
+          order.Details &&
           order.Details.map((d, idx) => (
             <div key={idx} className="row details-item">
               <div className="col-7">{d.FoodName}</div>

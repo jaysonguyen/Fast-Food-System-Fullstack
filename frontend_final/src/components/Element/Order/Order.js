@@ -39,8 +39,6 @@ export default function Order() {
     console.log(orderData);
     const res = await addNewOrder(orderData);
     setOrderList([]);
-    setTotal(0);
-    console.log(res);
     switch (res) {
       case 0:
         alert("Pending...");
