@@ -19,6 +19,7 @@ export default function Order() {
     useContext(OrderContext);
   let orderData = { StaffID: 3, BillDetails: [] };
   const [orderList, setOrderList] = useState([]);
+  const [flag, setFlag] = useState(false);
   const [total, setTotal] = useState(0);
 
   const updateTotal = () => {

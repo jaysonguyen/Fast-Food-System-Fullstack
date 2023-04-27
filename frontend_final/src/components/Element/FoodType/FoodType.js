@@ -9,7 +9,7 @@ import { BiCaretRightCircle } from "react-icons/bi";
 import { AiOutlinePlus } from "react-icons/ai";
 import "../Card/FoodTypeCart/FoodTypeCart.css";
 import { FoodData } from "../../../api/callApi";
-import { FoodByTypeData } from "../../../api/callApi";
+import { FoodByTypeData} from "../../../api/callApi";
 
 import { OrderContext } from "../../Context/OrderContext";
 

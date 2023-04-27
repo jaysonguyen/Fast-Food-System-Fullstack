@@ -35,12 +35,13 @@ import Staff from "./components/Admin/Store/Staff/Staff";
 import { KitchenLayout } from "./components/Layout/KitchenLayout";
 import { OrderPage as KitchenOrder } from "./components/pages/Kitchen/OrderPage";
 
-import { AdminLayout } from "./components/Layout/AdminLayout";
-import { AdminDB } from "./components/pages/admin/AdminDB";
-
 import "jquery/dist/jquery.min.js";
 import "popper.js/dist/popper.min.js";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+
+import { AdminLayout } from "./components/Layout/AdminLayout";
+import AllOder from "./components/Kitchen/AllOder/AllOder";
+
 import "./js/main.js";
 import FoodType from "./components/Element/FoodType/FoodType";
 import Order from "./components/Element/Order/Order";
@@ -57,6 +58,7 @@ function App() {
         {/* {pathname.includes("/admin") ? <AdminHeader /> : <NavBar />} */}
         {/* <NavBar /> */}
         <Routes>
+          <Route path="/kitchen" element={<AllOder />} />
           <Route path="/login" element={<LoginPage />} />
 
           <Route path="/" element={<OrderPage />} />

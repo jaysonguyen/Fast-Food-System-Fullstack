@@ -53,7 +53,7 @@ li {
 }
 
 .sidebar .nav-link {
-  color: var(--clr-font-primary) !important;
+  color: var(--clr-font-primary);
 }
 
 .nav-link.active {
@@ -234,10 +234,10 @@ select:focus,
 
 .form-list {
   background-color: #fff;
-  border: 2px solid #b5b5b5;
   border-radius: 10px;
   padding: 15px 20px;
   font-size: 14px;
+  box-shadow: 0 0 3px #ececec;
 }
 
 .btn {
@@ -904,7 +904,7 @@ td .nav-link:hover {
 /* order page */
 #myMain .bill-list .session-bill {
   overflow-y: scroll;
-  height: 70vh;
+  height: 75vh;
 }
 
 #myMain .container-list .list-item .img-container {

@@ -52,9 +52,7 @@ const AdminHeader = (props) => {
             <div className="container">
               <nav className="navbar navbar-expand-lg navbar-dark">
                 <div className="container-fluid">
-                  {/* <a className="navbar-brand" href="#">
-                    Admin
-                  </a> */}
+                  
                   <button
                     className="navbar-toggler"
                     type="button"
