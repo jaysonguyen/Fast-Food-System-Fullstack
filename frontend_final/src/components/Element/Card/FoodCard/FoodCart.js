@@ -10,6 +10,24 @@ export default function FoodCart({ foodtype }) {
 
   const { addToOrder } = useContext(OrderContext);
 
+  const getFoodDataTest = async () => {
+    try {
+      let data = await FoodByTypeData(foodtype.ID);
+      if (data.EM.includes("Error")) {
+        setFoods(FoodDT);
+      } else {
+        console.log(data.DT);
+        setFoods(data.DT);
+      }
+    } catch (error) {
+      setFoods(FoodDT);
+    }
+  };
+
+  useEffect(() => {
+    getFoodDataTest();
+  }, [foods]);
+
   // const addToOrder = (food) => {
   //   dispatch({ type: "ADD_TO_ORDER", payload: food });
   // };

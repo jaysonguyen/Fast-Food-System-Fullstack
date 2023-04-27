@@ -9,6 +9,7 @@ import { BiCaretRightCircle } from "react-icons/bi";
 import { AiOutlinePlus } from "react-icons/ai";
 import "../Card/FoodTypeCart/FoodTypeCart.css";
 import { FoodData } from "../../../api/callApi";
+import { FoodByTypeData } from "../../../api/callApi";
 
 import { OrderContext } from "../../Context/OrderContext";
 
@@ -31,7 +32,7 @@ export default function FoodType() {
 
   const handleShowFood = async (id) => {
     if (id) {
-      const data = await FoodData();
+      const data = await FoodByTypeData(id);
       if (data && +data.EC == 1) {
         setFoodList(data.DT);
       }
@@ -62,7 +63,7 @@ export default function FoodType() {
               <h4 className="food_feed_item_name">{food.Name}</h4>
               <p className="food_feed_item_price">
                 {food.Price.toLocaleString("de-DE")}
-                  <sup className="price_contaier_currency">&#8363;</sup>
+                <sup className="price_contaier_currency">&#8363;</sup>
               </p>
               <div className="food_feed_add_cart_btn">
                 <AiOutlinePlus
