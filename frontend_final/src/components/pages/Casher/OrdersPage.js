@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { CasherSideBar } from "../../Layout/SideMenu/SideBar";
 import { OrderSubHeader } from "../../Layout/Header";
@@ -6,6 +6,21 @@ import { Link } from "react-router-dom";
 import { Bell, Clock, ArrowBendDownLeft } from "phosphor-react";
 
 export const OrderManagement = () => {
+  const [date, setDate] = useState(new Date());
+
+  function tick() {
+    setDate(new Date());
+  }
+
+  useEffect(() => {
+    // time
+    const timerID = setInterval(() => tick(), 1000);
+
+    return function cleanup() {
+      clearInterval(timerID);
+    };
+  }, []);
+
   return (
     <div id="myMain" class="scrolly">
       <div className="main-header row">
@@ -31,6 +46,7 @@ export const OrderManagement = () => {
             <i className="fa fa-search"></i>
             <input type="text" />
           </div>
+          <div className="clock">{date.toLocaleTimeString()}</div>
         </div>
       </div>
       <div className="content py-3 px-5">

@@ -1,4 +1,6 @@
 import { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
+
 import FoodTypeCart from "../Card/FoodTypeCart/FoodTypeCart";
 import { Nav } from "reactstrap";
 import { getFoodTypeService } from "../../../services/foodTypeServices";
@@ -9,7 +11,7 @@ import { BiCaretRightCircle } from "react-icons/bi";
 import { AiOutlinePlus } from "react-icons/ai";
 import "../Card/FoodTypeCart/FoodTypeCart.css";
 import { FoodData } from "../../../api/callApi";
-import { FoodByTypeData} from "../../../api/callApi";
+import { FoodByTypeData } from "../../../api/callApi";
 
 import { OrderContext } from "../../Context/OrderContext";
 
@@ -77,6 +79,7 @@ export default function FoodType() {
         </div>
       </div>
       <div tabs className="casher-nav">
+      <Link to="/casher" className="back-link">Back</Link>
         {FoodType.map((foodtype, idx) => {
           let icon = `/images/icon/${foodtype.Image}`;
           return (

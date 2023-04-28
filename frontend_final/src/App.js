@@ -6,12 +6,17 @@ import "./css/plugins.css";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { NavBar } from "./components/NavBar";
+import { ToastContainer } from "react-toastify";
 
+//admin
+import { AdminLayout } from "./components/Layout/AdminLayout";
+import { FoodList } from "./components/pages/FoodList";
+import { AdminDB } from "./components/pages/admin/AdminDB";
 import AdminHeader from "./components/Admin/Admin_Header/AdminHeader";
 // import AdminSideBar from "./components/Admin/Admin_Header/AdminSideBar";
 import { AdminSideBar } from "./components/Layout/SideMenu/SideBar";
 import Production from "./components/Admin/Production/Production";
-import { ToastContainer } from "react-toastify";
+import AllOder from "./components/Kitchen/AllOder/AllOder";
 
 // casher
 import { CasherLayout } from "./components/Layout/CasherLayout";
@@ -23,8 +28,6 @@ import { OrderProcessing } from "./components/pages/Casher/OrderProcessing";
 import { OrderCompleted } from "./components/pages/Casher/OrderCompleted";
 import { OrderReady } from "./components/pages/Casher/OrderReady";
 import { LoginPage } from "./components/pages/Auth/LoginPage";
-// admin
-import { FoodList } from "./components/pages/FoodList";
 
 import Admin from "./components/Admin/Admin";
 import Promotion from "./components/Admin/Promotion/Promotion";
@@ -39,9 +42,6 @@ import { OrderPage as KitchenOrder } from "./components/pages/Kitchen/OrderPage"
 import "jquery/dist/jquery.min.js";
 import "popper.js/dist/popper.min.js";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-
-import { AdminLayout } from "./components/Layout/AdminLayout";
-import AllOder from "./components/Kitchen/AllOder/AllOder";
 
 import "./js/main.js";
 import FoodType from "./components/Element/FoodType/FoodType";
@@ -75,16 +75,13 @@ function App() {
                 path="/casher/orders/completed"
                 element={<OrderCompleted />}
               />
-              <Route
-                path="/casher/orders/ready"
-                element={<OrderReady />}
-              />
+              <Route path="/casher/orders/ready" element={<OrderReady />} />
             </Route>
           </Route>
 
           {/* admin */}
           <Route path="/admin" element={<AdminLayout />}>
-            <Route path="/admin/dashboard" element={<Production />}></Route>
+            <Route path="/admin/dashboard" element={<AdminDB />}></Route>
             {/* production */}
             <Route path="/admin/production" element={<Production />}></Route>
             <Route

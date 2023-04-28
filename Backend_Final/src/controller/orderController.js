@@ -94,12 +94,11 @@ const getLevel0 = async (req, res) => {
   try {
     console.log("order controller is running..");
     let id = req.params.id;
-    console.log(id);
+    // console.log(id);
     let check = tools.isNumberic(id);
     let data = [];
     if (check) {
       data = await getBillDetails(id);
-      console.log(data);
       return res.status(200).json({
         EM: data.EM,
         EC: data.EC,

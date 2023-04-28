@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
+import "./order.css";
 
 import { getAllOrder } from "../../../services/orderServices";
 import { Pencil, Package } from "phosphor-react";
+import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
+import { CiEdit } from "react-icons/ci";
 
 export const OrderHistory = () => {
   const [orders, SetOrders] = useState([]);
@@ -30,43 +33,61 @@ export const OrderHistory = () => {
   }
 
   return (
-    <div className="text-white mt-4">
-      <div className="table-wrapper bg-white">
-        <table className="table align-middle mb-0 ">
-          <thead className="">
-            <tr>
-              <th className="id">ID</th>
-              <th className="date">Date</th>
-              <th className="quantity">Quantity</th>
-              <th className="total">Total</th>
-              <th className="actions">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="">
-            { orders && 
-              orders.map((item, idx) => (
-                  <tr key={idx}>
-                    <td>
-                      <div className="d-flex align-items-center">{item.ID}</div>
-                    </td>
-                    <td>{item.Date}</td>
-                    <td>{item.Quantity}</td>
-                    <td>{item.Total}</td>
-                    <td>
+    <div class="">
+      <div class="form-list">
+        <div class="table-wrapper mb-0 ">
+          <div class="row row-header">
+            <th className="col-2">ID</th>
+            <th className="col-3">Date</th>
+            <th className="col-2">Quantity</th>
+            <th className="col-2">Total</th>
+            <th className="col-3">Actions</th>
+          </div>
+          <div className="seperate"></div>
+          <div class="table-body">
+            {orders &&
+              orders.map((order, key) => {
+                return (
+                  <div key={key} class="row item-list">
+                    <div class="col-lg-2">
+                      <div class="d-flex align-items-center">
+                        <div class="">
+                          <p class="mb-1">{order.ID}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <p class="fw-normal mb-1">{order.Date}</p>
+                    </div>
+                    <div class="col-lg-2">{order.Quantity}</div>
+                    <div class="col-lg-2">
+                      {order.Total.toLocaleString("de-DE")} <span>&#8363;</span>
+                    </div>
+                    <div class="col-lg-3">
                       <div className="d-flex flex-row gap-1">
-                        <a href="/" className="nav-link">
-                          <Pencil size={20} />
+                        <a className="nav-link">
+                          <CiEdit
+                            className="edit-icon"
+                            id={order.ID}
+                            onClick={(e) => handleAction(e.target.id)}
+                          />
                         </a>
-                        <a href="/" className="nav-link">
-                          <Package size={20} />
+                        <a href="#" className="nav-link">
+                          <AiOutlineDelete
+                            className="del-icon"
+                            id={order.ID}
+                            onClick={async (e) =>
+                              await handleDeleteFood(e.target.id)
+                            }
+                          />
                         </a>
                       </div>
-                    </td>
-                  </tr>
-                ))
-              }
-          </tbody>
-        </table>
+                    </div>
+                  </div>
+                );
+              })}
+          </div>
+        </div>
       </div>
     </div>
   );

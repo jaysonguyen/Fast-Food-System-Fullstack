@@ -96,19 +96,6 @@ const getAllBill = async () => {
               exec getAllBill
           `);
     poolConnection.close();
-    const newData = data.recordset.map(async (item, idx) => {
-      // det bill details
-      let details = [];
-      try {
-        details = await getBillDetails(item.ID);
-        // console.log(data.recordset[idx]);
-      } catch (error) {
-        console.log(error.message);
-      }
-      data.recordset[idx].Details = await details;
-    });
-
-    const result = await Promise.all(newData);
 
     if (data) {
       return {
@@ -167,25 +154,19 @@ const getBillUnfinished = async () => {
       exec getBillByStatus 0
     `);
     poolConnection.close();
-    const newData = data.recordset.map(async (item, idx) => {
-      // det bill details
-      let details = [];
-      try {
-        details = await getBillDetails(item.ID);
-        // console.log(data.recordset[idx]);
-      } catch (error) {
-        console.log(error.message);
-      }
-      data.recordset[idx].Details = await details;
-    });
-
-    const result = await Promise.all(newData);
-
-    return {
-      EM: "Get bill unfinished successfully",
-      EC: 1,
-      DT: data.recordset,
-    };
+    if (data) {
+      return {
+        EM: "Get bill unfinished successfully",
+        EC: 1,
+        DT: data.recordset,
+      };
+    } else {
+      return {
+        EM: "Get unfinished bill success but bill is empty",
+        EC: 0,
+        DT: [],
+      };
+    }
   } catch (error) {
     return {
       EM: "Error at order services",
@@ -202,20 +183,6 @@ const getBillFinished = async () => {
       exec getBillByStatus 1
     `);
     poolConnection.close();
-    const newData = data.recordset.map(async (item, idx) => {
-      // det bill details
-      let details = [];
-      try {
-        details = await getBillDetails(item.ID);
-        // console.log(data.recordset[idx]);
-      } catch (error) {
-        console.log(error.message);
-      }
-      data.recordset[idx].Details = await details;
-    });
-
-    const result = await Promise.all(newData);
-
     return {
       EM: "Get bill finished successfully",
       EC: 1,

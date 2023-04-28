@@ -125,7 +125,6 @@ export default function Order() {
                 </div>
               ))}
             </div>
-            {/* Checkout */}
             <div
               id="checkout"
               className="justify-content-between align-items-center"
@@ -138,12 +137,6 @@ export default function Order() {
                 </p>
               </div>
               <div className="d-flex flex-column gap-2 ">
-                {/* <button
-                  className="btn btn-clr-danger px-5 py-2"
-                  onClick={clearOrder}
-                >
-                  Clear
-                </button> */}
                 <button className="checkoutbtn" onClick={addOrderData}>
                   Checkout
                 </button>

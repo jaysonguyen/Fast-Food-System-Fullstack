@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "phosphor-react";
+import "./header.css";
 
 export const DefaultHeader = () => {
   return <div>Header</div>;
@@ -246,22 +247,53 @@ export const AuthHeader = () => {
 };
 
 export const OrderSubHeader = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
   return (
     <>
-      <div className="d-flex flex-row mt-3">
-        <Link to="/casher/orders/all" className="nav-link mx-3">
+      <div className="order-sub-header d-flex flex-row my-3">
+        <Link
+          to="/casher/orders/all"
+          onClick={() => setActiveIndex(0)}
+          className={
+            activeIndex === 0 ? "nav-link mx-3 active" : "nav-link mx-3"
+          }
+        >
           All Orders
         </Link>
-        <Link to="/casher/orders/processing" className="nav-link mx-3">
+        <Link
+          to="/casher/orders/processing"
+          onClick={() => setActiveIndex(1)}
+          className={
+            activeIndex === 1 ? "nav-link mx-3 active" : "nav-link mx-3"
+          }
+        >
           Processing
         </Link>
-        <Link to="/casher/orders/ready " className="nav-link mx-3">
+        {/* <Link
+          to="/casher/orders/ready "
+          className={
+            activeIndex === 2 ? "nav-link mx-3 active" : "nav-link mx-3"
+          }
+        >
           Ready
-        </Link>
-        <Link to="/casher/orders/completed " className="nav-link mx-3">
+        </Link> */}
+        <Link
+          to="/casher/orders/completed "
+          onClick={() => setActiveIndex(2)}
+          className={
+            activeIndex === 2 ? "nav-link mx-3 active" : "nav-link mx-3"
+          }
+        >
           Completed
         </Link>
-        <Link to={"/casher/"} className="nav-link mx-3">
+        <Link
+          to={"/casher/"}
+          onClick={() => setActiveIndex(3)}
+          className={
+            activeIndex === 3 ? "nav-link mx-3 active" : "nav-link mx-3"
+          }
+        >
           Cancelled
         </Link>
       </div>
