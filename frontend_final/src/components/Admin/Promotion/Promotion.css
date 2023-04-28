@@ -31,6 +31,7 @@
 
 .item-list {
    margin-bottom: 15px;
+   align-items: center;
 }
 
 .btn_success {
