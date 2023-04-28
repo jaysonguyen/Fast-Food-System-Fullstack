@@ -32,10 +32,10 @@ export function CasherSideBar() {
             <span className="d-none d-sm-inline">Make Order</span>
           </Link>
         </li> */}
-        <li className="nav-item" onClick={() => setActiveIndex(0)}>
+        <li className="nav-item" onClick={() => setActiveIndex(1)}>
           <Link
             to="/casher/menu"
-            className={activeIndex === 0 ? "nav-link active" : "nav-link"}
+            className={activeIndex === 1? "nav-link active" : "nav-link"}
           >
             <Scroll size={26} color="#3a3a3a" weight="fill" />
             <span className="d-none d-sm-inline">Menu</span>

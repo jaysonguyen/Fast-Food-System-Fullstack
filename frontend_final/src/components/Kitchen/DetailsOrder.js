@@ -87,7 +87,7 @@ export const DetailsOrder = ({ order }) => {
               <div className="col-3">{d.Price}</div>
             </div>
           ))}
-      </div>
+      </div>      
       <div className="checkout text-start">
         <div className="row">
           <div className="col-6 fs-5 my-auto px-4">Total: </div>

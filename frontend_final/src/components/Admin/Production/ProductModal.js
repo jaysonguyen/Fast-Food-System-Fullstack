@@ -72,7 +72,7 @@ const ProductModal = (props) => {
         location.reload();
         toast.success(data.EM);
       }
-      if (data && data.EC != 1) { 
+      if (data && data.EC != 1) {
         toast.error(data.EM);
       }
     }
@@ -178,31 +178,6 @@ const ProductModal = (props) => {
                   </label>
                 </div>
               </div>
-              <div className="col-4">
-                <div className="file-upload">
-                  <div className="file-select">
-                    <div className="file-select-button" id="fileName">
-                      Choose Image
-                    </div>
-                    <div className="file-select-name" id="noFile">
-                      No file chosen...
-                    </div>
-                    <input
-                      type="file"
-                      name="chooseFile"
-                      id="chooseFile"
-                      onChange={(e) => {
-                        const file = e.target.files[0];
-                        const reader = new FileReader();
-                        reader.onload = () => {
-                          setImage(reader.result);
-                        };
-                        reader.readAsDataURL(file);
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
             </div>
 
             <div className="form-outline mb-4">
@@ -219,14 +194,34 @@ const ProductModal = (props) => {
             </div>
             <div className="form-outline mb-4">
               <div className=" default-img-wrapper">
-                <img
-                  src={image ? image : "../../../images/default.jpg"}
-                  alt=""
+                <input
+                  type="file"
+                  hidden
+                  name="chooseFile"
+                  id="chooseFile"
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                      setImage(reader.result);
+                    };
+                    reader.readAsDataURL(file);
+                  }}
                 />
+                <div className="chooseFile_container">
+                  <label
+                    className={
+                      image
+                        ? "image_label_add_product active"
+                        : "image_label_add_product"
+                    }
+                    htmlFor="chooseFile"
+                  >
+                    Choose a file
+                  </label>
+                  {image && <img src={image} alt="" />}
+                </div>
               </div>
-              <label className="form-label" htmlFor="form6Example4">
-                Image
-              </label>
             </div>
             <div className="form-check d-flex mb-4">
               <input className="form-check-input me-2" id="form6Example8" />

@@ -3,10 +3,11 @@ import { Outlet } from "react-router-dom";
 import { CasherSideBar } from "../../Layout/SideMenu/SideBar";
 import { OrderSubHeader } from "../../Layout/Header";
 import { Link } from "react-router-dom";
+import { Bell, Clock, ArrowBendDownLeft } from "phosphor-react";
 
 export const OrderManagement = () => {
   return (
-    <>
+    <div id="myMain" class="scrolly">
       <div className="main-header row">
         <div className="col left d-flex flex-row gap-3 align-items-center">
           <button className="btn btn-clr-normal">
@@ -32,13 +33,11 @@ export const OrderManagement = () => {
           </div>
         </div>
       </div>
-      <div id="myMain" class="scrolly">
-        <div className="content py-3 px-5">
-          <div className="title fs-2">Orders List</div>
-          <OrderSubHeader />
-          <Outlet />
-        </div>
+      <div className="content py-3 px-5">
+        <div className="title fs-2">Orders List</div>
+        <OrderSubHeader />
+        <Outlet />
       </div>
-    </>
+    </div>
   );
 };
