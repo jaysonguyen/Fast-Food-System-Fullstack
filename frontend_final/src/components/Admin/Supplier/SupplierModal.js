@@ -55,7 +55,6 @@ const SupplierModal = (props) => {
       contact,
       note,
     }));
-
     const data = updateVendors(props.data.id, { ...dataVendor });
     if (data && +data.EC == 1) {
       toast.success(data.EM);

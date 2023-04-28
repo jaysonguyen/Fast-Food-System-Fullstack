@@ -23,14 +23,10 @@ const ProductModal = (props) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-
   console.log(props.action);
 
   //use for update
   const initialFoodInfo = async () => {};
-
-
-
 
   const handleCreateFood = async (e) => {
     e.preventDefault();
@@ -72,12 +68,11 @@ const ProductModal = (props) => {
         recipe,
       }));
       const data = await updateFood(idF, { ...dataFood });
-      console.log(idF, { ...dataFood });
-      if (data && +data.EC === 1) {
-        toast.success(data.EM);
+      if (data && +data.EC == 1) {
         location.reload();
+        toast.success(data.EM);
       }
-      if (data && data.EC != 1) {
+      if (data && data.EC != 1) { 
         toast.error(data.EM);
       }
     }

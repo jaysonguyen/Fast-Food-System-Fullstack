@@ -7,6 +7,8 @@ import { getAllProduct } from "../../../services/productList";
 import { getAllProductType } from "../../../services/productType";
 import { removeFood } from "../../../services/foodServices";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
+import { CiEdit } from "react-icons/ci";
+import { IoIosAdd } from "react-icons/io";
 import { toast } from "react-toastify";
 
 const Production = (props) => {
@@ -95,15 +97,13 @@ const Production = (props) => {
   return (
     <>
       <div class="table-header row">
-        <div class="col-3">
-          <h3 class="title">Product List</h3>
-        </div>
-        <div className="col text-end me-2">
-          <button className="btn btn-clr-normal">
-            <a onClick={() => handleShowModal()} className="nav-link">
-              Add product
-            </a>
-          </button>
+        <h3 class="title">Product</h3>
+        <div
+          className="add_promotion_big_btn"
+          onClick={() => handleShowModal()}
+        >
+          <IoIosAdd className="add_promotion_big_btn--icon" />
+          Add Product
         </div>
       </div>
       <div class="">
@@ -117,6 +117,7 @@ const Production = (props) => {
               <div class="col-lg-1">Status</div>
               <div class="col-lg-2">Actions</div>
             </div>
+            <div className="seperate"></div>
             <div class="table-body">
               {productList.map((product, key) => {
                 return (
@@ -124,7 +125,7 @@ const Production = (props) => {
                     <div class="col-lg-3">
                       <div class="d-flex align-items-center">
                         <div class="">
-                          <p class="fw-bold mb-1">{product.Name}</p>
+                          <p class="mb-1">{product.Name}</p>
                         </div>
                       </div>
                     </div>
@@ -142,8 +143,8 @@ const Production = (props) => {
                       <div
                         className={
                           product.Status == 1
-                            ? "text-center px-1 w-75 btn-sml btn-clr-success rounded-1"
-                            : "text-center px-1 w-75 btn-sml btn-clr-danger rounded-1"
+                            ? "text-center px-1 w-75 btn-sml btn_success rounded-1"
+                            : "text-center px-1 w-75 btn-sml btn_danger rounded-1"
                         }
                       >
                         {product.Status == 1 ? "ON" : "OFF"}
@@ -152,7 +153,7 @@ const Production = (props) => {
                     <div class="col-lg-2">
                       <div className="d-flex flex-row gap-1">
                         <a className="nav-link">
-                          <AiOutlineEdit
+                          <CiEdit
                             className="edit-icon"
                             id={product.ID}
                             onClick={(e) => handleAction(e.target.id)}

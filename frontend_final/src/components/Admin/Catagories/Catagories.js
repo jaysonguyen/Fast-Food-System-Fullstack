@@ -152,9 +152,9 @@ const Catagories = (props) => {
                                   onClick={(e) => handleAction(e.target.id)}
                                 />
                               </a>
-                              <a className="nav-link">
+                              {/* <a className="nav-link">
                                 <AiOutlineDelete className="del-icon" />
-                              </a>
+                              </a> */}
                             </div>
                           </div>
                         </div>
