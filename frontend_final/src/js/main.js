@@ -1,7 +1,7 @@
 import $ from "jquery";
 
 document.addEventListener("DOMContentLoaded", function () {
-  dropDownSideBar();
+  // dropDownSideBar();
   toggleAddProductForm();
   console.log("run into this");
 });

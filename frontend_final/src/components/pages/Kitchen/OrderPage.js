@@ -21,6 +21,8 @@ export const OrderPage = () => {
   const getAllOrderNew = async () => {
     let data = await getOrderProcessing();
     setOrderNew(data.DT.reverse());
+    sessionStorage.removeItem("ordersProcessing");
+    sessionStorage.setItem("ordersProcessing", JSON.stringify(data.DT));
   };
 
   const getAllOrderCompleted = async () => {

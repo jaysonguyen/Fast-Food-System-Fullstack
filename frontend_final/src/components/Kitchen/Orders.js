@@ -3,7 +3,7 @@ import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Bell, Clock } from "phosphor-react";
+import { Bell, Clock, ArrowBendDownLeft } from "phosphor-react";
 
 import { DetailsOrder } from "./DetailsOrder";
 
@@ -23,7 +23,9 @@ export const Orders = ({ orderNewData }) => {
     <>
       <div className="main-header row">
         <div className="col left d-flex flex-row gap-3 align-items-center">
-          <button className="btn btn-clr-normal">{"<-"}</button>
+          <button className="btn btn-clr-normal">
+            <ArrowBendDownLeft size={22} color="#ffffff" weight="fill" />
+          </button>
           <div className="breadcumb d-flex flex-row gap-3 align-items-center">
             <div className="prev">Dashboard</div>
             <div className="curr">Sales statistics</div>

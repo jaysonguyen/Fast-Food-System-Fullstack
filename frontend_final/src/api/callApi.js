@@ -52,6 +52,10 @@ export const getOrderById = (id) => {
   return axios.get(`api/order/${id}`);
 };
 
+export const updateOrderStatus = (id) => {
+  return axios.put(`api/order/${id}`);
+};
+
 // insert
 
 export const InsertFood = (name, price, image, type, recipe, status) => {

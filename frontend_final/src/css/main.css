@@ -269,7 +269,7 @@ select:focus,
 }
 
 .btn-clr-normal {
-  background-color: var(--clr-btn);
+  background-color: var(--clr-primary);
   color: #fff;
 }
 
@@ -787,7 +787,36 @@ td .nav-link:hover {
 }
 
 /* breadcumb */
-#myMain .main-header .breadcumb .rev {
+#myMain .main-header .breadcumb .prev::after {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  content: "\f054";
+
+  margin-left: 10px;
+}
+
+#myMain .main-header .breadcumb .curr {
+  background-color: var(--clr-primary);
+  border-radius: 10px;
+  padding: 5px 10px;
+  color: #fff;
+  font-weight: 700;
+}
+
+#myMain .main-header .search {
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px #3a3a3a;
+  padding: 10px 15px;
+}
+
+#myMain .main-header .search input {
+  border: none;
 }
 
 #myMain .sub-header {

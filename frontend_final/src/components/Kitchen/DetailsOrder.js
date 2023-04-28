@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 
-import { getOrderByID } from "../../services/orderServices";
+import {
+  getOrderByID,
+  updateOrderStatusService,
+} from "../../services/orderServices";
+import { toast } from "react-toastify";
 
 export const DetailsOrder = ({ order }) => {
   const [details, setDetails] = useState([]);
@@ -21,6 +25,36 @@ export const DetailsOrder = ({ order }) => {
     }
   };
 
+  function checkOrderExistence(orderID) {
+    const orders = JSON.parse(sessionStorage.getItem("ordersReady"));
+    if (!orders) {
+      return false; // session storage không tồn tại key "orders"
+    }
+    const orderIDs = orders.map((order) => order.ID);
+    console.log(orderIDs.includes(orderID));
+    return orderIDs.includes(orderID);
+  }
+
+  const addOrderToSessionCompleted = (order) => {
+    let orders = JSON.parse(sessionStorage.getItem("ordersReady")) || [];
+    let check = checkOrderExistence(order.ID);
+    if (check != true) {
+      orders.push(order);
+      sessionStorage.setItem("ordersReady", JSON.stringify(orders));
+    }
+    setDetails([]);
+  };
+
+  const addOrderToCompleted = (order) => {
+    let data = updateOrderStatusService(order.ID);
+    console.log("data: ", data);
+    if (data && data.EC != -1) {
+      toast.success(data.EM);
+    } else {
+      toast.error(data.EM);
+    }
+  };
+
   useEffect(() => {
     getBillByID(order.ID);
   }, [order]);
@@ -29,7 +63,12 @@ export const DetailsOrder = ({ order }) => {
     <>
       <div className="details-header d-flex flex-row align-items-center">
         <div className="title">Order #{order.ID}</div>
-        <button className="btn btn-clr-normal">Finished</button>
+        <button
+          className="btn btn-clr-normal"
+          onClick={() => addOrderToCompleted(order)}
+        >
+          Finished
+        </button>
       </div>
       <div className="info mt-4">
         <div className="row details-header">

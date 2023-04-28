@@ -21,6 +21,7 @@ import { OrderManagement } from "./components/pages/Casher/OrdersPage";
 import { OrderHistory } from "./components/pages/Casher/OrderHistory";
 import { OrderProcessing } from "./components/pages/Casher/OrderProcessing";
 import { OrderCompleted } from "./components/pages/Casher/OrderCompleted";
+import { OrderReady } from "./components/pages/Casher/OrderReady";
 import { LoginPage } from "./components/pages/Auth/LoginPage";
 // admin
 import { FoodList } from "./components/pages/FoodList";
@@ -73,6 +74,10 @@ function App() {
               <Route
                 path="/casher/orders/completed"
                 element={<OrderCompleted />}
+              />
+              <Route
+                path="/casher/orders/ready"
+                element={<OrderReady />}
               />
             </Route>
           </Route>

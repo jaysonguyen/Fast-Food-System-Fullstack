@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ProductionSB, StoreSB } from "./AdminSideBar";
 import { Scroll, ChartLine, BellSimpleRinging, Info } from "phosphor-react";
@@ -12,11 +12,16 @@ export function AdminSideBar() {
 }
 
 export function CasherSideBar() {
+  const [activeIndex, setActiveIndex] = useState(null);
+
   return (
     <>
       <ul className="nav main-nav">
-        <li className="nav-item">
-          <Link to="/casher/orders/all" className="nav-link">
+        <li className="nav-item" onClick={() => setActiveIndex(0)}>
+          <Link
+            to="/casher/orders/all"
+            className={activeIndex === 0 ? "nav-link active" : "nav-link"}
+          >
             <ChartLine size={26} color="#3a3a3a" weight="fill" />
             <span className="d-none d-sm-inline">Order List</span>
           </Link>
@@ -27,8 +32,11 @@ export function CasherSideBar() {
             <span className="d-none d-sm-inline">Make Order</span>
           </Link>
         </li> */}
-        <li className="nav-item">
-          <Link to="/casher/menu" className="nav-link">
+        <li className="nav-item" onClick={() => setActiveIndex(0)}>
+          <Link
+            to="/casher/menu"
+            className={activeIndex === 0 ? "nav-link active" : "nav-link"}
+          >
             <Scroll size={26} color="#3a3a3a" weight="fill" />
             <span className="d-none d-sm-inline">Menu</span>
           </Link>
@@ -37,13 +45,13 @@ export function CasherSideBar() {
       <div className="subnav">
         <div className="sub-title my-2 mx-3">More options</div>
         <ul className="nav main-nav">
-          <li className="nav-item">
+          <li className="nav-item" onClick={() => setActiveIndex(0)}>
             <a href="/" className="nav-link">
               <BellSimpleRinging size={26} color="#3a3a3a" weight="fill" />
               <span className="d-none d-sm-inline">Notify</span>
             </a>
           </li>
-          <li className="nav-item">
+          <li className="nav-item" onClick={() => setActiveIndex(0)}>
             <a href="/" className="nav-link">
               <Info size={26} color="#3a3a3a" weight="fill" />
               <span className="d-none d-sm-inline">Support</span>
@@ -56,17 +64,22 @@ export function CasherSideBar() {
 }
 
 export function KitchenSideBar() {
+  const [activeIndex, setActiveIndex] = useState(null);
+
   return (
     <>
       <ul className="nav main-nav">
-        <li className="nav-item">
+        <li className="nav-item" onClick={() => setActiveIndex(0)}>
           <a href="/" className="nav-link">
             <ChartLine size={26} color="#3a3a3a" weight="fill" />
             <span className="d-none d-sm-inline">Dashboard</span>
           </a>
         </li>
-        <li className="nav-item">
-          <Link to="/kitchen/orders" className="nav-link">
+        <li className="nav-item" onClick={() => setActiveIndex(0)}>
+          <Link
+            to="/kitchen/orders"
+            className={activeIndex === 0 ? "nav-link active" : "nav-link"}
+          >
             <Scroll size={26} color="#3a3a3a" weight="fill" />
             <span className="d-none d-sm-inline">Order</span>
           </Link>

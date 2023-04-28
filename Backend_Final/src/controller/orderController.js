@@ -157,7 +157,7 @@ const updateBill = async (req, res) => {
   try {
     const id = req.params.id;
     const data = await updateBillStatus(id);
-
+    console.log("data: ", data);
     return res.status(200).json({
       EM: data.EM,
       EC: data.EC,

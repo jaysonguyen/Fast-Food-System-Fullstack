@@ -255,6 +255,9 @@ export const OrderSubHeader = () => {
         <Link to="/casher/orders/processing" className="nav-link mx-3">
           Processing
         </Link>
+        <Link to="/casher/orders/ready " className="nav-link mx-3">
+          Ready
+        </Link>
         <Link to="/casher/orders/completed " className="nav-link mx-3">
           Completed
         </Link>

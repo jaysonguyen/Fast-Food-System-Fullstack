@@ -33,19 +33,19 @@ export default function FoodCart({ foodtype }) {
   // };
 
 
-  const getFoodDataTest = async () => {
-    try {
-      let data = await FoodByTypeData(foodtype.ID);
-      if (data.EM.includes("Error")) {
-        setFoods(FoodDT);
-      } else {
-        setFoods(data.DT);
-        console.log(data.DT);
-      }
-    } catch (error) {
-      setFoods(FoodDT);
-    }
-  };
+  // const getFoodDataTest = async () => {
+  //   try {
+  //     let data = await FoodByTypeData(foodtype.ID);
+  //     if (data.EM.includes("Error")) {
+  //       setFoods(FoodDT);
+  //     } else {
+  //       setFoods(data.DT);
+  //       console.log(data.DT);
+  //     }
+  //   } catch (error) {
+  //     setFoods(FoodDT);
+  //   }
+  // };
 
   // const getFoodDataTest = async () => {
   //   try {

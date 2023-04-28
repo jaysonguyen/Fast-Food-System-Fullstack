@@ -4,6 +4,7 @@ import {
   OrderCompletedData,
   AddNewOrderData,
   getOrderById,
+  updateOrderStatus,
 } from "../api/callApi";
 import { getFoodData } from "./foodServices";
 
@@ -54,6 +55,17 @@ export const getOrderByID = async (id) => {
   let data = [];
   try {
     data = await getOrderById(id);
+    return data.DT;
+  } catch (error) {
+    console.log(error.message);
+    return [];
+  }
+};
+
+export const updateOrderStatusService = async (id) => {
+  let data = [];
+  try {
+    data = await updateOrderStatus(id);
     return data.DT;
   } catch (error) {
     console.log(error.message);
