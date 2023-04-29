@@ -11,7 +11,7 @@ export const MenuSection = ({ foodtype }) => {
 
   const getFoodTypeData = async () => {
     let data = await getFoodTypeService();
-    setFoodType(data);
+    setFoodType(data.DT);
   };
 
   const getFoodDataTest = async () => {

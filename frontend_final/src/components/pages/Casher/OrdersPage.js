@@ -26,7 +26,7 @@ export const OrderManagement = () => {
   }, []);
 
   return (
-    <div id="myMain" class="scrolly">
+    <div id="myMain" className="scrolly">
       <div className="main-header row">
         <div className="col left d-flex flex-row gap-3 align-items-center">
           <button className="btn btn-clr-normal">
