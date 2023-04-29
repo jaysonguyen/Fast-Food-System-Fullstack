@@ -19,7 +19,7 @@ export function CasherSideBar() {
       <ul className="nav main-nav">
         <li className="nav-item" onClick={() => setActiveIndex(0)}>
           <Link
-            to="/casher/orders/all"
+            to="/casher/orders"
             className={activeIndex === 0 ? "nav-link active" : "nav-link"}
           >
             <ChartLine size={26} color="#3a3a3a" weight="fill" />
@@ -35,7 +35,7 @@ export function CasherSideBar() {
         <li className="nav-item" onClick={() => setActiveIndex(1)}>
           <Link
             to="/casher/menu"
-            className={activeIndex === 1? "nav-link active" : "nav-link"}
+            className={activeIndex === 1 ? "nav-link active" : "nav-link"}
           >
             <Scroll size={26} color="#3a3a3a" weight="fill" />
             <span className="d-none d-sm-inline">Menu</span>

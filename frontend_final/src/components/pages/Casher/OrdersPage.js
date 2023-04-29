@@ -5,8 +5,12 @@ import { OrderSubHeader } from "../../Layout/Header";
 import { Link } from "react-router-dom";
 import { Bell, Clock, ArrowBendDownLeft } from "phosphor-react";
 
+import { OrderList } from "./OrderList";
+
 export const OrderManagement = () => {
   const [date, setDate] = useState(new Date());
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [orderListType, setOrderListType] = useState("all");
 
   function tick() {
     setDate(new Date());
@@ -50,9 +54,54 @@ export const OrderManagement = () => {
         </div>
       </div>
       <div className="content py-3 px-5">
-        <div className="title fs-2">Orders List</div>
-        <OrderSubHeader />
-        <Outlet />
+        <div className="title fs-2 text-capitalize">{orderListType} Orders</div>
+        <div className="order-sub-header d-flex flex-row my-3">
+          <div
+            onClick={() => {
+              setActiveIndex(0);
+              setOrderListType("all");
+            }}
+            className={
+              activeIndex === 0 ? "nav-link mx-3 active" : "nav-link mx-3"
+            }
+          >
+            All Orders
+          </div>
+          <div
+            onClick={() => {
+              setActiveIndex(1);
+              setOrderListType("proccessing");
+            }}
+            className={
+              activeIndex === 1 ? "nav-link mx-3 active" : "nav-link mx-3"
+            }
+          >
+            Processing
+          </div>
+          <div
+            onClick={() => {
+              setActiveIndex(2);
+              setOrderListType("completed");
+            }}
+            className={
+              activeIndex === 2 ? "nav-link mx-3 active" : "nav-link mx-3"
+            }
+          >
+            Completed
+          </div>
+          <div
+            to={"/casher/"}
+            onClick={() => {
+              setActiveIndex(3);
+            }}
+            className={
+              activeIndex === 3 ? "nav-link mx-3 active" : "nav-link mx-3"
+            }
+          >
+            Cancelled
+          </div>
+        </div>
+        <OrderList type={orderListType} />
       </div>
     </div>
   );

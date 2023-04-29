@@ -1,32 +1,81 @@
 import React, { useState, useEffect } from "react";
+import "./order.css";
+
+import {
+  getAllOrder,
+  getOrderProcessing,
+  getOrderCompleted,
+} from "../../../services/orderServices";
+import { Pencil, Package } from "phosphor-react";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { CiEdit } from "react-icons/ci";
-import { getDateTime } from "../../../js/tool";
 
-import { getOrderProcessing } from "../../../services/orderServices";
-
-export const OrderProcessing = () => {
+export const OrderList = (props) => {
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const getOrderProcessingData = async () => {
+  const getAllOrderData = async () => {
     let data = [];
     try {
-      data = await getOrderProcessing();
-      console.log("đang lấy data..");
+      data = await getAllOrder();
       setOrders(data.DT);
     } catch (error) {
       console.log(error.message);
-      // SetOrders(FoodTypeDT);
+      return [];
     } finally {
       setIsLoading(false);
     }
   };
 
+  const getOrderProcessingData = async () => {
+    let data = [];
+    try {
+      data = await getOrderProcessing();
+      setOrders(data.DT);
+    } catch (error) {
+      console.log(error.message);
+      return [];
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const getOrderCompletedData = async () => {
+    let data = [];
+    try {
+      data = await getOrderCompleted();
+      setOrders(data.DT);
+    } catch (error) {
+      console.log(error.message);
+      return [];
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSetOrderListData = () => {
+    switch (props.type) {
+      case "all":
+        console.log("getting all orders...");
+        getAllOrderData();
+        break;
+      case "proccessing":
+        console.log("getting proccessing orders...");
+        getOrderProcessingData();
+        break;
+      case "completed":
+        console.log("getting completed orders...");
+        getOrderCompletedData();
+        break;
+      default:
+        break;
+    }
+  };
+
   useEffect(() => {
-    console.log("đang gọi hàm..");
-    getOrderProcessingData();
-  }, [orders]);
+    setIsLoading(true);
+    handleSetOrderListData();
+  }, [props.type]);
 
   if (isLoading) {
     return <p>Đang tải dữ liệu...</p>; // Hiển thị thông báo đang tải
@@ -37,15 +86,16 @@ export const OrderProcessing = () => {
       <div class="form-list">
         <div class="table-wrapper mb-0 ">
           <div class="row row-header">
-            <th className="col-2">ID</th>
-            <th className="col-3">Date</th>
-            <th className="col-2">Quantity</th>
-            <th className="col-2">Total</th>
-            <th className="col-3">Actions</th>
+            <div className="col-2">ID</div>
+            <div className="col-3">Date</div>
+            <div className="col-2">Quantity</div>
+            <div className="col-2">Total</div>
+            <div className="col-3">Actions</div>
           </div>
           <div className="seperate"></div>
           <div class="table-body">
-            {orders &&
+            {!isLoading &&
+              orders &&
               orders.map((order, key) => {
                 return (
                   <div key={key} class="row item-list">

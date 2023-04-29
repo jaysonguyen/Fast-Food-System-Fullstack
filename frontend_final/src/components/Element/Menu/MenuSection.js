@@ -50,7 +50,10 @@ export const MenuSection = ({ foodtype }) => {
             />
           </div>
           <div className="food-name">{item.Name}</div>
-          <div className="food-price">{item.Price}</div>
+          <div className="food-price">
+            {item.Price.toLocaleString("de-DE")}
+            <sup className="price_contaier_currency">&#8363;</sup>
+          </div>
         </div>
       ))}
     </>

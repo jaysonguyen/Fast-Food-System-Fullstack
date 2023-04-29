@@ -23,10 +23,7 @@ import { CasherLayout } from "./components/Layout/CasherLayout";
 import OrderPage from "./components/pages/Casher/MakeOrderPage";
 import { MenuManagementPage } from "./components/pages/Casher/MenuManagementPage";
 import { OrderManagement } from "./components/pages/Casher/OrdersPage";
-import { OrderHistory } from "./components/pages/Casher/OrderHistory";
-import { OrderProcessing } from "./components/pages/Casher/OrderProcessing";
-import { OrderCompleted } from "./components/pages/Casher/OrderCompleted";
-import { OrderReady } from "./components/pages/Casher/OrderReady";
+import { OrderList } from "./components/pages/Casher/OrderList";
 import { LoginPage } from "./components/pages/Auth/LoginPage";
 
 import Admin from "./components/Admin/Admin";
@@ -66,7 +63,7 @@ function App() {
           <Route path="/casher" element={<CasherLayout />}>
             <Route path="/casher/menu" element={<MenuManagementPage />} />
             <Route path="/casher/orders" element={<OrderManagement />}>
-              <Route path="/casher/orders/all" element={<OrderHistory />} />
+              {/* <Route path="/casher/orders/all" element={<OrderHistory />} />
               <Route
                 path="/casher/orders/processing"
                 element={<OrderProcessing />}
@@ -75,7 +72,7 @@ function App() {
                 path="/casher/orders/completed"
                 element={<OrderCompleted />}
               />
-              <Route path="/casher/orders/ready" element={<OrderReady />} />
+              <Route path="/casher/orders/ready" element={<OrderReady />} /> */}
             </Route>
           </Route>
 

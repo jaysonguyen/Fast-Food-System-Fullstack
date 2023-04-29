@@ -2,3 +2,6 @@
   background-color: #fff;
 }
 
+.order-sub-header .nav-link {
+  cursor: pointer;
+}

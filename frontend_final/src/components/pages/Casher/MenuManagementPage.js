@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-
-import { Bell, Clock } from "phosphor-react";
+import { Link } from "react-router-dom";
+import { Bell, Clock, ArrowBendDownLeft } from "phosphor-react";
 
 import { MenuSection } from "../../Element/Menu/MenuSection";
 import { getFoodTypeService } from "../../../services/foodTypeServices";
@@ -15,8 +15,10 @@ export const MenuManagementPage = () => {
     let data = [];
     try {
       data = await getFoodTypeService();
-      console.log(data);
-      setFoodType(data);
+      console.log(data.DT);
+      if (data && data.DT) {
+        setFoodType(data.DT);
+      }
     } catch (error) {
       setFoodType(footypeHardApi);
     }
@@ -34,9 +36,13 @@ export const MenuManagementPage = () => {
     <div id="myMain">
       <div className="main-header row">
         <div className="col left d-flex flex-row gap-3 align-items-center">
-          <button className="btn btn-clr-normal">{"<-"}</button>
+          <button className="btn btn-clr-normal">
+            <ArrowBendDownLeft size={22} color="#ffffff" weight="fill" />
+          </button>
           <div className="breadcumb d-flex flex-row gap-3 align-items-center">
-            <div className="prev">Dashboard</div>
+            <Link to="/" className="prev">
+              Dashboard
+            </Link>
             <div className="curr">Sales statistics</div>
           </div>
         </div>

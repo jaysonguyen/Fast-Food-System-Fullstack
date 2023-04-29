@@ -270,14 +270,6 @@ export const OrderSubHeader = () => {
         >
           Processing
         </Link>
-        {/* <Link
-          to="/casher/orders/ready "
-          className={
-            activeIndex === 2 ? "nav-link mx-3 active" : "nav-link mx-3"
-          }
-        >
-          Ready
-        </Link> */}
         <Link
           to="/casher/orders/completed "
           onClick={() => setActiveIndex(2)}

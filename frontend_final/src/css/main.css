@@ -295,6 +295,7 @@ select:focus,
   background-color: #fff;
   border-radius: 10px;
   overflow-y: scroll;
+  overflow-x: hidden;
   /* border: 2px solid var(--clr-btn); */
   /* box-shadow: 5px 5px 0px var(--clr-gradient-1); */
 }
@@ -862,6 +863,11 @@ td .nav-link:hover {
   margin: 10px auto;
 
   transition: all 0.3s;
+}
+
+#myMain .food-name {
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 #myMain .food-list .food-card {

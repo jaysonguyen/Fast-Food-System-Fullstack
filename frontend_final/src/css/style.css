@@ -12672,9 +12672,12 @@ ol.commentlist li .star-rating {
 .item-img {
   overflow: hidden;
   position: relative;
+  height: 80%;
 }
 .item-img img {
   width: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 .item-info-in {
   bottom: -20%;

@@ -5,7 +5,7 @@ const getFoodTypeService = async () => {
   let data = [];
   try {
     data = await FoodTypeData();
-    return data.DT;
+    return data;
   } catch (error) {
     return FoodTypeDT;
   }

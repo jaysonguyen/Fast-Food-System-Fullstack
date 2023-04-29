@@ -27,7 +27,7 @@ export default function FoodType() {
     try {
       data = await getFoodTypeService();
       console.log("food type: ", data);
-      setFoodType(data);
+      setFoodType(data.DT);
     } catch (error) {
       setFoodType(FoodTypeDT);
     }
@@ -79,22 +79,26 @@ export default function FoodType() {
         </div>
       </div>
       <div tabs className="casher-nav">
-      <Link to="/casher" className="back-link">Back</Link>
-        {FoodType.map((foodtype, idx) => {
-          let icon = `/images/icon/${foodtype.Image}`;
-          return (
-            <NavItem
-              onClick={() => handleShowFood(foodtype.ID)}
-              className="nav_item_margin_top nav-item item"
-            >
-              <NavLink className="foodtype_cart_container item-icon-box nav-link">
-                <img className="foodtype_cart_image" src={icon} />
-                <span className="foodType_cart_name">{foodtype.Name}</span>
-                <BiCaretRightCircle className="foodType_cart_name_icon" />
-              </NavLink>
-            </NavItem>
-          );
-        })}
+        <Link to="/casher" className="back-link">
+          {" "}
+          {"< Casher"}
+        </Link>
+        {FoodType &&
+          FoodType.map((foodtype, idx) => {
+            let icon = `/images/icon/${foodtype.Image}`;
+            return (
+              <NavItem
+                onClick={() => handleShowFood(foodtype.ID)}
+                className="nav_item_margin_top nav-item item"
+              >
+                <NavLink className="foodtype_cart_container item-icon-box nav-link">
+                  <img className="foodtype_cart_image" src={icon} />
+                  <span className="foodType_cart_name">{foodtype.Name}</span>
+                  <BiCaretRightCircle className="foodType_cart_name_icon" />
+                </NavLink>
+              </NavItem>
+            );
+          })}
       </div>
     </>
   );
