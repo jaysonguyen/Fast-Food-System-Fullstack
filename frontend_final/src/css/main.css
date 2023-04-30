@@ -1031,6 +1031,17 @@ td .nav-link:hover {
   margin-left: 45%;
 }
 
+#myMain .note-container {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px #3a3a3a;
+}
+
+#myMain .note-container .note-title {
+  font-weight: 700;
+  color: var(--clr-primary);
+}
+
 /* back-link */
 .back-link {
   color: var(--clr-primary);

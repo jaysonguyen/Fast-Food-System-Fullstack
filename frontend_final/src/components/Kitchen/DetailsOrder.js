@@ -71,28 +71,36 @@ export const DetailsOrder = ({ order }) => {
         </button>
       </div>
       <div className="info mt-4">
-        <div className="row details-header">
-          <div className="col-7">Food Name</div>
-          <div className="col-2">Quantity</div>
-          <div className="col-3">Price</div>
-        </div>
-        {/* loading spinner */}
-        {loading && <div>Loading...</div>}
-        {!loading &&
-          details &&
-          details.map((d, idx) => (
-            <div key={idx} className="row details-item">
-              <div className="col-7">{d.FoodName}</div>
-              <div className="col-2">{d.Quantity}</div>
-              <div className="col-3">{d.Price}</div>
+        <div className="row form-list">
+          <div className="col-8 table-wrapper">
+            <div className="row row-header mb-4">
+              <div className="col-8">Food Name</div>
+              <div className="col-4">Quantity</div>
             </div>
-          ))}
-      </div>      
+            <div class="table-body">
+              {/* loading spinner */}
+              {loading && <div>Loading...</div>}
+              {!loading &&
+                details &&
+                details.map((d, idx) => (
+                  <div key={idx} className="row item-list my-4">
+                    <div className="col-8">{d.FoodName}</div>
+                    <div className="col-4">{d.Quantity}</div>
+                  </div>
+                ))}
+            </div>
+          </div>
+          <div className="col-4 note-container">
+            <div className="note-title">Note</div>
+            <div className=""></div>
+          </div>
+        </div>
+      </div>
       <div className="checkout text-start">
-        <div className="row">
+        {/* <div className="row">
           <div className="col-6 fs-5 my-auto px-4">Total: </div>
           <div className="col-6 order-total">{order.Total} </div>
-        </div>
+        </div> */}
         {/* <div className="row mt-3 gap-2">
             <button className="col-5 btn btn-clr-normal">Clear</button>
             <button className="col-5 btn btn-clr-normal">Check Out</button>

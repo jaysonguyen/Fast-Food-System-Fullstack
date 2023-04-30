@@ -9,6 +9,7 @@ import {
 import { Pencil, Package } from "phosphor-react";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { CiEdit } from "react-icons/ci";
+import { HashLoader } from "react-spinners";
 
 export const OrderList = (props) => {
   const [orders, setOrders] = useState([]);
