@@ -14,60 +14,51 @@ import {
 import { toast } from "react-toastify";
 //name, contact, note
 const SupplierModal = (props) => {
-  const [show, setShow] = useState(props.show);
-
-  const [name, setName] = useState("");
-  const [contact, setContact] = useState("");
-  const [note, setNote] = useState("");
-  const [dataVendor, setDataVendor] = useState({});
+  const contact = props.contact;
+  const note = props.note;
 
   const handleCreate = async () => {
     try {
-      let data = await InsertSupplier(name, contact, note);
-      if (data && +data.EC == 1) {
-        toast.success(data.EM);
+      const regex = /^[0-9]{10}$/;
+      if (!regex.test(props.contact)) {
+        toast.error("Invalid phone number");
+      } else {
+        let data = await InsertSupplier(props.name, props.contact, props.note);
+        if (data && +data.EC == 1) {
+          toast.success(data.EM);
+          handleClose();
+        }
+        if (data && +data.EC == 0) {
+          toast.error(data.EM);
+        }
       }
-      if (data && +data.EC == 0) {
-        toast.error(data.EM);
-      }
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const handleShowdataVendor = () => {
-    setName(props.data.name);
-    setContact(props.data.contact);
-    setNote(props.data.note);
-    setDataVendor({
-      contact: props.data.contact,
-      note: props.data.note,
-    });
+  const handleClose = () => {
+    props.setShowModal(false);
   };
+  const handleShow = () => props.setShowModal(true);
 
-  const handleUpdate = async () => {
-    setDataVendor((prev) => ({
-      ...prev,
-      contact,
-      note,
-    }));
-    const data = updateVendors(props.data.id, { ...dataVendor });
-    if (data && +data.EC == 1) {
-      toast.success(data.EM);
-      location.reload();
-    }
-    if (data && +data.EC != 1) {
-      toast.error(data.EM);
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    if (props.data) {
+      const data = await updateVendors(props.idSup, {
+        ...props.data,
+        contact,
+        note,
+      });
+      if (data && +data.EC == 1) {
+        toast.success(data.EM);
+        props.setShowModal(false);
+      }
+      if (data && +data.EC != 1) {
+        toast.error(data.EM);
+      }
     }
   };
-
-  useEffect(() => {
-    handleShowdataVendor();
-  }, [props.data]);
 
   return (
     <>
@@ -93,8 +84,8 @@ const SupplierModal = (props) => {
                     id="form6Example1"
                     className="form-control"
                     disabled={props.action == "CREATE" ? "" : "disabled"}
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    value={props.name}
+                    onChange={(e) => props.setName(e.target.value)}
                   />
                   <label className="form-label" htmlFor="form6Example1">
                     Name
@@ -107,8 +98,8 @@ const SupplierModal = (props) => {
                     type="text"
                     id="form6Example1"
                     className="form-control"
-                    value={contact}
-                    onChange={(e) => setContact(e.target.value)}
+                    value={props.contact}
+                    onChange={(e) => props.setContact(e.target.value)}
                   />
                   <label className="form-label" htmlFor="form6Example1">
                     Contact
@@ -121,8 +112,8 @@ const SupplierModal = (props) => {
                     type="text"
                     id="form6Example1"
                     className="form-control"
-                    value={note}
-                    onChange={(e) => setNote(e.target.value)}
+                    value={props.note}
+                    onChange={(e) => props.setNote(e.target.value)}
                   />
                   <label className="form-label" htmlFor="form6Example1">
                     note
@@ -141,8 +132,8 @@ const SupplierModal = (props) => {
             variant="primary"
             onClick={
               props.action == "CREATE"
-                ? () => handleCreate()
-                : () => handleUpdate()
+                ? (e) => handleCreate(e)
+                : (e) => handleUpdate(e)
             }
           >
             {props.action == "CREATE" ? "CREATE" : "UPDATE"}

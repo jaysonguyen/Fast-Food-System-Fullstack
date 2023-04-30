@@ -30,11 +30,8 @@ const Promotion = (props) => {
 
   const fetchPromotion = async () => {
     try {
-      let dataPromotion = await getAllPromotion();
-      console.log("data promotion ", dataPromotion.DT);
+      const dataPromotion = await getAllPromotion();
       setPromotion(dataPromotion.DT);
-      if (dataPromotion) {
-      }
     } catch (error) {
       console.log(error);
     }
@@ -48,17 +45,22 @@ const Promotion = (props) => {
     if (data && +data.EC != 1) {
       toast.error(data.EM);
     }
-    console.log(id);
   };
 
   const handleInsertPromotion = async (e) => {
     e.preventDefault();
     try {
-      let data = await InsertPromotion(name, cost, status, dateStart, dateExp);
-      console.log(name, cost, status, dateStart, dateExp);
+      let data = await InsertPromotion(
+        name,
+        cost,
+        status,
+        dateStart || "",
+        dateExp || ""
+      );
 
       if (data && +data.EC == 1) {
         toast.success(data.EM);
+        setShowAdd(false);
       }
       if (data && +data.EC != 1) {
         toast.error(data.EM);
@@ -75,7 +77,7 @@ const Promotion = (props) => {
 
   useEffect(() => {
     fetchPromotion();
-  }, []);
+  }, [promotion]);
 
   return (
     <>

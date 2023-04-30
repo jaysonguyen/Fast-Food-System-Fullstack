@@ -19,6 +19,9 @@
     font-weight: 700;
 }
 
+.text_center {
+    text-align: center;
+}
 .seperate {
     width: 100%;
     margin: 10px 0;

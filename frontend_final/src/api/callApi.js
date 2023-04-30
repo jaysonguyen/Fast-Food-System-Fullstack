@@ -126,6 +126,13 @@ export const updatePromo = (id, status) => {
   return axios.put(`/api/promotion/edit`, {
     id,
     Status,
-
   });
+};
+
+export const deleteFoodSoft = (id) => {
+  return axios.put(`/api/general/deleteSoft/${id}`);
+};
+
+export const deleteVendorSoft = (id) => {
+  return axios.put(`/api/general/deleteVendor/${id}`);
 };

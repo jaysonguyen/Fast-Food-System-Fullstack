@@ -9,78 +9,62 @@ import "./Production.css";
 import { updateFood } from "../../../api/callApi";
 
 const ProductModal = (props) => {
-  const [show, setShow] = useState(props.show);
-  const [idF, setidF] = useState(props.show);
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
-  const [image, setImage] = useState("");
-  const [type, setType] = useState("");
-  const [recipe, setRecipe] = useState(1);
-  const [status, setStatus] = useState(1);
-  const [note, setNote] = useState("");
-  const [dataFood, setDataFood] = useState({});
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  console.log(props.action);
-
-  //use for update
-  const initialFoodInfo = async () => {};
+  const handleClose = () => props.setShowModal(false);
+  const handleShow = () => props.setShowModal(true);
+  const name = props.name;
+  const image = props.image;
+  const price = props.price;
+  const status = props.status;
+  const recipe = props.recipe;
+  const type = props.type;
 
   const handleCreateFood = async (e) => {
     e.preventDefault();
-    const data = await AddFood(name, price, image, type, recipe);
-    if (data && +data.EC === 1) {
-      toast.success(data.EM);
-      location.reload();
-    } else if (data && +data.EC != 1) {
-      toast.error(data.EM);
-      console.log(data);
+    if (isNaN(props.price)) {
+      toast.error("Invalid price");
     } else {
-      toast.error("add data failed");
-    }
-  };
-
-  const handleSetDataDefault = () => {
-    if (props.dataFood) {
-      setidF(props.dataFood.id);
-      setName(props.dataFood.name);
-      setImage(props.dataFood.image);
-      setPrice(props.dataFood.price);
-      setType(props.dataFood.type);
-      setStatus(props.dataFood.status);
-      setRecipe(props.dataFood.recipe);
-    }
-  };
-
-  const handleUpdateProduct = async () => {
-    if (props.dataFood.name == name) {
-      toast.error("New data must different form old data");
-    } else {
-      setDataFood((prevData) => ({
-        ...prevData,
-        name,
-        image,
-        price,
-        type,
-        status,
-        recipe,
-      }));
-      const data = await updateFood(idF, { ...dataFood });
+      const data = await AddFood(
+        props.name,
+        props.price,
+        props.image || "",
+        props.type || 2,
+        props.recipe || ""
+      );
       if (data && +data.EC == 1) {
-        location.reload();
         toast.success(data.EM);
-      }
-      if (data && data.EC != 1) {
+        handleClose();
+      } else if (data && +data.EC != 1) {
         toast.error(data.EM);
+        console.log(data);
+      } else {
+        toast.error("add data failed");
       }
+    }
+  };
+
+  const handleUpdateProduct = async (e) => {
+    e.preventDefault();
+    const data = await updateFood(props.id, {
+      ...props.dataFood,
+      name,
+      image,
+      price,
+      type,
+      status,
+      recipe,
+    });
+    if (data && +data.EC == 1) {
+      toast.success(data.EM);
+      props.setShowModal(false);
+    }
+    if (data && +data.EC != 1) {
+      toast.error(data.EM);
     }
   };
 
   useEffect(() => {
-    handleSetDataDefault();
-  }, [props.dataFood]);
+    console.log(name);
+  }, [image, price, recipe, status]);
 
   return (
     <>
@@ -105,8 +89,9 @@ const ProductModal = (props) => {
                     type="text"
                     id="form6Example1"
                     className="form-control"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    disabled={props.action == "CREATE" ? "" : "disabled"}
+                    value={props.name}
+                    onChange={(e) => props.setName(e.target.value)}
                   />
                   <label className="form-label" htmlFor="form6Example1">
                     Product Name
@@ -117,8 +102,8 @@ const ProductModal = (props) => {
                 <div className="form-outline">
                   <select
                     className="select w-100"
-                    value={type}
-                    onChange={(e) => setType(e.target.value)}
+                    value={props.type}
+                    onChange={(e) => props.setType(e.target.value)}
                   >
                     <option value="1">One</option>
                     <option value="2">Two</option>
@@ -142,8 +127,8 @@ const ProductModal = (props) => {
                     type="text"
                     id="form6Example3"
                     className="form-control"
-                    value={recipe}
-                    onChange={(e) => setRecipe(e.target.value)}
+                    value={props.recipe}
+                    onChange={(e) => props.setRecipe(e.target.value)}
                   />
                   <label className="form-label" htmlFor="form6Example3">
                     Recipe
@@ -156,8 +141,8 @@ const ProductModal = (props) => {
                     type="text"
                     id="form6Example4"
                     className="form-control"
-                    value={status}
-                    onChange={(e) => setStatus(e.target.value)}
+                    value={props.status}
+                    onChange={(e) => props.setStatus(e.target.value)}
                   />
                   <label className="form-label" htmlFor="form6Example4">
                     status
@@ -167,11 +152,10 @@ const ProductModal = (props) => {
               <div className="col-4">
                 <div className="form-outline mb-4">
                   <input
-                    type="number"
                     id="form6Example5"
                     className="form-control"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
+                    value={props.price}
+                    onChange={(e) => props.setPrice(e.target.value)}
                   />
                   <label className="form-label" htmlFor="form6Example5">
                     Price
@@ -185,8 +169,8 @@ const ProductModal = (props) => {
                 className="form-control"
                 id="form6Example7"
                 rows="4"
-                value={note}
-                onChange={(e) => setNote(e.target.value)}
+                value={props.note}
+                onChange={(e) => props.setNote(e.target.value)}
               ></textarea>
               <label className="form-label" htmlFor="form6Example7">
                 note
@@ -203,13 +187,22 @@ const ProductModal = (props) => {
                     const file = e.target.files[0];
                     const reader = new FileReader();
                     reader.onload = () => {
-                      setImage(reader.result);
+                      props.setImage(reader.result);
                     };
                     reader.readAsDataURL(file);
                   }}
                 />
                 <div className="chooseFile_container">
-                  <label className={image ? "image_label_add_product active" : "image_label_add_product"} htmlFor="chooseFile">Choose a file</label>
+                  <label
+                    className={
+                      image
+                        ? "image_label_add_product active"
+                        : "image_label_add_product"
+                    }
+                    htmlFor="chooseFile"
+                  >
+                    Choose a file
+                  </label>
                   {image && <img src={image} alt="" />}
                 </div>
               </div>
@@ -234,7 +227,7 @@ const ProductModal = (props) => {
             onClick={(e) =>
               props.action == "CREATE"
                 ? handleCreateFood(e)
-                : handleUpdateProduct()
+                : handleUpdateProduct(e)
             }
           >
             {props.action == "CREATE" ? "Create" : "Update"}
