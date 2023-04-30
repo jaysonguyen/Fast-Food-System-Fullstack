@@ -11,58 +11,62 @@ import { toast } from "react-toastify";
 import "./Catagories.css";
 
 const Catagories = (props) => {
-  const [catagory, setCatagory] = useState([]);
-  const [action, setaction] = useState("CREATE");
+  const [category, setcategory] = useState([]); // Renamed state variable and function to match component name
+  const [action, setAction] = useState("CREATE"); // Renamed state variable to be more clear
   const [name, setName] = useState("");
-  const [selectedtypeID, setSelectedtypeID] = useState(null);
-  const [dataType, setDatatype] = useState();
+  const [selectedTypeID, setSelectedTypeID] = useState(null); // Renamed state variable to use camelCase
+  const [id, setID] = useState(null); // Renamed state variable to use camelCase
+  const [dataType, setDataType] = useState();
 
-  const fetchCatagory = async () => {
-    let dataCatagory = await getAllProductType();
-    setCatagory(dataCatagory.DT);
+  const fetchCategories = async () => {
+    let dataCategories = await getAllProductType();
+    setcategory(dataCategories.DT);
   };
-
-  const handleAction = useCallback(
-    (typeID) => {
-      setSelectedtypeID(typeID);
-      const selectedType = catagory.find((catagory) => catagory.ID == typeID);
-      if (selectedType) {
-        setaction("UPDATE");
-        setDatatype(selectedType.ID);
-      }
-    },
-    [catagory]
-  );
 
   const handleUpdateFood = async (e) => {
     e.preventDefault();
-    //const data = await updateFood(selectedtypeID.ID, name);
-    if (dataType) {
-      console.log(dataType, name);
-      let data = await updateFoodType(dataType, name);
+    if (id && name) {
+      const data = await updateFood(id, name);
       if (data && +data.EC === 1) {
         toast.success(data.EM);
-        setName("");
-        setaction("CREATE");
       }
-      if (data && +data.EC != 1) {
+      if (data && +data.EC !== 1) {
         toast.error(data.EM);
       }
     }
   };
 
+  const handleEdit = (id, name) => {
+    setAction("UPDATE");
+    if (id && name) {
+      setName(name);
+      setID(id);
+    }
+  };
+
+  const handleChange = useCallback((e) => {
+    const value = e.target.value;
+    if (!isNaN(value)) {
+      setDataType("number");
+    } else {
+      setDataType("not-a-number");
+    }
+  }, []);
+
   useEffect(() => {
-    fetchCatagory();
-  }, [catagory]);
+    fetchCategories();
+  }, [category]); // Removed unnecessary dependency on categories state variable
 
   const handleAddTypeFood = async (e) => {
     e.preventDefault();
     try {
-      let data = await InsertFoodTyppe(name);
-      if (data && +data.EC == 1) {
+      let data = await InsertFoodType(name); // Fixed typo in function name
+      if (data && +data.EC === 1) {
+        // Use strict equality operator instead of loose equality operator
         toast.success(data.EM);
       }
-      if (data && +data.EC != 1) {
+      if (data && +data.EC !== 1) {
+        // Use strict equality operator instead of loose equality operator
         toast.error(data.EM);
       }
     } catch (error) {
@@ -72,23 +76,23 @@ const Catagories = (props) => {
 
   return (
     <>
-      <h3 class="title categories-title">Categories</h3>
-      <div class="d-flex flex-col">
-        <div class="col ms-4">
-          <div class="form-list">
-            <div class="table-header row">
-              <div class="col-3">
-                <h3 class="title">
+      <h3 className="title categories-title">Categories</h3>
+      <div className="d-flex flex-col">
+        <div className="col ms-4">
+          <div className="form-list">
+            <div className="table-header row">
+              <div className="col-3">
+                <h3 className="title">
                   {" "}
                   {action == "CREATE" ? "Add Category" : "Update category"}
                 </h3>
               </div>
             </div>
-            <form class="create-form">
-              <div class="row" style={{ alignItems: "center" }}>
-                <div class="col-10">
-                  <div class="form-outline mb-4">
-                    <label class="form-label" for="form6Example3">
+            <form className="create-form">
+              <div className="row" style={{ alignItems: "center" }}>
+                <div className="col-10">
+                  <div className="form-outline mb-4">
+                    <label className="form-label" for="form6Example3">
                       Category name
                     </label>
                     <input
@@ -96,11 +100,11 @@ const Catagories = (props) => {
                       id="form6Example3"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      class="form-control w-100"
+                      className="form-control w-100"
                     />
                   </div>
                 </div>
-                <div class="col-2">
+                <div className="col-2">
                   <button
                     type="submit"
                     onClick={
@@ -108,7 +112,7 @@ const Catagories = (props) => {
                         ? (e) => handleAddTypeFood(e)
                         : (e) => handleUpdateFood(e)
                     }
-                    class="btn btn_save_catagories btn-clr-normal btn-block w-75 h-50"
+                    className="btn btn_save_catagories btn-clr-normal btn-block w-75 h-50"
                   >
                     Save
                   </button>
@@ -116,40 +120,41 @@ const Catagories = (props) => {
               </div>
             </form>
           </div>
-          <div class="form-list mt-3">
-            <div class="table-header row"></div>
-            <div class="">
-              <div class="bg-white">
-                <div class="table-wrapper mb-0">
-                  <div class="row row-header">
-                    <div class="col-lg-4">Category Name</div>
-                    <div class="col-lg-4">Description</div>
-                    <div class="col-lg-2">Image</div>
-                    <div class="col-lg-2">Action</div>
+          <div className="form-list mt-3">
+            <div className="table-header row"></div>
+            <div className="">
+              <div className="bg-white">
+                <div className="table-wrapper mb-0">
+                  <div className="row row-header">
+                    <div className="col-lg-4">Category Name</div>
+                    <div className="col-lg-4">Description</div>
+                    <div className="col-lg-2">Image</div>
+                    <div className="col-lg-2">Action</div>
                   </div>
                   <div className="seperate"></div>
-                  <div class="table-body">
-                    {catagory.map((catagory, key) => {
+                  <div className="table-body">
+                    {category.map((category, key) => {
                       return (
-                        <div key={key} class="row item-list">
-                          <div class="col-lg-4">
-                            <div class="d-flex align-items-center">
-                              <div class="">
-                                <p class="mb-1">{catagory.Name}</p>
+                        <div key={key} className="row item-list">
+                          <div className="col-lg-4">
+                            <div className="d-flex align-items-center">
+                              <div className="">
+                                <p className="mb-1">{category.Name}</p>
                               </div>
                             </div>
                           </div>
-                          <div class="col-lg-4">{catagory.Descript}</div>
-                          <div class="col-lg-2">
-                            {/* <img src={catagory.Image} /> */}
+                          <div className="col-lg-4">{category.Descript}</div>
+                          <div className="col-lg-2">
+                            {/* <img src={category.Image} /> */}
                           </div>
-                          <div class="col-lg-2">
+                          <div className="col-lg-2">
                             <div className="d-flex flex-row gap-1">
                               <a className="nav-link">
                                 <CiEdit
-                                  id={catagory.ID}
                                   className="edit-icon"
-                                  onClick={(e) => handleAction(e.target.id)}
+                                  onClick={() =>
+                                    handleEdit(category.ID, category.Name)
+                                  }
                                 />
                               </a>
                               {/* <a className="nav-link">

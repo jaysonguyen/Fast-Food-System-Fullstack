@@ -13,7 +13,6 @@ const tools = require("../tool");
 
 const getFoodList = async (req, res) => {
   try {
-    console.log("get food list");
     let data = await getAllFood();
     return res.status(200).json({
       EM: data.EM,
@@ -66,7 +65,7 @@ const updateF = async (req, res) => {
     );
 
     if (data && +data.EC == 1) {
-      return res.status(500).json({
+      return res.status(200).json({
         EM: data.EM,
         EC: data.EC,
       });

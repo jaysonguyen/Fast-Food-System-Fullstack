@@ -1,10 +1,16 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  useLayoutEffect,
+} from "react";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { getAllSupplier, removeSupplier } from "../../../services/supplier";
 import SupplierModal from "./SupplierModal";
 import { toast } from "react-toastify";
 import { IoIosAdd } from "react-icons/io";
 import { CiEdit } from "react-icons/ci";
+import { deleteVendorSoft } from "../../../api/callApi";
 
 const Supplier = (props) => {
   const [supplier, setSupplier] = useState([]);
@@ -13,7 +19,8 @@ const Supplier = (props) => {
   const [dataVendor, setDatavendor] = useState({});
   const [name, setName] = useState({});
   const [contact, setContact] = useState("");
-  const [note, setnote] = useState("");
+  const [note, setNote] = useState("");
+  const [idSup, setidSup] = useState(null);
   const [action, setAction] = useState("CREATE");
 
   const fetchSupplier = async () => {
@@ -23,14 +30,16 @@ const Supplier = (props) => {
   };
 
   const handelDeleteSupplier = async (id) => {
-    const data = await removeSupplier(id);
-    if (data && +data.EC == 1) {
-      toast.success("Delete data succeed");
+    setidSup(id);
+    if (id) {
+      const data = await deleteVendorSoft(id);
+      if (data && +data.EC == 1) {
+        toast.success("Delete data succeed");
+      }
+      if (data && +data.EC != 1) {
+        toast.error(data.EM);
+      }
     }
-    if (data && +data.EC != 1) {
-      toast.error(data.EM);
-    }
-    console.log(id);
   };
 
   const handleAction = useCallback(
@@ -40,12 +49,11 @@ const Supplier = (props) => {
         (supplier) => supplier.ID == vendorID
       );
       if (selectedVendor) {
-        setDatavendor(vendorID);
         setContact(selectedVendor.Contact);
         setName(selectedVendor.Name);
-        setnote(selectedVendor.Note);
+        setNote(selectedVendor.Note);
+        setidSup(vendorID);
         setDatavendor({
-          id: vendorID,
           name: selectedVendor.Name,
           contact: selectedVendor.Contact,
           note: selectedVendor.Note,
@@ -59,9 +67,17 @@ const Supplier = (props) => {
     [supplier]
   );
 
-  useEffect(() => {
+  const handleAddSup = () => {
+    handleShowModal();
+    setAction("CREATE");
+    setName("");
+    setContact("");
+    setNote("");
+  };
+
+  useLayoutEffect(() => {
     fetchSupplier();
-  }, []);
+  }, [supplier]);
 
   const handleShowModal = () => {
     let flag = !showModal;
@@ -71,7 +87,7 @@ const Supplier = (props) => {
   return (
     <>
       <h3 class="title categories-title">Supplier</h3>
-      <div className="add_promotion_big_btn" onClick={() => handleShowModal()}>
+      <div className="add_promotion_big_btn" onClick={() => handleAddSup()}>
         <IoIosAdd className="add_promotion_big_btn--icon" />
         Add promotion
       </div>
@@ -89,55 +105,66 @@ const Supplier = (props) => {
               </div>
               <div className="seperate"></div>
               <div class="table-body">
-                {supplier.map((supplier, key) => {
-                  return (
-                    <div key={key} class="row item-list">
-                      <div class="col-lg-3">
-                        <div class="d-flex align-items-center">
-                          <div class="ms-3">
-                            <p class="mb-1">{supplier.Name}</p>
+                {supplier
+                  .filter((supp) => supp.Status == 1)
+                  .map((supplier, key) => {
+                    return (
+                      <div key={key} class="row item-list">
+                        <div class="col-lg-3">
+                          <div class="d-flex align-items-center">
+                            <div class="ms-3">
+                              <p class="mb-1">{supplier.Name}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-4">
+                          <p class="fw-normal mb-1">{supplier.Note}</p>
+                        </div>
+
+                        <div class="col-lg-3">{supplier.Contact}</div>
+                        <div class="col-lg-2">
+                          <div className="d-flex flex-row gap-1">
+                            <a className="nav-link">
+                              <CiEdit
+                                className="edit-icon"
+                                id={supplier.ID}
+                                onClick={(e) => handleAction(e.target.id)}
+                              />
+                            </a>
+                            <a className="nav-link">
+                              <AiOutlineDelete
+                                className="del-icon"
+                                onClick={() =>
+                                  handelDeleteSupplier(supplier.ID)
+                                }
+                              />
+                            </a>
                           </div>
                         </div>
                       </div>
-                      <div class="col-lg-4">
-                        <p class="fw-normal mb-1">{supplier.Note}</p>
-                      </div>
-
-                      <div class="col-lg-3">{supplier.Contact}</div>
-                      <div class="col-lg-2">
-                        <div className="d-flex flex-row gap-1">
-                          <a className="nav-link">
-                            <CiEdit
-                              className="edit-icon"
-                              id={supplier.ID}
-                              onClick={(e) => handleAction(e.target.id)}
-                            />
-                          </a>
-                          <a className="nav-link">
-                            <AiOutlineDelete
-                              className="del-icon"
-                              id={supplier.ID}
-                              onClick={async (e) =>
-                                handelDeleteSupplier(e.target.id)
-                              }
-                            />
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
               </div>
             </div>
           </div>
         </div>
       </div>
-      <SupplierModal
-        show={showModal}
-        action={action}
-        onHide={handleShowModal}
-        data={dataVendor}
-      />
+      {showModal && (
+        <SupplierModal
+          show={showModal}
+          setShowModal={setShowModal}
+          action={action}
+          onHide={handleShowModal}
+          idSup={idSup}
+          data={dataVendor}
+          name={name}
+          setName={setName}
+          contact={contact}
+          setContact={setContact}
+          note={note}
+          setNote={setNote}
+        />
+      )}
     </>
   );
 };

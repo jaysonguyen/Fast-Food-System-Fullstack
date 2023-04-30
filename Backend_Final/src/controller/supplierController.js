@@ -8,7 +8,6 @@ const {
 const getSupplier = async (req, res) => {
   try {
     const data = await readSupplier();
-    console.log(data);
     if (data && data.EC === 1) {
       return res.status(200).json({
         EM: data.EM,
