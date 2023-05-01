@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { ProductionSB, StoreSB } from "./AdminSideBar";
+import { AdminSB, StoreSB } from "./AdminSideBar";
 import { Scroll, ChartLine, BellSimpleRinging, Info } from "phosphor-react";
 
 const pathname = window.location.pathname;
 
 export function AdminSideBar() {
   console.log(pathname);
-  if (pathname.includes("/production")) return <ProductionSB />;
-  else if (pathname.includes("/store")) return <StoreSB />;
+  if (pathname.includes("/admin")) return <AdminSB />;
+  else if (pathname.includes("/staff")) return <StaffSB />;
 }
 
 export function CasherSideBar() {

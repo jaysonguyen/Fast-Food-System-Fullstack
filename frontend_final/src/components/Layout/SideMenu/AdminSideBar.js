@@ -9,7 +9,7 @@ import { CiShoppingBasket } from "react-icons/ci";
 import { BiImport } from "react-icons/bi";
 import "./AdminSideBar.css";
 
-export const ProductionSB = () => {
+export const AdminSB = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [activeIndexSub, setActiveIndexSub] = useState(null);
   const [flag, setFlag] = useState(false);
@@ -140,7 +140,7 @@ export const ProductionSB = () => {
   );
 };
 
-export const StoreSB = () => {
+export const StaffSB = () => {
   return (
     <ul className="nav-list nav flex-column">
       <li className="nav-item has-submenu">

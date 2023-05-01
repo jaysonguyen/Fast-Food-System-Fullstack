@@ -46,6 +46,7 @@ app.use("/api/staff/", require("./src/routes/staffApi"));
 app.use("/api/supplier/", require("./src/routes/supplierApi"));
 app.use("/api/promotion/", require("./src/routes/promotionApi"));
 app.use("/api/general/", require("./src/routes/generalApi"));
+app.use("/api/user/", require("./src/routes/userApi"));
 
 app.listen(PORT, () => {
   console.log("App running on port: " + PORT);

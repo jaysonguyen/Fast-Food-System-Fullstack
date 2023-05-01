@@ -50,8 +50,8 @@ export default function FoodType() {
     <>
       <div className="food_feed_container">
         <div className="row">
-          {foodList.map((food) => (
-            <div className="col col-3 food_feed_item_container">
+          {foodList.map((food, idx) => (
+            <div key={idx} className="col col-3 food_feed_item_container">
               <div className="image_food_feed">
                 <img
                   src={

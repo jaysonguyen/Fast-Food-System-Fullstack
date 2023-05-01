@@ -3,7 +3,7 @@ import {} from "react-spinners";
 
 const LoadingContext = createContext();
 
-export const LoadingProvvider = ({ children }) => {
+export const LoadingProvider = ({ children }) => {
   let values = [];
 
   return (
@@ -12,5 +12,5 @@ export const LoadingProvvider = ({ children }) => {
 };
 
 export const LoadingSpinner = () => {
-    
-} 
+  
+};

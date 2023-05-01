@@ -7,6 +7,7 @@ const {
 } = require("../controller/staffController");
 const router = express.Router();
 
+// /api/staff
 router.route("/list").get(readStaffList);
 router.route("/update/:id").put(updateStaff);
 router.route("/delete/:id").delete(removeStaff);

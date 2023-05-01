@@ -14,9 +14,25 @@ export const InsertSupplier = (name, contact, note) => {
   return axios.post(`/api/supplier/create`, { name, contact, note });
 };
 
+// staff
+
 export const deleteStaff = (id) => {
   return axios.delete(`/api/staff/delete/${id}`);
 };
+
+// useraa
+export const userListData = () => {
+  return axios.get(`/api/user`);
+};
+
+export const createNewUser = (email, password, isAdmin) => {
+  return axios.post(`/api/user`, {
+    email,
+    password,
+    isAdmin,
+  });
+};
+
 // Product
 export const FoodData = () => {
   return axios.get(`api/food`);
