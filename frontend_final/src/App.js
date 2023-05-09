@@ -1,4 +1,6 @@
 import React, { useState, StrictMode } from "react";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -31,10 +33,15 @@ import Promotion from "./components/Admin/Promotion/Promotion";
 import Catagories from "./components/Admin/Catagories/Catagories";
 import Supplier from "./components/Admin/Supplier/Supplier";
 import Staff from "./components/Admin/Store/Staff/Staff";
+import User from "./components/Admin/Store/User/User";
 
 // kitchen
 import { KitchenLayout } from "./components/Layout/KitchenLayout";
 import { OrderPage as KitchenOrder } from "./components/pages/Kitchen/OrderPage";
+
+// Staff
+import { Calendar } from "./components/Staff/Calendar/Calendar";
+import { Demo } from "./components/Staff/Calendar/Demo";
 
 import "jquery/dist/jquery.min.js";
 import "popper.js/dist/popper.min.js";
@@ -51,62 +58,71 @@ function App() {
     flag = true;
   }
   return (
-    <StrictMode>
-      <Router>
-        {/* {pathname.includes("/admin") ? <AdminHeader /> : <NavBar />} */}
-        {/* <NavBar /> */}
-        <Routes>
-          <Route path="/kitchen" element={<AllOder />} />
-          <Route path="/login" element={<LoginPage />} />
+    <DndProvider backend={HTML5Backend}>
+      <StrictMode>
+        <Router>
+          {/* {pathname.includes("/admin") ? <AdminHeader /> : <NavBar />} */}
+          {/* <NavBar /> */}
+          <Routes>
+            <Route path="/kitchen" element={<AllOder />} />
+            <Route path="/login" element={<LoginPage />} />
 
-          <Route path="/" element={<OrderPage />} />
-          <Route path="/casher" element={<CasherLayout />}>
-            <Route path="/casher/menu" element={<MenuManagementPage />} />
-            <Route path="/casher/orders" element={<OrderManagement />}></Route>
-          </Route>
+            <Route path="/" element={<OrderPage />} />
+            <Route path="/casher" element={<CasherLayout />}>
+              <Route path="/casher/menu" element={<MenuManagementPage />} />
+              <Route
+                path="/casher/orders"
+                element={<OrderManagement />}
+              ></Route>
+            </Route>
 
-          {/* admin */}
-          <Route path="/admin" element={<AdminLayout />}>
-            <Route path="/admin/dashboard" element={<AdminDB />}></Route>
-            {/* production */}
-            <Route path="/admin/production" element={<Production />}></Route>
-            <Route
-              path="/admin/production/promotion"
-              element={<Promotion />}
-            ></Route>
-            <Route
-              path="/admin/production/catagories"
-              element={<Catagories />}
-            ></Route>
-            <Route
-              path="/admin/production/supplier"
-              element={<Supplier />}
-            ></Route>
-            {/* store */}
-            <Route path="/admin/store/staff" element={<Staff />}></Route>
-          </Route>
-          {/* kitchen */}
-          <Route path="/kitchen" element={<KitchenLayout />}>
-            <Route path="/kitchen/orders" element={<KitchenOrder />}></Route>
-          </Route>
-          {/* staff */}
-          <Route path="/staff" element={<AdminLayout />}></Route>
-        </Routes>
-      </Router>
+            {/* admin */}
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route path="/admin/dashboard" element={<AdminDB />}></Route>
+              {/* production */}
+              <Route path="/admin/production" element={<Production />}></Route>
+              <Route
+                path="/admin/production/promotion"
+                element={<Promotion />}
+              ></Route>
+              <Route
+                path="/admin/production/catagories"
+                element={<Catagories />}
+              ></Route>
+              <Route
+                path="/admin/production/supplier"
+                element={<Supplier />}
+              ></Route>
+              {/* store */}
+              <Route path="/admin/store/staff" element={<Staff />}></Route>
+              <Route path="/admin/store/user" element={<User />}></Route>
+            </Route>
+            {/* kitchen */}
+            <Route path="/kitchen" element={<KitchenLayout />}>
+              <Route path="/kitchen/orders" element={<KitchenOrder />}></Route>
+            </Route>
+            {/* staff */}
+            <Route path="/staff" element={<AdminLayout />}>
+              <Route path="/staff/assignment" element={<Calendar />} />
+              <Route path="/staff/demo" element={<Demo />} />
+            </Route>
+          </Routes>
+        </Router>
 
-      <ToastContainer
-        position="bottom-left"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
-    </StrictMode>
+        <ToastContainer
+          position="bottom-left"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+      </StrictMode>
+    </DndProvider>
   );
 }
 

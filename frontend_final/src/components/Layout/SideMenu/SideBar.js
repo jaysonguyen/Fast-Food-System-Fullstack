@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { AdminSB, StoreSB } from "./AdminSideBar";
+import { AdminSB, StaffSB } from "./AdminSideBar";
 import { Scroll, ChartLine, BellSimpleRinging, Info } from "phosphor-react";
 
 const pathname = window.location.pathname;

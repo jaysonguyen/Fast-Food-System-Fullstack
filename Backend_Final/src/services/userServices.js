@@ -30,6 +30,27 @@ const getAllUser = async () => {
   }
 };
 
+const getUserByID = async (id) => {
+  try {
+    const poolConnection = await sql.connect(config);
+    const data = await poolConnection.request().query(`
+      exec getUserByID ${id}
+    `);
+    poolConnection.close();
+    return {
+      EM: "success",
+      EC: 1,
+      DT: data.recordset,
+    };
+  } catch (error) {
+    return {
+      EM: "error",
+      EC: -1,
+      DT: error.message,
+    };
+  }
+};
+
 const createUser = async ({ email, password, isAdmin }) => {
   try {
     const poolConnection = await sql.connect(config);
@@ -52,4 +73,30 @@ const createUser = async ({ email, password, isAdmin }) => {
   }
 };
 
-module.exports = { getAllUser, createUser };
+const getUserWithoutStaffRef = async () => {
+  try {
+    const poolConnection = await sql.connect(config);
+    const data = await poolConnection.request().query(`
+      exec getUserWithoutStaffRef
+    `);
+    poolConnection.close();
+    return {
+      EM: "success",
+      EC: 1,
+      DT: data.recordset,
+    };
+  } catch (error) {
+    return {
+      EM: "error",
+      EC: -1,
+      DT: error.message,
+    };
+  }
+};
+
+module.exports = {
+  getUserByID,
+  getUserWithoutStaffRef,
+  getAllUser,
+  createUser,
+};

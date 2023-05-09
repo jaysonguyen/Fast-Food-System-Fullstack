@@ -134,6 +134,54 @@ export const AdminSB = () => {
               <b>Import</b>
             </a>
           </li>
+          <li
+            className="nav-item has-submenu"
+            onClick={() => setActiveIndex(3)}
+          >
+            <a
+              href="#store"
+              data-bs-toggle="collapse"
+              className={activeIndex === 3 ? "nav-link active" : "nav-link"}
+            >
+              <AiFillGolden className="nav-link_icon" />
+              <b>Store</b>
+              <AiOutlineDown className="nav-link_icon nav-link_icon--down" />
+            </a>
+            <ul id="store" className="submenu ms-3 collapse">
+              <li
+                className="submenu_sidebar"
+                onClick={() => setActiveIndexSub(0)}
+              >
+                <Link
+                  className={
+                    activeIndex === 0 && activeIndexSub === 0
+                      ? "nav-link active"
+                      : "nav-link"
+                  }
+                  to="/admin/store/user"
+                >
+                  <MdFastfood className="nav-link_icon" />
+                  User
+                </Link>
+              </li>
+              <li
+                className="submenu_sidebar"
+                onClick={() => setActiveIndexSub(1)}
+              >
+                <Link
+                  className={
+                    activeIndex === 1 && activeIndexSub === 1
+                      ? "nav-link active"
+                      : "nav-link"
+                  }
+                  to="/admin/store/staff"
+                >
+                  <MdFastfood className="nav-link_icon" />
+                  Staff
+                </Link>
+              </li>
+            </ul>
+          </li>
         </ul>
       </div>
     </div>
@@ -141,40 +189,100 @@ export const AdminSB = () => {
 };
 
 export const StaffSB = () => {
+  const [activeIndex, setActiveIndex] = useState(null);
+  const [activeIndexSub, setActiveIndexSub] = useState(null);
+  const [flag, setFlag] = useState(false);
+
   return (
-    <ul className="nav-list nav flex-column">
-      <li className="nav-item has-submenu">
-        <a className="nav-link" data-bs-toggle="collapse" href="#staff">
-          <b>Staff</b>
-        </a>
-        <ul id="staff" className="submenu collapse">
-          <li>
-            <a className="nav-link" href="#">
-              Staff
+    <div className="sideBar_container">
+      <h4 className="sidbar_container_name_com">FastBite</h4>
+      <div className="sideBar_body_container">
+        <h6>Main Navigation</h6>
+        <ul className="nav-list nav flex-column">
+          <li
+            className="nav-item has-submenu"
+            onClick={() => setActiveIndex(0)}
+          >
+            <a
+              href="#product"
+              data-bs-toggle="collapse"
+              className={activeIndex === 0 ? "nav-link active" : "nav-link"}
+            >
+              <AiFillGolden className="nav-link_icon" />
+              <b>Calendar</b>
+              <AiOutlineDown className="nav-link_icon nav-link_icon--down" />
             </a>
+            <ul id="product" className="submenu ms-3 collapse">
+              <li
+                className="submenu_sidebar"
+                onClick={() => setActiveIndexSub(0)}
+              >
+                <Link
+                  className={
+                    activeIndex === 0 && activeIndexSub === 0
+                      ? "nav-link active"
+                      : "nav-link"
+                  }
+                  to="/staff/assignment"
+                >
+                  <MdFastfood className="nav-link_icon" />
+                  Shift Assignment
+                </Link>
+              </li>
+              <li
+                className="submenu_sidebar"
+                onClick={() => setActiveIndexSub(1)}
+              >
+                <Link
+                  className={
+                    activeIndex === 0 && activeIndexSub === 1
+                      ? "nav-link active"
+                      : "nav-link"
+                  }
+                  to="/admin/production/catagories"
+                >
+                  <BiCategory className="nav-link_icon" />
+                  Calendar
+                </Link>
+              </li>
+              <li
+                className="submenu_sidebar"
+                onClick={() => setActiveIndexSub(2)}
+              >
+                <a
+                  className={
+                    activeIndex === 0 && activeIndexSub === 2
+                      ? "nav-link active"
+                      : "nav-link"
+                  }
+                  href="#"
+                >
+                  <BsFillJournalBookmarkFill className="nav-link_icon" />
+                  Shift
+                </a>
+              </li>
+            </ul>
           </li>
-          <li>
-            <a className="nav-link" href="#">
-              Calendar
-            </a>
+          <li className="nav-item" onClick={() => setActiveIndex(1)}>
+            <Link
+              className={activeIndex === 1 ? "nav-link active" : "nav-link"}
+              to="/admin/production/supplier"
+            >
+              <FaCartArrowDown className="nav-link_icon" />
+              <b>Supplier </b>
+            </Link>
           </li>
-          <li>
-            <a className="nav-link" href="#">
-              Shift
+          <li className="nav-item" onClick={() => setActiveIndex(2)}>
+            <a
+              href="#"
+              className={activeIndex === 2 ? "nav-link active" : "nav-link"}
+            >
+              <BiImport className="nav-link_icon" />
+              <b>Import</b>
             </a>
           </li>
         </ul>
-      </li>
-      <li className="nav-item">
-        <Link className="nav-link" href="#">
-          <b>Leave </b>
-        </Link>
-      </li>
-      <li className="nav-item">
-        <Link className="nav-link" href="#">
-          <b>Salary </b>
-        </Link>
-      </li>
-    </ul>
+      </div>
+    </div>
   );
 };

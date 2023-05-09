@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap");
 :root {
   --clr-gradient-1: #c8161d;
   --clr-gradient-2: #df4949;
@@ -22,6 +22,10 @@
 
 body {
   font-family: "Fira Sans", sans-serif;
+}
+
+.title {
+  font-family: "Darumadrop One", cursive;
 }
 
 /****** File input ******/

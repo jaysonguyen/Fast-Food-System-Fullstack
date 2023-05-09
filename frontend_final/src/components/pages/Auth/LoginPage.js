@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "../../../css/root.css";
 import "./Login.css";
 import { getUserList } from "../../../services/userServices";
+import { getStaffByUserId } from "../../../services/staff";
 const sha256 = require("js-sha256");
 import loginBG from "./images/login-bg.png";
 
@@ -22,11 +23,20 @@ export const LoginPage = () => {
       const data = await getUserList();
       if (data && data.Ec != -1) {
         const users = data.DT;
-        users.forEach((u) => {
+        users.forEach(async (u) => {
           let psw = sha256(password);
           //login successfully
           if (u.Email == email && u.Password == psw) {
-            navigate("/");
+            //save user data to sessionStorage
+            console.log(u.ID);
+            if (!u.isAdmin) {
+              const staffdt = await getStaffByUserId(u.ID);
+              if (staffdt && staffdt.EC != -1) {
+                console.log("Staff: ", staffdt);
+              }
+            }
+            sessionStorage.setItem("user", JSON.stringify(u));
+            // navigate("/");
           }
         });
         setError("Email or password incorrect, please try again!");

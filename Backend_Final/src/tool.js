@@ -1,3 +1,6 @@
+const sql = require("mssql");
+const config = require("./config/configDatabase");
+
 const isNumberic = (str) => {
   if (typeof str != "string") return false; // we only process strings!
   return (
@@ -59,4 +62,24 @@ const getCurrentDateTime = () => {
   );
 };
 
-module.exports = { isNumberic, getCurrentDateTime };
+const sqlQueryCalled = async (query, success, error) => {
+  try {
+    const poolConnection = await sql.connect(config);
+    const data = await poolConnection.request().query(`
+      ${query}
+    `);
+    return {
+      EM: `${success}`,
+      EC: 1,
+      DT: data.recordset,
+    };
+  } catch (error) {
+    return {
+      EM: `${error}`,
+      EC: 1,
+      DT: error.message,
+    };
+  }
+};
+
+module.exports = { isNumberic, getCurrentDateTime, sqlQueryCalled };

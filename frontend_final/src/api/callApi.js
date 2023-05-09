@@ -72,6 +72,12 @@ export const updateOrderStatus = (id) => {
   return axios.put(`api/order/${id}`);
 };
 
+//shift
+
+export const getShiftListData = () => {
+  return axios.get(`api/shift`);
+}
+
 // insert
 
 export const InsertFood = (name, price, image, type, recipe, status) => {

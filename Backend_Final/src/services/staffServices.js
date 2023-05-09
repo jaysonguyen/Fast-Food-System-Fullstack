@@ -54,6 +54,33 @@ const updateStaffList = async (
   }
 };
 
+const updateStaffUserID = async (id) => {
+  try {
+    const poolConnection = await sql.connect(config);
+    const data = await poolConnection.query(`Exec updateStaffUserID ${id}`);
+    poolConnection.close();
+    if (data) {
+      return {
+        EM: "Delete Success",
+        EC: 1,
+        DT: "",
+      };
+    } else {
+      return {
+        EM: "Delete Success",
+        EC: 0,
+        DT: "",
+      };
+    }
+  } catch (error) {
+    return {
+      EM: "",
+      EC: -1,
+      DT: error.message,
+    };
+  }
+};
+
 const deleteStaff = async (id) => {
   try {
     const poolConnection = await sql.connect(config);
@@ -112,4 +139,31 @@ const createStaff = async (name, dob, gender, startAt, position, address) => {
   }
 };
 
-module.exports = { getStaffList, updateStaffList, deleteStaff, createStaff };
+const getStaffByUser = async (userid) => {
+  try {
+    const poolConnection = await sql.connect(config);
+    const data = await poolConnection.request().query(`
+      exec getStaffByUserID ${userid}
+    `);
+    return {
+      EM: "success",
+      EC: 1,
+      DT: data.recordset,
+    };
+  } catch (error) {
+    return {
+      EM: "error",
+      EC: -1,
+      DT: error.message,
+    };
+  }
+};
+
+module.exports = {
+  getStaffByUser,
+  getStaffList,
+  updateStaffList,
+  deleteStaff,
+  createStaff,
+  updateStaffUserID,
+};
