@@ -1,60 +1,70 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {
+  useContext,
+  createContext,
+  useEffect,
+  useState,
+  useCallback,
+  useMemo,
+} from "react";
 import axios from "../../../setup/axios";
 
 import { OrderContext } from "../../Context/OrderContext";
 import { addNewOrder } from "../../../services/orderServices";
 
 import { Form } from "react-bootstrap";
+import { Navigate, useNavigate } from "react-router-dom";
 import { NavLink } from "reactstrap";
 import { CaretCircleUp, CaretCircleDown } from "phosphor-react";
 import { isNumberic } from "../../tool";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { AiOutlineMinus } from "react-icons/ai";
 import { IoAdd } from "react-icons/io5";
+import { AddNewOrderData, checkOutOrder } from "../../../api/callApi";
 import "./Order.css";
+import OrderComplete from "./OrderComplete";
+export const OrderPaymentContext = createContext();
 
 export default function Order() {
-  // const { orderDetails, removeFromOrder } = useContext(OrderContext);
   const { removeFromOrder, orderDetails, emptyOrder } =
     useContext(OrderContext);
+
+  const navigate = useNavigate();
+
   let orderData = { StaffID: 3, BillDetails: [] };
   const [orderList, setOrderList] = useState([]);
+  const [userId, setUserId] = useState(3);
   const [flag, setFlag] = useState(false);
   const [total, setTotal] = useState(0);
+  const [show, setShow] = useState(false);
 
-  const updateTotal = () => {
-    let sum = 0;
-    orderList.forEach((item) => {
-      sum += item.Price * item.Quantity;
-    });
+  const updateTotal = useCallback(() => {
+    const sum = orderList.reduce(
+      (acc, item) => acc + item.Price * item.Quantity,
+      0
+    );
     setTotal(sum);
-  };
+  }, [orderList]);
 
-  const clearOrder = () => {
+  const clearOrder = useCallback(() => {
     setOrderList([]);
     setTotal(0);
-  };
+  }, []);
 
-  const addOrderData = async () => {
-    orderData.BillDetails = orderList;
-    console.log(orderData);
-    const res = await addNewOrder(orderData);
-    setOrderList([]);
-    switch (res) {
-      case 0:
-        alert("Pending...");
-        break;
-      case 1:
-        alert("Add order successfully!!");
-        break;
-      case -1:
-        alert("Error at api");
-        break;
-      case -2:
-        alert("Error at services");
-        break;
-      default:
-      // alert("Try again");
+  const checkOut = async () => {
+    if (total != 0) {
+      const res = await checkOutOrder(total);
+      if (res && +res.EC == 1) {
+        location.href = res.DT;
+        localStorage.setItem(
+          "order",
+          JSON.stringify({
+            StaffID: userId,
+            BillDetails: orderList,
+          })
+        );
+        setOrderList([]);
+        setTotal(0);
+      }
     }
   };
 
@@ -62,11 +72,11 @@ export default function Order() {
   useEffect(() => {
     console.log("rendering");
     setOrderList([...orderDetails]);
-    updateTotal();
   }, [orderDetails]);
 
-  console.log(orderList);
-  useEffect(() => {}, [total]);
+  useEffect(() => {
+    updateTotal();
+  }, [updateTotal]);
 
   return (
     <div
@@ -137,7 +147,7 @@ export default function Order() {
                 </p>
               </div>
               <div className="d-flex flex-column gap-2 ">
-                <button className="checkoutbtn" onClick={addOrderData}>
+                <button className="checkoutbtn" onClick={checkOut}>
                   Checkout
                 </button>
               </div>
