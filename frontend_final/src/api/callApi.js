@@ -76,7 +76,7 @@ export const updateOrderStatus = (id) => {
 
 export const getShiftListData = () => {
   return axios.get(`api/shift`);
-}
+};
 
 // insert
 
@@ -111,18 +111,7 @@ export const InsertStaff = (name, dob, gender, startAt, position, address) => {
 }; */
 
 export const AddNewOrderData = (orders) => {
-  axios
-    .post("api/order", orders)
-    .then((response) => {
-      // Xử lý phản hồi từ server nếu cần
-      console.log(response.data);
-      return 1;
-    })
-    .catch((error) => {
-      // Xử lý lỗi nếu có
-      console.log(error);
-      return -1;
-    });
+  return axios.post("api/order", { ...orders });
 };
 
 export const getFoodById = (id) => {
@@ -161,4 +150,8 @@ export const deleteFoodSoft = (id) => {
 
 export const deleteVendorSoft = (id) => {
   return axios.put(`/api/general/deleteVendor/${id}`);
+};
+
+export const checkOutOrder = (total) => {
+  return axios.post(`/api/order/payment/${total}`);
 };

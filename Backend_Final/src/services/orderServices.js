@@ -209,15 +209,18 @@ const addBill = async (staffid, today) => {
     if (data) {
       return {
         EM: "Add bill success",
+        EC: 1,
+      };
+    } else {
+      return {
+        EM: "Add bill failed",
         EC: 0,
-        DT: data.recordset,
       };
     }
   } catch (error) {
     return {
-      EM: "Add bill failed at services",
+      EM: error.message,
       EC: -1,
-      DT: error.message,
     };
   }
 };
@@ -233,16 +236,20 @@ const addBillDetails = async (billid, staffid, foodid, quantity, price) => {
       console.log("Added bill detail success..");
       return {
         EM: "Add bill details success",
+        EC: 1,
+      };
+    } else {
+      console.log("Error from services");
+      return {
+        EM: "Error from services",
         EC: 0,
-        DT: data.recordset,
       };
     }
   } catch (error) {
     console.log(error.message);
     return {
-      EM: "Error at create bill details", //error message
+      EM: error.message, //error message
       EC: -1, //error code
-      DT: error.message, //data
     };
   }
 };

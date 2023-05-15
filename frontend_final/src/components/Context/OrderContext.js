@@ -16,38 +16,23 @@ function orderReducer(state, action) {
     case "REMOVE_FROM_ORDER":
       return state.filter((item) => item.ID !== action.payload.ID);
     case "INCREMENT_QUANTITY":
-      // Tăng số lượng sản phẩm trong giỏ hàng
-      return {
-        ...state,
-        cartItems: state.cartItems.map((item) =>
-          item.id === action.payload.id
-            ? { ...item, Quantity: item.Quantity + 1 }
-            : item
-        ),
-      };
+      return state.map((item) =>
+        item.id === action.payload.id
+          ? { ...item, Quantity: item.Quantity + 1 }
+          : item
+      );
     case "DECREMENT_QUANTITY":
-      // Giảm số lượng sản phẩm trong giỏ hàng
-      return {
-        ...state,
-        cartItems: state.cartItems.map((item) =>
-          item.id === action.payload.id
-            ? { ...item, Quantity: item.Quantity - 1 }
-            : item
-        ),
-      };
+      return state.map((item) =>
+        item.id === action.payload.id
+          ? { ...item, Quantity: item.Quantity - 1 }
+          : item
+      );
     case "UPDATE_QUANTITY":
-      return {
-        ...state,
-        items: state.items.map((item) => {
-          if (item.id === action.payload.id) {
-            return {
-              ...item,
-              Quantity: action.payload.Quantity,
-            };
-          }
-          return item;
-        }),
-      };
+      return state.map((item) =>
+        item.id === action.payload.id
+          ? { ...item, Quantity: action.payload.Quantity }
+          : item
+      );
     case "EMPTY_ORDER":
       return [];
     default:

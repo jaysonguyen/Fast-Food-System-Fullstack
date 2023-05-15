@@ -23,6 +23,7 @@ import AllOder from "./components/Kitchen/AllOder/AllOder";
 // casher
 import { CasherLayout } from "./components/Layout/CasherLayout";
 import OrderPage from "./components/pages/Casher/MakeOrderPage";
+import OrderComplete from "./components/Element/Order/OrderComplete";
 import { MenuManagementPage } from "./components/pages/Casher/MenuManagementPage";
 import { OrderManagement } from "./components/pages/Casher/OrdersPage";
 import { OrderList } from "./components/pages/Casher/OrderList";
@@ -68,6 +69,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
 
             <Route path="/" element={<OrderPage />} />
+            <Route path="/order_complete" element={<OrderComplete />} />
             <Route path="/casher" element={<CasherLayout />}>
               <Route path="/casher/menu" element={<MenuManagementPage />} />
               <Route
@@ -106,6 +108,8 @@ function App() {
               <Route path="/staff/assignment" element={<Calendar />} />
               <Route path="/staff/demo" element={<Demo />} />
             </Route>
+
+
           </Routes>
         </Router>
 
