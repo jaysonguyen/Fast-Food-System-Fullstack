@@ -15,9 +15,9 @@ export const DetailsOrder = ({ order }) => {
 
   const getBillByID = async (id) => {
     try {
-      let orderDT = await getOrderByID(id);
-      console.log(orderDT);
-      setDetails(orderDT);
+      let getOrder = await getOrderByID(id);
+      console.log(getOrder);
+      if (getOrder && getOrder.EC != -1) setDetails(getOrder.DT);
       setLoading(false);
     } catch (error) {
       setLoading(true);

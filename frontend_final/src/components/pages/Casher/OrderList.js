@@ -10,10 +10,14 @@ import { Pencil, Package } from "phosphor-react";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { CiEdit } from "react-icons/ci";
 import { HashLoader } from "react-spinners";
+import { OrderModal } from "../../Element/Order/OrderModal";
 
 export const OrderList = (props) => {
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  //order choosen to show details (order modal)
+  const [orderChoosen, setOrderChoosen] = useState({});
 
   const getAllOrderData = async () => {
     let data = [];
@@ -73,6 +77,14 @@ export const OrderList = (props) => {
     }
   };
 
+  const [showModal, setShowModal] = useState(false);
+  const handleShowModal = (orderItem) => {
+    let flag = !showModal;
+    //if choosen then show modal details
+    orderItem && setOrderChoosen(orderItem);
+    setShowModal(flag);
+  };
+
   useEffect(() => {
     setIsLoading(true);
     handleSetOrderListData();
@@ -83,10 +95,10 @@ export const OrderList = (props) => {
   }
 
   return (
-    <div class="">
-      <div class="form-list">
-        <div class="table-wrapper mb-0 ">
-          <div class="row row-header">
+    <div className="">
+      <div className="form-list">
+        <div className="table-wrapper mb-0 ">
+          <div className="row row-header">
             <div className="col-2">ID</div>
             <div className="col-3">Date</div>
             <div className="col-2">Quantity</div>
@@ -94,33 +106,33 @@ export const OrderList = (props) => {
             <div className="col-3">Actions</div>
           </div>
           <div className="seperate"></div>
-          <div class="table-body">
+          <div className="table-body">
             {!isLoading &&
               orders &&
               orders.map((order, key) => {
                 return (
-                  <div key={key} class="row item-list">
-                    <div class="col-lg-2">
-                      <div class="d-flex align-items-center">
-                        <div class="">
-                          <p class="mb-1">{order.ID}</p>
+                  <div key={key} className="row item-list">
+                    <div className="col-lg-2">
+                      <div className="d-flex align-items-center">
+                        <div className="">
+                          <p className="mb-1">{order.ID}</p>
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-3">
-                      <p class="fw-normal mb-1">{order.Date}</p>
+                    <div className="col-lg-3">
+                      <p className="fw-normal mb-1">{order.Date}</p>
                     </div>
-                    <div class="col-lg-2">{order.Quantity}</div>
-                    <div class="col-lg-2">
+                    <div className="col-lg-2">{order.Quantity}</div>
+                    <div className="col-lg-2">
                       {order.Total.toLocaleString("de-DE")} <span>&#8363;</span>
                     </div>
-                    <div class="col-lg-3">
+                    <div className="col-lg-3">
                       <div className="d-flex flex-row gap-1">
                         <a className="nav-link">
                           <CiEdit
                             className="edit-icon"
                             id={order.ID}
-                            onClick={(e) => handleAction(e.target.id)}
+                            onClick={() => handleShowModal(order)}
                           />
                         </a>
                         <a href="#" className="nav-link">
@@ -140,6 +152,11 @@ export const OrderList = (props) => {
           </div>
         </div>
       </div>
+      <OrderModal
+        show={showModal}
+        order={orderChoosen}
+        onHide={handleShowModal}
+      />
     </div>
   );
 };

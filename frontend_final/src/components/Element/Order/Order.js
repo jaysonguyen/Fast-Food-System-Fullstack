@@ -68,6 +68,29 @@ export default function Order() {
     }
   };
 
+  const addOrderToDB = async () => {
+    orderData.BillDetails = orderList;
+    console.log(orderData);
+    const res = await addNewOrder(orderData);
+    setOrderList([]);
+    switch (res) {
+      case 0:
+        alert("Pending...");
+        break;
+      case 1:
+        alert("Add order successfully!!");
+        break;
+      case -1:
+        alert("Error at api");
+        break;
+      case -2:
+        alert("Error at services");
+        break;
+      default:
+      // alert("Try again");
+    }
+  };
+
   //track and render order list
   useEffect(() => {
     console.log("rendering");

@@ -7,6 +7,7 @@ import {
   updateOrderStatus,
 } from "../api/callApi";
 import { getFoodData } from "./foodServices";
+import axios from "../setup/axios";
 
 export const getAllOrder = async () => {
   let data = [];
@@ -54,8 +55,8 @@ export const getOrderCompleted = async () => {
 export const getOrderByID = async (id) => {
   let data = [];
   try {
-    data = await getOrderById(id);
-    return data.DT;
+    data = await axios.get(`api/order/${id}`);
+    return data;
   } catch (error) {
     console.log(error.message);
     return [];

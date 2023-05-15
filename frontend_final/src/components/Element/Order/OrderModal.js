@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Modal, Button } from "react-bootstrap";
 
 import { getOrderByID } from "../../../services/orderServices";
 
@@ -6,18 +7,21 @@ export const OrderModal = (props) => {
   const [show, setShow] = useState(props.show);
 
   const [dataOrder, setDataOrder] = useState({});
-  const [dataOrderDetails, setDataOrderDetails] = useState({});
+  const [dataOrderDetails, setDataOrderDetails] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const handleShowDetails = async () => {
-    if (props.order) {
+    if (props.order && props.order != dataOrder) {
       setDataOrder(props.order);
-      if (dataOrderDetails) {
+      if (dataOrder) {
         const detailsData = await getOrderByID(dataOrder.ID);
         if (detailsData && detailsData.DT) {
-          setDataOrderDetails(detailsData);
+          console.log(detailsData.DT);
+          setDataOrderDetails(detailsData.DT);
+          setIsLoading(false);
         } else {
           //error
           console.log(detailsData.EM);
@@ -27,6 +31,7 @@ export const OrderModal = (props) => {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     handleShowDetails();
   }, [props.order]);
 
@@ -43,46 +48,49 @@ export const OrderModal = (props) => {
           <Modal.Title className="title">Order #{dataOrder.ID}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div class="">
-            <div class="form-list">
-              <div class="table-wrapper mb-0 ">
-                <div class="row row-header">
-                  <th className="col-5">Food Name</th>
-                  <th className="col-3">Quantity</th>
-                  <th className="col-4">Total</th>
-                </div>
-                <div className="seperate"></div>
-                <div class="table-body">
-                  {dataOrderDetails &&
-                    dataOrderDetails.map((detail, key) => {
-                      return (
-                        <div key={key} class="row item-list">
-                          <div class="col-lg-2">
-                            <div class="d-flex align-items-center">
-                              <div class="">
-                                <p class="mb-1">{detail.FoodName}</p>
+          {isLoading && <p>Đang tải dữ liệu...</p>}
+          {!isLoading && (
+            <div className="">
+              <div className="form-list">
+                <div className="table-wrapper mb-0 ">
+                  <div className="row row-header">
+                    <div className="col-5">Food Name</div>
+                    <div className="col-3">Quantity</div>
+                    <div className="col-4">Total</div>
+                  </div>
+                  <div className="seperate"></div>
+                  <div className="table-body">
+                    {dataOrderDetails &&
+                      dataOrderDetails.map((detail, key) => (
+                        <div key={key} className="row item-list">
+                          <div className="col-5">
+                            <div className="d-flex align-items-center">
+                              <div className="">
+                                <p className="mb-1">{detail.FoodName}</p>
                               </div>
                             </div>
                           </div>
-                          <div class="col-lg-3">
-                            <p class="fw-normal mb-1">{detail.Quanity}</p>
+                          <div className="col-3">
+                            <p className="fw-normal mb-1">{detail.Quantity}</p>
                           </div>
-                          <div class="col-lg-2">
-                            {detail.Total.toLocaleString("de-DE")}{" "}
+                          <div className="col-4">
+                            {(detail.Quantity * detail.Price).toLocaleString(
+                              "de-DE"
+                            )}{" "}
                             <span>&#8363;</span>
                           </div>
                         </div>
-                      );
-                    })}
+                      ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          {/* <Button variant="secondary" onClick={handleClose}>
             Close
-          </Button>
+          </Button> */}
         </Modal.Footer>
       </Modal>
     </>
