@@ -5,6 +5,7 @@ const {
   createStaff,
   getStaffByUser,
   updateStaffUserID,
+  getStaffWithoutUserAccount,
 } = require("../services/staffServices");
 
 const readStaffList = async (req, res) => {
@@ -37,7 +38,6 @@ const updateStaff = async (req, res) => {
   try {
     const { name, birth, gender, address, startAt, position } = req.body;
     const id = req.params.id;
-    console.log(req.body, req.params.id);
     const data = await updateStaffList(
       id,
       name,
@@ -66,8 +66,9 @@ const updateStaff = async (req, res) => {
 
 const updateStaffUser = async (req, res) => {
   try {
-    const id = req.params.id;
-    const data = await updateStaffUserID(id);
+    const staffid = req.params.staffid;
+    const { userid } = req.body;
+    const data = await updateStaffUserID(staffid, userid);
     if (data && data.EC != -1) {
       return res.status(200).json({
         EM: data.EM,
@@ -109,6 +110,7 @@ const removeStaff = async (req, res) => {
 const addStaff = async (req, res) => {
   try {
     const { name, dob, gender, startAt, position, address } = req.body;
+    console.log(req.body);
     const data = await createStaff(
       name,
       dob,
@@ -168,6 +170,31 @@ const getStaffByUserID = async (req, res) => {
   }
 };
 
+const getStaffWithoutUserRef = async (req, res) => {
+  try {
+    const data = await getStaffWithoutUserAccount();
+    if (data && data.EC != -1) {
+      return res.status(200).json({
+        EM: "get staff without user account successfully!!",
+        EC: data.EC,
+        DT: data.DT,
+      });
+    } else {
+      return res.status(500).json({
+        EM: "get staff without user account failed at services!!",
+        EC: -1,
+        DT: data.DT,
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      EM: "get staff without user account failed at controller!!",
+      EC: -1,
+      DT: error.message,
+    });
+  }
+};
+
 module.exports = {
   getStaffByUserID,
   readStaffList,
@@ -175,4 +202,5 @@ module.exports = {
   removeStaff,
   addStaff,
   updateStaffUser,
+  getStaffWithoutUserRef,
 };

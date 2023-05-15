@@ -1,22 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import "../css/main.css";
 // import "../css/root.css";
 import { Modal, Button } from "react-bootstrap";
 import "./User.css";
-import Form from "react-bootstrap/Form";
-// import { AddFood } from "../../../../services/foodServices";
-import { InsertStaff } from "../../../../api/callApi";
-import { getAllStaff } from "../../../../services/staff";
+import {
+  getAllStaffWithNoUser,
+  updateStaffUser,
+} from "../../../../services/staff";
+import { insertUser, getUserByEmail } from "../../../../services/userServices";
 import { toast } from "react-toastify";
 
 const UserModal = (props) => {
   const [show, setShow] = useState(props.show);
 
   //name, price, image, type, recipe, status
-  const [staffList, setStaffList] = useState("");
+  const [staffList, setStaffList] = useState([]);
 
   const [staff, setStaff] = useState("");
   const [email, setEmail] = useState("");
+  const [isAdmin, setIsAdmin] = useState("");
   const [password, setPassword] = useState("");
 
   const handleClose = () => setShow(false);
@@ -24,35 +26,52 @@ const UserModal = (props) => {
 
   const getStaffList = async () => {
     try {
-      const staffDT = await getAllStaff();
+      const staffDT = await getAllStaffWithNoUser();
       if (staffDT && staffDT.EC != -1) {
-        setStaffList(staffDT);
+        // console.log(staffDT.DT);
+        setStaffList(staffDT.DT);
       }
     } catch (error) {
+      setStaffList([]);
       console.log(error.message);
     }
   };
 
   const handleCreateUser = async (e) => {
     e.preventDefault();
-    let data = await InsertStaff(
-      email,
-      dob,
-      gender,
-      startAt,
-      position,
-      address
-    );
-    if (data && +data.EC === 1) {
-      toast.success(data.EM);
-      location.reload();
-    } else if (data && +data.EC != 1) {
-      toast.error(data.EM);
-      console.log(data);
+    console.log("Staff: ", staff);
+    if (staff != "") {
+      //insert user
+      let data = await insertUser(email, password, isAdmin);
+      if (data && +data.EC === 1) {
+        //insert user to staff ref
+        //get user id
+        const newUser = await getUserByEmail(email);
+        if (newUser && newUser.EC != -1) {
+          const updateStaff = await updateStaffUser(staff, newUser.ID);
+          if (updateStaff && updateStaff.EC != -1) {
+            toast.success(data.EM);
+            location.reload();
+          } else {
+            toast.error(data.EM);
+          }
+        } else {
+          toast.error(data.EM);
+        }
+      } else if (data && +data.EC != 1) {
+        toast.error(data.EM);
+        // console.log(data);
+      } else {
+        toast.error("Error server");
+      }
     } else {
-      toast.error("Error server");
+      toast.error("Vui lòng chọn nhân viên");
     }
   };
+
+  useEffect(() => {
+    getStaffList();
+  }, [staffList]);
 
   return (
     <>
@@ -104,10 +123,17 @@ const UserModal = (props) => {
                   <select
                     class="select w-100"
                     value={staff}
-                    onChange={(e) => setStaff(e.target.value)}
+                    onClick={(e) => {
+                      console.log(e.target.value);
+                      setStaff(e.target.value);
+                    }}
                   >
-                    <option value="1">1</option>
-                    <option value="2">2</option>
+                    {staffList &&
+                      staffList.map((s) => (
+                        <option key={s.StaffID} value={s.StaffID}>
+                          {s.Name}
+                        </option>
+                      ))}
                   </select>
                   <label className="form-label" for="form6Example3">
                     Staff
@@ -125,6 +151,23 @@ const UserModal = (props) => {
                   />
                   <label className="form-label" for="form6Example3">
                     Crreated At
+                  </label>
+                </div>
+              </div>
+              <div className="col-6">
+                <div className="form-outline mb-4">
+                  <select
+                    value={isAdmin}
+                    onClick={(e) => setIsAdmin(e.target.value)}
+                    className="form-control"
+                    // value={startAt}
+                    // onChange={(e) => setStart(e.target.value)}
+                  >
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                  </select>
+                  <label className="form-label" for="form6Example3">
+                    Admin?
                   </label>
                 </div>
               </div>

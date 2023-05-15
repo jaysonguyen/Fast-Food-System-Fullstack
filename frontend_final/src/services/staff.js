@@ -14,6 +14,15 @@ const getStaffByUserId = async (userid) => {
   }
 };
 
+const getAllStaffWithNoUser = async () => {
+  try {
+    let data = await axios.get("/api/staff/nouser");
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const removeStaff = async (id) => {
   try {
     let data = await deleteStaff(id);
@@ -51,4 +60,21 @@ const updateStaff = async (
     console.log(error);
   }
 };
-export { getAllStaff, removeStaff, getStaffByUserId, updateStaff };
+
+const updateStaffUser = async (staffid, userid) => {
+  try {
+    let data = await axios.put(`/api/staff/user/update/${staffid}`, { userid });
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export {
+  getAllStaff,
+  removeStaff,
+  getStaffByUserId,
+  updateStaff,
+  getAllStaffWithNoUser,
+  updateStaffUser,
+};

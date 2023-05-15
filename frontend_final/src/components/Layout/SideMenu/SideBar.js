@@ -46,10 +46,10 @@ export function CasherSideBar() {
         <div className="sub-title my-2 mx-3">More options</div>
         <ul className="nav main-nav">
           <li className="nav-item" onClick={() => setActiveIndex(0)}>
-            <a href="/" className="nav-link">
+            <Link to="/staff" className="nav-link">
               <BellSimpleRinging size={26} color="#3a3a3a" weight="fill" />
-              <span className="d-none d-sm-inline">Notify</span>
-            </a>
+              <span className="d-none d-sm-inline">Staff</span>
+            </Link>
           </li>
           <li className="nav-item" onClick={() => setActiveIndex(0)}>
             <a href="/" className="nav-link">
@@ -88,12 +88,10 @@ export function KitchenSideBar() {
       <div className="subnav">
         <div className="sub-title my-2 mx-3">More options</div>
         <ul className="nav main-nav">
-          <li className="nav-item">
-            <a href="/" className="nav-link">
-              <BellSimpleRinging size={26} color="#3a3a3a" weight="fill" />
-              <span className="d-none d-sm-inline">Notify</span>
-            </a>
-          </li>
+          <Link to="/staff" className="nav-link">
+            <BellSimpleRinging size={26} color="#3a3a3a" weight="fill" />
+            <span className="d-none d-sm-inline">Staff</span>
+          </Link>
           <li className="nav-item">
             <a href="/" className="nav-link">
               <Info size={26} color="#3a3a3a" weight="fill" />

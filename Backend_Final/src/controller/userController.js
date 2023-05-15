@@ -3,6 +3,7 @@ const {
   createUser,
   getUserWithoutStaffRef,
   getUserByID,
+  getUserByEmail,
 } = require("../services/userServices");
 
 const getUserList = async (req, res) => {
@@ -56,10 +57,35 @@ const getUserByIDData = async (req, res) => {
   }
 };
 
+const getUserByEmailData = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const data = await getUserByEmail(email);
+    if (data && data.EC != -1) {
+      return res.status(200).json({
+        EM: "Get user by email successfully!!",
+        EC: data.EC,
+        DT: data.DT,
+      });
+    } else {
+      return res.status(500).json({
+        EM: "Get user by email failed, error from services!!",
+        EC: -1,
+        DT: [],
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      EM: "Get user by email failed, error from services!!",
+      EC: -1,
+      DT: [],
+    });
+  }
+};
+
 const createNewUser = async (req, res) => {
   try {
     const params = req.body;
-    console.log(params);
     const data = await createUser(params);
 
     if (data && data.EC != -1) {
@@ -114,4 +140,5 @@ module.exports = {
   getUserList,
   createNewUser,
   getUserWithStaffRefData,
+  getUserByEmailData,
 };

@@ -12,6 +12,10 @@ const User = (props) => {
     setUser(dataStaff.DT);
   };
 
+  const getStaffWithoutUserAccountList = async () => {
+    
+  }
+
   //   const handleDeleteStaff = async (id) => {
   //     let data = await removeStaff(id);
   //     if (data && +data.EC === 1) {

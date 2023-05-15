@@ -12,7 +12,7 @@ const Staff = (props) => {
     setStaff(dataStaff.DT);
   };
 
-  const handleDeleteStaff = async (id) => {
+  const handleDeleteStaff = async (id) => { 
     let data = await removeStaff(id);
     if (data && +data.EC === 1) {
       toast.success(data.EM);
@@ -114,7 +114,7 @@ const Staff = (props) => {
                                   <div className="ms-3">
                                     <p className="fw-bold mb-1">{staff.Name}</p>
                                     <p className="text-muted mb-0">
-                                      {staff.Birth}
+                                      {new Date(staff.Birth).toISOString().slice(0, 10)}
                                     </p>
                                   </div>
                                 </div>

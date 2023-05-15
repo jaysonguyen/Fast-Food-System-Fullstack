@@ -20,7 +20,40 @@ const getStaffList = async () => {
       };
     }
   } catch (error) {
-    console.log(error);
+    return {
+      EM: error.message,
+      EC: -1,
+      DT: [],
+    };
+  }
+};
+
+const getStaffWithoutUserAccount = async () => {
+  try {
+    const poolConnection = await sql.connect(config);
+    const data = await poolConnection
+      .request()
+      .query("Exec getUserWithoutStaffRef");
+    poolConnection.close();
+    if (data) {
+      return {
+        EM: "Get staff without user account success",
+        EC: 1,
+        DT: data.recordset,
+      };
+    } else {
+      return {
+        EM: "Get staff without user account success",
+        EC: 0,
+        DT: [],
+      };
+    }
+  } catch (error) {
+    return {
+      EM: "error",
+      EC: -1,
+      DT: error.message,
+    };
   }
 };
 
@@ -34,6 +67,7 @@ const updateStaffList = async (
   position
 ) => {
   try {
+    console.log(birth);
     const poolConnection = await sql.connect(config);
     await poolConnection.query(
       `EXEC sp_update_staff ${id}, N'${name}', '${birth}', ${gender}, N'${address}', '${startAt}', ${position}`
@@ -54,10 +88,12 @@ const updateStaffList = async (
   }
 };
 
-const updateStaffUserID = async (id) => {
+const updateStaffUserID = async (staffid, userid) => {
   try {
     const poolConnection = await sql.connect(config);
-    const data = await poolConnection.query(`Exec updateStaffUserID ${id}`);
+    const data = await poolConnection.query(
+      `Exec updateStaffUserID ${staffid}, ${userid}`
+    );
     poolConnection.close();
     if (data) {
       return {
@@ -113,7 +149,7 @@ const createStaff = async (name, dob, gender, startAt, position, address) => {
   try {
     const poolConnection = await sql.connect(config);
     const data = await poolConnection.query(
-      `Exec sp_insertStaff N'${name}', '${dob}', ${gender}, '${startAt}', ${position}, N'${address}'`
+      `Exec insertStaff N'${name}', '${dob}', ${gender}, '${startAt}', ${position}, N'${address}'`
     );
     poolConnection.close();
     if (data) {
@@ -166,4 +202,5 @@ module.exports = {
   deleteStaff,
   createStaff,
   updateStaffUserID,
+  getStaffWithoutUserAccount,
 };

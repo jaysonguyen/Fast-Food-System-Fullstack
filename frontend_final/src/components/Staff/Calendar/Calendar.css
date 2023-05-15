@@ -1,11 +1,11 @@
 :root {
-  --clr-1: #f1c0e8;
-  --clr-2: #a3c4f3;
-  --clr-3: #90dbf4;
-  --clr-4: #98f5e1;
-  --clr-5: #b9fbc0;
-  --clr-6: #fbf8cc;
-  --clr-7: #fde4cf;
+  --clr-1: #f6c391;
+  --clr-2: #d25380;
+  --clr-3: #e08e6d;
+  --clr-4: #f6c391;
+  --clr-5: #d25380;
+  --clr-6: #e08e6d;
+  --clr-7: #f6c391;
 }
 
 .shift-list .shift-container {
@@ -44,13 +44,14 @@
 .calendar-container {
   display: flex;
   margin-top: 20px;
-  height: 70vh;
+  height: 35vh;
 }
 
 .calendar-container .day {
   width: 14.3%;
   margin-right: 5px;
   text-align: center;
+  border-radius: 10px;
 }
 
 .calendar-container .day.drop {
@@ -67,7 +68,7 @@
 }
 
 .calendar-container .drop-area .shift-container {
-  background-color: var(--clr-white);
+  background-color: #fffaf4;
   color: var(--clr-grey);
   padding: 10px 10px;
   margin: 5px 10px;
