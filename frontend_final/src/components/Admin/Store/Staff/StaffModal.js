@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-// import "../css/main.css";
-// import "../css/root.css";
 import { Modal, Button } from "react-bootstrap";
+import { toast } from "react-toastify";
+
 import "./Staff.css";
 import Form from "react-bootstrap/Form";
 import { InsertStaff } from "../../../../api/callApi";
@@ -12,7 +12,6 @@ import {
 import { getPositionList } from "../../../../services/positionServices";
 import { updateStaff } from "../../../../services/staff";
 
-import { toast } from "react-toastify";
 
 const StaffModal = (props) => {
   const [show, setShow] = useState(props.show);
@@ -77,6 +76,8 @@ const StaffModal = (props) => {
   };
 
   const initEditInformation = () => {
+    setLoading(true);
+
     setName(props.staff.Name);
     setDob(props.staff.Birth);
     setGender(props.staff.Gender);
@@ -84,6 +85,7 @@ const StaffModal = (props) => {
     setPositionId(props.staff.Position);
     setStart(props.staff.startAt);
 
+    setLoading(false);
     // getUser(props.staff.ID);
   };
 
@@ -141,12 +143,10 @@ const StaffModal = (props) => {
   };
 
   useEffect(() => {
-    setLoading(true);
     getPositionListData();
     getUserListData();
     if (props.staff.ID) initEditInformation();
-    setLoading(false);
-  }, [props, currUser]);
+  }, [props.staff, currUser]);
 
   return (
     <>
@@ -163,7 +163,7 @@ const StaffModal = (props) => {
         <Modal.Body>
           <>
             {loading && <p>Đang tải dữ liệu...</p>}
-            {!loading && (
+            {true && (
               <form className="create-form">
                 <div className="row mb-4">
                   <div className="col">
@@ -208,7 +208,6 @@ const StaffModal = (props) => {
                         type="date"
                         id="form6Example3"
                         className="form-control"
-                        value={dob}
                         onChange={(e) => setDob(e.target.value)}
                       />
                       <label className="form-label" htmlFor="form6Example3">

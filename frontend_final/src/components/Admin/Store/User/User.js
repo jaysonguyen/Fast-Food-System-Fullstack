@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
-import { getUserList } from "../../../../services/userServices";
+import {
+  getUserList,
+  deleteUserAccount,
+} from "../../../../services/userServices";
 import { getPositionList } from "../../../../services/positionServices";
 import UserModal from "./UserModal";
 import { toast } from "react-toastify";
@@ -20,16 +23,16 @@ const User = (props) => {
     setPosition(dataPos.DT);
   };
 
-  //   const handleDeleteStaff = async (id) => {
-  //     let data = await removeStaff(id);
-  //     if (data && +data.EC === 1) {
-  //       toast.success(data.EM);
-  //     }
-  //     if (data && +data.EC != 1) {
-  //       toast.error(data.EM);
-  //     }
-  //     console.log(id);
-  //   };
+  const handleDeleteUser = async (id) => {
+    let data = await deleteUserAccount(id);
+    if (data && +data.EC === 1) {
+      toast.success(data.EM);
+    }
+    if (data && +data.EC != 1) {
+      toast.error(data.EM);
+    }
+    console.log(id);
+  };
 
   useEffect(() => {
     fetchPosition();
@@ -145,10 +148,10 @@ const User = (props) => {
                                   <span className="nav-link">
                                     <AiOutlineDelete
                                       className="del-icon"
-                                      id={user.StaffID}
-                                      //   onClick={async (e) =>
-                                      // await handleDeleteStaff(e.target.id)
-                                      //   }
+                                      id={user.ID}
+                                      onClick={async (e) =>
+                                        await handleDeleteUser(e.target.id)
+                                      }
                                     />
                                   </span>
                                 </div>

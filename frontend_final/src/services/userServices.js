@@ -50,3 +50,12 @@ export const insertUser = async (email, password, isAdmin, staffId) => {
     return error.response.data;
   }
 };
+
+export const deleteUserAccount = async (id) => {
+  try {
+    const data = await axios.delete(`/api/user/${id}`);
+    return data;
+  } catch (error) {
+    return error.response.data;
+  }
+};

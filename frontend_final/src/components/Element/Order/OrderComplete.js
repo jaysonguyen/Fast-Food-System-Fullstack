@@ -23,7 +23,7 @@ function OrderComplete(props) {
 
   return (
     <div>
-      <Link to="/">Trở về</Link>
+      <Link to="/casher/makeOrder">Trở về</Link>
       Đặt hàng thành công!
     </div>
   );

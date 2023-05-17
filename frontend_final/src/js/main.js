@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
   toggleAddProductForm();
   console.log("run into this");
 });
+
 // DOMContentLoaded  end
 setSideNav();
 

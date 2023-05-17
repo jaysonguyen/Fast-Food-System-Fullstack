@@ -99,10 +99,39 @@ const createNewUser = async (req, res) => {
     ];
 
     const user = await AsyncQuery(proc, input, true);
-    console.log("user", user);
     if (user.success) {
       return res.status(200).json({
         EM: "Create new user successfully!!",
+        EC: 1,
+        DT: user.data.recordset,
+      });
+    } else {
+      return res.status(500).json({
+        EM: user.data,
+        EC: -1,
+        DT: [],
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      EM: error.message,
+      EC: -1,
+      DT: [],
+    });
+  }
+};
+
+const deleteUserAccount = async (req, res) => {
+  try {
+    const id = req.params.id;
+    //create user
+    const proc = "exec sp_deleteUserAccount";
+    const input = [["id", id]];
+
+    const user = await AsyncQuery(proc, input, true);
+    if (user.success) {
+      return res.status(200).json({
+        EM: "Delete user successfully!!",
         EC: 1,
         DT: user.data.recordset,
       });
@@ -153,4 +182,5 @@ module.exports = {
   createNewUser,
   getUserWithStaffRefData,
   getUserByEmailData,
+  deleteUserAccount,
 };

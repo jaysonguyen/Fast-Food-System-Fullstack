@@ -88,6 +88,7 @@ export default function FoodType() {
             let icon = `/images/icon/${foodtype.Image}`;
             return (
               <NavItem
+                key={idx}
                 onClick={() => handleShowFood(foodtype.ID)}
                 className="nav_item_margin_top nav-item item"
               >

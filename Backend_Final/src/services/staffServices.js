@@ -67,10 +67,12 @@ const updateStaffList = async (
   position
 ) => {
   try {
-    console.log(birth);
+    console.log(
+      `EXEC updateStaff ${id}, N'${name}', '${birth}', ${gender}, N'${address}', '${startAt}', ${position}`
+    );
     const poolConnection = await sql.connect(config);
     await poolConnection.query(
-      `EXEC sp_update_staff ${id}, N'${name}', '${birth}', ${gender}, N'${address}', '${startAt}', ${position}`
+      `EXEC updateStaff ${id}, N'${name}', '${birth}', ${gender}, N'${address}', '${startAt}', ${position}`
     );
     poolConnection.close();
     return {

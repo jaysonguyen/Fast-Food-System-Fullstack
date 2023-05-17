@@ -7,6 +7,7 @@ import { FoodByTypeData } from "../../../../api/callApi";
 
 export default function FoodCart({ foodtype }) {
   const [foods, setFoods] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const { addToOrder } = useContext(OrderContext);
 
@@ -15,6 +16,7 @@ export default function FoodCart({ foodtype }) {
       let data = await FoodByTypeData(foodtype.ID);
       if (data.EM.includes("Error")) {
         setFoods(FoodDT);
+        setLoading(false);
       } else {
         console.log(data.DT);
         setFoods(data.DT);
@@ -26,7 +28,7 @@ export default function FoodCart({ foodtype }) {
 
   useEffect(() => {
     getFoodDataTest();
-  }, [foods]);
+  }, [loading]);
 
   return (
     <TabPane

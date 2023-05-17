@@ -65,10 +65,9 @@ function App() {
           {/* {pathname.includes("/admin") ? <AdminHeader /> : <NavBar />} */}
           {/* <NavBar /> */}
           <Routes>
-            <Route path="/kitchen" element={<AllOder />} />
             <Route path="/login" element={<LoginPage />} />
 
-            <Route path="/makeOrder" element={<OrderPage />} />
+            <Route path="/casher/makeOrder" element={<OrderPage />} />
             <Route path="/order_complete" element={<OrderComplete />} />
             <Route path="/casher" element={<CasherLayout />}>
               <Route path="/casher/menu" element={<MenuManagementPage />} />

@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { getAllStaff, removeStaff } from "../../../../services/staff";
+import { getPositionList } from "../../../../services/positionServices";
 import StaffModal from "./StaffModal";
 import { toast } from "react-toastify";
+const moment = require("moment");
 
 const Staff = (props) => {
   const [staff, setStaff] = useState([]);
+  const [position, setPosition] = useState([]);
 
   const fetchStaff = async () => {
     let dataStaff = await getAllStaff();
     setStaff(dataStaff.DT);
   };
 
-  const handleDeleteStaff = async (id) => { 
+  const fetchPosition = async () => {
+    let dataPos = await getPositionList();
+    setPosition(dataPos.DT);
+  };
+
+  const handleDeleteStaff = async (id) => {
     let data = await removeStaff(id);
     if (data && +data.EC === 1) {
       toast.success(data.EM);
@@ -24,8 +32,9 @@ const Staff = (props) => {
   };
 
   useEffect(() => {
+    fetchPosition();
     fetchStaff();
-  }, []);
+  }, [staff]);
 
   const [showModal, setShowModal] = useState(false);
   const [choosedStaff, setChoosedStaff] = useState({});
@@ -114,7 +123,9 @@ const Staff = (props) => {
                                   <div className="ms-3">
                                     <p className="fw-bold mb-1">{staff.Name}</p>
                                     <p className="text-muted mb-0">
-                                      {new Date(staff.Birth).toISOString().slice(0, 10)}
+                                      {new Date(staff.Birth)
+                                        .toISOString()
+                                        .slice(0, 10)}
                                     </p>
                                   </div>
                                 </div>
@@ -130,8 +141,12 @@ const Staff = (props) => {
                                   {staff.Address}
                                 </p>
                               </td>
-                              <td>{staff.StartAt}</td>
-                              <td>{staff.Position}</td>
+                              <td>
+                                {moment(moment(staff.StartAt).toDate()).format(
+                                  "DD/MM/YYYY"
+                                )}
+                              </td>
+                              <td>{position[staff.Position - 1].Name}</td>
                               <td>
                                 <div className="d-flex flex-row gap-1">
                                   <a
