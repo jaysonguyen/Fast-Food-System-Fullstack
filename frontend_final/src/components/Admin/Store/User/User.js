@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { getUserList } from "../../../../services/userServices";
+import { getPositionList } from "../../../../services/positionServices";
 import UserModal from "./UserModal";
 import { toast } from "react-toastify";
+const moment = require("moment");
 
 const User = (props) => {
   const [user, setUser] = useState([]);
+  const [position, setPosition] = useState([]);
 
   const fetchUser = async () => {
     let dataStaff = await getUserList();
     setUser(dataStaff.DT);
   };
 
-  const getStaffWithoutUserAccountList = async () => {
-    
-  }
+  const fetchPosition = async () => {
+    let dataPos = await getPositionList();
+    setPosition(dataPos.DT);
+  };
 
   //   const handleDeleteStaff = async (id) => {
   //     let data = await removeStaff(id);
@@ -28,6 +32,7 @@ const User = (props) => {
   //   };
 
   useEffect(() => {
+    fetchPosition();
     fetchUser();
   }, [user]);
 
@@ -91,7 +96,8 @@ const User = (props) => {
                       <thead className="">
                         <tr>
                           <th>Email</th>
-                          <th>Phone</th>
+                          <th>Name</th>
+                          <th>Position</th>
                           <th>Created At</th>
                           <th>Actions</th>
                         </tr>
@@ -117,8 +123,18 @@ const User = (props) => {
                                 </div>
                               </td>
                               <td>
+                                <p className="text-muted mb-0">{user.Name}</p>
+                              </td>
+                              <td>
                                 <p className="text-muted mb-0">
-                                  {user.CreatedAt}
+                                  {position[user.Position - 1].Name}
+                                </p>
+                              </td>
+                              <td>
+                                <p className="text-muted mb-0">
+                                  {moment(
+                                    moment(user.CreatedAt).toDate()
+                                  ).format("DD/MM/YYYY hh:mm:ss")}
                                 </p>
                               </td>
                               <td>

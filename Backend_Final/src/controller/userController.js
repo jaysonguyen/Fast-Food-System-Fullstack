@@ -5,6 +5,8 @@ const {
   getUserByID,
   getUserByEmail,
 } = require("../services/userServices");
+const { AsyncQuery } = require("../config/configDatabase");
+const sha256 = require("js-sha256");
 
 const getUserList = async (req, res) => {
   try {
@@ -86,26 +88,36 @@ const getUserByEmailData = async (req, res) => {
 const createNewUser = async (req, res) => {
   try {
     const params = req.body;
-    const data = await createUser(params);
+    //create user
+    const proc = "exec sp_createUserAndUpdateStaff";
+    const psw = sha256(params.password);
+    const input = [
+      ["email", params.email],
+      ["password", psw],
+      ["isAdmin", params.isAdmin],
+      ["staffID", params.staffId],
+    ];
 
-    if (data && data.EC != -1) {
+    const user = await AsyncQuery(proc, input, true);
+    console.log("user", user);
+    if (user.success) {
       return res.status(200).json({
         EM: "Create new user successfully!!",
-        EC: data.EC,
-        DT: data.DT,
+        EC: 1,
+        DT: user.data.recordset,
       });
     } else {
       return res.status(500).json({
-        EM: "Create new user failed, error from services!!",
+        EM: user.data,
         EC: -1,
         DT: [],
       });
     }
   } catch (error) {
     return res.status(500).json({
-      EM: "Error from controller",
+      EM: error.message,
       EC: -1,
-      DT: error.message,
+      DT: [],
     });
   }
 };

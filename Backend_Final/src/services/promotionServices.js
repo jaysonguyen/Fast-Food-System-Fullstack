@@ -1,5 +1,5 @@
 const sql = require("mssql");
-const config = require("../config/configDatabase");
+const {config} = require("../config/configDatabase");
 
 const readPromotion = async () => {
   try {

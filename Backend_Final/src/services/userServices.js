@@ -1,11 +1,11 @@
 const sql = require("mssql");
-const config = require("../config/configDatabase");
+const { config } = require("../config/configDatabase");
 const sha256 = require("js-sha256");
 
 const getAllUser = async () => {
   try {
     const poolConnection = await sql.connect(config);
-    const data = await poolConnection.request().query(`select * from [User]`);
+    const data = await poolConnection.request().query(`exec getAllUser`);
     poolConnection.close();
 
     if (data) {
@@ -76,21 +76,22 @@ const createUser = async ({ email, password, isAdmin }) => {
   try {
     const poolConnection = await sql.connect(config);
     const psw = sha256(password);
-    console.log(psw);
+    // console.log(email, psw, isAdmin);
+    console.log(`exec sp_createUser '${email}', '${psw}', ${isAdmin} `);
     const data = await poolConnection.request().query(`
-            exec sp_createUser '${email}', '${psw}', ${isAdmin} 
-        `);
+      exec sp_createUser '${email}', '${psw}', ${isAdmin} 
+    `);
     poolConnection.close();
     return {
-      EM: "Successfully",
+      EM: "Create user successfully",
       EC: 1,
       DT: data.recordset,
     };
   } catch (error) {
     return {
-      EM: "Error",
+      EM: error.message,
       EC: -1,
-      DT: data.recordset,
+      DT: [],
     };
   }
 };

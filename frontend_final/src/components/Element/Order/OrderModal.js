@@ -6,32 +6,30 @@ import { getOrderByID } from "../../../services/orderServices";
 export const OrderModal = (props) => {
   const [show, setShow] = useState(props.show);
 
-  const [dataOrder, setDataOrder] = useState({});
+  //const [dataOrder, setDataOrder] = useState({});
   const [dataOrderDetails, setDataOrderDetails] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleShowDetails = async () => {
-    if (props.order && props.order != dataOrder) {
-      setDataOrder(props.order);
-      if (dataOrder) {
-        const detailsData = await getOrderByID(dataOrder.ID);
+  useEffect(() => {
+    const handleShowDetails = async () => {
+      if (props.order) {
+        const detailsData = await getOrderByID(props.order.ID);
         if (detailsData && detailsData.DT) {
           console.log(detailsData.DT);
           setDataOrderDetails(detailsData.DT);
           setIsLoading(false);
         } else {
           //error
-          console.log(detailsData.EM);
+          //console.log(detailsData.EM);
         }
       }
-    }
-  };
+    };
 
-  useEffect(() => {
     setIsLoading(true);
+    console.log("o", props.order);
     handleShowDetails();
   }, [props.order]);
 
@@ -45,11 +43,11 @@ export const OrderModal = (props) => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title className="title">Order #{dataOrder.ID}</Modal.Title>
+          <Modal.Title className="title">Order #{props.order.ID}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {isLoading && <p>Đang tải dữ liệu...</p>}
-          {!isLoading && (
+          {true && (
             <div className="">
               <div className="form-list">
                 <div className="table-wrapper mb-0 ">

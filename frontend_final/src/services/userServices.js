@@ -6,7 +6,7 @@ export const getUserList = async () => {
     const data = await userListData();
     return data;
   } catch (error) {
-    return error.message;
+    return error.response.data;
   }
 };
 
@@ -15,7 +15,7 @@ export const getUserByID = async (id) => {
     const data = await axios.get(`/api/user/get/${id}`);
     return data;
   } catch (error) {
-    return error.message;
+    return error.response.data;
   }
 };
 
@@ -24,7 +24,7 @@ export const getUserByEmail = async (email) => {
     const data = await axios.get(`/api/user/get/email/`, { email });
     return data;
   } catch (error) {
-    return error.message;
+    return error.response.data;
   }
 };
 
@@ -33,13 +33,13 @@ export const getUserWithoutStaff = async () => {
     const data = await axios.get("/api/user/nostaff");
     return data;
   } catch (error) {
-    return error.message;
+    return error.response.data;
   }
 };
 
-export const insertUser = async (email, password, isAdmin) => {
+export const insertUser = async (email, password, isAdmin, staffId) => {
   try {
-    let data = await axios.post(`/api/user/`, { email, password, isAdmin });
+    let data = await axios.post(`/api/user/`, { email, password, isAdmin, staffId });
     if (data) {
       return {
         EM: data.EM,
@@ -47,6 +47,6 @@ export const insertUser = async (email, password, isAdmin) => {
       };
     }
   } catch (error) {
-    console.log(error);
+    return error.response.data;
   }
 };

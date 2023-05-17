@@ -68,7 +68,7 @@ function App() {
             <Route path="/kitchen" element={<AllOder />} />
             <Route path="/login" element={<LoginPage />} />
 
-            <Route path="/" element={<OrderPage />} />
+            <Route path="/makeOrder" element={<OrderPage />} />
             <Route path="/order_complete" element={<OrderComplete />} />
             <Route path="/casher" element={<CasherLayout />}>
               <Route path="/casher/menu" element={<MenuManagementPage />} />
@@ -108,8 +108,6 @@ function App() {
               <Route path="/staff/assignment" element={<Calendar />} />
               <Route path="/staff/demo" element={<Demo />} />
             </Route>
-
-
           </Routes>
         </Router>
 

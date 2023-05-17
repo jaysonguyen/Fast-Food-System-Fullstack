@@ -42,28 +42,9 @@ const UserModal = (props) => {
     console.log("Staff: ", staff);
     if (staff != "") {
       //insert user
-      let data = await insertUser(email, password, isAdmin);
-      if (data && +data.EC === 1) {
-        //insert user to staff ref
-        //get user id
-        const newUser = await getUserByEmail(email);
-        if (newUser && newUser.EC != -1) {
-          const updateStaff = await updateStaffUser(staff, newUser.ID);
-          if (updateStaff && updateStaff.EC != -1) {
-            toast.success(data.EM);
-            location.reload();
-          } else {
-            toast.error(data.EM);
-          }
-        } else {
-          toast.error(data.EM);
-        }
-      } else if (data && +data.EC != 1) {
-        toast.error(data.EM);
-        // console.log(data);
-      } else {
-        toast.error("Error server");
-      }
+      let data = await insertUser(email, password, isAdmin, staff);
+      console.log(data);
+      if(data) toast.success(data.EM);
     } else {
       toast.error("Vui lòng chọn nhân viên");
     }

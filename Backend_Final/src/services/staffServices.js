@@ -1,5 +1,5 @@
 const sql = require("mssql");
-const config = require("../config/configDatabase");
+const { config } = require("../config/configDatabase");
 
 const getStaffList = async () => {
   try {
@@ -91,8 +91,9 @@ const updateStaffList = async (
 const updateStaffUserID = async (staffid, userid) => {
   try {
     const poolConnection = await sql.connect(config);
+    console.log(`exec updateStaffUserID ${staffid}, ${userid}`);
     const data = await poolConnection.query(
-      `Exec updateStaffUserID ${staffid}, ${userid}`
+      `exec updateStaffUserID ${staffid}, ${userid}`
     );
     poolConnection.close();
     if (data) {

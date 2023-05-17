@@ -62,6 +62,15 @@ const getCurrentDateTime = () => {
   );
 };
 
+function isEmail(email) {
+  var emailFormat = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+  if (email !== "" && email.match(emailFormat)) {
+    return true;
+  }
+
+  return false;
+}
+
 const sqlQueryCalled = async (query, success, error) => {
   try {
     const poolConnection = await sql.connect(config);
@@ -82,4 +91,4 @@ const sqlQueryCalled = async (query, success, error) => {
   }
 };
 
-module.exports = { isNumberic, getCurrentDateTime, sqlQueryCalled };
+module.exports = { isNumberic, getCurrentDateTime, sqlQueryCalled, isEmail };
