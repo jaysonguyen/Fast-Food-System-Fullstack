@@ -10,6 +10,7 @@ export const MenuManagementPage = () => {
   const [FoodType, setFoodType] = useState([]);
   const [foodTypePicked, setFoodTypePicked] = useState({});
   const [selected, setSelected] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const getFoodTypeData = async () => {
     let data = [];
@@ -25,8 +26,10 @@ export const MenuManagementPage = () => {
   };
 
   const getFT = (ft) => {
+    setLoading(true);
     setSelected(ft);
     setFoodTypePicked(ft);
+    setLoading(false);
   };
 
   useEffect(() => {

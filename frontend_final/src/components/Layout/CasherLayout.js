@@ -2,6 +2,9 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import { CasherSideBar } from "./SideMenu/SideBar";
 
+import { MenuManagementPage } from "../pages/Casher/MenuManagementPage";
+import { OrderManagement } from "../pages/Casher/OrdersPage";
+
 export const CasherLayout = () => {
   return (
     <div id="wapper" className="flex-wrapcontainer-fluid">

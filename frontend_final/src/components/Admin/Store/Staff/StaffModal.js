@@ -51,7 +51,7 @@ const StaffModal = (props) => {
   const [dob, setDob] = useState("");
   const [gender, setGender] = useState(1);
   const [address, setAddress] = useState("");
-  const [positionId, setPositionId] = useState(0);
+  const [positionId, setPositionId] = useState(1);
   const [startAt, setStart] = useState("");
 
   const resetInfo = () => {
@@ -185,7 +185,10 @@ const StaffModal = (props) => {
                       <select
                         className="select w-100"
                         value={positionId}
-                        onChange={(e) => setPositionId(e.target.value)}
+                        onChange={(e) => {
+                          console.log(e.target.value);
+                          setPositionId(e.target.value);
+                        }}
                       >
                         {!loading &&
                           positionList &&

@@ -39,6 +39,9 @@ import { OrderPage as KitchenOrder } from "./components/pages/Kitchen/OrderPage"
 // Staff
 import { Calendar } from "./components/Staff/Calendar/Calendar";
 
+// private route
+import PrivateRoute from "./components/pages/Auth/PrivateRoute";
+
 import "jquery/dist/jquery.min.js";
 import "popper.js/dist/popper.min.js";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -51,6 +54,17 @@ function App() {
   if (pathname == "/admin") {
     flag = true;
   }
+
+  // let position = "0";
+  // const userDT = sessionStorage.getItem("User");
+  // if (
+  //   userDT &&
+  //   userDT.StaffID != null &&
+  //   userDT.StaffID != "" &&
+  //   userDT.StaffID != undefined
+  // )
+  //   position = userDT.Position;
+
   return (
     <DndProvider backend={HTML5Backend}>
       <StrictMode>
@@ -60,9 +74,31 @@ function App() {
           <Routes>
             <Route path="/login" element={<LoginPage />} />
 
-            <Route path="/casher/makeOrder" element={<OrderPage />} />
-            <Route path="/order_complete" element={<OrderComplete />} />
-            <Route path="/casher" element={<CasherLayout />}>
+            {/* casher */}
+            <Route
+              path="/casher/makeOrder"
+              element={
+                <PrivateRoute pos="3">
+                  <OrderPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/casher/order_complete"
+              element={
+                <PrivateRoute pos="3">
+                  <OrderComplete />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/casher"
+              element={
+                <PrivateRoute pos="3">
+                  <CasherLayout />
+                </PrivateRoute>
+              }
+            >
               <Route path="/casher/menu" element={<MenuManagementPage />} />
               <Route
                 path="/casher/orders"
@@ -71,7 +107,14 @@ function App() {
             </Route>
 
             {/* admin */}
-            <Route path="/admin" element={<AdminLayout />}>
+            <Route
+              path="/admin"
+              element={
+                <PrivateRoute pos="4">
+                  <AdminLayout />
+                </PrivateRoute>
+              }
+            >
               <Route path="/admin/dashboard" element={<AdminDB />}></Route>
               {/* production */}
               <Route path="/admin/production" element={<Production />}></Route>
@@ -96,7 +139,14 @@ function App() {
               <Route path="/admin/store/user" element={<User />}></Route>
             </Route>
             {/* kitchen */}
-            <Route path="/kitchen" element={<KitchenLayout />}>
+            <Route
+              path="/kitchen"
+              element={
+                <PrivateRoute pos="1">
+                  <KitchenLayout />
+                </PrivateRoute>
+              }
+            >
               <Route path="/kitchen/orders" element={<KitchenOrder />}></Route>
             </Route>
             {/* staff */}

@@ -59,7 +59,12 @@ export const LoginPage = () => {
     setEmail(event.target.value);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    //logout
+    if (sessionStorage.getItem("User")) {
+      sessionStorage.removeItem("User");
+    }
+  }, []);
 
   return (
     <div

@@ -1,18 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-import { MenuList } from "./MenuList";
-
-import { getFoodTypeService } from "../../../services/foodTypeServices";
 import { FoodByTypeData } from "../../../api/callApi";
 
 export const MenuSection = ({ foodtype }) => {
-  const [foodType, setFoodType] = useState([]);
   const [foods, setFoods] = useState([]);
-
-  const getFoodTypeData = async () => {
-    let data = await getFoodTypeService();
-    setFoodType(data.DT);
-  };
 
   const getFoodDataTest = async () => {
     try {
@@ -30,8 +21,7 @@ export const MenuSection = ({ foodtype }) => {
 
   useEffect(() => {
     getFoodDataTest();
-    getFoodTypeData();
-  }, [foodType]);
+  }, [foodtype]);
 
   return (
     <>
