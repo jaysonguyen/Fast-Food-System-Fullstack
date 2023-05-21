@@ -16,8 +16,7 @@ export const getAllOrder = async () => {
     data = await OrderData();
     return data;
   } catch (error) {
-    console.log(error.message);
-    return [];
+    return error.response.data;
   }
 };
 
@@ -36,8 +35,7 @@ export const getOrderProcessing = async () => {
     data = await OrderProcessingData();
     return data;
   } catch (error) {
-    console.log(error.message);
-    return [];
+    return error.response.data;
   }
 };
 
@@ -47,8 +45,7 @@ export const getOrderCompleted = async () => {
     data = await OrderCompletedData();
     return data;
   } catch (error) {
-    console.log(error.message);
-    return [];
+    return error.response.data;
   }
 };
 
@@ -58,8 +55,7 @@ export const getOrderByID = async (id) => {
     data = await axios.get(`api/order/${id}`);
     return data;
   } catch (error) {
-    console.log(error.message);
-    return [];
+    return error.response.data;
   }
 };
 
@@ -69,8 +65,7 @@ export const updateOrderStatusService = async (id) => {
     data = await updateOrderStatus(id);
     return data.DT;
   } catch (error) {
-    console.log(error.message);
-    return [];
+    return error.response.data;
   }
 };
 
@@ -80,7 +75,6 @@ export const deleteOrderByID = async (id) => {
     data = await axios.delete(`/api/order/${id}`);
     return data.DT;
   } catch (error) {
-    console.log(error.message);
-    return [];
+    return error.response.data;
   }
 };

@@ -33,7 +33,7 @@ const getStaffWithoutUserAccount = async () => {
     const poolConnection = await sql.connect(config);
     const data = await poolConnection
       .request()
-      .query("Exec getUserWithoutStaffRef");
+      .query("exec getUserWithoutStaffRef");
     poolConnection.close();
     if (data) {
       return {
@@ -151,6 +151,7 @@ const deleteStaff = async (id) => {
 const createStaff = async (name, dob, gender, startAt, position, address) => {
   try {
     const poolConnection = await sql.connect(config);
+    console.log(name, dob, gender, startAt, position, address);
     const data = await poolConnection.query(
       `Exec insertStaff N'${name}', '${dob}', ${gender}, '${startAt}', ${position}, N'${address}'`
     );

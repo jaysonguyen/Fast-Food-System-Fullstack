@@ -17,10 +17,12 @@ const Catagories = (props) => {
   const [selectedTypeID, setSelectedTypeID] = useState(null); // Renamed state variable to use camelCase
   const [id, setID] = useState(null); // Renamed state variable to use camelCase
   const [dataType, setDataType] = useState();
+  const [loading, setLoading] = useState(true);
 
   const fetchCategories = async () => {
     let dataCategories = await getAllProductType();
     setcategory(dataCategories.DT);
+    setLoading(false);
   };
 
   const handleUpdateFood = async (e) => {
@@ -55,7 +57,9 @@ const Catagories = (props) => {
 
   useEffect(() => {
     fetchCategories();
-  }, [category]); // Removed unnecessary dependency on categories state variable
+  }, [loading]); // Removed unnecessary dependency on categories state variable
+
+  if (loading) return <div>Đang tải...</div>;
 
   const handleAddTypeFood = async (e) => {
     e.preventDefault();
@@ -64,6 +68,7 @@ const Catagories = (props) => {
       if (data && +data.EC === 1) {
         // Use strict equality operator instead of loose equality operator
         toast.success(data.EM);
+        fetchCategories();
       }
       if (data && +data.EC !== 1) {
         // Use strict equality operator instead of loose equality operator

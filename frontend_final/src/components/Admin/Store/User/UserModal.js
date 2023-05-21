@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 
 const UserModal = (props) => {
   const [show, setShow] = useState(props.show);
+  const [loading, setLoading] = useState(true);
 
   //name, price, image, type, recipe, status
   const [staffList, setStaffList] = useState([]);
@@ -30,6 +31,7 @@ const UserModal = (props) => {
       if (staffDT && staffDT.EC != -1) {
         // console.log(staffDT.DT);
         setStaffList(staffDT.DT);
+        setLoading(false);
       }
     } catch (error) {
       setStaffList([]);
@@ -44,7 +46,7 @@ const UserModal = (props) => {
       //insert user
       let data = await insertUser(email, password, isAdmin, staff);
       console.log(data);
-      if(data) toast.success(data.EM);
+      if (data) toast.success(data.EM);
     } else {
       toast.error("Vui lòng chọn nhân viên");
     }
@@ -52,7 +54,7 @@ const UserModal = (props) => {
 
   useEffect(() => {
     getStaffList();
-  }, [staffList]);
+  }, [loading]);
 
   return (
     <>

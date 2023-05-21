@@ -71,33 +71,33 @@ export const AdminSB = () => {
                 className="submenu_sidebar"
                 onClick={() => setActiveIndexSub(2)}
               >
-                <a
+                <Link
                   className={
                     activeIndex === 0 && activeIndexSub === 2
                       ? "nav-link active"
                       : "nav-link"
                   }
-                  href="#"
+                  to="#"
                 >
                   <BsFillJournalBookmarkFill className="nav-link_icon" />
                   Recipe
-                </a>
+                </Link>
               </li>
               <li
                 className="submenu_sidebar"
                 onClick={() => setActiveIndexSub(3)}
               >
-                <a
+                <Link
                   className={
                     activeIndex === 0 && activeIndexSub === 3
                       ? "nav-link active"
                       : "nav-link"
                   }
-                  href="#"
+                  to="/admin/production/ingredient"
                 >
                   <CiShoppingBasket className="nav-link_icon" />
                   Ingredients
-                </a>
+                </Link>
               </li>
               <li
                 className="submenu_sidebar"

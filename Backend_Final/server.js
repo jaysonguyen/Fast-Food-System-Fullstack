@@ -49,6 +49,8 @@ app.use("/api/general/", require("./src/routes/generalApi"));
 app.use("/api/user/", require("./src/routes/userApi"));
 app.use("/api/shift/", require("./src/routes/shiftApi"));
 app.use("/api/position/", require("./src/routes/positionApi"));
+app.use("/api/ingredient/", require("./src/routes/ingredientApi"));
+app.use("/api/unit/", require("./src/routes/unitApi"));
 
 app.use("/api/auth/", require("./src/routes/authApi"));
 

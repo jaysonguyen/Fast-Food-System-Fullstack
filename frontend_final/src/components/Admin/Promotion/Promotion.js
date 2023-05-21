@@ -27,11 +27,13 @@ const Promotion = (props) => {
   const [dateStart, setDateStart] = useState("");
   const [dateExp, setDateExp] = useState("");
   const [showAdd, setShowAdd] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const fetchPromotion = async () => {
     try {
       const dataPromotion = await getAllPromotion();
       setPromotion(dataPromotion.DT);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -77,7 +79,7 @@ const Promotion = (props) => {
 
   useEffect(() => {
     fetchPromotion();
-  }, [promotion]);
+  }, [loading]);
 
   return (
     <>

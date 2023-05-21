@@ -12,7 +12,6 @@ import {
 import { getPositionList } from "../../../../services/positionServices";
 import { updateStaff } from "../../../../services/staff";
 
-
 const StaffModal = (props) => {
   const [show, setShow] = useState(props.show);
   const [loading, setLoading] = useState(true);
@@ -37,6 +36,7 @@ const StaffModal = (props) => {
       console.log("position list: ", data);
       if (data && data.EC != -1) {
         setPositionList(data.DT);
+        setLoading(false);
       }
     } catch (error) {
       return error.message;
@@ -146,7 +146,7 @@ const StaffModal = (props) => {
     getPositionListData();
     getUserListData();
     if (props.staff.ID) initEditInformation();
-  }, [props.staff, currUser]);
+  }, [props.staff, currUser, props.show]);
 
   return (
     <>

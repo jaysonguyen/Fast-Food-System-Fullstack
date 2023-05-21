@@ -14,7 +14,6 @@ import { AdminLayout } from "./components/Layout/AdminLayout";
 import { AdminDB } from "./components/pages/admin/AdminDB";
 // import AdminSideBar from "./components/Admin/Admin_Header/AdminSideBar";
 import { AdminSideBar } from "./components/Layout/SideMenu/SideBar";
-import Production from "./components/Admin/Production/Production";
 
 // casher
 import { CasherLayout } from "./components/Layout/CasherLayout";
@@ -25,11 +24,13 @@ import { OrderManagement } from "./components/pages/Casher/OrdersPage";
 import { LoginPage } from "./components/pages/Auth/LoginPage";
 
 import Admin from "./components/Admin/Admin";
+import Production from "./components/Admin/Production/Production";
 import Promotion from "./components/Admin/Promotion/Promotion";
 import Catagories from "./components/Admin/Catagories/Catagories";
 import Supplier from "./components/Admin/Supplier/Supplier";
 import Staff from "./components/Admin/Store/Staff/Staff";
 import User from "./components/Admin/Store/User/User";
+import Ingredient from "./components/Admin/Ingredient/Ingredient";
 
 // kitchen
 import { KitchenLayout } from "./components/Layout/KitchenLayout";
@@ -81,6 +82,10 @@ function App() {
               <Route
                 path="/admin/production/catagories"
                 element={<Catagories />}
+              ></Route>
+              <Route
+                path="/admin/production/ingredient"
+                element={<Ingredient />}
               ></Route>
               <Route
                 path="/admin/production/supplier"
