@@ -76,7 +76,7 @@ const Auth = {
       });
     } catch (error) {
       return res.status(500).json({
-        EM: "Error from server",
+        EM: "Cannot connect to DB",
         EC: -1,
         DT: [],
       });

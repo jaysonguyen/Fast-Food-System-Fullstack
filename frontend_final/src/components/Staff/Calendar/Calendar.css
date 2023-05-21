@@ -16,7 +16,10 @@
   /* border: 2px solid var(--clr-primary); */
   cursor: pointer;
   background-color: var(--clr-1);
-  color: var(--clr-grey);
+  /* color: var(--clr-white); */
+  color: #3a3a3a;
+  display: flex;
+  flex-direction: column;
 }
 
 .shift-list .shift-container.drag {
@@ -25,26 +28,33 @@
 }
 
 .shift-list,
-.time {
+.shift-list .time {
   display: flex;
+  flex-direction: row;
+}
+
+.shift-list .time {
+  color: #333;
+  justify-content: space-between;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.shift-list .time > div {
+  background-color: var(--clr-white);
+  border-radius: 10px;
+  padding: 10px 20px;
 }
 
 .shift-name {
   font-size: 16px;
 }
 
-.time {
-  flex-direction: column;
-  /* justify-content: space-between; */
-  margin-top: 1em;
-  font-size: 12px;
-}
-
 /* calendar */
 .calendar-container {
   display: flex;
   margin-top: 20px;
-  height: 35vh;
+  height: 40vh;
 }
 
 .calendar-container .day {
@@ -54,7 +64,12 @@
   border-radius: 10px;
 }
 
-.calendar-container .day.drop {
+.calendar-container .day-time {
+  /* background-color: var(--clr-primary); */
+  border: 1px solid #fff;
+  color: var(--clr-white);
+  padding: 7px 20px;
+  border-radius: 10px;
 }
 
 .calendar-container .day-title {
@@ -90,7 +105,7 @@
 }
 
 .calendar-container .drop-item.drag {
-  opacity: 0.5;
+  opacity: 1;
 }
 /* ---- */
 /* trash */

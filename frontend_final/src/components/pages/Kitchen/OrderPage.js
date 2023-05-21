@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+import "../../Kitchen/Order.css";
 import { Orders } from "../../Kitchen/Orders";
 import {
   getOrderByID,

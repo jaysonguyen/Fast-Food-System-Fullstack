@@ -1,4 +1,4 @@
-import React, { useState, StrictMode } from "react";
+import React, { StrictMode } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
@@ -7,18 +7,14 @@ import "react-toastify/dist/ReactToastify.css";
 import "./css/plugins.css";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { NavBar } from "./components/NavBar";
 import { ToastContainer } from "react-toastify";
 
 //admin
 import { AdminLayout } from "./components/Layout/AdminLayout";
-import { FoodList } from "./components/pages/FoodList";
 import { AdminDB } from "./components/pages/admin/AdminDB";
-import AdminHeader from "./components/Admin/Admin_Header/AdminHeader";
 // import AdminSideBar from "./components/Admin/Admin_Header/AdminSideBar";
 import { AdminSideBar } from "./components/Layout/SideMenu/SideBar";
 import Production from "./components/Admin/Production/Production";
-import AllOder from "./components/Kitchen/AllOder/AllOder";
 
 // casher
 import { CasherLayout } from "./components/Layout/CasherLayout";
@@ -26,7 +22,6 @@ import OrderPage from "./components/pages/Casher/MakeOrderPage";
 import OrderComplete from "./components/Element/Order/OrderComplete";
 import { MenuManagementPage } from "./components/pages/Casher/MenuManagementPage";
 import { OrderManagement } from "./components/pages/Casher/OrdersPage";
-import { OrderList } from "./components/pages/Casher/OrderList";
 import { LoginPage } from "./components/pages/Auth/LoginPage";
 
 import Admin from "./components/Admin/Admin";
@@ -42,15 +37,12 @@ import { OrderPage as KitchenOrder } from "./components/pages/Kitchen/OrderPage"
 
 // Staff
 import { Calendar } from "./components/Staff/Calendar/Calendar";
-import { Demo } from "./components/Staff/Calendar/Demo";
 
 import "jquery/dist/jquery.min.js";
 import "popper.js/dist/popper.min.js";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 import "./js/main.js";
-import FoodType from "./components/Element/FoodType/FoodType";
-import Order from "./components/Element/Order/Order";
 
 function App() {
   const pathname = window.location.pathname;
@@ -105,7 +97,6 @@ function App() {
             {/* staff */}
             <Route path="/staff" element={<AdminLayout />}>
               <Route path="/staff/assignment" element={<Calendar />} />
-              <Route path="/staff/demo" element={<Demo />} />
             </Route>
           </Routes>
         </Router>

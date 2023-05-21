@@ -7,6 +7,7 @@ import { BsFillJournalBookmarkFill } from "react-icons/bs";
 import { MdFastfood, MdDiscount } from "react-icons/md";
 import { CiShoppingBasket } from "react-icons/ci";
 import { BiImport } from "react-icons/bi";
+import { User, PaperPlaneTilt, CalendarCheck } from "phosphor-react";
 import "./AdminSideBar.css";
 
 export const AdminSB = () => {
@@ -208,7 +209,11 @@ export const StaffSB = () => {
               data-bs-toggle="collapse"
               className={activeIndex === 0 ? "nav-link active" : "nav-link"}
             >
-              <AiFillGolden className="nav-link_icon" />
+              <CalendarCheck
+                size={16}
+                weight="fill"
+                className="nav-link_icon"
+              />
               <b>Calendar</b>
               <AiOutlineDown className="nav-link_icon nav-link_icon--down" />
             </a>
@@ -268,8 +273,8 @@ export const StaffSB = () => {
               className={activeIndex === 1 ? "nav-link active" : "nav-link"}
               to="/admin/production/supplier"
             >
-              <FaCartArrowDown className="nav-link_icon" />
-              <b>Supplier </b>
+              <User size={16} weight="fill" className="nav-link_icon" />
+              <b>My Account </b>
             </Link>
           </li>
           <li className="nav-item" onClick={() => setActiveIndex(2)}>
@@ -277,8 +282,12 @@ export const StaffSB = () => {
               href="#"
               className={activeIndex === 2 ? "nav-link active" : "nav-link"}
             >
-              <BiImport className="nav-link_icon" />
-              <b>Import</b>
+              <PaperPlaneTilt
+                size={16}
+                weight="fill"
+                className="nav-link_icon"
+              />
+              <b>Report</b>
             </a>
           </li>
         </ul>

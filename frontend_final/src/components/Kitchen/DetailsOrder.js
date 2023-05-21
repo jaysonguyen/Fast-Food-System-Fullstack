@@ -35,21 +35,14 @@ export const DetailsOrder = ({ order }) => {
     return orderIDs.includes(orderID);
   }
 
-  const addOrderToSessionCompleted = (order) => {
-    let orders = JSON.parse(sessionStorage.getItem("ordersReady")) || [];
-    let check = checkOrderExistence(order.ID);
-    if (check != true) {
-      orders.push(order);
-      sessionStorage.setItem("ordersReady", JSON.stringify(orders));
-    }
-    setDetails([]);
-  };
-
   const addOrderToCompleted = (order) => {
     let data = updateOrderStatusService(order.ID);
     console.log("data: ", data);
     if (data && data.EC != -1) {
       toast.success(data.EM);
+      setTimeout(() => {
+        window.location.reload(); // Refresh the page after a delay
+      }, 1000);
     } else {
       toast.error(data.EM);
     }

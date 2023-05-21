@@ -6,7 +6,17 @@ body {
   padding: 30px 10px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
+}
+
+.employee-card {
+  width: 160px;
+  display: flex;
+  flex-direction: row;
+}
+
+.trashcan {
+  cursor: pointer;
 }
 
 .order_table_staff_name,

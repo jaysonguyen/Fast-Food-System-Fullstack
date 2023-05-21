@@ -16,6 +16,7 @@ import {} from "phosphor-react";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { AiOutlineMinus } from "react-icons/ai";
 import { IoAdd } from "react-icons/io5";
+import { Trash } from "phosphor-react";
 import { AddNewOrderData, checkOutOrder } from "../../../api/callApi";
 import "./Order.css";
 export const OrderPaymentContext = createContext();
@@ -56,10 +57,10 @@ export default function Order() {
     }
   };
 
-  const clearOrder = useCallback(() => {
-    setOrderList([]);
+  const clearOrder = () => {
+    emptyOrder();
     setTotal(0);
-  }, []);
+  };
 
   const [showModal, setShowModal] = useState(false);
   const handleShowModal = () => {
@@ -86,15 +87,20 @@ export default function Order() {
         {/* order details */}
         <div id="orderTable" className="table-responsive ">
           <div className="order_table_heading">
-            <div className="order_table_employee_img">
-              <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/75a1736b-8ad6-4b3e-b47b-19f5987e9711/deigkx9-80dd0b0a-8d86-4292-9d51-db8524c6014c.jpg/v1/fill/w_670,h_1192,q_70,strp/dead_emoji_iphone_wallpaper___iphone_wallpapers_by_maxboosted_deigkx9-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTYwMCIsInBhdGgiOiJcL2ZcLzc1YTE3MzZiLThhZDYtNGIzZS1iNDdiLTE5ZjU5ODdlOTcxMVwvZGVpZ2t4OS04MGRkMGIwYS04ZDg2LTQyOTItOWQ1MS1kYjg1MjRjNjAxNGMuanBnIiwid2lkdGgiOiI8PTkwMCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.K_VIxJ25QayQUe1_8v-a2bca98Y2k70fU4ciB471jIc" />
+            <div className="trashcan" onClick={clearOrder}>
+              <Trash size={26} color="#3a3a3a" weight="fill" />
             </div>
-            <h6 className="order_table_staff_name">
-              Dao My
-              <h6 className="order_table_staff_job">Employee</h6>
-            </h6>
-            <div className="order_tabler_staff_icon">
-              <MdOutlineKeyboardArrowDown className="order_tabler_staff_icon--icon" />
+            <div className="employee-card">
+              <div className="order_table_employee_img">
+                <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/75a1736b-8ad6-4b3e-b47b-19f5987e9711/deigkx9-80dd0b0a-8d86-4292-9d51-db8524c6014c.jpg/v1/fill/w_670,h_1192,q_70,strp/dead_emoji_iphone_wallpaper___iphone_wallpapers_by_maxboosted_deigkx9-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTYwMCIsInBhdGgiOiJcL2ZcLzc1YTE3MzZiLThhZDYtNGIzZS1iNDdiLTE5ZjU5ODdlOTcxMVwvZGVpZ2t4OS04MGRkMGIwYS04ZDg2LTQyOTItOWQ1MS1kYjg1MjRjNjAxNGMuanBnIiwid2lkdGgiOiI8PTkwMCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.K_VIxJ25QayQUe1_8v-a2bca98Y2k70fU4ciB471jIc" />
+              </div>
+              <h6 className="order_table_staff_name">
+                Dao My
+                <h6 className="order_table_staff_job">Employee</h6>
+              </h6>
+              <div className="order_tabler_staff_icon">
+                <MdOutlineKeyboardArrowDown className="order_tabler_staff_icon--icon" />
+              </div>
             </div>
           </div>
           <div className="order_table_body">

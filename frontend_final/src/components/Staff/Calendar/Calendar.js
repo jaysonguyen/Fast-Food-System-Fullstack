@@ -1,53 +1,68 @@
 import React, { useState, useEffect } from "react";
+import moment from "moment";
+
 import { getShiftList } from "../../../services/shiftServices";
-import { useDrop, useDrag } from "react-dnd";
+import { useDrop } from "react-dnd";
+import { Day } from "./Day";
 import "./Calendar.css";
 
 import { Shift } from "./Shift";
 
+const days = [
+  {
+    Name: "Sunday",
+    Day: "",
+    Shifts: [],
+  },
+  {
+    Name: "Monday",
+    Day: "",
+    Shifts: [],
+  },
+  {
+    Name: "Tuesday",
+    Day: "",
+    Shifts: [],
+  },
+  {
+    Name: "Wednesday",
+    Day: "",
+    Shifts: [],
+  },
+  {
+    Name: "Thursday",
+    Day: "",
+    Shifts: [],
+  },
+  {
+    Name: "Friday",
+    Day: "",
+    Shifts: [],
+  },
+  {
+    Name: "Saturday",
+    Day: "",
+    Shifts: [],
+  },
+];
+
+const getNextWeekDays = () => {
+  const today = moment();
+  const nextWeek = today.clone().add(1, "weeks");
+
+  for (let i = 0; i < 7; i++) {
+    const day = nextWeek.clone().add(i, "days");
+    days[i].Day = day.format("YYYY-MM-DD");
+  }
+};
+
 export const Calendar = () => {
-  const [monday, setMonday] = useState([]);
-  const [tuesday, setTuesday] = useState([]);
-  const [wednesday, setWednesday] = useState([]);
-  const [thursday, setThursday] = useState([]);
-  const [friday, setFriday] = useState([]);
-  const [saturday, setSaturday] = useState([]);
-  const [sunday, setSunday] = useState([]);
-
   const [shifts, setShifts] = useState([]);
+  const [countShift, setCountShift] = useState(0);
+  const [loading, setLoading] = useState(true);
 
-  const [{ isOver1 }, dropToAdd] = useDrop({
-    accept: "shift",
-    drop: (item) => addShift(item.id),
-    collect: (monitor) => ({
-      isOver1: !!monitor.isOver(),
-    }),
-  });
-
-  const [{ isOver2 }, dropToRemove] = useDrop({
-    accept: "shift",
-    drop: (item) => {
-      console.log("item Id: ", item.id);
-      removeShift(item.id);
-    },
-    collect: (monitor) => ({
-      isOver2: !!monitor.isOver(),
-    }),
-  });
-
-  const removeShift = (id) => {
-    console.log(id);
-    console.log(monday);
-    setMonday(monday.filter((s) => s.ID !== id));
-  };
-
-  const addShift = (id) => {
-    let check = monday.filter((s) => s.ID === id);
-    if (check == 0) {
-      const mondayList = shifts.filter((shift) => id === shift.ID);
-      setMonday((shift) => [...shift, mondayList[0]]);
-    }
-  };
+  const incCount = () => setCountShift(countShift + 1);
+  const decCount = () => setCountShift(countShift - 1);
 
   const init = async () => {
     const data = await getShiftList();
@@ -60,15 +75,17 @@ export const Calendar = () => {
 
   useEffect(() => {
     init();
+    getNextWeekDays();
+    setLoading(false);
   }, []);
 
   return (
     <div>
       <div className=" position-relative">
-        <div ref={dropToRemove} className={isOver2 ? "trash drop" : "trash"}>
+        {/* <div ref={dropToRemove} className={isOver2 ? "trash drop" : "trash"}>
           <span></span>
           <i></i>
-        </div>
+        </div> */}
         <div className="shift-wrapper">
           <div className="shift-list">
             {shifts &&
@@ -79,48 +96,21 @@ export const Calendar = () => {
         </div>
         <div className="calendar-wrapper">
           <div className="calendar-container">
-            <div
-              className={isOver1 ? "day drop" : "day"}
-              ref={dropToAdd}
-              style={{ backgroundColor: "var(--clr-1)" }}
-            >
-              <div className=" day-title">Sunday</div>
-              <div className=" drop-area">
-                {monday &&
-                  monday.map((item, idx) => (
-                    <Shift
-                      key={idx}
-                      shift={item}
-                      onClick={removeShift}
-                    />
-                  ))}
-              </div>
-            </div>
-            <div className="day" style={{ backgroundColor: "var(--clr-2)" }}>
-              <div className=" day-title">Monday</div>
-              <div className=" drop-area"></div>
-            </div>
-            <div className="day" style={{ backgroundColor: "var(--clr-3)" }}>
-              <div className=" day-title">Tuesday</div>
-              <div className=" drop-area"></div>
-            </div>
-            <div className="day" style={{ backgroundColor: "var(--clr-4)" }}>
-              <div className=" day-title">Wednesday</div>
-              <div className=" drop-area"></div>
-            </div>
-            <div className="day" style={{ backgroundColor: "var(--clr-5)" }}>
-              <div className=" day-title">Thursday</div>
-              <div className=" drop-area"></div>
-            </div>
-            <div className="day" style={{ backgroundColor: "var(--clr-6)" }}>
-              <div className=" day-title">Friday</div>
-              <div className=" drop-area"></div>
-            </div>
-            <div className="day" style={{ backgroundColor: "var(--clr-7)" }}>
-              <div className=" day-title">Saturday</div>
-              <div className=" drop-area"></div>
-            </div>
+            {days.map((d, idx) => (
+              <Day
+                key={idx}
+                index={idx}
+                data={d}
+                incCount={incCount}
+                decCount={decCount}
+                loading={loading}
+              />
+            ))}
           </div>
+        </div>
+        <div className="">
+          <div>Total shift: {countShift}</div>
+          <div>Total hours: {countShift * 4} hours</div>
         </div>
       </div>
     </div>

@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from "react";
-import "./order.css";
+import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
+import { CiEdit } from "react-icons/ci";
+import { HashLoader } from "react-spinners";
+import { useNavigate } from "react-router-dom";
 
+import { OrderModal } from "../../Element/Order/OrderModal";
+import { toast } from "react-toastify";
+import "./order.css";
 import {
   getAllOrder,
   getOrderProcessing,
   getOrderCompleted,
+  deleteOrderByID,
 } from "../../../services/orderServices";
-import { Pencil, Package } from "phosphor-react";
-import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
-import { CiEdit } from "react-icons/ci";
-import { HashLoader } from "react-spinners";
-import { OrderModal } from "../../Element/Order/OrderModal";
 
 export const OrderList = (props) => {
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   //order choosen to show details (order modal)
   const [orderChoosen, setOrderChoosen] = useState({});
@@ -74,6 +77,21 @@ export const OrderList = (props) => {
         break;
       default:
         break;
+    }
+  };
+
+  const handleDeleteOrder = async (id) => {
+    let data = [];
+    try {
+      data = await deleteOrderByID(id);
+      if (data && data.EC != -1) {
+        toast.success("Delete order successfully");
+        handleSetOrderListData(); // Refresh the page after a delay
+      } else {
+        toast.error(data.EM);
+      }
+    } catch (error) {
+      toast.error(error.message);
     }
   };
 
@@ -139,9 +157,7 @@ export const OrderList = (props) => {
                           <AiOutlineDelete
                             className="del-icon"
                             id={order.ID}
-                            onClick={async (e) =>
-                              await handleDeleteFood(e.target.id)
-                            }
+                            onClick={() => handleDeleteOrder(order.ID)}
                           />
                         </a>
                       </div>

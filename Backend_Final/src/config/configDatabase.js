@@ -1,17 +1,27 @@
 const sql = require("mssql");
+const msnodesqlv8 = require("mssql/msnodesqlv8");
 const { isNumberic } = require("../tool");
 
+// const config = {
+//   user: "jaysonguyendb", // better stored in an app setting such as process.env.DB_USER
+//   password: "Thanhnguyen1", // better stored in an app setting such as process.env.DB_PASSWORD
+//   server: "jaysonguyendb.database.windows.net", // better stored in an app setting such as process.env.DB_SERVER
+//   port: 1433, // optional, defaults to 1433, better stored in an app setting such as process.env.DB_PORT
+//   database: "jaysonguyendb", // better stored in an app setting such as process.env.DB_NAME
+//   authentication: {
+//     type: "default",
+//   },
+//   options: {
+//     encrypt: true,
+//   },
+// };
+
 const config = {
-  user: "jaysonguyendb", // better stored in an app setting such as process.env.DB_USER
-  password: "Thanhnguyen1", // better stored in an app setting such as process.env.DB_PASSWORD
-  server: "jaysonguyendb.database.windows.net", // better stored in an app setting such as process.env.DB_SERVER
-  port: 1433, // optional, defaults to 1433, better stored in an app setting such as process.env.DB_PORT
-  database: "jaysonguyendb", // better stored in an app setting such as process.env.DB_NAME
-  authentication: {
-    type: "default",
-  },
+  server: "LAPTOP-6NGD2LH1\\THAOMY",
+  database: "fastfooddb",
+  driver: "msnodesqlv8",
   options: {
-    encrypt: true,
+    trustedConnection: true,
   },
 };
 

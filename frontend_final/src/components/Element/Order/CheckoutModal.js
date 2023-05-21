@@ -8,10 +8,6 @@ import { addNewOrder } from "../../../services/orderServices";
 export const CheckoutModal = (props) => {
   const [method, setMethod] = useState("");
 
-  const handleClose = () => {
-    props.show = false;
-  };
-
   const checkOut = async () => {
     console.log("total: ", props.total);
     if (props.total != 0) {
@@ -31,12 +27,20 @@ export const CheckoutModal = (props) => {
   };
 
   const addOrderToDB = async () => {
-    orderData.BillDetails = props.orderList;
-    console.log(orderData);
-    const res = await addNewOrder(orderData);
-    switch (res) {
+    const orderDetailsData = props.orderList;
+    console.log("orderDetailsData: ", orderDetailsData);
+    if (orderDetailsData.length == 0) {
+      toast.error("Order không thể rỗng. Thêm thất bại");
+      return;
+    }
+
+    const res = await addNewOrder({
+      StaffID: 1,
+      BillDetails: orderDetailsData,
+    });
+    switch (res.EC) {
       case 0:
-        alert("Pending...");
+        alert(res.EM);
         break;
       case 1:
         toast.success("Order completed successfully");
@@ -53,8 +57,8 @@ export const CheckoutModal = (props) => {
   };
 
   const handleCheckout = () => {
-    if (method == "") handleClose();
-    else {
+    console.log(method);
+    if (method != "" && props.orderList.length > 0) {
       console.log("method: ", method);
       switch (method) {
         case "momo":
@@ -65,6 +69,7 @@ export const CheckoutModal = (props) => {
           break;
       }
     }
+    return;
   };
 
   return (
@@ -107,11 +112,7 @@ export const CheckoutModal = (props) => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            className=""
-            variant="primary"
-            onClick={() => handleCheckout()}
-          >
+          <Button className="" variant="primary" onClick={handleCheckout}>
             Select
           </Button>
         </Modal.Footer>
