@@ -52,6 +52,8 @@ app.use("/api/position/", require("./src/routes/positionApi"));
 app.use("/api/ingredient/", require("./src/routes/ingredientApi"));
 app.use("/api/unit/", require("./src/routes/unitApi"));
 
+app.use("/api/calendar/", require("./src/routes/calendarApi"));
+
 app.use("/api/auth/", require("./src/routes/authApi"));
 
 app.listen(PORT, () => {

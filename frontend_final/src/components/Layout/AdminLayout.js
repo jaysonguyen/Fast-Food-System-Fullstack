@@ -1,6 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import { AdminSideBar } from "./SideMenu/SideBar";
+import { AssignShiftProvider } from "../../components/Context/AssignShiftContext";
 import "../../css/AdminLayout.css";
 
 export const AdminLayout = () => {
@@ -12,7 +13,9 @@ export const AdminLayout = () => {
         </div>
         <div className="main-content product px-0 col-lg-9">
           <div className="content py-4">
-            <Outlet />
+            <AssignShiftProvider>
+              <Outlet />
+            </AssignShiftProvider>
           </div>
         </div>
       </div>

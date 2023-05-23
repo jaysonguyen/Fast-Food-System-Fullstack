@@ -7,6 +7,7 @@ import { addNewOrder } from "../../../services/orderServices";
 
 export const CheckoutModal = (props) => {
   const [method, setMethod] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const checkOut = async () => {
     console.log("total: ", props.total);
@@ -68,15 +69,20 @@ export const CheckoutModal = (props) => {
           addOrderToDB();
           break;
       }
+      setIsModalOpen(false);
     }
     return;
   };
+
+  useEffect(() => {
+    setIsModalOpen(props.show);
+  }, [props.show]);
 
   return (
     <>
       <Modal
         size="lg"
-        show={props.show}
+        show={isModalOpen}
         className="modal-user"
         onHide={props.onHide}
         centered

@@ -1,14 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useDrop } from "react-dnd";
 import moment from "moment";
+import { toast } from "react-toastify";
 
 import { Shift } from "./Shift";
-
+import { AssignShiftContext } from "../../Context/AssignShiftContext";
 import { getShiftList } from "../../../services/shiftServices";
 
 export const Day = (props) => {
-  const [list, setList] = useState(props.data.Shifts);
+  //assign shift list
+  const [list, setList] = useState([]);
+  //shift information list
   const [shifts, setShifts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const { addToAssign, removeFromAssign } = useContext(AssignShiftContext);
+  //get staffID
+  const staffID = JSON.parse(sessionStorage.getItem("User")).StaffID;
 
   const init = async () => {
     const data = await getShiftList();
@@ -17,6 +25,14 @@ export const Day = (props) => {
     } else {
       setShifts([]);
     }
+    setLoading(false);
+  };
+
+  const fetchDayData = () => {
+    const day = props.data.Shifts;
+    day.map((d) => {
+      addShift(d.ShiftID);
+    });
   };
 
   const [{ isOver1 }, dropToAdd] = useDrop({
@@ -33,21 +49,38 @@ export const Day = (props) => {
     if (check.length == 0) {
       //if not then add
       const getShift = shifts.filter((shift) => id === shift.ID);
-      setList((shift) => [...shift, getShift]);
-      props.incCount();
+
+      if (staffID != null) {
+        //add shift assignment into day
+        setList((shift) => [...shift, getShift]);
+        //add shift to assignmentDetails
+        const obj = [
+          { ShiftID: getShift[0].ID, StaffID: staffID, Date: props.data.Day },
+        ];
+        addToAssign(obj);
+        props.incCount();
+      } else
+        toast.error("StaffID is null? Check the security of this application");
     }
   };
 
   const removeShift = (id) => {
     //remove item from list
     setList(list.filter((s) => s[0].ID !== id));
+
+    const getShift = shifts.filter((shift) => id === shift.ID);
+    //remove shift from assignmentDetails
+    const obj = [
+      { ShiftID: getShift[0].ID, StaffID: staffID, Date: props.data.Day },
+    ];
+    removeFromAssign(obj);
     props.decCount();
   };
 
   useEffect(() => {
     init();
-  }, []);
-  console.log("data: ", props.data);
+    if (shifts.length > 0) fetchDayData();
+  }, [loading]);
 
   return (
     <div

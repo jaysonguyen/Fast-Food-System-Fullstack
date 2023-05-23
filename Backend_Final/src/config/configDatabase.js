@@ -62,10 +62,10 @@ const AsyncQuery = async (query, params, callSp) => {
   }
 
   let result;
-  console.log("query: ", query);
+  // console.log("query: ", query);
   try {
     result = await poolConnection.request().query(query);
-    console.log("result: ", result);
+    // console.log("result: ", result);
     poolConnection.close();
     return {
       success: true,

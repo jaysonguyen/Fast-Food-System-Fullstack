@@ -3,10 +3,9 @@ import { getShiftListData } from "../api/callApi";
 
 export const getShiftList = async () => {
   try {
-    const data = await getShiftListData();
+    const data = await axios.get("api/shift");
     return data;
   } catch (error) {
-    console.log(error.message);
-    return -1;
+    return error.response.data;
   }
 };
