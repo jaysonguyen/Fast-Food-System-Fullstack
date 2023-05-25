@@ -5,6 +5,8 @@ const {
   createStaff,
   getStaffByUser,
   updateStaffUserID,
+  getFeedBack,
+  insertFeedBack,
 } = require("../services/staffServices");
 
 const readStaffList = async (req, res) => {
@@ -47,6 +49,7 @@ const updateStaff = async (req, res) => {
       startAt,
       position
     );
+    
     if (data) {
       return res.status(200).json({
         EM: data.EM,
@@ -168,6 +171,59 @@ const getStaffByUserID = async (req, res) => {
   }
 };
 
+const readFeedBack = async (req, res) => {
+  try {
+    const data = await getFeedBack();
+    if (data && data.EC != -1) {
+      return res.status(200).json({
+        EM: "Get feedBack list successfully",
+        EC: data.EC,
+        DT: data.DT,
+      });
+    } else {
+      return res.status(200).json({
+        EM: "Empty List",
+        EC: 0,
+        DT: [],
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      EM: "Error from server",
+      EC: -1,
+      DT: "",
+    });
+  }
+};
+
+const createFeedBack = async (req, res) => {
+  try {
+    const { name, contact, content } = req.body;
+    const data = await insertFeedBack(name, contact, content);
+    if (data) {
+      return res.status(200).json({
+        EM: data.EM,
+        EC: data.EC,
+        data: data.DT,
+      });
+    } else {
+      return res.status(200).json({
+        EM: data.EM,
+        EC: data.EC,
+        data: "",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(200).json({
+      EM: "Error from server",
+      EC: -1,
+      data: "",
+    });
+  }
+};
+
 module.exports = {
   getStaffByUserID,
   readStaffList,
@@ -175,4 +231,6 @@ module.exports = {
   removeStaff,
   addStaff,
   updateStaffUser,
+  readFeedBack,
+  createFeedBack
 };

@@ -1,4 +1,4 @@
-const sql = require("mssql");
+const sql = require("mssql/msnodesqlv8");
 const config = require("../config/configDatabase");
 
 const getStaffList = async () => {
@@ -159,6 +159,59 @@ const getStaffByUser = async (userid) => {
   }
 };
 
+const getFeedBack = async () => {
+  try {
+    const poolConnection = await sql.connect(config);
+    const data = await poolConnection.request().query("Exec sp_get_feed_back");
+    poolConnection.close();
+    if (data) {
+      return {
+        EM: "Get feedBack success",
+        EC: 1,
+        DT: data.recordset,
+      };
+    } else {
+      return {
+        EM: "Get feedBack success",
+        EC: 0,
+        DT: [],
+      };
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const insertFeedBack = async (name, contact, content) => {
+  try {
+    const poolConnection = await sql.connect(config);
+    const data = await poolConnection.query(
+      `Exec sp_insert_feedBack N'${name}', '${contact}', '${content}'`
+    );
+    poolConnection.close();
+    if (data) {
+      return {
+        EM: "Create feedback success",
+        EC: 1,
+        DT: data.recordset,
+      };
+    } else {
+      return {
+        EM: "Create feedback success",
+        EC: 1,
+        DT: [],
+      };
+    }
+  } catch (error) {
+    console.log(error);
+    return {
+      EM: "Error from services",
+      EC: -1,
+      DT: [],
+    };
+  }
+};
+
 module.exports = {
   getStaffByUser,
   getStaffList,
@@ -166,4 +219,6 @@ module.exports = {
   deleteStaff,
   createStaff,
   updateStaffUserID,
+  getFeedBack,
+  insertFeedBack,
 };

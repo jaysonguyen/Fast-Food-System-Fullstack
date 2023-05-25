@@ -49,6 +49,7 @@ app.use("/api/general/", require("./src/routes/generalApi"));
 app.use("/api/user/", require("./src/routes/userApi"));
 app.use("/api/shift/", require("./src/routes/shiftApi"));
 app.use("/api/position/", require("./src/routes/positionApi"));
+app.use("/api/staff/timeOff/", require("./src/routes/timeOffApi"));
 
 app.listen(PORT, () => {
   console.log("App running on port: " + PORT);

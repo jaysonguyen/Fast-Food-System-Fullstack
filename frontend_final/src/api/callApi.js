@@ -155,3 +155,28 @@ export const deleteVendorSoft = (id) => {
 export const checkOutOrder = (total) => {
   return axios.post(`/api/order/payment/${total}`);
 };
+
+export const getTimeOffList = () => {
+  return axios.get(`/api/staff/timeOff/`);
+};
+
+export const InsertTimeOff = (timeStart, timeEnd, reason, idEm) => {
+  return axios.post(`/api/staff/timeOff`, {
+    timeStart,
+    timeEnd,
+    reason,
+    idEm,
+  });
+};
+
+export const getFeedBack = () => {
+  return axios.get(`/api/staff/feedback`);
+};
+
+export const createFeedBack = (name, contact, content) => {
+  return axios.post(`/api/staff/feedback/create`, {
+    name,
+    contact,
+    content,
+  });
+};

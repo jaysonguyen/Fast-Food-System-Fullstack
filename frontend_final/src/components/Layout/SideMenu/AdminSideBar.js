@@ -7,6 +7,7 @@ import { BsFillJournalBookmarkFill } from "react-icons/bs";
 import { MdFastfood, MdDiscount } from "react-icons/md";
 import { CiShoppingBasket } from "react-icons/ci";
 import { BiImport } from "react-icons/bi";
+
 import "./AdminSideBar.css";
 
 export const AdminSB = () => {
@@ -112,6 +113,103 @@ export const AdminSB = () => {
                 >
                   <MdDiscount className="nav-link_icon" />
                   Promotion
+                </Link>
+              </li>
+            </ul>
+          </li>
+
+          <li
+            className="nav-item has-submenu"
+            onClick={() => setActiveIndex(6)}
+          >
+            <a
+              href="#product"
+              data-bs-toggle="collapse"
+              className={activeIndex === 6 ? "nav-link active" : "nav-link"}
+            >
+              <AiFillGolden className="nav-link_icon" />
+              <b>Human Resource</b>
+              <AiOutlineDown className="nav-link_icon nav-link_icon--down" />
+            </a>
+            <ul id="product" className="submenu ms-3 collapse">
+              <li
+                className="submenu_sidebar"
+                onClick={() => setActiveIndexSub(0)}
+              >
+                <Link
+                  className={
+                    activeIndex === 6 && activeIndexSub === 0
+                      ? "nav-link active"
+                      : "nav-link"
+                  }
+                  to="/staff/timeoff"
+                >
+                  <MdFastfood className="nav-link_icon" />
+                  Time Off
+                </Link>
+              </li>
+              <li
+                className="submenu_sidebar"
+                onClick={() => setActiveIndexSub(1)}
+              >
+                <Link
+                  className={
+                    activeIndex === 6 && activeIndexSub === 1
+                      ? "nav-link active"
+                      : "nav-link"
+                  }
+                  to="/admin/production/catagories"
+                >
+                  <BiCategory className="nav-link_icon" />
+                  Shift
+                </Link>
+              </li>
+              <li
+                className="submenu_sidebar"
+                onClick={() => setActiveIndexSub(2)}
+              >
+                <a
+                  className={
+                    activeIndex === 6 && activeIndexSub === 2
+                      ? "nav-link active"
+                      : "nav-link"
+                  }
+                  href="#"
+                >
+                  <BsFillJournalBookmarkFill className="nav-link_icon" />
+                  Calendar
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li
+            className="nav-item has-submenu"
+            onClick={() => setActiveIndex(7)}
+          >
+            <a
+              href="#product"
+              data-bs-toggle="collapse"
+              className={activeIndex == 7 ? "nav-link active" : "nav-link"}
+            >
+              <AiFillGolden className="nav-link_icon" />
+              <b>Cusomter</b>
+              <AiOutlineDown className="nav-link_icon nav-link_icon--down" />
+            </a>
+            <ul id="product" className="submenu ms-3 collapse">
+              <li
+                className="submenu_sidebar"
+                onClick={() => setActiveIndexSub(0)}
+              >
+                <Link
+                  className={
+                    activeIndex === 7 && activeIndexSub === 0
+                      ? "nav-link active"
+                      : "nav-link"
+                  }
+                  to="/admin/feedback"
+                >
+                  <MdFastfood className="nav-link_icon" />
+                  FeedBack
                 </Link>
               </li>
             </ul>
@@ -243,6 +341,22 @@ export const StaffSB = () => {
                 >
                   <BiCategory className="nav-link_icon" />
                   Calendar
+                </Link>
+              </li>
+              <li
+                className="submenu_sidebar"
+                onClick={() => setActiveIndexSub(5)}
+              >
+                <Link
+                  className={
+                    activeIndex === 0 && activeIndexSub === 5
+                      ? "nav-link active"
+                      : "nav-link"
+                  }
+                  to="/staff/timeoff"
+                >
+                  <BiCategory className="nav-link_icon" />
+                  Time off
                 </Link>
               </li>
               <li

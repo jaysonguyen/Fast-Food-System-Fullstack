@@ -35,6 +35,10 @@ import Catagories from "./components/Admin/Catagories/Catagories";
 import Supplier from "./components/Admin/Supplier/Supplier";
 import Staff from "./components/Admin/Store/Staff/Staff";
 import User from "./components/Admin/Store/User/User";
+import Timeoff from "./components/Staff/TimeOff/Timeoff";
+import FeedBack from "./components/FeedBack/FeedBack";
+import FeedbackThanks from "./components/FeedBack/FeedbackThanks";
+import AddminFeedBack from "./components/Admin/Customer/FeedBack";
 
 // kitchen
 import { KitchenLayout } from "./components/Layout/KitchenLayout";
@@ -65,6 +69,8 @@ function App() {
           {/* {pathname.includes("/admin") ? <AdminHeader /> : <NavBar />} */}
           {/* <NavBar /> */}
           <Routes>
+            <Route path="/feedback" element={<FeedBack />} />
+            <Route path="/feedback/thanks" element={<FeedbackThanks />} />
             <Route path="/kitchen" element={<AllOder />} />
             <Route path="/login" element={<LoginPage />} />
 
@@ -88,6 +94,10 @@ function App() {
                 element={<Promotion />}
               ></Route>
               <Route
+                path="/admin/feedback"
+                element={<AddminFeedBack />}
+              ></Route>
+              <Route
                 path="/admin/production/catagories"
                 element={<Catagories />}
               ></Route>
@@ -107,9 +117,8 @@ function App() {
             <Route path="/staff" element={<AdminLayout />}>
               <Route path="/staff/assignment" element={<Calendar />} />
               <Route path="/staff/demo" element={<Demo />} />
+              <Route path="/staff/timeoff" element={<Timeoff />} />
             </Route>
-
-
           </Routes>
         </Router>
 

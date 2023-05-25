@@ -1,14 +1,15 @@
-const sql = require("mssql");
+const sql = require("mssql/msnodesqlv8");
 const config = require("../config/configDatabase");
 
 console.log("Starting...");
-
+//
 const getAllFood = async () => {
   try {
     const poolConnection = await sql.connect(config);
     let data = await poolConnection.request().query("exec sp_get_food_infor");
     poolConnection.close();
     if (data) {
+      console.log(data);
       return {
         EM: "Get all food success",
         EC: 1,
@@ -30,6 +31,8 @@ const getAllFood = async () => {
     };
   }
 };
+
+getAllFood();
 
 const createOneFood = async (name, price, image, type, recipe) => {
   try {
