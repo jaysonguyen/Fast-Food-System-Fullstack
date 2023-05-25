@@ -19,20 +19,25 @@ export const Day = (props) => {
   const staffID = JSON.parse(sessionStorage.getItem("User")).StaffID;
 
   const init = async () => {
-    const data = await getShiftList();
-    if (data && data.EC != -1) {
-      setShifts(data.DT);
-    } else {
+    if (shifts.length == 0) {
       setShifts([]);
+      const data = await getShiftList();
+      if (data && data.EC != -1) {
+        setShifts(data.DT);
+      } else {
+        setShifts([]);
+      }
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const fetchDayData = () => {
-    const day = props.data.Shifts;
-    day.map((d) => {
-      addShift(d.ShiftID);
-    });
+    if (shifts.length > 0) {
+      const day = props.data.Shifts;
+      day.map((d) => {
+        addShift(d.ShiftID);
+      });
+    }
   };
 
   const [{ isOver1 }, dropToAdd] = useDrop({
@@ -79,8 +84,12 @@ export const Day = (props) => {
 
   useEffect(() => {
     init();
-    if (shifts.length > 0) fetchDayData();
-  }, [loading]);
+    fetchDayData();
+  }, [shifts.length]);
+
+  // useEffect(() => {
+  //   if (list.length > 0) fetchDayData();
+  // }, [loading]);
 
   return (
     <div

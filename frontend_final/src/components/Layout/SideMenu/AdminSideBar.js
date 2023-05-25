@@ -181,6 +181,38 @@ export const AdminSB = () => {
                   Staff
                 </Link>
               </li>
+              <li
+                className="submenu_sidebar"
+                onClick={() => setActiveIndexSub(2)}
+              >
+                <Link
+                  className={
+                    activeIndex === 1 && activeIndexSub === 1
+                      ? "nav-link active"
+                      : "nav-link"
+                  }
+                  to="/admin/store/assignment"
+                >
+                  <MdFastfood className="nav-link_icon" />
+                  Assignment
+                </Link>
+              </li>
+              <li
+                className="submenu_sidebar"
+                onClick={() => setActiveIndexSub(3)}
+              >
+                <Link
+                  className={
+                    activeIndex === 1 && activeIndexSub === 1
+                      ? "nav-link active"
+                      : "nav-link"
+                  }
+                  to="/admin/store/calendar"
+                >
+                  <MdFastfood className="nav-link_icon" />
+                  Calendar
+                </Link>
+              </li>
             </ul>
           </li>
         </ul>

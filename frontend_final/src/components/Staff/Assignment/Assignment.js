@@ -58,15 +58,16 @@ import { Shift } from "./Shift";
 //   }
 // };
 
-export const Calendar = () => {
-  const [shifts, setShifts] = useState([]);
+export const Assignment = () => {
   const [countShift, setCountShift] = useState(0);
+  const [shifts, setShifts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const incCount = () => setCountShift(countShift + 1);
   const decCount = () => setCountShift(countShift - 1);
 
-  const { days, assignmentDetails } = useContext(AssignShiftContext);
+  const { days, assignmentDetails, initAssginmentStaff } =
+    useContext(AssignShiftContext);
 
   const handleSaveAssignment = async () => {
     //insert assign to DB
@@ -89,18 +90,27 @@ export const Calendar = () => {
     }
   };
 
+  const fetchAssignData = async () => {
+    initAssginmentStaff();
+  };
+
   useEffect(() => {
     init();
-    setLoading(false);
+    fetchAssignData();
   }, []);
 
   return (
-    <div>
+    <div id="staff-assignment">
       <div className=" position-relative">
-        {/* <div ref={dropToRemove} className={isOver2 ? "trash drop" : "trash"}>
-          <span></span>
-          <i></i>
-        </div> */}
+        <div className="fs-3 title">Shift Assignment</div>
+        <div className="row mb-3">
+          <div className=" col-3">
+            Day from: <span>{days[0].Day}</span>
+          </div>
+          <div className="col-3">
+            Day end: <span>{days[6].Day}</span>
+          </div>
+        </div>
         <div className="shift-wrapper">
           <div className="shift-list">
             {shifts &&

@@ -165,10 +165,90 @@ const clearAssignCalendar = async (req, res) => {
   }
 };
 
+//get all assignment
+const getAllCalendar = async (req, res) => {
+  try {
+    const proc = "exec sp_getAllCalendar";
+    const input = [];
+
+    const result = await AsyncQuery(proc, input, true);
+    if (result.success) {
+      return res.status(200).json({
+        EM: "Get all calendar shifts successfully!!",
+        EC: 1,
+        DT: result.data.recordset,
+      });
+    } else {
+      return res.status(500).json({
+        EM: result.data,
+        EC: -1,
+        DT: [],
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      EM: error.message,
+      EC: -1,
+      DT: [],
+    });
+  }
+};
+
+//insert assignment
+const insertCalendar = async (req, res) => {
+  try {
+    //get a list of assignment shift by staffid
+    const inputs = req.body;
+    console.log("inputs: ", inputs);
+    let proc = "";
+    let input = [];
+
+    // Create an array of promises for each async operation
+    const promises = inputs.map(async (assign) => {
+      proc = "exec sp_deleteCalWithDate";
+      input = [["Date", assign.Date]];
+      const clearCalendar = await AsyncQuery(proc, input, true);
+
+      proc = "exec sp_insertCalendar";
+      input = [
+        ["ShiftID", assign.ShiftID],
+        ["StaffID", assign.StaffID],
+        ["Date", assign.Date],
+      ];
+      const result = await AsyncQuery(proc, input, true);
+
+      if (!result.success) {
+        return res.status(500).json({
+          EM: result.data,
+          EC: -1,
+          DT: [],
+        });
+      }
+    });
+
+    // Wait for all promises to resolve
+    await Promise.all(promises);
+
+    return res.status(500).json({
+      EM: "Save calendar successfully",
+      EC: 1,
+      DT: [],
+    });
+  } catch (error) {
+    return res.status(500).json({
+      EM: error.message,
+      EC: -1,
+      DT: [],
+    });
+  }
+};
+
 module.exports = {
   clearAssignCalendar,
   getAssignByStaffid,
   deleteAssignByStaffid,
   insertAssign,
   getAllAssign,
+  getAllCalendar,
+  insertCalendar,
 };

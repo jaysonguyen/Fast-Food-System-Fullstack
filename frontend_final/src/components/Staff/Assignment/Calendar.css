@@ -8,7 +8,7 @@
   --clr-7: #f6c391;
 }
 
-.shift-list .shift-container {
+#staff-assignment .shift-list .shift-container {
   padding: 10px 20px;
   margin: 5px;
   border-radius: 10px;
@@ -22,49 +22,49 @@
   flex-direction: column;
 }
 
-.shift-list .shift-container.drag {
+#staff-assignment .shift-list .shift-container.drag {
   background-color: var(--clr-primary);
   color: var(--clr-white);
 }
 
-.shift-list,
+#staff-assignment .shift-list,
 .shift-list .time {
   display: flex;
   flex-direction: row;
 }
 
-.shift-list .time {
+#staff-assignment .shift-list .time {
   color: #333;
   justify-content: space-between;
   font-size: 18px;
   margin-top: 10px;
 }
 
-.shift-list .time > div {
+#staff-assignment .shift-list .time > div {
   background-color: var(--clr-white);
   border-radius: 10px;
   padding: 10px 20px;
 }
 
-.shift-name {
+#staff-assignment .shift-name {
   font-size: 16px;
 }
 
 /* calendar */
-.calendar-container {
+#staff-assignment .calendar-container {
   display: flex;
   margin-top: 20px;
   height: 40vh;
 }
 
-.calendar-container .day {
+#staff-assignment .calendar-container .day {
   width: 14.3%;
   margin-right: 5px;
   text-align: center;
   border-radius: 10px;
 }
 
-.calendar-container .day-time {
+#staff-assignment .calendar-container .day-time {
   /* background-color: var(--clr-primary); */
   border: 1px solid #fff;
   color: var(--clr-white);
@@ -72,17 +72,17 @@
   border-radius: 10px;
 }
 
-.calendar-container .day-title {
+#staff-assignment .calendar-container .day-title {
   padding: 5px 10px;
   border-radius: 10px;
 }
 
-.calendar-container .drop-area {
+#staff-assignment .calendar-container .drop-area {
   height: 100%;
   margin-top: 10px;
 }
 
-.calendar-container .drop-area .shift-container {
+#staff-assignment .calendar-container .drop-area .shift-container {
   background-color: #fffaf4;
   color: var(--clr-grey);
   padding: 10px 10px;
@@ -91,11 +91,11 @@
   cursor: pointer;
 }
 
-.calendar-container .drop-area .shift-container .time {
+#staff-assignment .calendar-container .drop-area .shift-container .time {
   display: none;
 }
 /* ------ */
-.calendar-container .drop-item {
+#staff-assignment .calendar-container .drop-item {
   background-color: var(--clr-white);
   color: var(--clr-grey);
   padding: 10px 10px;
@@ -104,13 +104,13 @@
   cursor: pointer;
 }
 
-.calendar-container .drop-item.drag {
+#staff-assignment .calendar-container .drop-item.drag {
   opacity: 1;
 }
 /* ---- */
 /* trash */
 
-.trash {
+#staff-assignment .trash {
   background: var(--clr-grey);
   width: 26px;
   height: 26px;
@@ -127,7 +127,7 @@
   border-bottom-right-radius: 6px;
   border-bottom-left-radius: 6px;
 }
-.trash span {
+#staff-assignment .trash span {
   position: absolute;
   height: 5px;
   width: 120%;
@@ -142,7 +142,7 @@
   transition: transform 250ms;
   transform-origin: 15% 80%;
 }
-.trash span:after {
+#staff-assignment .trash span:after {
   content: "";
   position: absolute;
   width: 5px;
@@ -158,7 +158,7 @@
   transform-origin: 19% 100%;
 }
 
-.trash i {
+#staff-assignment .trash i {
   position: relative;
   width: 2px;
   height: 10px;
@@ -167,7 +167,7 @@
   margin: 10px auto;
   border-radius: 5px;
 }
-.trash i:after {
+#staff-assignment .trash i:after {
   content: "";
   width: 2px;
   height: 10px;
@@ -176,7 +176,7 @@
   left: -5px;
   border-radius: 5px;
 }
-.trash i:before {
+#staff-assignment .trash i:before {
   content: "";
   width: 2px;
   height: 10px;
@@ -186,7 +186,7 @@
   border-radius: 5px;
 }
 
-.trash.drop span {
+#staff-assignment .trash.drop span {
   transform: rotate(-45deg);
   transition: transform 250ms;
 }

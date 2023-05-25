@@ -11,7 +11,7 @@ export const AdminLayout = () => {
         <div id="sidebar" className="sidebar py-4 px-0 col-lg-2">
           <AdminSideBar />
         </div>
-        <div className="main-content product px-0 col-lg-9">
+        <div className="main-content product px-0 col-lg me-5">
           <div className="content py-4">
             <AssignShiftProvider>
               <Outlet />

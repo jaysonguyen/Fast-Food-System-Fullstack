@@ -23,7 +23,6 @@ export const Shift = ({ shift, onClick }) => {
       <div className="shift-name col">{shift.Name}</div>
       <div className="time col">
         <div>{moment.utc(shift.Begin).format("HH:mm")}</div>
-        {/* <div>{shift.Begin}</div> */}
         <div>{moment.utc(shift.End).format("HH:mm")}</div>
       </div>
     </div>

@@ -29,3 +29,23 @@ export const insertAssign = async (item) => {
     return error.response.data;
   }
 };
+
+export const getAllCalendar = async () => {
+  let data = [];
+  try {
+    data = await axios.get("/api/calendar/list");
+    return data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
+export const insertCalendar = async (item) => {
+  let data = [];
+  try {
+    data = await axios.post("api/calendar/add", item);
+    return data;
+  } catch (error) {
+    return error.response.data;
+  }
+};

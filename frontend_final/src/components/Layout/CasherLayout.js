@@ -1,11 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
+import { getStaffByUserId } from "../../services/staff";
+
 import { Outlet } from "react-router-dom";
 import { CasherSideBar } from "./SideMenu/SideBar";
 
-import { MenuManagementPage } from "../pages/Casher/MenuManagementPage";
-import { OrderManagement } from "../pages/Casher/OrdersPage";
+import { MyAccountModal } from "../Account/MyAccountModal";
 
 export const CasherLayout = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const handleShowModal = () => {
+    let flag = !showModal;
+    setShowModal(flag);
+  };
+
+  const staffid = JSON.parse(sessionStorage.getItem("User")).StaffID;
+  const [user, setUser] = useState({});
+
+  const fetchUser = async () => {
+    const data = await getStaffByUserId(staffid);
+    if (data && data.EC != -1) {
+      console.log("data: ", data.DT);
+      setUser(data.DT);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, [loading]);
+
   return (
     <div id="wapper" className="flex-wrapcontainer-fluid">
       <div className="row flex-nowrap">
@@ -29,12 +54,15 @@ export const CasherLayout = () => {
               </div>
               <div className="my-2">Thao My</div>
               <div className="my-2">Casher</div>
-              <button className="btn btn-clr-normal">Details</button>
+              <button className="btn btn-clr-normal" onClick={handleShowModal}>
+                Details
+              </button>
             </div>
           </div>
         </div>
         <Outlet />
       </div>
+      <MyAccountModal user={user} show={showModal} onHide={handleShowModal} />
     </div>
   );
 };

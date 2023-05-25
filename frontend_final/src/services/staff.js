@@ -1,8 +1,13 @@
 import axios from "../setup/axios";
 import { deleteStaff } from "../api/callApi";
 
-const getAllStaff = () => {
-  return axios.get(`/api/staff/list`);
+const getAllStaff = async () => {
+  try {
+    const data = axios.get(`/api/staff/list`);
+    return data;
+  } catch (error) {
+    return error.response.data;
+  }
 };
 
 const getStaffByUserId = async (userid) => {

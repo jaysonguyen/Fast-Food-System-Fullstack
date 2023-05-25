@@ -36,8 +36,8 @@ const Staff = (props) => {
     fetchStaff();
   }, [staff]);
 
-  const [showModal, setShowModal] = useState(false);
   const [choosedStaff, setChoosedStaff] = useState({});
+  const [showModal, setShowModal] = useState(false);
   const handleShowModal = (staff) => {
     let flag = !showModal;
     setChoosedStaff(() => ({ ...staff }));

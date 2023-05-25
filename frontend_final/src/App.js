@@ -23,13 +23,15 @@ import { MenuManagementPage } from "./components/pages/Casher/MenuManagementPage
 import { OrderManagement } from "./components/pages/Casher/OrdersPage";
 import { LoginPage } from "./components/pages/Auth/LoginPage";
 
-import Admin from "./components/Admin/Admin";
+// admin
 import Production from "./components/Admin/Production/Production";
 import Promotion from "./components/Admin/Promotion/Promotion";
 import Catagories from "./components/Admin/Catagories/Catagories";
 import Supplier from "./components/Admin/Supplier/Supplier";
 import Staff from "./components/Admin/Store/Staff/Staff";
 import User from "./components/Admin/Store/User/User";
+import Assign from "./components/Admin/Store/Assignment/Assign";
+import Calendar from "./components/Admin/Store/Calendar/Calendar";
 import Ingredient from "./components/Admin/Ingredient/Ingredient";
 
 // kitchen
@@ -37,7 +39,7 @@ import { KitchenLayout } from "./components/Layout/KitchenLayout";
 import { OrderPage as KitchenOrder } from "./components/pages/Kitchen/OrderPage";
 
 // Staff
-import { Calendar } from "./components/Staff/Calendar/Calendar";
+import { Assignment } from "./components/Staff/Assignment/Assignment";
 
 // private route
 import PrivateRoute from "./components/pages/Auth/PrivateRoute";
@@ -137,6 +139,14 @@ function App() {
               {/* store */}
               <Route path="/admin/store/staff" element={<Staff />}></Route>
               <Route path="/admin/store/user" element={<User />}></Route>
+              <Route
+                path="/admin/store/assignment"
+                element={<Assign />}
+              ></Route>
+              <Route
+                path="/admin/store/calendar"
+                element={<Calendar />}
+              ></Route>
             </Route>
             {/* kitchen */}
             <Route
@@ -151,7 +161,7 @@ function App() {
             </Route>
             {/* staff */}
             <Route path="/staff" element={<AdminLayout />}>
-              <Route path="/staff/assignment" element={<Calendar />} />
+              <Route path="/staff/assignment" element={<Assignment />} />
             </Route>
           </Routes>
         </Router>

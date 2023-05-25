@@ -7,6 +7,7 @@ const {
   updateStaffUserID,
   getStaffWithoutUserAccount,
 } = require("../services/staffServices");
+const { AsyncQuery } = require("../config/configDatabase");
 
 const readStaffList = async (req, res) => {
   try {
@@ -146,18 +147,22 @@ const getStaffByUserID = async (req, res) => {
   try {
     console.log(req.params);
     const id = req.params.id;
-    const data = await getStaffByUser(id);
-    if (data && data.EC != -1) {
-      return res.status(200).json({
-        EM: data.EM,
-        EC: data.EC,
-        DT: data.DT,
+
+    proc = "exec getStaffByUserID";
+    input = [["userID", id]];
+    const result = await AsyncQuery(proc, input, true);
+
+    if (!result.success) {
+      return res.status(500).json({
+        EM: result.data,
+        EC: -1,
+        DT: [],
       });
     } else {
       return res.status(200).json({
-        EM: data.EM,
-        EC: 0,
-        DT: [],
+        EM: "Get user successfully",
+        EC: 1,
+        DT: result.data.recordset[0],
       });
     }
   } catch (error) {
