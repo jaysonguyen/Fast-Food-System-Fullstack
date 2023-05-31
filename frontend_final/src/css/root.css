@@ -1,22 +1,31 @@
 @import url("https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap");
 :root {
-  --clr-gradient-1: #d24850;
+  --clr-gradient-1: #c8161d;
   --clr-gradient-2: #df4949;
-  --clr-btn: #94355c;
+  --clr-btn: #e4002b;
+  --clr-primary: #ffca40;
+  --clr-secondary: #b01e23;
+  --clr-white: #f8f8f7;
+  --clr-grey: #808080;
   --clr-card: #ffe4e7;
   --clr-card-shadow: #f6dfe2;
 
   --clr-bg-body: rgba(255, 223, 231, 0.5);
-  --clr-font-primary: rgb(130, 37, 94);
-  --clr-font-secondary: rgb(165, 0, 85);
+  --clr-form-bg: rgba(114, 98, 60, 0.5);
+  --clr-font-primary: #f3a853d9;
+  --clr-font-secondary: #c8161d;
+  --clr-font-dark: #5d5945;
+  --clr-font-light: #fff9db;
   --clr-font-third: ;
-
-  --red: red;
 }
 
 body {
   font-family: "Fira Sans", sans-serif;
+}
+
+.title {
+  font-family: "Darumadrop One", cursive;
 }
 
 /****** File input ******/

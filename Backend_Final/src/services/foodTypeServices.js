@@ -1,5 +1,5 @@
 const sql = require("mssql");
-const config = require("../config/configDatabase");
+const { config } = require("../config/configDatabase");
 
 console.log("Starting..");
 
@@ -148,7 +148,38 @@ const deleteFoodTypeAndFood = async (id) => {
     return {
       EM: "Delete food type failed",
       EC: 0,
-      DT: eror.message,
+      DT: error.message,
+    };
+  }
+};
+
+const updateTypeFood = async (id, name) => {
+  try {
+    let poolConnection = await sql.connect(config);
+    let data = await poolConnection
+      .request()
+      .query(`exec sp_update_foodtype ${id}, N'${name}'`);
+    poolConnection.close();
+
+    if (data) {
+      return {
+        EM: "Update food type success",
+        EC: 1,
+        DT: data.recordset,
+      };
+    } else {
+      return {
+        EM: "Update food type success",
+        EC: 1,
+        DT: [],
+      };
+    }
+  } catch (error) {
+    console.log(error.message);
+    return {
+      EM: "Update food type failed",
+      EC: 0,
+      DT: error.message,
     };
   }
 };
@@ -189,4 +220,5 @@ module.exports = {
   getFoodTypeById,
   createFoodType,
   getFoodByType,
+  updateTypeFood,
 };

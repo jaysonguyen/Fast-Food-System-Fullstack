@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../css/main.css";
 import "../css/root.css";
 import "./Supplier.css";
@@ -6,55 +6,59 @@ import { Modal, Button } from "react-bootstrap";
 import "../Production/Production.css";
 import Form from "react-bootstrap/Form";
 import { AddFood } from "../../../services/foodServices";
-import { InsertSupplier } from "../../../api/callApi";
+import {
+  InsertSupplier,
+  updateFoodType,
+  updateVendors,
+} from "../../../api/callApi";
 import { toast } from "react-toastify";
 //name, contact, note
 const SupplierModal = (props) => {
-  const [show, setShow] = useState(props.show);
-
-  const [name, setName] = useState("");
-  const [contact, setContact] = useState("");
-  const [note, setNote] = useState("");
+  const contact = props.contact;
+  const note = props.note;
 
   const handleCreate = async () => {
     try {
-      let data = await InsertSupplier(name, contact, note);
-      if (data && +data.EC == 1) {
-        toast.success(data.EM);
+      const regex = /^[0-9]{10}$/;
+      if (!regex.test(props.contact)) {
+        toast.error("Invalid phone number");
+      } else {
+        let data = await InsertSupplier(props.name, props.contact, props.note);
+        if (data && +data.EC == 1) {
+          toast.success(data.EM);
+          handleClose();
+        }
+        if (data && +data.EC == 0) {
+          toast.error(data.EM);
+        }
       }
-      if (data && +data.EC == 0) {
-        toast.error(data.EM);
-      }
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
-    
   };
 
-  //name, price, image, type, recipe, status
+  const handleClose = () => {
+    props.setShowModal(false);
+  };
+  const handleShow = () => props.setShowModal(true);
 
-  /*  const [name, setName] = useState("");
-  const [contact, setContact] = useState("");
-  const [note, setNote] = useState(""); */
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  /* const handleCreateFood = async (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
-    let data = await InsertSupplier(name, contact, note);
-    if (data && +data.EC === 1) {
-      toast.success(data.EM)
-      console.log(data);
-      location.reload();
-    } else if (data && +data.EC != 1) {
-      toast.error(data.EM);
-      console.log(data);
-    } else {
-      toast.error("Error from server");
+    if (props.data) {
+      const data = await updateVendors(props.idSup, {
+        ...props.data,
+        contact,
+        note,
+      });
+      if (data && +data.EC == 1) {
+        toast.success(data.EM);
+        props.setShowModal(false);
+      }
+      if (data && +data.EC != 1) {
+        toast.error(data.EM);
+      }
     }
-  }; */
+  };
 
   return (
     <>
@@ -66,7 +70,9 @@ const SupplierModal = (props) => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title className="title">Create Supplier</Modal.Title>
+          <Modal.Title className="title">
+            {props.action == "CREATE" ? "Create Supplier" : "Update Supplier"}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form className="create-form">
@@ -77,10 +83,11 @@ const SupplierModal = (props) => {
                     type="text"
                     id="form6Example1"
                     className="form-control"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    disabled={props.action == "CREATE" ? "" : "disabled"}
+                    value={props.name}
+                    onChange={(e) => props.setName(e.target.value)}
                   />
-                  <label className="form-label" for="form6Example1">
+                  <label className="form-label" htmlFor="form6Example1">
                     Name
                   </label>
                 </div>
@@ -91,10 +98,10 @@ const SupplierModal = (props) => {
                     type="text"
                     id="form6Example1"
                     className="form-control"
-                    value={contact}
-                    onChange={(e) => setContact(e.target.value)}
+                    value={props.contact}
+                    onChange={(e) => props.setContact(e.target.value)}
                   />
-                  <label className="form-label" for="form6Example1">
+                  <label className="form-label" htmlFor="form6Example1">
                     Contact
                   </label>
                 </div>
@@ -105,10 +112,10 @@ const SupplierModal = (props) => {
                     type="text"
                     id="form6Example1"
                     className="form-control"
-                    value={note}
-                    onChange={(e) => setNote(e.target.value)}
+                    value={props.note}
+                    onChange={(e) => props.setNote(e.target.value)}
                   />
-                  <label className="form-label" for="form6Example1">
+                  <label className="form-label" htmlFor="form6Example1">
                     note
                   </label>
                 </div>
@@ -120,8 +127,16 @@ const SupplierModal = (props) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button className="" variant="primary" onClick={() => handleCreate()}>
-            Create
+          <Button
+            className=""
+            variant="primary"
+            onClick={
+              props.action == "CREATE"
+                ? (e) => handleCreate(e)
+                : (e) => handleUpdate(e)
+            }
+          >
+            {props.action == "CREATE" ? "CREATE" : "UPDATE"}
           </Button>
         </Modal.Footer>
       </Modal>

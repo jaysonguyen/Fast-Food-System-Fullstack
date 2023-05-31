@@ -2201,12 +2201,15 @@ ol.comment-list li.comment .reply a {
 }
 .pizza-items {
   display: flex;
-  flex-wrap: wrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  height: 120px;
+  flex-wrap: nowrap;
   border: 0;
 }
 .pizza-items .item {
-  flex: 0 0 14.28%;
-  max-width: 14.28%;
+  flex: 0 0 20%;
+  max-width: 20%;
 }
 .nav-tabs.pizza-items .item-icon-box {
   color: #fff;
@@ -2898,6 +2901,7 @@ td.fc-event-container {
   }
   .nav-tabs.pizza-items .item-icon-box.active {
     background: rgba(255, 255, 255, 0.3);
+    position: relative;
   }
   .nav-tabs.pizza-items .item-icon-box.active:before,
   .item-icon-box:after {

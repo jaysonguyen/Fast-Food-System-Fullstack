@@ -7,19 +7,20 @@ import { FoodByTypeData } from "../../../../api/callApi";
 
 export default function FoodCart({ foodtype }) {
   const [foods, setFoods] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const { addToOrder } = useContext(OrderContext);
-
-  // const addToOrder = (food) => {
-  //   dispatch({ type: "ADD_TO_ORDER", payload: food });
-  // };
 
   const getFoodDataTest = async () => {
     try {
       let data = await FoodByTypeData(foodtype.ID);
       if (data.EM.includes("Error")) {
         setFoods(FoodDT);
-      } else {setFoods(data.DT); console.log(data.DT);}
+        setLoading(false);
+      } else {
+        console.log(data.DT);
+        setFoods(data.DT);
+      }
     } catch (error) {
       setFoods(FoodDT);
     }
@@ -27,39 +28,38 @@ export default function FoodCart({ foodtype }) {
 
   useEffect(() => {
     getFoodDataTest();
-  }, [foods]);
+  }, [loading]);
 
   return (
-    <TabPane tabId={foodtype.ID} style={{ overflowY: "scroll" }}>
-      <div className="row ">
-        {foods.map((food, idx) => {
-          return (
-            <div key={idx} className="dz-col col m-b30">
-              <div className="item-box shop-item style2">
-                <div className="item-img">
-                  <img src={require("../../../../images/pic1.png")} alt="" />
-                </div>
-                <div className="item-info text-center">
-                  <h4 className="item-title">{food.Name}</h4>
-                  <p className="price ">
-                    <del>45</del>
-                    {food.Price.toLocaleString("de-DE")}
-                    <sup>&#8363;</sup>
-                  </p>
-                  <div className="cart-btn ">
-                    <button
-                      className="order-btn btn"
-                      onClick={() => addToOrder(food)}
-                    >
-                      <i className="ti-shopping-cart"></i> Add to order
-                    </button>
-                  </div>
-                </div>
-              </div>
+    <TabPane
+      className="food-list"
+      tabId={foodtype.ID}
+      style={{ overflowY: "scroll" }}
+    >
+      {foods.map((food, idx) => {
+        return (
+          <div
+            key={idx}
+            className=" mx-2 food-card float-start"
+            onClick={() => addToOrder(food)}
+          >
+            <div className="food-img">
+              <img
+                src={
+                  food.Image !== null &&
+                  food.Image !== undefined &&
+                  food.Image !== "null"
+                    ? food.Image
+                    : "../images/default.jpg"
+                }
+                alt="food image"
+              />
             </div>
-          );
-        })}
-      </div>
+            <div className="food-name">{food.Name}</div>
+            <div className="food-price">{food.Price}</div>
+          </div>
+        );
+      })}
     </TabPane>
   );
 }

@@ -1,5 +1,5 @@
 const sql = require("mssql");
-const config = require("../config/configDatabase");
+const {config} = require("../config/configDatabase");
 
 const readSupplier = async () => {
   try {
@@ -88,24 +88,21 @@ const deleteSupplier = async (id) => {
   }
 };
 
-const updateSupplier = async (id, contact, note) => {
+const updateSupplier = async (id, rawData) => {
   try {
     const poolConnection = await sql.connect(config);
-    let data = poolConnection.query(
-      `exec sp_update_supplier ${id}, N'${contact}', N'${note}'`
+    const data = await poolConnection.query(
+      `exec sp_update_supplier ${id}, N'${rawData.contact}', N'${rawData.note}'`
     );
-
     if (data) {
       return {
         EM: "Update supplier success",
         EC: 1,
-        DT: "",
       };
     } else {
       return {
-        EM: "Update supplier success",
+        EM: "Update supplier failed",
         EC: 0,
-        DT: "",
       };
     }
   } catch (error) {

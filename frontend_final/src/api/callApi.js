@@ -14,10 +14,25 @@ export const InsertSupplier = (name, contact, note) => {
   return axios.post(`/api/supplier/create`, { name, contact, note });
 };
 
-// Staff
+// staff
+
 export const deleteStaff = (id) => {
   return axios.delete(`/api/staff/delete/${id}`);
 };
+
+// useraa
+export const userListData = () => {
+  return axios.get(`/api/user`);
+};
+
+export const createNewUser = (email, password, isAdmin) => {
+  return axios.post(`/api/user`, {
+    email,
+    password,
+    isAdmin,
+  });
+};
+
 // Product
 export const FoodData = () => {
   return axios.get(`api/food`);
@@ -53,6 +68,16 @@ export const getOrderById = (id) => {
   return axios.get(`api/order/${id}`);
 };
 
+export const updateOrderStatus = (id) => {
+  return axios.put(`api/order/${id}`);
+};
+
+//shift
+
+export const getShiftListData = () => {
+  return axios.get(`api/shift`);
+};
+
 // insert
 
 export const InsertFood = (name, price, image, type, recipe, status) => {
@@ -86,40 +111,47 @@ export const InsertStaff = (name, dob, gender, startAt, position, address) => {
 }; */
 
 export const AddNewOrderData = (orders) => {
-  axios
-    .post("api/order", orders)
-    .then((response) => {
-      // Xử lý phản hồi từ server nếu cần
-      console.log(response.data);
-      return 1;
-    })
-    .catch((error) => {
-      // Xử lý lỗi nếu có
-      console.log(error);
-      return -1;
-    });
+  return axios.post("api/order", { ...orders });
 };
 
 export const getFoodById = (id) => {
   return axios.get(`/api/food/getId/${id}`);
 };
 
-export const updateFood = (id, Name, Price, Type, Status) => {
-  return axios.put(`/api/food/update`, {
+export const updateFood = (id, rawData) => {
+  return axios.put(`/api/food/update/${id}`, {
+    ...rawData,
+  });
+};
+
+export const updateFoodType = (id, name) => {
+  return axios.put(`/api/foodtype/update`, {
     id,
-    Name,
-    Price,
-    Type,
+    name,
+  });
+};
+
+export const updateVendors = (id, rawData) => {
+  return axios.put(`/api/supplier/edit/${id}`, {
+    ...rawData,
+  });
+};
+
+export const updatePromo = (id, status) => {
+  return axios.put(`/api/promotion/edit`, {
+    id,
     Status,
   });
 };
-// update
-export const UpdateFood = (id, name, price, type, status) => {
-  return axios.put(`api/food/${id}`, {
-    id,
-    name,
-    price,
-    type,
-    status,
-  });
+
+export const deleteFoodSoft = (id) => {
+  return axios.put(`/api/general/deleteSoft/${id}`);
+};
+
+export const deleteVendorSoft = (id) => {
+  return axios.put(`/api/general/deleteVendor/${id}`);
+};
+
+export const checkOutOrder = (total) => {
+  return axios.post(`/api/order/payment/${total}`);
 };

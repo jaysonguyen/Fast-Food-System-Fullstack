@@ -1,3 +1,6 @@
+const sql = require("mssql");
+const config = require("./config/configDatabase");
+
 const isNumberic = (str) => {
   if (typeof str != "string") return false; // we only process strings!
   return (
@@ -59,4 +62,33 @@ const getCurrentDateTime = () => {
   );
 };
 
-module.exports = { isNumberic, getCurrentDateTime };
+function isEmail(email) {
+  var emailFormat = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+  if (email !== "" && email.match(emailFormat)) {
+    return true;
+  }
+
+  return false;
+}
+
+const sqlQueryCalled = async (query, success, error) => {
+  try {
+    const poolConnection = await sql.connect(config);
+    const data = await poolConnection.request().query(`
+      ${query}
+    `);
+    return {
+      EM: `${success}`,
+      EC: 1,
+      DT: data.recordset,
+    };
+  } catch (error) {
+    return {
+      EM: `${error}`,
+      EC: 1,
+      DT: error.message,
+    };
+  }
+};
+
+module.exports = { isNumberic, getCurrentDateTime, sqlQueryCalled, isEmail };

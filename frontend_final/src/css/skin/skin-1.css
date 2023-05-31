@@ -1,11 +1,12 @@
 /*===================== 
 	Premery bg color 
 =====================*/
+@import "../root.css";
 
 :root {
-  --color-primary: #5fcac7;
-  --color-secondry: #44b5b2;
-  --color-hover: #44b5b2;
+  --color-primary: var(--clr-primary);
+  --color-secondry: var(--clr-primary);
+  --color-hover: var(--clr-primary);
 }
 
 /* Hex */
@@ -74,7 +75,7 @@
 .fc-button.fc-state-down,
 .fc-button.fc-state-active,
 .fc-button.fc-state-default {
-  background-color: #5fcac7;
+  background-color: var(--clr-primary);
 }
 
 /*Hex color :hover */

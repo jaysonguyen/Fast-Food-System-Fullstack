@@ -1,5 +1,5 @@
 const sql = require("mssql");
-const config = require("../config/configDatabase");
+const {config} = require("../config/configDatabase");
 
 const readPromotion = async () => {
   try {
@@ -37,7 +37,7 @@ const createPromotion = async (name, price, status, dateStart, dateExp) => {
     );
     poolConnection.close();
     if (data) {
-      console.log(data)
+      console.log(data);
       return {
         EM: "Create promotion Success",
         EC: 1,
@@ -81,11 +81,11 @@ const deletePromotion = async (id) => {
   }
 };
 
-const updatePromotion = async (id, name, price, status) => {
+const updatePromotion = async (id, status) => {
   try {
     const poolConnection = await sql.connect(config);
     const data = poolConnection.query(
-      `exec sp_update_discount ${id}, N'${name}', ${price}, ${status}`
+      `exec sp_update_status_discount ${id} ${status}`
     );
     if (data) {
       return {

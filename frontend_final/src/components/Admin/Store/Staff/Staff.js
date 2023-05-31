@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { getAllStaff, removeStaff } from "../../../../services/staff";
+import { getPositionList } from "../../../../services/positionServices";
 import StaffModal from "./StaffModal";
 import { toast } from "react-toastify";
+const moment = require("moment");
 
 const Staff = (props) => {
   const [staff, setStaff] = useState([]);
+  const [position, setPosition] = useState([]);
 
   const fetchStaff = async () => {
     let dataStaff = await getAllStaff();
     setStaff(dataStaff.DT);
+  };
+
+  const fetchPosition = async () => {
+    let dataPos = await getPositionList();
+    setPosition(dataPos.DT);
   };
 
   const handleDeleteStaff = async (id) => {
@@ -24,67 +32,73 @@ const Staff = (props) => {
   };
 
   useEffect(() => {
+    fetchPosition();
     fetchStaff();
   }, [staff]);
 
+  const [choosedStaff, setChoosedStaff] = useState({});
   const [showModal, setShowModal] = useState(false);
-  const handleShowModal = () => {
+  const handleShowModal = (staff) => {
     let flag = !showModal;
+    setChoosedStaff(() => ({ ...staff }));
     setShowModal(flag);
   };
 
   return (
     <div id="body">
-      <div class="container">
-        <div class="container-fluid main-body">
-          <div class="d-flex flex-col">
-            <div class="col ms-4">
-              <div class="information">
-                <div class="row">
-                  <div class="col">
-                    <div class="info-card d-flex flex-col gap-4">
+      <div className="container">
+        <div className="container-fluid main-body">
+          <div className="d-flex flex-col">
+            <div className="col ms-4">
+              <div className="information">
+                <div className="row">
+                  <div className="col">
+                    <div className="info-card d-flex flex-col gap-4">
                       <h4>20%</h4>
                       <div>sub title</div>
                     </div>
                   </div>
-                  <div class="col">
-                    <div class="info-card d-flex flex-col gap-4">
+                  <div className="col">
+                    <div className="info-card d-flex flex-col gap-4">
                       <h4>20%</h4>
                       <div>sub title</div>
                     </div>
                   </div>
-                  <div class="col">
-                    <div class="info-card d-flex flex-col gap-4">
+                  <div className="col">
+                    <div className="info-card d-flex flex-col gap-4">
                       <h4>20%</h4>
                       <div>sub title</div>
                     </div>
                   </div>
-                  <div class="col">
-                    <div class="info-card d-flex flex-col gap-4">
+                  <div className="col">
+                    <div className="info-card d-flex flex-col gap-4">
                       <h4>20%</h4>
                       <div>sub title</div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="main-content rounded-3 border border-2 py-4 px-3">
-                <div class="table-header row">
-                  <div class="col-3">
-                    <h3 class="title">Staff List</h3>
+              <div className="main-content rounded-3 border border-2 py-4 px-3">
+                <div className="table-header row">
+                  <div className="col-3">
+                    <h3 className="title">Staff List</h3>
                   </div>
-                  <div class="col text-end me-2">
-                    <button class="btn btn-clr-normal">
-                      <a onClick={() => handleShowModal()} class="nav-link">
+                  <div className="col text-end me-2">
+                    <button className="btn btn-clr-normal">
+                      <a
+                        onClick={() => handleShowModal({})}
+                        className="nav-link"
+                      >
                         Add staff
                       </a>
                     </button>
                   </div>
                 </div>
                 <br></br>
-                <div class="text-white">
-                  <div class="bg-white">
-                    <table class="table align-middle mb-0">
-                      <thead class="">
+                <div className="text-white">
+                  <div className="bg-white">
+                    <table className="table align-middle mb-0">
+                      <thead className="">
                         <tr>
                           <th>Staff name</th>
                           <th>Gender</th>
@@ -97,35 +111,48 @@ const Staff = (props) => {
                       <tbody>
                         {staff.map((staff, key) => {
                           return (
-                            <tr>
+                            <tr key={key}>
                               <td>
-                                <div class="d-flex align-items-center">
+                                <div className="d-flex align-items-center">
                                   <img
                                     src="https://mdbootstrap.com/img/new/avatars/8.jpg"
                                     alt=""
                                     style={{ width: "45px", height: "45px" }}
-                                    class="rounded-circle"
+                                    className="rounded-circle"
                                   />
-                                  <div class="ms-3">
-                                    <p class="fw-bold mb-1">{staff.Name}</p>
-                                    <p class="text-muted mb-0">{staff.Birth}</p>
+                                  <div className="ms-3">
+                                    <p className="fw-bold mb-1">{staff.Name}</p>
+                                    <p className="text-muted mb-0">
+                                      {new Date(staff.Birth)
+                                        .toISOString()
+                                        .slice(0, 10)}
+                                    </p>
                                   </div>
                                 </div>
                               </td>
                               <td>
-                                <p class="text-muted mb-0">
+                                <p className="text-muted mb-0">
                                   {staff.Gender == 0 ? "Nam" : "Nữ"}
                                 </p>
                               </td>
                               <td>
                                 {" "}
-                                <p class="fw-normal mb-1">{staff.Address}</p>
+                                <p className="fw-normal mb-1">
+                                  {staff.Address}
+                                </p>
                               </td>
-                              <td>{staff.StartAt}</td>
-                              <td>{staff.Position}</td>
+                              <td>
+                                {moment(moment(staff.StartAt).toDate()).format(
+                                  "DD/MM/YYYY"
+                                )}
+                              </td>
+                              <td>{position[staff.Position - 1].Name}</td>
                               <td>
                                 <div className="d-flex flex-row gap-1">
-                                  <a href="./edit.html" className="nav-link">
+                                  <a
+                                    onClick={() => handleShowModal(staff)}
+                                    className="nav-link"
+                                  >
                                     <AiOutlineEdit className="edit-icon" />
                                   </a>
                                   <span className="nav-link">
@@ -151,7 +178,11 @@ const Staff = (props) => {
           </div>
         </div>
       </div>
-      <StaffModal show={showModal} onHide={handleShowModal} />
+      <StaffModal
+        show={showModal}
+        staff={choosedStaff}
+        onHide={handleShowModal}
+      />
     </div>
   );
 };

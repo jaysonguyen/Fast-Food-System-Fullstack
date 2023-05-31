@@ -1,5 +1,5 @@
 const sql = require("mssql");
-const config = require("../config/configDatabase");
+const {config} = require("../config/configDatabase");
 
 console.log("orderServices is running..");
 
@@ -96,19 +96,6 @@ const getAllBill = async () => {
               exec getAllBill
           `);
     poolConnection.close();
-    const newData = data.recordset.map(async (item, idx) => {
-      // det bill details
-      let details = [];
-      try {
-        details = await getBillDetails(item.ID);
-        // console.log(data.recordset[idx]);
-      } catch (error) {
-        console.log(error.message);
-      }
-      data.recordset[idx].Details = await details;
-    });
-
-    const result = await Promise.all(newData);
 
     if (data) {
       return {
@@ -140,8 +127,13 @@ const getBillDetails = async (billid) => {
             exec getBillDetails ${billid}
         `);
     poolConnection.close();
+    console.log("details from services: ", data.recordset);
     if (data) {
-      return data.recordset;
+      return {
+        EM: "get bill details success",
+        EC: 0,
+        DT: data.recordset,
+      };
     } else {
       return [];
     }
@@ -162,25 +154,19 @@ const getBillUnfinished = async () => {
       exec getBillByStatus 0
     `);
     poolConnection.close();
-    const newData = data.recordset.map(async (item, idx) => {
-      // det bill details
-      let details = [];
-      try {
-        details = await getBillDetails(item.ID);
-        // console.log(data.recordset[idx]);
-      } catch (error) {
-        console.log(error.message);
-      }
-      data.recordset[idx].Details = await details;
-    });
-
-    const result = await Promise.all(newData);
-
-    return {
-      EM: "Get bill unfinished successfully",
-      EC: 1,
-      DT: data.recordset,
-    };
+    if (data) {
+      return {
+        EM: "Get bill unfinished successfully",
+        EC: 1,
+        DT: data.recordset,
+      };
+    } else {
+      return {
+        EM: "Get unfinished bill success but bill is empty",
+        EC: 0,
+        DT: [],
+      };
+    }
   } catch (error) {
     return {
       EM: "Error at order services",
@@ -197,20 +183,6 @@ const getBillFinished = async () => {
       exec getBillByStatus 1
     `);
     poolConnection.close();
-    const newData = data.recordset.map(async (item, idx) => {
-      // det bill details
-      let details = [];
-      try {
-        details = await getBillDetails(item.ID);
-        // console.log(data.recordset[idx]);
-      } catch (error) {
-        console.log(error.message);
-      }
-      data.recordset[idx].Details = await details;
-    });
-
-    const result = await Promise.all(newData);
-
     return {
       EM: "Get bill finished successfully",
       EC: 1,
@@ -237,15 +209,18 @@ const addBill = async (staffid, today) => {
     if (data) {
       return {
         EM: "Add bill success",
+        EC: 1,
+      };
+    } else {
+      return {
+        EM: "Add bill failed",
         EC: 0,
-        DT: data.recordset,
       };
     }
   } catch (error) {
     return {
-      EM: "Add bill failed at services",
+      EM: error.message,
       EC: -1,
-      DT: error.message,
     };
   }
 };
@@ -261,16 +236,20 @@ const addBillDetails = async (billid, staffid, foodid, quantity, price) => {
       console.log("Added bill detail success..");
       return {
         EM: "Add bill details success",
+        EC: 1,
+      };
+    } else {
+      console.log("Error from services");
+      return {
+        EM: "Error from services",
         EC: 0,
-        DT: data.recordset,
       };
     }
   } catch (error) {
     console.log(error.message);
     return {
-      EM: "Error at create bill details", //error message
+      EM: error.message, //error message
       EC: -1, //error code
-      DT: error.message, //data
     };
   }
 };

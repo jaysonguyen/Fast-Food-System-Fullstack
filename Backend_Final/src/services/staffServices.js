@@ -1,5 +1,5 @@
 const sql = require("mssql");
-const config = require("../config/configDatabase");
+const { config } = require("../config/configDatabase");
 
 const getStaffList = async () => {
   try {
@@ -20,7 +20,40 @@ const getStaffList = async () => {
       };
     }
   } catch (error) {
-    console.log(error);
+    return {
+      EM: error.message,
+      EC: -1,
+      DT: [],
+    };
+  }
+};
+
+const getStaffWithoutUserAccount = async () => {
+  try {
+    const poolConnection = await sql.connect(config);
+    const data = await poolConnection
+      .request()
+      .query("exec getUserWithoutStaffRef");
+    poolConnection.close();
+    if (data) {
+      return {
+        EM: "Get staff without user account success",
+        EC: 1,
+        DT: data.recordset,
+      };
+    } else {
+      return {
+        EM: "Get staff without user account success",
+        EC: 0,
+        DT: [],
+      };
+    }
+  } catch (error) {
+    return {
+      EM: "error",
+      EC: -1,
+      DT: error.message,
+    };
   }
 };
 
@@ -34,9 +67,12 @@ const updateStaffList = async (
   position
 ) => {
   try {
+    console.log(
+      `EXEC updateStaff ${id}, N'${name}', '${birth}', ${gender}, N'${address}', '${startAt}', ${position}`
+    );
     const poolConnection = await sql.connect(config);
     await poolConnection.query(
-      `EXEC sp_update_staff ${id}, N'${name}', '${birth}', ${gender}, N'${address}', '${startAt}', ${position}`
+      `EXEC updateStaff ${id}, N'${name}', '${birth}', ${gender}, N'${address}', '${startAt}', ${position}`
     );
     poolConnection.close();
     return {
@@ -50,6 +86,36 @@ const updateStaffList = async (
       EM: "Error from services",
       EC: 0,
       DT: [],
+    };
+  }
+};
+
+const updateStaffUserID = async (staffid, userid) => {
+  try {
+    const poolConnection = await sql.connect(config);
+    console.log(`exec updateStaffUserID ${staffid}, ${userid}`);
+    const data = await poolConnection.query(
+      `exec updateStaffUserID ${staffid}, ${userid}`
+    );
+    poolConnection.close();
+    if (data) {
+      return {
+        EM: "Delete Success",
+        EC: 1,
+        DT: "",
+      };
+    } else {
+      return {
+        EM: "Delete Success",
+        EC: 0,
+        DT: "",
+      };
+    }
+  } catch (error) {
+    return {
+      EM: "",
+      EC: -1,
+      DT: error.message,
     };
   }
 };
@@ -85,8 +151,9 @@ const deleteStaff = async (id) => {
 const createStaff = async (name, dob, gender, startAt, position, address) => {
   try {
     const poolConnection = await sql.connect(config);
+    console.log(name, dob, gender, startAt, position, address);
     const data = await poolConnection.query(
-      `Exec sp_insertStaff N'${name}', '${dob}', ${gender}, '${startAt}', ${position}, N'${address}'`
+      `Exec insertStaff N'${name}', '${dob}', ${gender}, '${startAt}', ${position}, N'${address}'`
     );
     poolConnection.close();
     if (data) {
@@ -112,4 +179,32 @@ const createStaff = async (name, dob, gender, startAt, position, address) => {
   }
 };
 
-module.exports = { getStaffList, updateStaffList, deleteStaff, createStaff };
+const getStaffByUser = async (userid) => {
+  try {
+    const poolConnection = await sql.connect(config);
+    const data = await poolConnection.request().query(`
+      exec getStaffByUserID ${userid}
+    `);
+    return {
+      EM: "success",
+      EC: 1,
+      DT: data.recordset,
+    };
+  } catch (error) {
+    return {
+      EM: "error",
+      EC: -1,
+      DT: error.message,
+    };
+  }
+};
+
+module.exports = {
+  getStaffByUser,
+  getStaffList,
+  updateStaffList,
+  deleteStaff,
+  createStaff,
+  updateStaffUserID,
+  getStaffWithoutUserAccount,
+};

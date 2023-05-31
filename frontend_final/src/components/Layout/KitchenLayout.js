@@ -10,7 +10,10 @@ export const KitchenLayout = () => {
           <div className="">
             <div className="logo">
               <div className="logo-img">
-                <img src="../images/abstract-img.png" alt="logo image" />
+                <img
+                  src="https://images-platform.99static.com//zfLktX5H5gpA2mkiYB5tONTmPNM=/0x0:999x999/fit-in/500x500/99designs-contests-attachments/116/116570/attachment_116570888"
+                  alt="logo image"
+                />
               </div>
               <span>FoodiePos</span>
             </div>
@@ -22,11 +25,12 @@ export const KitchenLayout = () => {
                 <img src="../images/default.jpg" alt="account image" />
               </div>
               <div className="my-2">Thao My</div>
+              <div className="my-2">Kitchen</div>
               <button className="btn btn-clr-normal">Details</button>
             </div>
           </div>
         </div>
-        <div id="myMain">
+        <div id="myMain" className="">
           <Outlet />
         </div>
       </div>

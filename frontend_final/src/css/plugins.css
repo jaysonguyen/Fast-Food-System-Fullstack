@@ -5,7 +5,8 @@
 @import url("../css/root.css");
 @import url("../css/main.css");
 
-@import url("../plugins/fontawesome/css/font-awesome.min.css");
+/* @import url("../plugins/fontawesome/css/font-awesome.min.css"); */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css");
 @import url("../plugins/line-awesome/css/line-awesome.min.css");
 @import url("../plugins/themify/themify-icons.css");
 @import url("../plugins/animate/animate.css");

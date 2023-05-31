@@ -1,11 +1,11 @@
+import { footypeHardApi } from "../api/tempAPI";
 import { FoodTypeData } from "../api/callApi";
-//import { FoodTypeDT } from "../api/tempApi";
 
 const getFoodTypeService = async () => {
   let data = [];
   try {
     data = await FoodTypeData();
-    return data.DT;
+    return data;
   } catch (error) {
     return FoodTypeDT;
   }

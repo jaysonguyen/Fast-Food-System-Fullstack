@@ -1,12 +1,13 @@
 import $ from "jquery";
 
 document.addEventListener("DOMContentLoaded", function () {
-  dropDownSideBar();
+  // dropDownSideBar();
   toggleAddProductForm();
-  setSideNav();
   console.log("run into this");
 });
+
 // DOMContentLoaded  end
+setSideNav();
 
 // setSideNav();
 
@@ -56,29 +57,28 @@ function setSideNav() {
 
   console.log(route, route2);
 
-  $item = $("#sidebar .nav-link").filter(function () {
+  let $item = $("#sidebar .nav-link").filter(function () {
     return (
       $(this).prop("href").split("/").splice(-1)[0].indexOf(route) !== -1 ||
       $(this).prop("href").split("/").splice(-1)[0].indexOf(route2) !== -1
     );
   });
 
-  $item2 = $("#mySidebar .nav-link").filter(function () {
+  let $item2 = $("#mySidebar .nav-link").filter(function () {
     return (
       $(this).prop("href").split("/").splice(-1)[0].indexOf(route) !== -1 ||
       $(this).prop("href").split("/").splice(-1)[0].indexOf(route2) !== -1
     );
   });
 
-  $authHeader = $("#auth-header .nav-link").filter(function () {
+  console.log("item2: ", $("#mySidebar .nav-link"));
+
+  let $authHeader = $("#auth-header .nav-link").filter(function () {
     return (
       $(this).prop("href").split("/").splice(-1)[0].indexOf(route) !== -1 ||
       $(this).prop("href").split("/").splice(-1)[0].indexOf(route2) !== -1
     );
   });
-
-  console.log($item2);
-
   $item.map((idx, val) => val.classList.toggle("active"));
   $item2.map((idx, val) => val.classList.toggle("active"));
   $authHeader.map((idx, val) => val.classList.toggle("active"));

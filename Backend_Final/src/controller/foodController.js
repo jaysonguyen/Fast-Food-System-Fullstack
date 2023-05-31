@@ -13,7 +13,6 @@ const tools = require("../tool");
 
 const getFoodList = async (req, res) => {
   try {
-    console.log("get food list");
     let data = await getAllFood();
     return res.status(200).json({
       EM: data.EM,
@@ -58,33 +57,23 @@ const createFood = async (req, res) => {
 const updateF = async (req, res) => {
   try {
     // const { id, nameFood } = req.query;
-    // console.log(req.params.id, req.body.nameFood);
-    let data = [];
-    if (req.body.Name == undefined) {
-      //update food status only
-      data = await updateFoodStatus(req.params.id, req.body.Status);
-    } else {
-      data = await updateFood(
-        //update full food
-        req.params.id,
-        req.body.Name,
-        req.body.Price,
-        req.body.Type,
-        req.body.Status
-      );
-    }
+    // console.log(req.params.id, req.body.nameFood
+    const data = await updateFood(
+      //update full food
+      req.params.id,
+      req.body
+    );
 
-    if (data.EM.includes("Success")) {
-      return res.status(201).json({
-        EM: "Update success",
-        EC: 1,
-        DT: data.DT,
+    if (data && +data.EC == 1) {
+      return res.status(200).json({
+        EM: data.EM,
+        EC: data.EC,
       });
-    } else if (data.EM.includes("Error")) {
+    }
+    if (data && +data.EC != 1) {
       return res.status(500).json({
         EM: data.EM,
-        EC: 1,
-        DT: data.DT,
+        EC: data.EC,
       });
     }
   } catch (error) {
